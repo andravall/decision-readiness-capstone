@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Decision Readiness Board · Confirmation Protocol (Q3.03)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -62,11 +63,19 @@ body {
   color: var(--ink);
   font: 14.5px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 button, select, textarea, input {
   font: inherit;
   color: inherit;
+  touch-action: manipulation;
+}
+
+#decision-panel,
+#members-heading {
+  scroll-margin-top: 84px;
 }
 
 button {
@@ -1366,6 +1375,17 @@ input:focus-visible,
   100% { background-color: transparent; }
 }
 
+/* Mobile Sticky Quick-Jump Bar */
+.mobile-dock {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .btn, .btn-row-edit, .btn-ghost-top, .radio-card {
+    min-height: 44px;
+  }
+}
+
 /* Tablet Breakpoint */
 @media (max-width: 980px) {
   .topbar-inner, .workspace {
@@ -1379,8 +1399,11 @@ input:focus-visible,
     grid-column: 1 / -1;
   }
   .main-grid {
-    grid-template-columns: minmax(0, 1.25fr) minmax(290px, 1fr);
-    gap: 18px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .side-stack {
+    position: static;
   }
   .hero-main {
     flex-direction: column;
@@ -1394,10 +1417,54 @@ input:focus-visible,
     justify-content: space-between;
     flex-wrap: wrap;
   }
+  .workspace {
+    padding-bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+  .mobile-dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 35;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(250, 249, 245, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line-strong);
+    box-shadow: 0 -4px 20px rgba(20, 23, 20, 0.06);
+  }
+  .mobile-dock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .mobile-dock-ratio {
+    font: 700 12.5px/1.2 var(--mono);
+    color: var(--ink);
+  }
+  .mobile-dock-sub {
+    font-size: 11.5px;
+    color: var(--ink-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 /* Mobile Breakpoint (tested down to 360px) */
 @media (max-width: 760px) {
+  textarea, select, input {
+    font-size: 16px;
+  }
+  .mobile-dock {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .topbar-inner, .workspace {
     padding-left: 16px;
     padding-right: 16px;
@@ -1581,6 +1648,7 @@ input:focus-visible,
     <button type="button" class="footer-reset" id="reset-bottom">Ulangi simulasi ke kondisi awal ↺</button>
   </footer>
 </main>
+<div class="mobile-dock" id="mobile-dock" aria-label="Ringkasan dan navigasi cepat"></div>
 
 <script>
 const $ = id => document.getElementById(id)
@@ -2173,7 +2241,30 @@ function render(focusPanel = false) {
     const titleEl = $('panel-title')
     if (titleEl) {
       titleEl.tabIndex = -1
-      titleEl.focus()
+      titleEl.focus({ preventScroll: true })
+      if (window.innerWidth <= 980) {
+        $('decision-panel').scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+  }
+
+  const readyReq = requiredMembers.length - pendingRequired.length
+  const dockBtnLabel = typeof screen === 'number'
+    ? 'Ke form respons ↓'
+    : status === 'Final'
+      ? 'Pengumuman ↓'
+      : 'Panel keputusan ↓'
+  $('mobile-dock').innerHTML =
+    '<div class="mobile-dock-info">' +
+      '<span class="mobile-dock-ratio">' + readyReq + '/' + requiredMembers.length + ' wajib pasti · ' + esc(status) + '</span>' +
+      '<span class="mobile-dock-sub">' + (canFinalize ? 'Syarat hadir terpenuhi' : pendingRequired.length + ' anggota wajib belum pasti') + '</span>' +
+    '</div>' +
+    '<button type="button" class="btn primary" id="mobile-jump-panel" style="min-height:38px;padding:7px 12px;font-size:12px">' + dockBtnLabel + '</button>'
+  $('mobile-jump-panel').onclick = () => {
+    $('decision-panel').scrollIntoView({ behavior: 'smooth', block: 'start' })
+    if ($('panel-title')) {
+      $('panel-title').tabIndex = -1
+      $('panel-title').focus({ preventScroll: true })
     }
   }
 }

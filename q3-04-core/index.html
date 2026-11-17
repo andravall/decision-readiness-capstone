@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Decision Readiness Board · MVP Core Build (Q3.04)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +51,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -62,11 +63,19 @@ body {
   color: var(--ink);
   font: 14.5px/1.55 var(--sans);
   -webkit-font-smoothing: antialiased;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 button, select, textarea, input {
   font: inherit;
   color: inherit;
+  touch-action: manipulation;
+}
+
+#decision-card-el,
+#builder-slot {
+  scroll-margin-top: 84px;
 }
 
 button {
@@ -238,8 +247,15 @@ button {
 .proposal-tabs {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 7px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+
+.proposal-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .prop-tab {
@@ -1060,6 +1076,16 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   box-shadow: var(--shadow-focus);
 }
 
+.mobile-dock {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .btn, .prop-tab, .radio-card, input[type="text"], input[type="date"], input[type="time"], select {
+    min-height: 44px;
+  }
+}
+
 @media (max-width: 980px) {
   .topbar-inner, .workspace { padding-left: 22px; padding-right: 22px; }
   .builder-grid { grid-template-columns: 1fr; }
@@ -1069,9 +1095,34 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .side-stack { position: static; }
   .hero-main { flex-direction: column; }
   .status-box { max-width: none; width: 100%; }
+  .workspace { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .mobile-dock.has-proposal {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 35;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(250, 249, 245, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line-strong);
+    box-shadow: 0 -4px 20px rgba(20, 23, 20, 0.06);
+  }
+  .mobile-dock-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .mobile-dock-ratio { font: 700 12.5px/1.2 var(--mono); color: var(--ink); }
+  .mobile-dock-sub { font-size: 11.5px; color: var(--ink-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
 
 @media (max-width: 720px) {
+  input[type="text"], input[type="date"], input[type="time"], select, textarea {
+    font-size: 16px;
+  }
+  .mobile-dock.has-proposal { padding-left: 16px; padding-right: 16px; }
   .topbar-inner, .workspace { padding-left: 16px; padding-right: 16px; }
   .storage-pill, .brand-badge { display: none; }
   .builder-shell { padding: 20px 16px; }
@@ -1131,6 +1182,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
     <button type="button" class="btn btn-sm danger-ghost" id="btn-clear-all" style="display:none">Bersihkan semua data lokal</button>
   </footer>
 </main>
+<div class="mobile-dock" id="mobile-dock" aria-label="Ringkasan dan navigasi cepat"></div>
 
 <script>
 const STORAGE_KEY = 'drb_q304_core_v1'
@@ -1617,6 +1669,8 @@ function renderSwitcher(active) {
 function renderActiveWorkspace(proposal, focusPanel = false) {
   if (!proposal) {
     $('active-proposal-slot').innerHTML = ''
+    $('mobile-dock').className = 'mobile-dock'
+    $('mobile-dock').innerHTML = ''
     return
   }
 
@@ -1948,7 +2002,7 @@ function renderActiveWorkspace(proposal, focusPanel = false) {
       '</section>' +
 
       '<div class="side-stack">' +
-        '<section class="card decision-card ' + panelStateClass + '" aria-label="Panel keputusan koordinator">' + panelInner + prevReasonHtml + '</section>' +
+        '<section class="card decision-card ' + panelStateClass + '" id="decision-card-el" aria-label="Panel keputusan koordinator">' + panelInner + prevReasonHtml + '</section>' +
         '<section class="card history-card" aria-labelledby="h-title">' +
           '<div class="history-head"><h2 id="h-title">Jejak perubahan</h2><span class="diag-label">' + proposal.history.length + ' catatan</span></div>' +
           '<ol class="history-list">' + proposal.history.map(item =>
@@ -2094,7 +2148,26 @@ function renderActiveWorkspace(proposal, focusPanel = false) {
 
   if (focusPanel && $('panel-title')) {
     $('panel-title').tabIndex = -1
-    $('panel-title').focus()
+    $('panel-title').focus({ preventScroll: true })
+    if (window.innerWidth <= 980 && $('decision-card-el')) {
+      $('decision-card-el').scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  $('mobile-dock').className = 'mobile-dock has-proposal'
+  const dockCta = typeof screen === 'number'
+    ? 'Ke form respons ↓'
+    : proposal.status === 'Final'
+      ? 'Pengumuman ↓'
+      : 'Panel keputusan ↓'
+  $('mobile-dock').innerHTML =
+    '<div class="mobile-dock-info">' +
+      '<span class="mobile-dock-ratio">' + readyCount + '/' + requiredMembers.length + ' wajib pasti · ' + esc(proposal.status) + '</span>' +
+      '<span class="mobile-dock-sub">' + esc(proposal.title) + '</span>' +
+    '</div>' +
+    '<button type="button" class="btn primary btn-sm" id="mobile-jump-decision">' + dockCta + '</button>'
+  $('mobile-jump-decision').onclick = () => {
+    if ($('decision-card-el')) $('decision-card-el').scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 }
 
