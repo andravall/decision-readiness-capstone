@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
+import { BrandLogo } from './BrandLogo';
 
 interface TopNavbarProps {
   mode: 'hub' | 'q303-isolated' | 'q304';
@@ -22,15 +23,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
   const shortQ303 = 'Q3.03';
   const shortQ304 = 'Q3.04';
 
-  const BrandEmblem = (
-    <span className="brand-mark" aria-hidden="true">
-      <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
-        <rect x="2" y="9.5" width="3.2" height="6.5" rx="1" fill="currentColor" opacity="0.45" />
-        <rect x="7.4" y="5.5" width="3.2" height="10.5" rx="1" fill="currentColor" opacity="0.75" />
-        <rect x="12.8" y="2" width="3.2" height="14" rx="1" fill="currentColor" />
-      </svg>
-    </span>
-  );
+  const BrandEmblem = <BrandLogo />;
 
   return (
     <header className="topbar">

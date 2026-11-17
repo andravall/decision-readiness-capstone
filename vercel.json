@@ -10,7 +10,7 @@
       "destination": "/assets/$1"
     },
     {
-      "source": "/((?!arsip/|assets/).*)",
+      "source": "/((?!arsip/|assets/|favicon|apple-touch-icon|icon-|site\\.webmanifest).*)",
       "destination": "/index.html"
     }
   ]
