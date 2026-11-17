@@ -286,15 +286,6 @@ export interface TranslationDictionary {
     cardQ304OpenBtn: string;
     cardQ304CopyBtn: string;
     cardQ304Copied: string;
-    cardArchivePill: string;
-    cardArchiveTitle: string;
-    cardArchiveBody: string;
-    v1Label: string;
-    v1Open: string;
-    v2Label: string;
-    v2Open: string;
-    vAgyLabel: string;
-    vAgyOpen: string;
     visualsEyebrow: string;
     visualsTitle: string;
     visualsSub: string;
@@ -636,7 +627,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
     hub: {
       eyebrow: 'SI Capstone: Digital Innovation for Real-World Impact · Gasal 2026/2027',
       heroTitle: 'Dari balasan chat yang tersebar menuju keputusan jadwal yang dapat dijelaskan.',
-      heroLead: 'Portal terpusat ini menghimpun artefak interaktif dan jejak keputusan proyek saya dari Quest 1 hingga Quest 3. Setiap prototipe dan fungsi inti ditempatkan pada sub-rute terisolasi agar sesi pengujian pengguna tetap bersih dari bias konteks sekaligus menjaga versi terdahulu tetap utuh bagi penilai.',
+      heroLead: 'Portal terpusat ini menghimpun artefak interaktif, tautan pengumpulan, dan peta perjalanan bukti proyek saya dari Quest 1 hingga Quest 5. Setiap prototipe dan fungsi inti ditempatkan pada sub-rute terisolasi agar sesi pengujian pengguna tetap bersih dari bias konteks.',
       authorChipLabel: 'Penyusun:',
       workModeChip: 'Q1.02 bersama M. Faiz Roihan · Mulai Q1.03 individu',
       questionLabel: 'Pertanyaan utama proyek',
@@ -659,28 +650,19 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       routesTitle: 'Akses prototipe & ruang kerja MVP',
       routesSub: 'Gunakan tautan khusus /q3-03 saat membagikan prototipe kepada reviewer agar mereka langsung masuk ke simulasi bersih tanpa bocoran skenario.',
       cardQ303Pill: 'Q3.03 · Sketch The Future',
-      cardQ303Title: 'Prototipe Interaktif — Versi AGY',
+      cardQ303Title: 'First Clickable Prototype — Simulasi Koordinator',
       cardQ303Body: 'Simulasi satu alur koordinator: pengelompokan eksplisit anggota wajib vs opsional, rel tahapan Confirmation Protocol, kartu diagnostik kesiapan 3-segmen, pemilih radio tingkat kepastian, pratinjau WhatsApp simulasi, dan deteksi perubahan pasca-final.',
       cardQ303RouteLabel: 'Rute bersih reviewer: /q3-03',
-      cardQ303OpenBtn: 'Buka Prototipe Q3.03 →',
+      cardQ303OpenBtn: 'Buka Prototipe Q3.03',
       cardQ303CopyBtn: 'Salin link Reviewer',
       cardQ303Copied: 'Link /q3-03 disalin ✓',
       cardQ304Pill: 'Q3.04 · Build The Core',
       cardQ304Title: 'MVP Core Build — Data Baru & Persisten',
       cardQ304Body: 'Implementasi fungsi inti yang memproses usulan jadwal baru, memvalidasi daftar anggota, menyimpan perubahan ke localStorage lintas muat ulang halaman, menyediakan tautan snapshot, serta mengelola siklus Confirmation Protocol secara nyata.',
       cardQ304RouteLabel: 'Rute kerja MVP: /q3-04-core',
-      cardQ304OpenBtn: 'Buka MVP Core Q3.04 →',
+      cardQ304OpenBtn: 'Buka MVP Core Q3.04',
       cardQ304CopyBtn: 'Salin link Q3.04',
       cardQ304Copied: 'Link /q3-04-core disalin ✓',
-      cardArchivePill: 'Arsip Iterasi Antarmuka',
-      cardArchiveTitle: 'Jejak Evolusi Desain Q3.03',
-      cardArchiveBody: 'Seluruh versi terdahulu dipertahankan utuh di sub-rute terpisah agar perkembangan hierarki informasi, tipografi, dan kejelasan status dapat diperiksa secara langsung.',
-      v1Label: 'Versi 01 · Eksplorasi awal',
-      v1Open: 'Buka v1 →',
-      v2Label: 'Versi 02 · Lembar kerja',
-      v2Open: 'Buka v2 →',
-      vAgyLabel: 'Versi AGY · Diagnostik aktif',
-      vAgyOpen: 'Buka aktif →',
       visualsEyebrow: 'Artefak Visual Q2–Q3',
       visualsTitle: 'Peta penalaran, alur pengguna, dan struktur layar',
       visualsSub: 'Ketuk gambar atau tombol Perbesar untuk membaca detail penuh di layar ponsel, tablet, maupun desktop.',
@@ -1061,7 +1043,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
     hub: {
       eyebrow: 'SI Capstone: Digital Innovation for Real-World Impact · Fall 2026/2027',
       heroTitle: 'From scattered chat replies to explainable group scheduling decisions.',
-      heroLead: 'This centralized portal brings together my interactive artifacts and evidence trail from Quest 1 through Quest 3. Each prototype and working build lives on an isolated sub-route so usability reviews remain free from context bias while preserving earlier iterations intact for graders.',
+      heroLead: 'This centralized portal brings together my interactive artifacts, submission links, and complete evidence trail from Quest 1 through Quest 5. Each prototype and working build lives on an isolated sub-route so usability reviews remain free from context bias.',
       authorChipLabel: 'Author:',
       workModeChip: 'Q1.02 with M. Faiz Roihan · Individual from Q1.03 onward',
       questionLabel: 'Core research question',
@@ -1084,28 +1066,19 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       routesTitle: 'Interactive prototypes & MVP workspace',
       routesSub: 'Share the dedicated /q3-03 link with usability reviewers so they land directly inside a clean, spoiler-free simulation.',
       cardQ303Pill: 'Q3.03 · Sketch The Future',
-      cardQ303Title: 'Clickable Prototype — AGY Redesign',
+      cardQ303Title: 'First Clickable Prototype — Coordinator Simulation',
       cardQ303Body: 'Single-flow coordinator simulation featuring explicit required vs optional grouping, Confirmation Protocol stepper rail, 3-segment readiness diagnostics, open certainty radio cards, simulated WhatsApp drafts, and post-final drift detection.',
       cardQ303RouteLabel: 'Clean reviewer route: /q3-03',
-      cardQ303OpenBtn: 'Open Q3.03 Prototype →',
+      cardQ303OpenBtn: 'Open Q3.03 Prototype',
       cardQ303CopyBtn: 'Copy Reviewer Link',
       cardQ303Copied: 'Copied /q3-03 link ✓',
       cardQ304Pill: 'Q3.04 · Build The Core',
       cardQ304Title: 'MVP Core Build — Live & Persistent',
       cardQ304Body: 'Working core implementation that validates and processes brand-new meeting proposals, persists state in localStorage across reloads, generates shareable URL snapshots, and runs the full Confirmation Protocol lifecycle.',
       cardQ304RouteLabel: 'Working MVP route: /q3-04-core',
-      cardQ304OpenBtn: 'Open Q3.04 Core MVP →',
+      cardQ304OpenBtn: 'Open Q3.04 Core MVP',
       cardQ304CopyBtn: 'Copy Q3.04 Link',
       cardQ304Copied: 'Copied /q3-04-core link ✓',
-      cardArchivePill: 'Interface Iteration Archive',
-      cardArchiveTitle: 'Q3.03 Design Evolution',
-      cardArchiveBody: 'Earlier iterations remain preserved on separate static routes so graders can inspect visual hierarchy, typography, and status-clarity progression firsthand.',
-      v1Label: 'Version 01 · Initial card layout',
-      v1Open: 'Open v1 →',
-      v2Label: 'Version 02 · Worksheet layout',
-      v2Open: 'Open v2 →',
-      vAgyLabel: 'AGY Version · Diagnostic active',
-      vAgyOpen: 'Open active →',
       visualsEyebrow: 'Q2–Q3 Visual Artifacts',
       visualsTitle: 'Reasoning maps, user flow, and screen wireframes',
       visualsSub: 'Tap any diagram or click Expand to pan and inspect full high-resolution details across mobile, tablet, and desktop.',

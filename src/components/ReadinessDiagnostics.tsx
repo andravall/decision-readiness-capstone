@@ -1,5 +1,6 @@
 import React from 'react';
 import { RESPONSE_TONES, ReadinessEvaluation } from '../domain/readiness';
+import { handleSpotlightMove } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 
 interface ReadinessDiagnosticsProps {
@@ -18,9 +19,12 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
     ? optionalMembers.map((m) => `${m.name} (${t.responses[m.response].short})`).join(', ')
     : t.common.noOptionalMsg;
 
+  const pct =
+    requiredMembers.length > 0 ? Math.round((readyCount / requiredMembers.length) * 100) : 0;
+
   return (
     <section className="diagnostics" aria-label={t.common.readinessTitle} aria-live="polite">
-      <div className="diag-card">
+      <div className="diag-card spotlight-card" onPointerMove={handleSpotlightMove}>
         <div>
           <div className="diag-head">
             <span className="diag-label">{t.common.readinessTitle}</span>
@@ -31,6 +35,12 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
               {readyCount} / {requiredMembers.length}
             </strong>
             <span>{t.common.requiredConfirmedSuffix}</span>
+          </div>
+          <div className="readiness-meter-bar" aria-hidden="true">
+            <div
+              className={`readiness-meter-fill${canFinalize ? ' is-complete' : ''}`}
+              style={{ width: `${pct}%` }}
+            />
           </div>
         </div>
         <div className="req-segments">
@@ -52,7 +62,7 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
         </div>
       </div>
 
-      <div className="diag-card">
+      <div className="diag-card spotlight-card" onPointerMove={handleSpotlightMove}>
         <div>
           <div className="diag-head">
             <span className="diag-label">{t.common.blockersTitle}</span>
@@ -90,7 +100,7 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
         )}
       </div>
 
-      <div className="diag-card">
+      <div className="diag-card spotlight-card" onPointerMove={handleSpotlightMove}>
         <div>
           <div className="diag-head">
             <span className="diag-label">{t.common.optionalTitle}</span>

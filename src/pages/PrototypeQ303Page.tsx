@@ -233,7 +233,7 @@ export const PrototypeQ303Page: React.FC = () => {
         }
       />
 
-      <main className="container workspace has-dock">
+      <main className="container workspace has-dock page-enter">
         {toast && (
           <div
             className={`live-toast${

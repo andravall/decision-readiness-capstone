@@ -435,7 +435,7 @@ export const CoreMvpQ304Page: React.FC = () => {
         }
       />
 
-      <main className={`container workspace${activeProposal ? ' has-dock' : ''}`}>
+      <main className={`container workspace page-enter${activeProposal ? ' has-dock' : ''}`}>
         {toast && (
           <div
             className={`live-toast${

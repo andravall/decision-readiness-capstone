@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useScrollProgress } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import { BrandLogo } from './BrandLogo';
 
@@ -10,6 +11,7 @@ interface TopNavbarProps {
 
 export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
   const { locale, setLocale, t } = useLanguage();
+  const scrollProgress = useScrollProgress();
 
   const brandTitle = mode === 'hub' ? t.nav.hubTitle : t.nav.boardTitle;
   const badgeText =
@@ -124,6 +126,13 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
           </NavLink>
         </nav>
       )}
+
+      <div className="scroll-progress-wrap" aria-hidden="true">
+        <div
+          className="scroll-progress-bar"
+          style={{ transform: `scaleX(${scrollProgress})` }}
+        />
+      </div>
     </header>
   );
 };

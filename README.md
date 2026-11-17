@@ -11,9 +11,8 @@ Production-ready modular web application (**React 19 + TypeScript + Vite**) unif
 | Route | Purpose | Isolation & Persistence |
 | --- | --- | --- |
 | `/` | **Capstone Evidence & Artifact Hub** — Cross-phase journey (`Q1` → `Q5`), interactive Retina/SVG diagram viewer with pan-zoom lightbox, and design iteration history. | Read-only showcase portal |
-| `/q3-03` | **Q3.03 Clickable Prototype (AGY Redesign)** — Isolated single-flow simulation for unguided usability reviews without scenario spoilers. | In-memory session state |
+| `/q3-03` | **Q3.03 Clickable Prototype** — Isolated single-flow simulation for unguided usability reviews without scenario spoilers. | In-memory session state |
 | `/q3-04-core` | **Q3.04 MVP Core Build (*Make It Work. Prove It!*)** — Real proposal builder, strict validation, multi-proposal `localStorage` persistence, and shareable UTF-8 Base64URL `#snapshot=` links. | Persistent `localStorage` (`drb_q304_core_v2`) |
-| `/arsip/q3-03-v1/` & `/arsip/q3-03-v2/` | Preserved static snapshots of earlier Q3.03 design iterations for transparent grading audit. | Static HTML archives |
 
 ## Tech Stack & Design System
 

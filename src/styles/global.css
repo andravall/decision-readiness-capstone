@@ -607,6 +607,27 @@ button {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  text-align: left;
+  transition: all 0.18s var(--ease);
+}
+
+.thesis-flow-chip:hover {
+  border-color: #3f4842;
+  background: #202522;
+}
+
+.thesis-flow-chip.is-active {
+  border-color: #3b82f6;
+  background: rgba(37, 99, 235, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.25);
+}
+
+.thesis-stage-caption {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #a9b4ac;
+  animation: fadeSlide 0.22s var(--ease);
 }
 
 .thesis-flow-num {
@@ -684,11 +705,11 @@ button {
   max-width: 62ch;
 }
 
-/* Workspace Launchpad Cards */
+/* Workspace Launchpad Cards (2-Column Balanced Grid) */
 .dock-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .dock-card {
@@ -2943,5 +2964,215 @@ a:focus-visible,
 @media (max-width: 480px) {
   .diagnostics .diag-card:not(:first-child) .diag-head span:last-child {
     display: none;
+  }
+}
+
+/* ==========================================================================
+   9. INTERACTIVE MOTION, SPOTLIGHT SHEEN & TACTILE MICRO-INTERACTIONS
+   ========================================================================== */
+
+/* Top Scroll Progress Hairline */
+.scroll-progress-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #10b981);
+  transform-origin: 0 50%;
+  transition: transform 0.08s linear;
+}
+
+/* Route & Blueprint Transitions */
+.page-enter {
+  animation: pageLiftIn 0.34s var(--ease) both;
+}
+
+.blueprint-img-enter {
+  animation: blueprintFade 0.28s var(--ease) both;
+}
+
+.card-stagger {
+  animation: cardStaggerIn 0.32s var(--ease) both;
+  animation-delay: calc(var(--stagger-idx, 0) * 28ms);
+}
+
+/* Pulsing Live Status Beacon */
+.pulse-dot {
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.5);
+  animation: pulseBeacon 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+/* Animated Readiness Progress Bar in Diagnostics */
+.readiness-meter-bar {
+  margin-top: 9px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.readiness-meter-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--accent);
+  transition: width 0.48s var(--ease), background-color 0.3s var(--ease);
+}
+
+.readiness-meter-fill.is-complete {
+  background: var(--good-ink);
+}
+
+.req-seg {
+  transition: transform 0.2s var(--ease), background-color 0.22s var(--ease),
+    border-color 0.22s var(--ease);
+}
+
+.req-seg.seg-good {
+  animation: segPop 0.28s var(--ease);
+}
+
+/* Pointer-Tracking Radial Spotlight Sheen (Desktop Hover) */
+@media (hover: hover) and (pointer: fine) {
+  .spotlight-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      380px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(29, 78, 216, 0.065),
+      transparent 65%
+    );
+    transition: opacity 0.25s var(--ease);
+  }
+
+  .spotlight-card:hover::before {
+    opacity: 1;
+  }
+
+  .spotlight-dark {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      rgba(96, 165, 250, 0.12),
+      transparent 65%
+    );
+    transition: opacity 0.25s var(--ease);
+  }
+
+  .spotlight-dark:hover::before {
+    opacity: 1;
+  }
+
+  .quest-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
+/* Tactile Spring Compression Across Touch & Pointer Devices */
+.btn:active,
+.tab-btn:active,
+.state-switch-btn:active,
+.quest-link-btn:active,
+.route-pill:active,
+.mobile-route-tab:active,
+.thesis-flow-chip:active,
+.blueprint-rail-btn:active,
+.radio-card:active {
+  transform: scale(0.978);
+}
+
+@keyframes pageLiftIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardStaggerIn {
+  from {
+    opacity: 0.01;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blueprintFade {
+  from {
+    opacity: 0.25;
+    transform: scale(0.992);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseBeacon {
+  0% {
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0.48);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(29, 78, 216, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0);
+  }
+}
+
+@keyframes segPop {
+  0% {
+    transform: scale(0.95);
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

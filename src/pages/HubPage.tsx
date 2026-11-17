@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DiagramLightbox } from '../components/DiagramLightbox';
 import { TopNavbar } from '../components/TopNavbar';
+import { handleSpotlightMove } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import { VisualArtifactItem } from '../i18n/translations';
 
@@ -10,6 +11,7 @@ export const HubPage: React.FC = () => {
   const [activeVisualIdx, setActiveVisualIdx] = useState(0);
   const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'>('ALL');
   const [stateFilter, setStateFilter] = useState<'all' | 'done' | 'upcoming'>('all');
+  const [heroStageIdx, setHeroStageIdx] = useState<0 | 1 | 2>(0);
   const [lightboxItem, setLightboxItem] = useState<VisualArtifactItem | null>(null);
   const [copiedRoute, setCopiedRoute] = useState<'q303' | 'q304' | null>(null);
 
@@ -53,6 +55,43 @@ export const HubPage: React.FC = () => {
   const submittedPct = Math.round((submittedNotionCount / allQuests.length) * 100);
   const liveWebPct = Math.round((liveWebCount / allQuests.length) * 100);
 
+  const heroProtocolStages =
+    locale === 'id'
+      ? [
+          {
+            num: '01 · OPEN',
+            label: 'Usulan waktu',
+            rule: 'Usulan dibuka di board; koordinator membaca siapa anggota wajib yang belum menjawab atau masih tentatif.'
+          },
+          {
+            num: '02 · CLARIFY',
+            label: 'Sementara',
+            rule: 'Jika anggota wajib belum lengkap, jadwal ditandai Sementara dan pesan klarifikasi dikirim via WhatsApp.'
+          },
+          {
+            num: '03 · LOCK',
+            label: 'Final sadar',
+            rule: 'Saat seluruh anggota wajib menyatakan pasti, koordinator menetapkan Final secara sadar beserta alasannya.'
+          }
+        ]
+      : [
+          {
+            num: '01 · OPEN',
+            label: 'Time proposal',
+            rule: 'Proposal opens on the board; coordinator inspects which required members have not replied or remain tentative.'
+          },
+          {
+            num: '02 · CLARIFY',
+            label: 'Provisional',
+            rule: 'When required certainty is incomplete, schedule stays Provisional and a targeted clarification goes to WhatsApp.'
+          },
+          {
+            num: '03 · LOCK',
+            label: 'Coordinator final',
+            rule: 'Once all required members confirm certainty, the coordinator deliberately locks Final status with written rationale.'
+          }
+        ];
+
   return (
     <>
       <TopNavbar
@@ -64,14 +103,14 @@ export const HubPage: React.FC = () => {
         }
       />
 
-      <main className="container workspace" id="top">
+      <main className="container workspace page-enter" id="top">
         {/* 00 // ARCHITECTURAL EDITORIAL MASTHEAD */}
         <section className="hub-masthead" aria-labelledby="hub-title">
           <div className="hub-masthead-grid">
             <div className="hub-hero-copy">
               <div>
                 <p className="eyebrow">
-                  <span className="eyebrow-dot" aria-hidden="true" />
+                  <span className="eyebrow-dot pulse-dot" aria-hidden="true" />
                   <span>{t.hub.eyebrow}</span>
                 </p>
                 <h1 className="hub-display-title" id="hub-title">
@@ -106,7 +145,11 @@ export const HubPage: React.FC = () => {
               </div>
             </div>
 
-            <aside className="hub-thesis-panel" aria-label={t.hub.questionLabel}>
+            <aside
+              className="hub-thesis-panel spotlight-dark"
+              aria-label={t.hub.questionLabel}
+              onPointerMove={handleSpotlightMove}
+            >
               <div>
                 <div className="thesis-index-bar">
                   <span>00 // {t.hub.questionLabel}</span>
@@ -118,25 +161,28 @@ export const HubPage: React.FC = () => {
                 </p>
               </div>
 
-              <div className="thesis-mini-flow" aria-label="Confirmation Protocol stages">
-                <div className="thesis-flow-chip">
-                  <span className="thesis-flow-num">01 · OPEN</span>
-                  <span className="thesis-flow-label">
-                    {locale === 'id' ? 'Usulan waktu' : 'Time proposal'}
-                  </span>
+              <div>
+                <div className="thesis-mini-flow" role="tablist" aria-label="Confirmation Protocol interactive preview">
+                  {heroProtocolStages.map((st, idx) => {
+                    const active = heroStageIdx === idx;
+                    return (
+                      <button
+                        key={st.num}
+                        type="button"
+                        role="tab"
+                        aria-selected={active}
+                        className={`thesis-flow-chip${active ? ' is-active' : ''}`}
+                        onClick={() => setHeroStageIdx(idx as 0 | 1 | 2)}
+                      >
+                        <span className="thesis-flow-num">{st.num}</span>
+                        <span className="thesis-flow-label">{st.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
-                <div className="thesis-flow-chip">
-                  <span className="thesis-flow-num">02 · CLARIFY</span>
-                  <span className="thesis-flow-label">
-                    {locale === 'id' ? 'Sementara' : 'Provisional'}
-                  </span>
-                </div>
-                <div className="thesis-flow-chip">
-                  <span className="thesis-flow-num">03 · LOCK</span>
-                  <span className="thesis-flow-label">
-                    {locale === 'id' ? 'Final sadar' : 'Coordinator final'}
-                  </span>
-                </div>
+                <p className="thesis-stage-caption" key={heroStageIdx}>
+                  {heroProtocolStages[heroStageIdx].rule}
+                </p>
               </div>
             </aside>
           </div>
@@ -165,7 +211,7 @@ export const HubPage: React.FC = () => {
           </div>
         </section>
 
-        {/* 01 // ISOLATED WORKSPACES */}
+        {/* 01 // ISOLATED WORKSPACES (2-COLUMN FEATURE GRID) */}
         <div className="section-head" id="routes">
           <div>
             <span className="section-coord">01 // {t.hub.routesEyebrow}</span>
@@ -175,7 +221,10 @@ export const HubPage: React.FC = () => {
         </div>
 
         <section className="dock-grid" aria-label={t.hub.routesTitle}>
-          <article className="dock-card featured-blue">
+          <article
+            className="dock-card featured-blue spotlight-card"
+            onPointerMove={handleSpotlightMove}
+          >
             <div>
               <span className="pill accent">{t.hub.cardQ303Pill}</span>
               <h3>{t.hub.cardQ303Title}</h3>
@@ -196,7 +245,10 @@ export const HubPage: React.FC = () => {
             </Link>
           </article>
 
-          <article className="dock-card featured-green">
+          <article
+            className="dock-card featured-green spotlight-card"
+            onPointerMove={handleSpotlightMove}
+          >
             <div>
               <span className="pill good">{t.hub.cardQ304Pill}</span>
               <h3>{t.hub.cardQ304Title}</h3>
@@ -215,28 +267,6 @@ export const HubPage: React.FC = () => {
             <Link className="btn primary btn-full" to="/q3-04-core">
               {t.hub.cardQ304OpenBtn} →
             </Link>
-          </article>
-
-          <article className="dock-card">
-            <div>
-              <span className="pill">{t.hub.cardArchivePill}</span>
-              <h3>{t.hub.cardArchiveTitle}</h3>
-              <p>{t.hub.cardArchiveBody}</p>
-              <ul className="version-list">
-                <li>
-                  <span>{t.hub.v1Label}</span>
-                  <a href="/arsip/q3-03-v1/index.html">{t.hub.v1Open}</a>
-                </li>
-                <li>
-                  <span>{t.hub.v2Label}</span>
-                  <a href="/arsip/q3-03-v2/index.html">{t.hub.v2Open}</a>
-                </li>
-                <li>
-                  <span>{t.hub.vAgyLabel}</span>
-                  <Link to="/q3-03">{t.hub.vAgyOpen}</Link>
-                </li>
-              </ul>
-            </div>
           </article>
         </section>
 
@@ -266,7 +296,7 @@ export const HubPage: React.FC = () => {
             ))}
           </div>
 
-          <div className="blueprint-stage">
+          <div className="blueprint-stage" key={currentVisual.id}>
             <div className="visual-stage-head">
               <div>
                 <strong style={{ display: 'block', fontSize: '15px', letterSpacing: '-0.015em' }}>
@@ -297,6 +327,7 @@ export const HubPage: React.FC = () => {
 
             <div className="visual-frame">
               <img
+                className="blueprint-img-enter"
                 src={currentVisual.png}
                 alt={currentVisual.title}
                 onClick={() => setLightboxItem(currentVisual)}
@@ -324,7 +355,7 @@ export const HubPage: React.FC = () => {
         </div>
 
         {/* Semester Progress Telemetry */}
-        <div className="trail-telemetry">
+        <div className="trail-telemetry spotlight-card" onPointerMove={handleSpotlightMove}>
           <div className="trail-telemetry-top">
             <div className="trail-stats">
               <span className="trail-stat-item">
@@ -341,7 +372,8 @@ export const HubPage: React.FC = () => {
               </span>
             </div>
             <span className="diag-label">
-              {doneCount} / {allQuests.length} {locale === 'id' ? 'TAHAP AKTIF/SELESAI' : 'COMPLETED / ACTIVE'}
+              {doneCount} / {allQuests.length}{' '}
+              {locale === 'id' ? 'TAHAP AKTIF/SELESAI' : 'COMPLETED / ACTIVE'}
             </span>
           </div>
 
@@ -406,8 +438,12 @@ export const HubPage: React.FC = () => {
           </div>
         </div>
 
-        <section className="trail-grid" aria-live="polite">
-          {filteredQuests.map((q) => {
+        <section
+          className="trail-grid"
+          aria-live="polite"
+          key={`${activePhase}-${stateFilter}`}
+        >
+          {filteredQuests.map((q, idx) => {
             const spineCls = !q.completed
               ? ' is-upcoming'
               : q.tone === 'accent'
@@ -417,7 +453,12 @@ export const HubPage: React.FC = () => {
                   : '';
 
             return (
-              <article key={q.code + q.challengeName} className={`quest-card${spineCls}`}>
+              <article
+                key={q.code + q.challengeName}
+                className={`quest-card spotlight-card card-stagger${spineCls}`}
+                style={{ '--stagger-idx': Math.min(idx, 10) } as React.CSSProperties}
+                onPointerMove={handleSpotlightMove}
+              >
                 <div className="quest-top">
                   <div className="quest-code-wrap">
                     <span className="quest-code">{q.code}</span>

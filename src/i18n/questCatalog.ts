@@ -377,7 +377,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       tone: 'accent',
       completed: true,
       summary:
-        'Merancang wireframe enam keadaan layar dan membangun prototipe interaktif terisolasi di rute /q3-03 (melalui tiga iterasi v1 → v2 → AGY) untuk menguji keterbacaan anggota wajib vs opsional, rel protokol, dan perubahan pasca-final.',
+        'Merancang wireframe enam keadaan layar dan membangun prototipe klik interaktif terisolasi di rute /q3-03 untuk menguji keterbacaan anggota wajib vs opsional, tahapan Confirmation Protocol, alasan keputusan, dan perubahan pasca-final.',
       boundary:
         'Status pengumpulan jujur: prototipe & naskah portofolio telah siap; tautan pengumpulan LMS/Notion final menunggu sesi review pengguna nyata tanpa petunjuk tombol.',
       links: [
@@ -1070,7 +1070,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       tone: 'accent',
       completed: true,
       summary:
-        'Designed a six-state screen wireframe and built an isolated interactive simulation on /q3-03 (evolving across v1 → v2 → AGY) testing required vs optional grouping, protocol rail, and post-final drift.',
+        'Designed a six-state screen wireframe and built an isolated clickable prototype on /q3-03 testing required vs optional grouping, Confirmation Protocol stages, coordinator rationale, and post-final drift.',
       boundary:
         'Honest submission status: interactive build & portfolio draft are complete; final LMS/Notion submission link awaits live unguided peer usability review.',
       links: [
