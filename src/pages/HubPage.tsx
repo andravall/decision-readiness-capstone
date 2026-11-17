@@ -6,7 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { VisualArtifactItem } from '../i18n/translations';
 
 export const HubPage: React.FC = () => {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const [activeVisualIdx, setActiveVisualIdx] = useState(0);
   const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q3+'>('ALL');
   const [lightboxItem, setLightboxItem] = useState<VisualArtifactItem | null>(null);
@@ -43,55 +43,80 @@ export const HubPage: React.FC = () => {
       />
 
       <main className="container workspace" id="top">
-        <section className="hero-shell" aria-labelledby="hub-title">
-          <div
-            className="hero-main"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 340px), 1fr))',
-              gap: '28px'
-            }}
-          >
-            <div>
-              <p className="eyebrow">{t.hub.eyebrow}</p>
-              <h1 className="hero-title" id="hub-title">
-                {t.hub.heroTitle}
-              </h1>
-              <p className="hero-lead">{t.hub.heroLead}</p>
-              <div className="meta-strip">
-                <span className="meta-chip">
-                  <strong>{t.hub.authorChipLabel}</strong> Mohammad Ferdinand Valliandra (Andra)
-                </span>
-                <span className="meta-chip">
-                  <strong>NRP:</strong> 5026231159
-                </span>
-                <span className="meta-chip">{t.hub.workModeChip}</span>
+        {/* 00 // ARCHITECTURAL EDITORIAL MASTHEAD */}
+        <section className="hub-masthead" aria-labelledby="hub-title">
+          <div className="hub-masthead-grid">
+            <div className="hub-hero-copy">
+              <div>
+                <p className="eyebrow">
+                  <span className="eyebrow-dot" aria-hidden="true" />
+                  <span>{t.hub.eyebrow}</span>
+                </p>
+                <h1 className="hub-display-title" id="hub-title">
+                  {t.hub.heroTitle}
+                </h1>
+                <p className="hub-lead">{t.hub.heroLead}</p>
+              </div>
+
+              <div className="author-ledger" aria-label="Project authorship">
+                <div className="author-cell">
+                  <span className="author-cell-key">
+                    {locale === 'id' ? 'Penyusun' : 'Author'}
+                  </span>
+                  <span className="author-cell-val">M. Ferdinand Valliandra</span>
+                </div>
+                <div className="author-cell">
+                  <span className="author-cell-key">NRP · Kelas</span>
+                  <span className="author-cell-val" style={{ fontFamily: 'var(--font-mono)' }}>
+                    5026231159 · SI-A
+                  </span>
+                </div>
+                <div className="author-cell">
+                  <span className="author-cell-key">
+                    {locale === 'id' ? 'Kepengarangan' : 'Authorship'}
+                  </span>
+                  <span className="author-cell-val">
+                    {locale === 'id'
+                      ? 'Q1.02 Tim · Q1.03+ Individu'
+                      : 'Q1.02 Pair · Q1.03+ Solo'}
+                  </span>
+                </div>
               </div>
             </div>
 
-            <div
-              style={{
-                background: 'var(--surface-raised)',
-                border: '1px solid var(--line)',
-                borderLeft: '3.5px solid var(--accent)',
-                borderRadius: 'var(--radius-md)',
-                padding: '20px 22px'
-              }}
-            >
-              <span className="diag-label">{t.hub.questionLabel}</span>
-              <blockquote
-                style={{
-                  margin: '8px 0 12px',
-                  font: '700 16.5px/1.4 var(--font-sans)',
-                  letterSpacing: '-0.018em'
-                }}
-              >
-                {t.hub.questionQuote}
-              </blockquote>
-              <p style={{ margin: 0, fontSize: '12.5px', color: 'var(--ink-secondary)' }}>
-                <strong>{t.hub.candidateSummaryLabel}</strong> {t.hub.candidateSummaryBody}
-              </p>
-            </div>
+            <aside className="hub-thesis-panel" aria-label={t.hub.questionLabel}>
+              <div>
+                <div className="thesis-index-bar">
+                  <span>00 // {t.hub.questionLabel}</span>
+                  <span>WHATSAPP COORDINATION</span>
+                </div>
+                <blockquote className="thesis-quote">{t.hub.questionQuote}</blockquote>
+                <p className="thesis-body">
+                  <strong>{t.hub.candidateSummaryLabel}</strong> {t.hub.candidateSummaryBody}
+                </p>
+              </div>
+
+              <div className="thesis-mini-flow" aria-label="Confirmation Protocol stages">
+                <div className="thesis-flow-chip">
+                  <span className="thesis-flow-num">01 · OPEN</span>
+                  <span className="thesis-flow-label">
+                    {locale === 'id' ? 'Usulan waktu' : 'Time proposal'}
+                  </span>
+                </div>
+                <div className="thesis-flow-chip">
+                  <span className="thesis-flow-num">02 · CLARIFY</span>
+                  <span className="thesis-flow-label">
+                    {locale === 'id' ? 'Sementara' : 'Provisional'}
+                  </span>
+                </div>
+                <div className="thesis-flow-chip">
+                  <span className="thesis-flow-num">03 · LOCK</span>
+                  <span className="thesis-flow-label">
+                    {locale === 'id' ? 'Final sadar' : 'Coordinator final'}
+                  </span>
+                </div>
+              </div>
+            </aside>
           </div>
 
           <div className="epistemic-strip">
@@ -118,11 +143,10 @@ export const HubPage: React.FC = () => {
           </div>
         </section>
 
+        {/* 01 // ISOLATED WORKSPACES */}
         <div className="section-head" id="routes">
           <div>
-            <p className="eyebrow" style={{ marginBottom: '4px' }}>
-              {t.hub.routesEyebrow}
-            </p>
+            <span className="section-coord">01 // {t.hub.routesEyebrow}</span>
             <h2>{t.hub.routesTitle}</h2>
             <p>{t.hub.routesSub}</p>
           </div>
@@ -134,20 +158,20 @@ export const HubPage: React.FC = () => {
               <span className="pill accent">{t.hub.cardQ303Pill}</span>
               <h3>{t.hub.cardQ303Title}</h3>
               <p>{t.hub.cardQ303Body}</p>
-              <span className="route-code">{t.hub.cardQ303RouteLabel}</span>
+              <div className="route-bar">
+                <span>/q3-03</span>
+                <button
+                  type="button"
+                  className="route-copy-inline"
+                  onClick={() => handleCopyLink('/q3-03', 'q303')}
+                >
+                  {copiedRoute === 'q303' ? t.hub.cardQ303Copied : t.hub.cardQ303CopyBtn}
+                </button>
+              </div>
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              <Link className="btn primary" to="/q3-03">
-                {t.hub.cardQ303OpenBtn}
-              </Link>
-              <button
-                type="button"
-                className="btn"
-                onClick={() => handleCopyLink('/q3-03', 'q303')}
-              >
-                {copiedRoute === 'q303' ? t.hub.cardQ303Copied : t.hub.cardQ303CopyBtn}
-              </button>
-            </div>
+            <Link className="btn obsidian btn-full" to="/q3-03">
+              {t.hub.cardQ303OpenBtn} →
+            </Link>
           </article>
 
           <article className="dock-card featured-green">
@@ -155,20 +179,20 @@ export const HubPage: React.FC = () => {
               <span className="pill good">{t.hub.cardQ304Pill}</span>
               <h3>{t.hub.cardQ304Title}</h3>
               <p>{t.hub.cardQ304Body}</p>
-              <span className="route-code">{t.hub.cardQ304RouteLabel}</span>
+              <div className="route-bar">
+                <span>/q3-04-core</span>
+                <button
+                  type="button"
+                  className="route-copy-inline"
+                  onClick={() => handleCopyLink('/q3-04-core', 'q304')}
+                >
+                  {copiedRoute === 'q304' ? t.hub.cardQ304Copied : t.hub.cardQ304CopyBtn}
+                </button>
+              </div>
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              <Link className="btn primary" to="/q3-04-core">
-                {t.hub.cardQ304OpenBtn}
-              </Link>
-              <button
-                type="button"
-                className="btn"
-                onClick={() => handleCopyLink('/q3-04-core', 'q304')}
-              >
-                {copiedRoute === 'q304' ? t.hub.cardQ304Copied : t.hub.cardQ304CopyBtn}
-              </button>
-            </div>
+            <Link className="btn primary btn-full" to="/q3-04-core">
+              {t.hub.cardQ304OpenBtn} →
+            </Link>
           </article>
 
           <article className="dock-card">
@@ -194,38 +218,36 @@ export const HubPage: React.FC = () => {
           </article>
         </section>
 
+        {/* 02 // MASTER-DETAIL BLUEPRINT STUDIO */}
         <div className="section-head" id="visuals">
           <div>
-            <p className="eyebrow" style={{ marginBottom: '4px' }}>
-              {t.hub.visualsEyebrow}
-            </p>
+            <span className="section-coord">02 // {t.hub.visualsEyebrow}</span>
             <h2>{t.hub.visualsTitle}</h2>
             <p>{t.hub.visualsSub}</p>
           </div>
         </div>
 
-        <section aria-label={t.hub.visualsTitle}>
-          <div className="scroll-tabs-wrap">
-            <div className="segmented-strip" role="tablist">
-              {t.hub.visuals.map((v, idx) => (
-                <button
-                  key={v.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={idx === activeVisualIdx}
-                  className={`tab-btn${idx === activeVisualIdx ? ' is-active' : ''}`}
-                  onClick={() => setActiveVisualIdx(idx)}
-                >
-                  {v.tab}
-                </button>
-              ))}
-            </div>
+        <section className="blueprint-studio" aria-label={t.hub.visualsTitle}>
+          <div className="blueprint-rail" role="tablist">
+            {t.hub.visuals.map((v, idx) => (
+              <button
+                key={v.id}
+                type="button"
+                role="tab"
+                aria-selected={idx === activeVisualIdx}
+                className={`blueprint-rail-btn${idx === activeVisualIdx ? ' is-active' : ''}`}
+                onClick={() => setActiveVisualIdx(idx)}
+              >
+                <span className="blueprint-rail-idx">{String(idx + 1).padStart(2, '0')}</span>
+                <span className="blueprint-rail-label">{v.tab}</span>
+              </button>
+            ))}
           </div>
 
-          <div className="visual-stage">
+          <div className="blueprint-stage">
             <div className="visual-stage-head">
               <div>
-                <strong style={{ display: 'block', fontSize: '15px' }}>
+                <strong style={{ display: 'block', fontSize: '15px', letterSpacing: '-0.015em' }}>
                   {currentVisual.title}
                 </strong>
                 <span style={{ fontSize: '12.5px', color: 'var(--ink-muted)' }}>
@@ -235,7 +257,7 @@ export const HubPage: React.FC = () => {
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 <button
                   type="button"
-                  className="btn btn-sm"
+                  className="btn btn-sm diagram-preview-trigger"
                   onClick={() => setLightboxItem(currentVisual)}
                 >
                   {t.hub.expandBtn}
@@ -262,15 +284,14 @@ export const HubPage: React.FC = () => {
           </div>
         </section>
 
+        {/* 03 // EVIDENCE TRAIL */}
         <div className="section-head" id="trail">
           <div>
-            <p className="eyebrow" style={{ marginBottom: '4px' }}>
-              {t.hub.trailEyebrow}
-            </p>
+            <span className="section-coord">03 // {t.hub.trailEyebrow}</span>
             <h2>{t.hub.trailTitle}</h2>
             <p>{t.hub.trailSub}</p>
           </div>
-          <div className="scroll-tabs-wrap" style={{ marginBottom: 0 }}>
+          <div className="scroll-tabs-wrap">
             <div className="segmented-strip" role="group">
               {(
                 [

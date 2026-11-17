@@ -56,7 +56,7 @@ export const MemberRosterList: React.FC<MemberRosterListProps> = ({
                   >
                     {member.name[0]?.toUpperCase() || '?'}
                   </span>
-                  <div>
+                  <div className="person-info">
                     <div className="person-name-line">
                       <span className="person-name">{member.name}</span>
                       <span
@@ -76,7 +76,7 @@ export const MemberRosterList: React.FC<MemberRosterListProps> = ({
                   <StatusBadge label={t.responses[member.response].label} tone={tone} />
                 </div>
 
-                <div>
+                <div className="member-action-cell">
                   <button
                     type="button"
                     className={`btn btn-sm${isEditing ? ' primary' : ''}`}

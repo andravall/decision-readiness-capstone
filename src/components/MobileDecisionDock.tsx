@@ -28,7 +28,7 @@ export const MobileDecisionDock: React.FC<MobileDecisionDockProps> = ({
         </span>
         <span className="mobile-dock-sub">{subtext}</span>
       </div>
-      <button type="button" className="btn primary btn-sm" onClick={onJump}>
+      <button type="button" className="btn primary btn-sm" onClick={onJump} data-testid="mobile-dock-cta">
         {ctaLabel}
       </button>
     </div>

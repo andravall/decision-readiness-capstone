@@ -496,21 +496,30 @@ export const CoreMvpQ304Page: React.FC = () => {
             </div>
 
             {activeProposal && (
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+              <div className="switcher-actions">
                 <button
                   type="button"
                   className="btn btn-sm"
                   onClick={handleCopySnapshot}
                   data-testid="btn-copy-snapshot"
+                  title={t.q304.copySnapshotBtn}
                 >
-                  {copiedSnapshot ? t.q304.snapshotCopied : t.q304.copySnapshotBtn}
+                  <span className="hide-mobile">
+                    {copiedSnapshot ? t.q304.snapshotCopied : t.q304.copySnapshotBtn}
+                  </span>
+                  <span className="mobile-only-label">
+                    {copiedSnapshot ? '✓ Copied' : 'Snapshot'}
+                  </span>
                 </button>
                 <button
                   type="button"
                   className="btn btn-sm danger-ghost"
                   onClick={handleDeleteActive}
+                  title={t.q304.deleteProposalBtn}
+                  aria-label={t.q304.deleteProposalBtn}
                 >
-                  {t.q304.deleteProposalBtn}
+                  <span className="hide-mobile">{t.q304.deleteProposalBtn}</span>
+                  <span className="mobile-only-label">✕</span>
                 </button>
               </div>
             )}
@@ -782,15 +791,12 @@ export const CoreMvpQ304Page: React.FC = () => {
                 </div>
 
                 <div className="status-box" aria-live="polite">
-                  <div>
+                  <div className="status-box-top">
                     <span className="diag-label">{t.common.statusDecisionLabel}</span>
-                    <div style={{ marginTop: '6px' }}>
-                      <StatusBadge
-                        label={t.statuses[activeProposal.status].label}
-                        tone={STATUS_TONES[activeProposal.status]}
-                        large
-                      />
-                    </div>
+                    <StatusBadge
+                      label={t.statuses[activeProposal.status].label}
+                      tone={STATUS_TONES[activeProposal.status]}
+                    />
                   </div>
                   <p className="status-box-caption">
                     {t.statuses[activeProposal.status].caption}
@@ -977,7 +983,13 @@ export const CoreMvpQ304Page: React.FC = () => {
                 ? t.common.mobileJumpAnnounce
                 : t.common.mobileJumpDecision
           }
-          onJump={scrollToPanelOnMobile}
+          onJump={() => {
+            if (screen === 'board') {
+              setScreen(activeProposal.status === 'final' ? 'announcement' : 'review');
+            } else {
+              scrollToPanelOnMobile();
+            }
+          }}
         />
       )}
     </>

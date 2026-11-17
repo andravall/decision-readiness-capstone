@@ -601,20 +601,56 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
     );
   };
 
+  useEffect(() => {
+    if (screen === 'board') return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onChangeScreen('board');
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [screen, onChangeScreen]);
+
+  const isSheetOpen = screen !== 'board';
+
   return (
-    <section
-      className={`card decision-card${panelStateCls}`}
-      id="decision-panel"
-      ref={panelRef}
-      aria-label="Coordinator decision workbench"
+    <div
+      className={`workbench-host${isSheetOpen ? ' is-sheet-open' : ''}`}
+      onClick={(e) => {
+        if (isSheetOpen && e.target === e.currentTarget) {
+          onChangeScreen('board');
+        }
+      }}
     >
-      {renderContent()}
-      {status === 'needs_review' && finalReason && (
-        <div className="previous-reason-box">
-          <strong>{t.workbench.prevReasonTitle(finalAt)}</strong>
-          <div>{finalReason}</div>
-        </div>
-      )}
-    </section>
+      <section
+        className={`card decision-card${panelStateCls}`}
+        id="decision-panel"
+        ref={panelRef}
+        aria-label="Coordinator decision workbench"
+      >
+        {isSheetOpen && (
+          <div className="sheet-only-header">
+            <div className="mobile-sheet-handle" aria-hidden="true" />
+            <div className="mobile-sheet-bar">
+              <span className="diag-label">Confirmation Protocol</span>
+              <button
+                type="button"
+                className="btn btn-sm"
+                onClick={() => onChangeScreen('board')}
+                data-testid="btn-close-sheet"
+              >
+                {t.common.closeBtn} ✕
+              </button>
+            </div>
+          </div>
+        )}
+        {renderContent()}
+        {status === 'needs_review' && finalReason && (
+          <div className="previous-reason-box">
+            <strong>{t.workbench.prevReasonTitle(finalAt)}</strong>
+            <div>{finalReason}</div>
+          </div>
+        )}
+      </section>
+    </div>
   );
 };

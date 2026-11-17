@@ -9,12 +9,27 @@ interface ProtocolRailProps {
 }
 
 export const ProtocolRail: React.FC<ProtocolRailProps> = ({ status, history, persistentMode }) => {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
 
-  const steps: { key: ProtocolStatusKey; num: string; label: string }[] = [
-    { key: 'proposal', num: '01', label: t.protocolSteps.s1 },
-    { key: 'provisional', num: '02', label: t.protocolSteps.s2 },
-    { key: 'final', num: '03', label: t.protocolSteps.s3 }
+  const steps: { key: ProtocolStatusKey; num: string; label: string; shortLabel: string }[] = [
+    {
+      key: 'proposal',
+      num: '01',
+      label: t.protocolSteps.s1,
+      shortLabel: locale === 'id' ? 'Usulan' : 'Proposed'
+    },
+    {
+      key: 'provisional',
+      num: '02',
+      label: t.protocolSteps.s2,
+      shortLabel: locale === 'id' ? 'Sementara' : 'Provisional'
+    },
+    {
+      key: 'final',
+      num: '03',
+      label: t.protocolSteps.s3,
+      shortLabel: 'Final'
+    }
   ];
 
   const hadProvisional = history.some((h) => h.kind === 'protocol_provisional');
@@ -42,22 +57,17 @@ export const ProtocolRail: React.FC<ProtocolRailProps> = ({ status, history, per
             <React.Fragment key={step.key}>
               <span className={cls}>
                 <span className="p-step-num">{step.num}</span>
-                <span>{step.label}</span>
+                <span className="hide-mobile">{step.label}</span>
+                <span className="mobile-only-label">{step.shortLabel}</span>
               </span>
-              {idx < steps.length - 1 && (
-                <span className="p-arrow" aria-hidden="true">
-                  →
-                </span>
-              )}
+              {idx < steps.length - 1 && <span className="p-connector" aria-hidden="true" />}
             </React.Fragment>
           );
         })}
 
         {status === 'needs_review' && (
           <>
-            <span className="p-arrow" aria-hidden="true">
-              ↺
-            </span>
+            <span className="p-connector" aria-hidden="true" />
             <span className="p-step is-active tone-alert">
               <span className="p-step-num">!</span>
               <span>{t.protocolSteps.drift}</span>

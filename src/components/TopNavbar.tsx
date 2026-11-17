@@ -12,20 +12,32 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
 
   const brandTitle = mode === 'hub' ? t.nav.hubTitle : t.nav.boardTitle;
   const badgeText =
-    mode === 'hub' ? '5026231159 · SI Capstone' : mode === 'q303-isolated' ? t.nav.simBadge : t.nav.mvpBadge;
+    mode === 'hub'
+      ? '5026231159 · SI Capstone'
+      : mode === 'q303-isolated'
+        ? t.nav.simBadge
+        : t.nav.mvpBadge;
+
+  const shortHub = locale === 'id' ? 'Hub' : 'Hub';
+  const shortQ303 = 'Q3.03';
+  const shortQ304 = 'Q3.04';
+
+  const BrandEmblem = (
+    <span className="brand-mark" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+        <rect x="2" y="9.5" width="3.2" height="6.5" rx="1" fill="currentColor" opacity="0.45" />
+        <rect x="7.4" y="5.5" width="3.2" height="10.5" rx="1" fill="currentColor" opacity="0.75" />
+        <rect x="12.8" y="2" width="3.2" height="14" rx="1" fill="currentColor" />
+      </svg>
+    </span>
+  );
 
   return (
     <header className="topbar">
-      <div className="container topbar-inner">
+      <div className="container topbar-row">
         {mode === 'q303-isolated' ? (
           <div className="brand">
-            <span className="brand-mark" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="2" y="9" width="3.2" height="7" rx="1" fill="currentColor" opacity="0.45" />
-                <rect x="7.4" y="5.5" width="3.2" height="10.5" rx="1" fill="currentColor" opacity="0.75" />
-                <rect x="12.8" y="2" width="3.2" height="14" rx="1" fill="currentColor" />
-              </svg>
-            </span>
+            {BrandEmblem}
             <div className="brand-meta">
               <span className="brand-name">{brandTitle}</span>
               <span className="brand-tag">{badgeText}</span>
@@ -33,13 +45,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
           </div>
         ) : (
           <Link className="brand" to="/">
-            <span className="brand-mark" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="2" y="9" width="3.2" height="7" rx="1" fill="currentColor" opacity="0.45" />
-                <rect x="7.4" y="5.5" width="3.2" height="10.5" rx="1" fill="currentColor" opacity="0.75" />
-                <rect x="12.8" y="2" width="3.2" height="14" rx="1" fill="currentColor" />
-              </svg>
-            </span>
+            {BrandEmblem}
             <div className="brand-meta">
               <span className="brand-name">{brandTitle}</span>
               <span className={`brand-tag${mode === 'q304' ? ' tone-good' : ''}`}>{badgeText}</span>
@@ -48,25 +54,28 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
         )}
 
         {mode !== 'q303-isolated' && (
-          <nav className="top-nav" aria-label="Main routes">
+          <nav className="top-nav-desktop" aria-label="Main routes">
             <NavLink
               to="/"
               end
               className={({ isActive }) => `route-pill${isActive ? ' is-active' : ''}`}
             >
-              {t.nav.hubRoute}
+              <span className="route-pill-idx">01</span>
+              <span>{t.nav.hubRoute}</span>
             </NavLink>
             <NavLink
               to="/q3-03"
               className={({ isActive }) => `route-pill${isActive ? ' is-active' : ''}`}
             >
-              {t.nav.q303Route}
+              <span className="route-pill-idx">02</span>
+              <span>{t.nav.q303Route}</span>
             </NavLink>
             <NavLink
               to="/q3-04-core"
               className={({ isActive }) => `route-pill${isActive ? ' is-active' : ''}`}
             >
-              {t.nav.q304Route}
+              <span className="route-pill-idx">03</span>
+              <span>{t.nav.q304Route}</span>
             </NavLink>
           </nav>
         )}
@@ -95,6 +104,33 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
           {rightSlot}
         </div>
       </div>
+
+      {mode !== 'q303-isolated' && (
+        <nav className="top-nav-mobile" aria-label="Mobile routes">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) => `mobile-route-tab${isActive ? ' is-active' : ''}`}
+          >
+            <span className="route-pill-idx">01</span>
+            <span>{shortHub}</span>
+          </NavLink>
+          <NavLink
+            to="/q3-03"
+            className={({ isActive }) => `mobile-route-tab${isActive ? ' is-active' : ''}`}
+          >
+            <span className="route-pill-idx">02</span>
+            <span>{shortQ303}</span>
+          </NavLink>
+          <NavLink
+            to="/q3-04-core"
+            className={({ isActive }) => `mobile-route-tab${isActive ? ' is-active' : ''}`}
+          >
+            <span className="route-pill-idx">03</span>
+            <span>{shortQ304}</span>
+          </NavLink>
+        </nav>
+      )}
     </header>
   );
 };

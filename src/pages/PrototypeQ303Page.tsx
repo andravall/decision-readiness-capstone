@@ -278,15 +278,12 @@ export const PrototypeQ303Page: React.FC = () => {
             </div>
 
             <div className="status-box" aria-live="polite">
-              <div>
+              <div className="status-box-top">
                 <span className="diag-label">{t.common.statusDecisionLabel}</span>
-                <div style={{ marginTop: '6px' }}>
-                  <StatusBadge
-                    label={t.statuses[status].label}
-                    tone={STATUS_TONES[status]}
-                    large
-                  />
-                </div>
+                <StatusBadge
+                  label={t.statuses[status].label}
+                  tone={STATUS_TONES[status]}
+                />
               </div>
               <p className="status-box-caption">{t.statuses[status].caption}</p>
             </div>
@@ -361,7 +358,13 @@ export const PrototypeQ303Page: React.FC = () => {
             : t.common.mobilePendingCount(evaluation.pendingRequired.length)
         }
         ctaLabel={mobileCta}
-        onJump={scrollToPanelOnMobile}
+        onJump={() => {
+          if (screen === 'board') {
+            setScreen(status === 'final' ? 'announcement' : 'review');
+          } else {
+            scrollToPanelOnMobile();
+          }
+        }}
       />
     </>
   );
