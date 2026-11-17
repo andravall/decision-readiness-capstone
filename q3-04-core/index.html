@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Decision Readiness Board · MVP Core Build (Q3.04)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
 <style>
 :root {
   color-scheme: light;
@@ -33,9 +36,8 @@
   --alert-ink: #992828;
   --alert-bg: #fdf0ee;
   --alert-border: #efc1bc;
-  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Charter, Georgia, serif;
-  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
-  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: "Space Grotesk", sans-serif;
+  --mono: "JetBrains Mono", monospace;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -350,8 +352,8 @@ button {
 
 .builder-head h1,
 .builder-head h2 {
-  font: 400 clamp(25px, 3.2vw, 34px)/1.15 var(--serif);
-  letter-spacing: -0.025em;
+  font: 700 clamp(24px, 3vw, 32px)/1.15 var(--sans);
+  letter-spacing: -0.03em;
   margin: 0 0 6px;
 }
 
@@ -519,8 +521,8 @@ textarea {
 }
 
 .hero-title {
-  font: 400 clamp(26px, 3.4vw, 38px)/1.12 var(--serif);
-  letter-spacing: -0.028em;
+  font: 700 clamp(25px, 3.3vw, 36px)/1.12 var(--sans);
+  letter-spacing: -0.032em;
   margin: 0 0 13px;
 }
 
@@ -672,11 +674,9 @@ textarea {
 }
 
 .diag-metric strong {
-  font-size: 24px;
-  font-weight: 650;
+  font: 700 23px/1.1 var(--mono);
   letter-spacing: -0.035em;
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
 }
 
 .diag-metric span {
@@ -817,7 +817,7 @@ textarea {
   border-radius: 8px;
   display: grid;
   place-items: center;
-  font: 600 15px/1 var(--serif);
+  font: 600 14px/1 var(--mono);
   background: var(--surface-sunken);
   border: 1px solid var(--line-strong);
   color: var(--ink-secondary);
@@ -923,8 +923,8 @@ textarea {
 }
 
 .decision-card h2 {
-  font: 400 24px/1.18 var(--serif);
-  letter-spacing: -0.022em;
+  font: 700 22px/1.2 var(--sans);
+  letter-spacing: -0.026em;
   margin: 0 0 10px;
 }
 
