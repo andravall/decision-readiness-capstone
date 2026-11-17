@@ -718,15 +718,16 @@ a:focus-visible {
       </div>
     </article>
 
-    <article class="dock-card">
+    <article class="dock-card featured">
       <div>
-        <span class="pill warn">Slot Berikutnya · Q3.04+</span>
-        <h3>MVP Core Build &amp; Uji Lapangan</h3>
-        <p>Rute terpisah untuk tantangan berikutnya (<em>Make It Work. Prove It!</em> hingga uji pengguna nyata Q3.07–Q3.09) sehingga pembaruan MVP ke depan tidak menimpa prototipe Q3.03.</p>
-        <span class="route-code">Rute disiapkan: /q3-04-core/</span>
+        <span class="pill good">Aktif · Q3.04 Build The Core</span>
+        <h3>MVP Core Build — Data Baru &amp; Persisten</h3>
+        <p>Implementasi fungsi inti yang memproses usulan jadwal baru, memvalidasi daftar anggota, menyimpan perubahan ke <code>localStorage</code> lintas muat ulang halaman, menyediakan tautan <em>snapshot</em>, serta mengelola siklus Confirmation Protocol secara nyata.</p>
+        <span class="route-code">Rute kerja MVP: /q3-04-core/</span>
       </div>
       <div class="dock-actions">
-        <a class="btn" href="./q3-04-core/">Lihat status rute Q3.04 →</a>
+        <a class="btn primary" href="./q3-04-core/">Buka MVP Core Q3.04 →</a>
+        <button type="button" class="btn" id="copy-q304-link">Salin link Q3.04</button>
       </div>
     </article>
   </section>
@@ -876,13 +877,22 @@ const QUEST_TRAIL = [
     boundary: 'Batas status: pemeriksaan lintas ukuran layar (1440px, 768px, 360px) telah dilakukan mandiri; minimal satu sesi review pengguna tanpa petunjuk tombol masih wajib dijalankan.'
   },
   {
+    phase: 'Q3',
+    code: 'Q3.04 · Build The Core',
+    title: 'MVP Core Build Portfolio (Make It Work. Prove It!)',
+    status: 'Selesai diuji internal',
+    tone: 'good',
+    summary: 'Mengimplementasikan fungsi inti di rute /q3-04-core/: pembuatan usulan pertemuan baru dengan validasi input, penyimpanan persisten localStorage + tautan snapshot, evaluasi kesiapan anggota wajib, dan deteksi perubahan pasca-final.',
+    boundary: 'Batas bukti: 6 skenario pengujian internal (IT-01 s.d. IT-06) lulus verifikasi teknis; belum diuji pengguna luar sehingga status validasi H1 dari Q2.05 tetap dipertahankan inconclusive.'
+  },
+  {
     phase: 'Q3+',
-    code: 'Q3.04–Q3.13 · Build, Test & Iterate',
-    title: 'MVP Core Build hingga Ready For Impact',
+    code: 'Q3.05–Q3.13 · Mentor, Test & Iterate',
+    title: 'Meet The Mentor hingga Ready For Impact',
     status: 'Tahap berikutnya',
     tone: 'warn',
-    summary: 'Rangkaian pembangunan fungsi inti MVP (Make It Work. Prove It!), integrasi alur fungsional, pengujian langsung pada kelompok nyata, analisis hambatan, dan iterasi berbasis bukti.',
-    boundary: 'Status jujur: pengerjaan belum dimulai; menunggu penyelesaian review Q3.03 serta pembacaan instruksi dan rubrik rinci tugas berikutnya.'
+    summary: 'Konsultasi progres fungsi inti bersama mentor (Q3.05), penyempurnaan integrasi alur (Q3.06), pengujian langsung pada kelompok nyata (Q3.07), analisis hambatan, dan iterasi.',
+    boundary: 'Status jujur: menunggu review mentor serta pelaksanaan pengujian langsung bersama pengguna.'
   },
   {
     phase: 'Q3+',
@@ -923,11 +933,11 @@ function renderVisuals() {
 
 function renderTrail() {
   const filters = [
-    { key: 'ALL', label: 'Semua Tahap (10)' },
+    { key: 'ALL', label: 'Semua Tahap (11)' },
     { key: 'Q1', label: 'Q1 · Discover' },
     { key: 'Q2', label: 'Q2 · Validate' },
     { key: 'Q3', label: 'Q3 · Aktif' },
-    { key: 'Q3+', label: 'Q3.04–Q5 · Berikutnya' }
+    { key: 'Q3+', label: 'Q3.05–Q5 · Berikutnya' }
   ]
 
   $('phase-filters').innerHTML = filters.map(f =>
@@ -955,20 +965,26 @@ function renderTrail() {
   ).join('')
 }
 
-$('copy-q303-link').onclick = () => {
-  const btn = $('copy-q303-link')
-  const cleanUrl = new URL('./q3-03/', window.location.href).href
-  const done = () => {
-    const prev = btn.textContent
-    btn.textContent = 'Link /q3-03/ disalin ✓'
-    setTimeout(() => { btn.textContent = prev }, 1800)
-  }
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(cleanUrl).then(done).catch(done)
-  } else {
-    done()
+function bindCopyRoute(btnId, relPath, doneText) {
+  const btn = $(btnId)
+  if (!btn) return
+  btn.onclick = () => {
+    const cleanUrl = new URL(relPath, window.location.href).href
+    const done = () => {
+      const prev = btn.textContent
+      btn.textContent = doneText
+      setTimeout(() => { btn.textContent = prev }, 1800)
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(cleanUrl).then(done).catch(done)
+    } else {
+      done()
+    }
   }
 }
+
+bindCopyRoute('copy-q303-link', './q3-03/', 'Link /q3-03/ disalin ✓')
+bindCopyRoute('copy-q304-link', './q3-04-core/', 'Link /q3-04-core/ disalin ✓')
 
 renderVisuals()
 renderTrail()
