@@ -3,6 +3,13 @@ import { AuditTimeline } from '../components/AuditTimeline';
 import { DecisionWorkbench, WorkbenchScreen } from '../components/DecisionWorkbench';
 import { MemberRosterList } from '../components/MemberRosterList';
 import { MobileDecisionDock } from '../components/MobileDecisionDock';
+import {
+  CalendarProposalIcon,
+  ClockTickIcon,
+  LocationModeIcon,
+  ShareLinkIcon,
+  ShieldLockIcon
+} from '../components/ProjectIcons';
 import { ProtocolRail } from '../components/ProtocolRail';
 import { ReadinessDiagnostics } from '../components/ReadinessDiagnostics';
 import { StatusBadge, ToneIcon } from '../components/StatusBadge';
@@ -499,16 +506,17 @@ export const CoreMvpQ304Page: React.FC = () => {
               <div className="switcher-actions">
                 <button
                   type="button"
-                  className="btn btn-sm"
+                  className="btn btn-sm interactive-icon-trigger"
                   onClick={handleCopySnapshot}
                   data-testid="btn-copy-snapshot"
                   title={t.q304.copySnapshotBtn}
                 >
+                  <ShareLinkIcon size={13} />
                   <span className="hide-mobile">
                     {copiedSnapshot ? t.q304.snapshotCopied : t.q304.copySnapshotBtn}
                   </span>
                   <span className="mobile-only-label">
-                    {copiedSnapshot ? '✓ Copied' : 'Snapshot'}
+                    {copiedSnapshot ? '✓' : 'Snapshot'}
                   </span>
                 </button>
                 <button
@@ -777,15 +785,21 @@ export const CoreMvpQ304Page: React.FC = () => {
                     {activeProposal.title}
                   </h1>
                   <div className="meta-strip">
-                    <span className="meta-chip">
-                      {formatIsoDate(activeProposal.date, locale)}
+                    <span className="meta-chip interactive-icon-trigger">
+                      <CalendarProposalIcon size={13} />
+                      <span>{formatIsoDate(activeProposal.date, locale)}</span>
                     </span>
-                    <span className="meta-chip">
-                      {formatMeetingTime(activeProposal.time, activeProposal.tz)}
+                    <span className="meta-chip interactive-icon-trigger">
+                      <ClockTickIcon size={13} />
+                      <span>{formatMeetingTime(activeProposal.time, activeProposal.tz)}</span>
                     </span>
-                    <span className="meta-chip">{activeProposal.mode}</span>
-                    <span className="meta-chip rule-chip">
-                      {t.q304.ruleChipDynamic(evaluation.requiredMembers.length)}
+                    <span className="meta-chip interactive-icon-trigger">
+                      <LocationModeIcon size={13} />
+                      <span>{activeProposal.mode}</span>
+                    </span>
+                    <span className="meta-chip rule-chip interactive-icon-trigger">
+                      <ShieldLockIcon size={13} />
+                      <span>{t.q304.ruleChipDynamic(evaluation.requiredMembers.length)}</span>
                     </span>
                   </div>
                 </div>

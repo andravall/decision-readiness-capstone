@@ -2,6 +2,12 @@ import React from 'react';
 import { RESPONSE_TONES, ReadinessEvaluation } from '../domain/readiness';
 import { handleSpotlightMove } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
+import {
+  AlertGateIcon,
+  LayersOptionalIcon,
+  ShieldLockIcon,
+  UsersCheckIcon
+} from './ProjectIcons';
 
 interface ReadinessDiagnosticsProps {
   evaluation: ReadinessEvaluation;
@@ -24,10 +30,18 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
 
   return (
     <section className="diagnostics" aria-label={t.common.readinessTitle} aria-live="polite">
-      <div className="diag-card spotlight-card" onPointerMove={handleSpotlightMove}>
+      <div
+        className="diag-card spotlight-card interactive-icon-trigger"
+        onPointerMove={handleSpotlightMove}
+      >
         <div>
           <div className="diag-head">
-            <span className="diag-label">{t.common.readinessTitle}</span>
+            <span className="diag-label-with-icon">
+              <span className={`icon-chip ${canFinalize ? 'tone-good' : 'tone-accent'}`}>
+                <UsersCheckIcon size={14} />
+              </span>
+              <span className="diag-label">{t.common.readinessTitle}</span>
+            </span>
             <span className="diag-label">{t.common.ruleTarget(requiredMembers.length)}</span>
           </div>
           <div className="diag-metric">
@@ -62,10 +76,18 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
         </div>
       </div>
 
-      <div className="diag-card spotlight-card" onPointerMove={handleSpotlightMove}>
+      <div
+        className="diag-card spotlight-card interactive-icon-trigger"
+        onPointerMove={handleSpotlightMove}
+      >
         <div>
           <div className="diag-head">
-            <span className="diag-label">{t.common.blockersTitle}</span>
+            <span className="diag-label-with-icon">
+              <span className={`icon-chip ${canFinalize ? 'tone-good' : 'tone-warn'}`}>
+                {canFinalize ? <ShieldLockIcon size={14} /> : <AlertGateIcon size={14} />}
+              </span>
+              <span className="diag-label">{t.common.blockersTitle}</span>
+            </span>
             <span className="diag-label">
               {canFinalize ? t.common.zeroPending : t.common.pendingCountLabel(pendingRequired.length)}
             </span>
@@ -100,10 +122,18 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
         )}
       </div>
 
-      <div className="diag-card spotlight-card" onPointerMove={handleSpotlightMove}>
+      <div
+        className="diag-card spotlight-card interactive-icon-trigger"
+        onPointerMove={handleSpotlightMove}
+      >
         <div>
           <div className="diag-head">
-            <span className="diag-label">{t.common.optionalTitle}</span>
+            <span className="diag-label-with-icon">
+              <span className="icon-chip tone-neutral">
+                <LayersOptionalIcon size={14} />
+              </span>
+              <span className="diag-label">{t.common.optionalTitle}</span>
+            </span>
             <span className="diag-label">{t.common.membersCount(totalMembers)}</span>
           </div>
           <div className="diag-metric">

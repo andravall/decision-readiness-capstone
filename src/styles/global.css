@@ -936,6 +936,9 @@ button {
 }
 
 .tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   min-height: 36px;
   padding: 6px 12px;
   border-radius: 8px;
@@ -2962,7 +2965,7 @@ a:focus-visible,
 }
 
 @media (max-width: 480px) {
-  .diagnostics .diag-card:not(:first-child) .diag-head span:last-child {
+  .diagnostics .diag-card:not(:first-child) .diag-head > span:last-child {
     display: none;
   }
 }
@@ -3164,6 +3167,259 @@ a:focus-visible,
   100% {
     transform: scale(1);
   }
+}
+
+/* ==========================================================================
+   10. INTERACTIVE DOMAIN ICONS, MINI-BOARD VISUALISER & FEATURE MEDALLIONS
+   ========================================================================== */
+.p-icon {
+  flex: none;
+  display: inline-block;
+  vertical-align: middle;
+  transition: transform 0.22s var(--ease), color 0.18s var(--ease);
+}
+
+.p-icon .icon-part-needle,
+.p-icon .icon-part-hand,
+.p-icon .icon-part-cursor,
+.p-icon .icon-part-pop,
+.p-icon .icon-part-slide {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.28s var(--ease);
+}
+
+.interactive-icon-trigger:hover .icon-part-needle {
+  transform: rotate(24deg);
+}
+
+.interactive-icon-trigger:hover .icon-part-hand {
+  transform: rotate(35deg);
+}
+
+.interactive-icon-trigger:hover .icon-part-cursor {
+  transform: translate(-1.5px, -1.5px) scale(1.06);
+}
+
+.interactive-icon-trigger:hover .icon-part-pop {
+  transform: scale(1.16);
+}
+
+.interactive-icon-trigger:hover .icon-part-slide {
+  transform: translateX(1.5px);
+}
+
+.interactive-icon-trigger:hover .dock-icon-medallion,
+.interactive-icon-trigger:hover .ep-icon-tile {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Hero Obsidian Interactive Mini-Board Visualiser */
+.thesis-chip-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.thesis-chip-icon {
+  color: var(--obsidian-muted);
+  display: inline-flex;
+  transition: color 0.18s var(--ease), transform 0.22s var(--ease);
+}
+
+.thesis-flow-chip.is-active .thesis-chip-icon {
+  color: #60a5fa;
+  transform: scale(1.1);
+}
+
+.hero-live-board-viz {
+  margin-top: 10px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--obsidian-border);
+  animation: fadeSlide 0.24s var(--ease);
+}
+
+.hero-viz-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--obsidian-border);
+}
+
+.hero-viz-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.hero-viz-pill {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 3px 7px;
+  border-radius: 5px;
+  border: 1px solid var(--obsidian-border);
+  background: var(--obsidian-raised);
+  color: #d6dcd7;
+}
+
+.hero-viz-pill.is-good {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(52, 211, 153, 0.35);
+  color: #6ee7b7;
+}
+
+.hero-viz-pill.is-warn {
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(251, 191, 36, 0.35);
+  color: #fcd34d;
+}
+
+.hero-viz-pill.is-accent {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(96, 165, 250, 0.42);
+  color: #93c5fd;
+}
+
+.hero-viz-status {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.09);
+  color: #f6f5f0;
+}
+
+.hero-viz-status.is-good {
+  background: rgba(16, 185, 129, 0.24);
+  color: #6ee7b7;
+}
+
+.hero-viz-status.is-warn {
+  background: rgba(245, 158, 11, 0.24);
+  color: #fde68a;
+}
+
+.hero-live-board-viz .thesis-stage-caption {
+  margin: 0;
+}
+
+/* Epistemic Icon Tiles */
+.ep-cell-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.ep-icon-tile {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border: 1px solid transparent;
+  transition: transform 0.22s var(--ease);
+}
+
+/* Workspace Card Medallions & Visual Feature Chips */
+.dock-card-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dock-icon-medallion {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid transparent;
+  transition: transform 0.22s var(--ease);
+}
+
+.dock-feature-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.dock-feature-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+
+.route-copy-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Blueprint Rail Icon & Diagnostic Icon Chips */
+.blueprint-rail-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  color: var(--ink-secondary);
+}
+
+.blueprint-rail-btn.is-active .blueprint-rail-icon {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(96, 165, 250, 0.38);
+  color: #93c5fd;
+}
+
+.diag-label-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.icon-chip {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border: 1px solid transparent;
+}
+
+.quest-phase-medallion {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border: 1px solid transparent;
 }
 
 @media (prefers-reduced-motion: reduce) {

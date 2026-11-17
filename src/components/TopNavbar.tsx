@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useScrollProgress } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import { BrandLogo } from './BrandLogo';
+import { CompassHubIcon, CoreDatabaseCheckIcon, PrototypeCursorIcon } from './ProjectIcons';
 
 interface TopNavbarProps {
   mode: 'hub' | 'q303-isolated' | 'q304';
@@ -21,7 +22,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
         ? t.nav.simBadge
         : t.nav.mvpBadge;
 
-  const shortHub = locale === 'id' ? 'Hub' : 'Hub';
+  const shortHub = 'Hub';
   const shortQ303 = 'Q3.03';
   const shortQ304 = 'Q3.04';
 
@@ -53,23 +54,23 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
             <NavLink
               to="/"
               end
-              className={({ isActive }) => `route-pill${isActive ? ' is-active' : ''}`}
+              className={({ isActive }) => `route-pill interactive-icon-trigger${isActive ? ' is-active' : ''}`}
             >
-              <span className="route-pill-idx">01</span>
+              <CompassHubIcon size={14} />
               <span>{t.nav.hubRoute}</span>
             </NavLink>
             <NavLink
               to="/q3-03"
-              className={({ isActive }) => `route-pill${isActive ? ' is-active' : ''}`}
+              className={({ isActive }) => `route-pill interactive-icon-trigger${isActive ? ' is-active' : ''}`}
             >
-              <span className="route-pill-idx">02</span>
+              <PrototypeCursorIcon size={14} />
               <span>{t.nav.q303Route}</span>
             </NavLink>
             <NavLink
               to="/q3-04-core"
-              className={({ isActive }) => `route-pill${isActive ? ' is-active' : ''}`}
+              className={({ isActive }) => `route-pill interactive-icon-trigger${isActive ? ' is-active' : ''}`}
             >
-              <span className="route-pill-idx">03</span>
+              <CoreDatabaseCheckIcon size={14} />
               <span>{t.nav.q304Route}</span>
             </NavLink>
           </nav>
@@ -105,23 +106,23 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
           <NavLink
             to="/"
             end
-            className={({ isActive }) => `mobile-route-tab${isActive ? ' is-active' : ''}`}
+            className={({ isActive }) => `mobile-route-tab interactive-icon-trigger${isActive ? ' is-active' : ''}`}
           >
-            <span className="route-pill-idx">01</span>
+            <CompassHubIcon size={13} />
             <span>{shortHub}</span>
           </NavLink>
           <NavLink
             to="/q3-03"
-            className={({ isActive }) => `mobile-route-tab${isActive ? ' is-active' : ''}`}
+            className={({ isActive }) => `mobile-route-tab interactive-icon-trigger${isActive ? ' is-active' : ''}`}
           >
-            <span className="route-pill-idx">02</span>
+            <PrototypeCursorIcon size={13} />
             <span>{shortQ303}</span>
           </NavLink>
           <NavLink
             to="/q3-04-core"
-            className={({ isActive }) => `mobile-route-tab${isActive ? ' is-active' : ''}`}
+            className={({ isActive }) => `mobile-route-tab interactive-icon-trigger${isActive ? ' is-active' : ''}`}
           >
-            <span className="route-pill-idx">03</span>
+            <CoreDatabaseCheckIcon size={13} />
             <span>{shortQ304}</span>
           </NavLink>
         </nav>

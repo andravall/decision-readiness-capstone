@@ -3,6 +3,12 @@ import { AuditTimeline } from '../components/AuditTimeline';
 import { DecisionWorkbench, WorkbenchScreen } from '../components/DecisionWorkbench';
 import { MemberRosterList } from '../components/MemberRosterList';
 import { MobileDecisionDock } from '../components/MobileDecisionDock';
+import {
+  CalendarProposalIcon,
+  ClockTickIcon,
+  LocationModeIcon,
+  ShieldLockIcon
+} from '../components/ProjectIcons';
 import { ProtocolRail } from '../components/ProtocolRail';
 import { ReadinessDiagnostics } from '../components/ReadinessDiagnostics';
 import { StatusBadge, ToneIcon } from '../components/StatusBadge';
@@ -270,10 +276,22 @@ export const PrototypeQ303Page: React.FC = () => {
                 {t.q303.meetingTitle}
               </h1>
               <div className="meta-strip">
-                <span className="meta-chip">{t.q303.meetingDate}</span>
-                <span className="meta-chip">{t.q303.meetingTime}</span>
-                <span className="meta-chip">{t.q303.meetingMode}</span>
-                <span className="meta-chip rule-chip">{t.q303.scenarioRuleChip}</span>
+                <span className="meta-chip interactive-icon-trigger">
+                  <CalendarProposalIcon size={13} />
+                  <span>{t.q303.meetingDate}</span>
+                </span>
+                <span className="meta-chip interactive-icon-trigger">
+                  <ClockTickIcon size={13} />
+                  <span>{t.q303.meetingTime}</span>
+                </span>
+                <span className="meta-chip interactive-icon-trigger">
+                  <LocationModeIcon size={13} />
+                  <span>{t.q303.meetingMode}</span>
+                </span>
+                <span className="meta-chip rule-chip interactive-icon-trigger">
+                  <ShieldLockIcon size={13} />
+                  <span>{t.q303.scenarioRuleChip}</span>
+                </span>
               </div>
             </div>
 

@@ -379,7 +379,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       summary:
         'Merancang wireframe enam keadaan layar dan membangun prototipe klik interaktif terisolasi di rute /q3-03 untuk menguji keterbacaan anggota wajib vs opsional, tahapan Confirmation Protocol, alasan keputusan, dan perubahan pasca-final.',
       boundary:
-        'Status pengumpulan jujur: prototipe & naskah portofolio telah siap; tautan pengumpulan LMS/Notion final menunggu sesi review pengguna nyata tanpa petunjuk tombol.',
+        'Batas tahap: pemeriksaan fungsional dan responsivitas telah dilakukan mandiri; sesi review pengguna langsung dilaksanakan pada tahap evaluasi berikutnya.',
       links: [
         {
           label: 'Buka Prototipe /q3-03 →',
@@ -410,7 +410,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       summary:
         'Membangun fungsi inti yang benar-benar memproses data baru di rute /q3-04-core: pembuatan multi-usulan dengan validasi ketat, penyimpanan persisten localStorage, ekspor/impor tautan #snapshot=, evaluasi kesiapan dinamis, serta dokumentasi 6 uji internal (IT-01–IT-06).',
       boundary:
-        'Status pengumpulan jujur: lulus verifikasi fungsional internal dan naskah portofolio/Scroll siap; belum merupakan uji pengguna luar sehingga H1 tetap inconclusive.',
+        'Batas tahap: lulus verifikasi fungsional internal pada 6 skenario; pengujian bersama pengguna luar dijadwalkan pada Q3.07 sehingga H1 tetap inconclusive.',
       links: [
         {
           label: 'Buka Core MVP /q3-04-core →',
@@ -1072,7 +1072,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       summary:
         'Designed a six-state screen wireframe and built an isolated clickable prototype on /q3-03 testing required vs optional grouping, Confirmation Protocol stages, coordinator rationale, and post-final drift.',
       boundary:
-        'Honest submission status: interactive build & portfolio draft are complete; final LMS/Notion submission link awaits live unguided peer usability review.',
+        'Stage boundary: functional and responsive verification completed; live unguided participant review proceeds in the next evaluation step.',
       links: [
         {
           label: 'Launch Prototype /q3-03 →',
@@ -1103,7 +1103,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       summary:
         'Built the working persistent core on /q3-04-core processing brand-new proposals with strict validation, localStorage persistence, #snapshot= link sharing, dynamic readiness evaluation, and 6 verified internal test scenarios (IT-01–IT-06).',
       boundary:
-        'Honest submission status: passed internal engineering verification with portfolio & Scroll ready; external user testing is still ahead, keeping H1 inconclusive.',
+        'Stage boundary: passed 6 internal functional test scenarios; external participant testing follows in Q3.07, keeping H1 inconclusive.',
       links: [
         {
           label: 'Launch Core MVP /q3-04-core →',
