@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SI Capstone Hub · Mohammad Ferdinand Valliandra (5026231159)</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f3f2ec;
+  --bg-subtle: #eae8df;
+  --surface: #ffffff;
+  --surface-raised: #faf9f5;
+  --surface-sunken: #f5f4ee;
+  --ink: #141714;
+  --ink-secondary: #484e46;
+  --ink-muted: #6e756b;
+  --line: #ddddd3;
+  --line-strong: #c5c6b9;
+  --accent: #1b44c8;
+  --accent-hover: #14359e;
+  --accent-soft: #eef2fd;
+  --accent-border: #c5d3f8;
+  --good-ink: #135c3b;
+  --good-bg: #eaf6ef;
+  --good-border: #b7dfc8;
+  --warn-ink: #824b0a;
+  --warn-bg: #fef6e4;
+  --warn-border: #efd393;
+  --neutral-ink: #4a5048;
+  --neutral-bg: #f0f1eb;
+  --neutral-border: #d2d5ca;
+  --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Charter, Georgia, serif;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 2px rgba(20, 23, 20, 0.04), 0 8px 24px -12px rgba(20, 23, 20, 0.06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(20, 23, 20, 0.035) 1px, transparent 0);
+  background-size: 20px 20px;
+  color: var(--ink);
+  font: 14.5px/1.58 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(250, 249, 245, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.topbar-inner {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.brand-meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.brand-name {
+  font-weight: 650;
+  font-size: 14.5px;
+  letter-spacing: -0.02em;
+}
+
+.brand-tag {
+  font: 11px/1 var(--mono);
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: var(--neutral-bg);
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 580;
+  text-decoration: none;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease), transform 0.1s var(--ease);
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--surface-sunken);
+  border-color: var(--ink-muted);
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(27, 68, 200, 0.2);
+}
+
+.btn.primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-sm {
+  min-height: 33px;
+  padding: 6px 11px;
+  font-size: 12px;
+}
+
+main.container {
+  padding-top: 32px;
+  padding-bottom: 56px;
+}
+
+/* Hero Section */
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.hero-body {
+  padding: 32px 34px 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(280px, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.eyebrow {
+  font: 11px/1.4 var(--mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 10px;
+}
+
+.hero h1 {
+  font: 400 clamp(29px, 3.7vw, 42px)/1.12 var(--serif);
+  letter-spacing: -0.028em;
+  margin: 0 0 14px;
+  color: var(--ink);
+}
+
+.hero-lead {
+  font-size: 15px;
+  color: var(--ink-secondary);
+  margin: 0 0 18px;
+  max-width: 66ch;
+}
+
+.identity-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-secondary);
+}
+
+.question-box {
+  background: var(--surface-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.question-box blockquote {
+  margin: 6px 0 12px;
+  font: 400 18px/1.35 var(--serif);
+  color: var(--ink);
+}
+
+.question-box p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink-secondary);
+}
+
+/* Epistemic Summary Strip */
+.epistemic-strip {
+  border-top: 1px solid var(--line);
+  background: var(--surface-raised);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.ep-cell {
+  padding: 16px 20px;
+  border-right: 1px solid var(--line);
+}
+
+.ep-cell:last-child {
+  border-right: 0;
+}
+
+.ep-label {
+  font: 10.5px/1.2 var(--mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.ep-value {
+  font-weight: 650;
+  font-size: 14.5px;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.ep-note {
+  font-size: 12px;
+  color: var(--ink-secondary);
+  line-height: 1.42;
+}
+
+/* Section Headers */
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 32px 0 16px;
+}
+
+.section-head h2 {
+  font: 400 26px/1.18 var(--serif);
+  letter-spacing: -0.022em;
+  margin: 0;
+}
+
+.section-head p {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: var(--ink-secondary);
+}
+
+/* Interactive Artifacts Dock */
+.dock-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 0.95fr;
+  gap: 16px;
+}
+
+.dock-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.dock-card.featured {
+  border-top: 3px solid var(--accent);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  border: 1px solid var(--neutral-border);
+  background: var(--neutral-bg);
+  color: var(--neutral-ink);
+  width: max-content;
+}
+
+.pill.good {
+  background: var(--good-bg);
+  border-color: var(--good-border);
+  color: var(--good-ink);
+}
+
+.pill.warn {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+  color: var(--warn-ink);
+}
+
+.pill.accent {
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.dock-card h3 {
+  font-size: 17.5px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  margin: 10px 0 6px;
+}
+
+.dock-card p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--ink-secondary);
+}
+
+.route-code {
+  display: inline-block;
+  margin-top: 10px;
+  font: 11.5px/1.3 var(--mono);
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  color: var(--ink-secondary);
+}
+
+.version-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.version-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--line);
+}
+
+.version-list li:last-child {
+  border-bottom: 0;
+}
+
+.version-list a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.version-list a:hover {
+  text-decoration: underline;
+}
+
+.dock-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Visual Artifacts Gallery */
+.visual-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tab-btn {
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 12.5px;
+  font-weight: 560;
+  color: var(--ink-secondary);
+  transition: all 0.15s var(--ease);
+}
+
+.tab-btn:hover {
+  color: var(--ink);
+  background: var(--surface-raised);
+}
+
+.tab-btn.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.visual-stage {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.visual-stage-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.visual-stage-head strong {
+  font-size: 14.5px;
+}
+
+.visual-stage-head span {
+  font-size: 12.5px;
+  color: var(--ink-muted);
+}
+
+.visual-frame {
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.visual-frame img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+/* Evidence Trail Filter & Cards */
+.phase-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.trail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.quest-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quest-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.quest-code {
+  font: 600 11.5px/1 var(--mono);
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.quest-card h3 {
+  font-size: 15.5px;
+  font-weight: 650;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.quest-summary {
+  font-size: 13px;
+  color: var(--ink-secondary);
+  margin: 0;
+}
+
+.quest-boundary {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+.quest-boundary strong {
+  color: var(--ink-secondary);
+}
+
+footer.hub-footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-muted);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 980px) {
+  .container { padding-left: 22px; padding-right: 22px; }
+  .hero-body { grid-template-columns: 1fr; gap: 20px; padding: 24px; }
+  .epistemic-strip { grid-template-columns: 1fr 1fr; }
+  .ep-cell:nth-child(2) { border-right: 0; }
+  .ep-cell:nth-child(1), .ep-cell:nth-child(2) { border-bottom: 1px solid var(--line); }
+  .dock-grid { grid-template-columns: 1fr; }
+  .trail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .container { padding-left: 16px; padding-right: 16px; }
+  .brand-tag { display: none; }
+  .epistemic-strip { grid-template-columns: 1fr; }
+  .ep-cell { border-right: 0; border-bottom: 1px solid var(--line); }
+  .ep-cell:last-child { border-bottom: 0; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container topbar-inner">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <rect x="2" y="9" width="3.2" height="7" rx="1" fill="currentColor" opacity="0.45"/>
+          <rect x="7.4" y="5.5" width="3.2" height="10.5" rx="1" fill="currentColor" opacity="0.75"/>
+          <rect x="12.8" y="2" width="3.2" height="14" rx="1" fill="currentColor"/>
+        </svg>
+      </span>
+      <div class="brand-meta">
+        <span class="brand-name">Decision Readiness Board · Capstone Hub</span>
+        <span class="brand-tag">5026231159 · Kelas A</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <a class="btn primary btn-sm" href="./q3-03/">Buka Prototipe Q3.03 →</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero" aria-labelledby="hub-title">
+    <div class="hero-body">
+      <div>
+        <p class="eyebrow">SI Capstone: Digital Innovation for Real-World Impact · Gasal 2026/2027</p>
+        <h1 id="hub-title">Dari balasan chat yang tersebar menuju keputusan jadwal yang dapat dijelaskan.</h1>
+        <p class="hero-lead">Portal terpusat ini menghimpun artefak interaktif dan jejak keputusan proyek saya dari Quest 1 hingga Quest 3. Setiap prototipe ditempatkan pada sub-rute terisolasi agar sesi pengujian pengguna tetap bersih dari bias konteks sekaligus menjaga versi terdahulu tetap utuh bagi penilai.</p>
+        <div class="identity-chips">
+          <span class="chip"><strong>Penyusun:</strong> Mohammad Ferdinand Valliandra (Andra)</span>
+          <span class="chip"><strong>NRP:</strong> 5026231159</span>
+          <span class="chip"><strong>Pengerjaan:</strong> Q1.02 bersama M. Faiz Roihan · Mulai Q1.03 individu</span>
+        </div>
+      </div>
+
+      <div class="question-box">
+        <span class="ep-label">Pertanyaan utama proyek</span>
+        <blockquote>“Kapan respons anggota sudah cukup untuk menetapkan jadwal pertemuan kelompok yang dapat dijalankan?”</blockquote>
+        <p><strong>Kandidat solusi:</strong> Decision Readiness Board dengan Confirmation Protocol — menyatukan status respons, tingkat kepastian, penanda anggota wajib hadir, alasan keputusan koordinator, dan jejak perubahan, dengan WhatsApp tetap sebagai kanal percakapan serta pengumuman.</p>
+      </div>
+    </div>
+
+    <div class="epistemic-strip">
+      <div class="ep-cell">
+        <span class="ep-label">Temuan kunci Q1</span>
+        <span class="ep-value">Tersedia ≠ Berkomitmen</span>
+        <span class="ep-note">Belum menjawab, tentatif, tersedia pasti, dan komitmen jadwal final perlu dibedakan (PP02, dipersempit pada Q1.06).</span>
+      </div>
+      <div class="ep-cell">
+        <span class="ep-label">Kandidat &amp; skor Q2.02–Q2.03</span>
+        <span class="ep-value">Board (17/20) + Protokol</span>
+        <span class="ep-note">Confirmation Protocol (19/20) menjadi aturan pakai; protokol tanpa board tetap alternatif pembanding yang ringan.</span>
+      </div>
+      <div class="ep-cell">
+        <span class="ep-label">Keputusan bukti Q2.05</span>
+        <span class="ep-value">H1 Inconclusive</span>
+        <span class="ep-note">Rekap K1–K3 indikatif (rata-rata 40 dtk vs 75 dtk; ketepatan 3/3 setara), namun butuh validasi tambahan sebelum MVP.</span>
+      </div>
+      <div class="ep-cell">
+        <span class="ep-label">Fokus aktif Q3.03</span>
+        <span class="ep-value">Clickable Prototype</span>
+        <span class="ep-note">Pemeriksaan hipotesis desain satu alur koordinator; belum mengubah verdict validasi solusi.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <p class="eyebrow" style="margin-bottom:4px">Rute Aplikasi Terisolasi</p>
+      <h2>Akses prototipe &amp; ruang kerja MVP</h2>
+      <p>Gunakan tautan khusus <code>/q3-03/</code> saat membagikan prototipe kepada reviewer agar mereka langsung masuk ke simulasi bersih tanpa bocoran skenario.</p>
+    </div>
+  </div>
+
+  <section class="dock-grid" aria-label="Daftar rute antarmuka">
+    <article class="dock-card featured">
+      <div>
+        <span class="pill accent">Aktif · Q3.03 Sketch The Future</span>
+        <h3>Prototipe Interaktif — Versi AGY</h3>
+        <p>Simulasi satu alur koordinator: pengelompokan eksplisit anggota wajib vs opsional, rel tahapan Confirmation Protocol, kartu diagnostik kesiapan 3-segmen, pemilih radio tingkat kepastian, pratinjau WhatsApp simulasi, dan deteksi perubahan pasca-final.</p>
+        <span class="route-code">Rute bersih reviewer: /q3-03/</span>
+      </div>
+      <div class="dock-actions">
+        <a class="btn primary" href="./q3-03/">Buka Prototipe Q3.03 →</a>
+        <button type="button" class="btn" id="copy-q303-link">Salin link khusus Reviewer</button>
+      </div>
+    </article>
+
+    <article class="dock-card">
+      <div>
+        <span class="pill">Arsip Iterasi Antarmuka</span>
+        <h3>Jejak Evolusi Desain Q3.03</h3>
+        <p>Seluruh versi terdahulu dipertahankan utuh di sub-rute terpisah agar perkembangan hierarki informasi, tipografi, dan kejelasan status dapat diperiksa secara langsung.</p>
+        <ul class="version-list">
+          <li><span><strong>Versi 01</strong> · Eksplorasi kartu awal</span><a href="./arsip/q3-03-v1/">Buka v1 →</a></li>
+          <li><span><strong>Versi 02</strong> · Tata letak lembar kerja</span><a href="./arsip/q3-03-v2/">Buka v2 →</a></li>
+          <li><span><strong>Versi AGY</strong> · Diagnostik &amp; protokol</span><a href="./q3-03/">Buka aktif →</a></li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="dock-card">
+      <div>
+        <span class="pill warn">Slot Berikutnya · Q3.04+</span>
+        <h3>MVP Core Build &amp; Uji Lapangan</h3>
+        <p>Rute terpisah untuk tantangan berikutnya (<em>Make It Work. Prove It!</em> hingga uji pengguna nyata Q3.07–Q3.09) sehingga pembaruan MVP ke depan tidak menimpa prototipe Q3.03.</p>
+        <span class="route-code">Rute disiapkan: /q3-04-core/</span>
+      </div>
+      <div class="dock-actions">
+        <a class="btn" href="./q3-04-core/">Lihat status rute Q3.04 →</a>
+      </div>
+    </article>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <p class="eyebrow" style="margin-bottom:4px">Artefak Visual Q2–Q3</p>
+      <h2>Peta penalaran, alur pengguna, dan struktur layar</h2>
+      <p>Diagram asli dari dokumentasi proyek untuk menelusuri benang merah antara evaluasi bukti (Q2.05–Q2.07) dan rancangan pengalaman (Q3.02–Q3.03).</p>
+    </div>
+  </div>
+
+  <section aria-label="Galeri diagram proyek">
+    <div class="visual-tabs" role="tablist" id="visual-tabs"></div>
+    <div class="visual-stage" id="visual-stage"></div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <p class="eyebrow" style="margin-bottom:4px">Keterlacakan Lintas Tahap</p>
+      <h2>Peta perjalanan bukti (Q1 → Q5)</h2>
+      <p>Ringkasan temuan, keputusan, dan batas metodologis yang saya pertahankan pada setiap tahap.</p>
+    </div>
+    <div class="phase-filters" id="phase-filters" role="group" aria-label="Saring berdasarkan fase"></div>
+  </div>
+
+  <section class="trail-grid" id="trail-grid" aria-live="polite"></section>
+
+  <footer class="hub-footer">
+    <span>Mohammad Ferdinand Valliandra (5026231159) · SI Capstone Kelas A · Pembaruan 18 November 2026 WIB</span>
+    <span>Catatan: Keberadaan halaman hub ini memfasilitasi akses artefak lintas tahap dan tidak menggantikan verifikasi review pengguna nyata maupun pengumpulan resmi LMS.</span>
+  </footer>
+</main>
+
+<script>
+const $ = id => document.getElementById(id)
+
+const VISUAL_ARTIFACTS = [
+  {
+    id: 'q302-flow',
+    tab: 'Q3.02 · User Flow',
+    title: 'Diagram Alur Pengguna Bercabang (Q3.02 Experience Design Blueprint)',
+    caption: 'Memisahkan cabang klarifikasi sementara via WhatsApp dari penetapan jadwal final oleh koordinator.',
+    src: './assets/Q3.02_User_Flow.svg'
+  },
+  {
+    id: 'q303-wireframe',
+    tab: 'Q3.03 · Wireframe 6 Keadaan',
+    title: 'Wireframe Enam Keadaan Layar (Q3.03 Sketch The Future)',
+    caption: 'Kerangka awal sebelum diterjemahkan menjadi prototipe HTML interaktif.',
+    src: './assets/Q3.03_Wireframe.svg'
+  },
+  {
+    id: 'q205-decision',
+    tab: 'Q2.05 · Bukti & Keputusan',
+    title: 'Ringkasan Bukti Eksperimen dan Keputusan (Q2.05 Follow The Signal)',
+    caption: 'Menjelaskan mengapa hasil K1–K3 bersifat indikatif sementara validasi H1 ditetapkan inconclusive.',
+    src: './assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.svg'
+  },
+  {
+    id: 'q206-trail',
+    tab: 'Q2.06 · Lean Evidence Trail',
+    title: 'Peta Jejak Keputusan Q2.02–Q2.05 (Q2.06 Lean Checkpoint)',
+    caption: 'Menghubungkan alternatif ide, koreksi skor matriks, asumsi berisiko, eksperimen, dan keputusan sebelum MVP.',
+    src: './assets/Q2.06_Peta_Jejak_Keputusan.svg'
+  },
+  {
+    id: 'q207-mindshift',
+    tab: 'Q2.07 · Mindshift',
+    title: 'Peta Perubahan Pemahaman Inovasi (Q2.07 Change Your Mind)',
+    caption: 'Pergeseran dari sekadar merapikan tampilan menuju tuntutan keterlacakan prosedur dan beban pembaruan.',
+    src: './assets/Q2.07_Peta_Perubahan_Pemahaman.svg'
+  }
+]
+
+const QUEST_TRAIL = [
+  {
+    phase: 'Q1',
+    code: 'Q1.02 · Scan the Signals',
+    title: 'Reality Signal Map',
+    status: 'Arsip selesai',
+    tone: 'good',
+    summary: 'Memetakan 10 sinyal masalah harian bersama Muhammad Faiz Roihan (Faiz S01–S05; saya S06–S10). Sinyal S07 mengenai koordinasi waktu pertemuan kelompok yang berulang dipilih untuk ditelusuri lebih lanjut.',
+    boundary: 'Batas bukti: skor dan durasi awal masih berupa perkiraan penyaringan sinyal, belum membuktikan kebutuhan aplikasi baru.'
+  },
+  {
+    phase: 'Q1',
+    code: 'Q1.03 · Enter Their World',
+    title: 'User Context Observation Pack',
+    status: 'Arsip selesai',
+    tone: 'good',
+    summary: 'Mengamati langsung P01 mengoordinasikan rapat via WhatsApp pada 17 September 2026 (pesan awal 20.55, rangkuman/kompromi 20.58, pengumuman 21.00, konfirmasi lengkap 21.51). Mulai tahap ini proyek dikerjakan secara individu.',
+    boundary: 'Batas bukti: berasal dari satu kejadian observasi dengan keterlibatan menyiapkan kerangka pesan; jeda 51 menit pasca-pengumuman tidak diklaim sebagai waktu kerja yang hilang.'
+  },
+  {
+    phase: 'Q1',
+    code: 'Q1.04–Q1.05 · Hear & Decode',
+    title: 'Interview Evidence & Human Insight Atlas',
+    status: 'Arsip selesai',
+    tone: 'good',
+    summary: 'Wawancara tatap muka P01, P02, P03 (24 September 2026) dan sintesis pain PP02: menyatakan tersedia di chat atau polling belum tentu berarti berkomitmen pada jadwal final.',
+    boundary: 'Batas bukti: analisis bertumpu pada catatan wawancara terkonfirmasi tanpa transkrip verbatim; persona Raka adalah komposit sintesis, bukan partisipan baru.'
+  },
+  {
+    phase: 'Q1',
+    code: 'Q1.06–Q1.08 · Prove, Pitch & Shift',
+    title: 'Problem Proof, Pitch & Lens Shift',
+    status: 'Arsip selesai',
+    tone: 'good',
+    summary: 'Memilih keputusan Refine untuk mempersempit masalah pada kesulitan koordinator membaca kecukupan/kepastian respons dan menjelaskan dasar penetapan jadwal.',
+    boundary: 'Batas bukti: cerita lanjutan P02 menunjukkan keterlambatan mulai rapat 15–30 menit terkait perjalanan/kegiatan lain, sehingga tidak seluruhnya disebabkan menunggu konfirmasi.'
+  },
+  {
+    phase: 'Q2',
+    code: 'Q2.02–Q2.03 · Idea Storm & Bet Lab',
+    title: 'Pemilihan Kandidat & Hipotesis H1–H4',
+    status: 'Arsip selesai',
+    tone: 'good',
+    summary: 'Membandingkan enam alternatif solusi dan menetapkan Decision Readiness Board dengan aturan Confirmation Protocol sebagai kandidat uji, disertai prioritas hipotesis H1 atas rangkuman chat setara.',
+    boundary: 'Koreksi terbuka: skor matriks awal board adalah 17/20 (bukan 20/20 pada berkas awal), sedangkan Confirmation Protocol 19/20; pemilihan didasarkan pada kesesuaian pekerjaan dan kelayakan pengujian.'
+  },
+  {
+    phase: 'Q2',
+    code: 'Q2.04–Q2.07 · Experiment & Decision',
+    title: 'Evaluasi Bukti & Lean Evidence Trail',
+    status: 'H1 Inconclusive',
+    tone: 'warn',
+    summary: 'Eksplorasi R1–R3 dan laporan lanjutan K1–K3 mencatat rata-rata durasi baca skenario 40 detik pada board vs 75 detik pada chat dengan ketepatan setara (3/3). Pada Q2.05 ditetapkan keputusan validasi tambahan sebelum MVP.',
+    boundary: 'Batas bukti: kelengkapan pesan mentah, stopwatch, dan kontrol urutan pada seri K belum memadai untuk menutup validasi H1 maupun menguji beban pembaruan (H3).'
+  },
+  {
+    phase: 'Q3',
+    code: 'Q3.02 · Design The Experience',
+    title: 'Experience Design Blueprint',
+    status: 'Arsip & draf Forum siap',
+    tone: 'good',
+    summary: 'Menurunkan satu user story koordinator menjadi diagram alur bercabang, pemisahan fitur Must Have vs Later, dan kriteria pengujian kesiapan keputusan.',
+    boundary: 'Batas status: merupakan hipotesis desain individu; naskah diskusi Forum Walk in Their Shoes telah disiapkan dan menunggu bukti posting/masukan sejawat.'
+  },
+  {
+    phase: 'Q3',
+    code: 'Q3.03 · Sketch The Future',
+    title: 'First Clickable Prototype Portfolio',
+    status: 'Aktif · Menunggu review nyata',
+    tone: 'accent',
+    summary: 'Membangun prototipe interaktif mandiri (Versi AGY di rute /q3-03/) yang memvisualisasikan kepastian anggota wajib vs opsional, tahapan protokol, alasan keputusan, dan peninjauan ulang pasca-final.',
+    boundary: 'Batas status: pemeriksaan lintas ukuran layar (1440px, 768px, 360px) telah dilakukan mandiri; minimal satu sesi review pengguna tanpa petunjuk tombol masih wajib dijalankan.'
+  },
+  {
+    phase: 'Q3+',
+    code: 'Q3.04–Q3.13 · Build, Test & Iterate',
+    title: 'MVP Core Build hingga Ready For Impact',
+    status: 'Tahap berikutnya',
+    tone: 'warn',
+    summary: 'Rangkaian pembangunan fungsi inti MVP (Make It Work. Prove It!), integrasi alur fungsional, pengujian langsung pada kelompok nyata, analisis hambatan, dan iterasi berbasis bukti.',
+    boundary: 'Status jujur: pengerjaan belum dimulai; menunggu penyelesaian review Q3.03 serta pembacaan instruksi dan rubrik rinci tugas berikutnya.'
+  },
+  {
+    phase: 'Q3+',
+    code: 'Q4–Q5 · Transform & Leave Your Legacy',
+    title: 'Evaluasi Dampak & The Impact Defense',
+    status: 'Rencana kurikuler',
+    tone: 'neutral',
+    summary: 'Pengukuran nilai nyata penggunaan solusi, peninjauan keputusan kritis, keberlanjutan, dan pembelaan bukti akhir semester.',
+    boundary: 'Status jujur: slot disiapkan sebagai peta kesinambungan portal satu domain; belum ada klaim dampak lapangan.'
+  }
+]
+
+let activeVisual = 0
+let activePhase = 'ALL'
+
+function renderVisuals() {
+  $('visual-tabs').innerHTML = VISUAL_ARTIFACTS.map((item, idx) =>
+    '<button type="button" role="tab" aria-selected="' + (idx === activeVisual) + '" class="tab-btn ' + (idx === activeVisual ? 'is-active' : '') + '" data-v="' + idx + '">' + item.tab + '</button>'
+  ).join('')
+
+  $('visual-tabs').querySelectorAll('button').forEach(btn => {
+    btn.onclick = () => {
+      activeVisual = Number(btn.dataset.v)
+      renderVisuals()
+    }
+  })
+
+  const current = VISUAL_ARTIFACTS[activeVisual]
+  $('visual-stage').innerHTML =
+    '<div class="visual-stage-head">' +
+      '<strong>' + current.title + '</strong>' +
+      '<span>' + current.caption + '</span>' +
+    '</div>' +
+    '<div class="visual-frame">' +
+      '<img src="' + current.src + '" alt="' + current.title + '" loading="lazy">' +
+    '</div>'
+}
+
+function renderTrail() {
+  const filters = [
+    { key: 'ALL', label: 'Semua Tahap (10)' },
+    { key: 'Q1', label: 'Q1 · Discover' },
+    { key: 'Q2', label: 'Q2 · Validate' },
+    { key: 'Q3', label: 'Q3 · Aktif' },
+    { key: 'Q3+', label: 'Q3.04–Q5 · Berikutnya' }
+  ]
+
+  $('phase-filters').innerHTML = filters.map(f =>
+    '<button type="button" class="tab-btn ' + (activePhase === f.key ? 'is-active' : '') + '" data-phase="' + f.key + '">' + f.label + '</button>'
+  ).join('')
+
+  $('phase-filters').querySelectorAll('button').forEach(btn => {
+    btn.onclick = () => {
+      activePhase = btn.dataset.phase
+      renderTrail()
+    }
+  })
+
+  const items = activePhase === 'ALL' ? QUEST_TRAIL : QUEST_TRAIL.filter(q => q.phase === activePhase)
+  $('trail-grid').innerHTML = items.map(q =>
+    '<article class="quest-card">' +
+      '<div class="quest-top">' +
+        '<span class="quest-code">' + q.code + '</span>' +
+        '<span class="pill ' + (q.tone === 'good' ? 'good' : q.tone === 'warn' ? 'warn' : q.tone === 'accent' ? 'accent' : '') + '">' + q.status + '</span>' +
+      '</div>' +
+      '<h3>' + q.title + '</h3>' +
+      '<p class="quest-summary">' + q.summary + '</p>' +
+      '<div class="quest-boundary">' + q.boundary + '</div>' +
+    '</article>'
+  ).join('')
+}
+
+$('copy-q303-link').onclick = () => {
+  const btn = $('copy-q303-link')
+  const cleanUrl = new URL('./q3-03/', window.location.href).href
+  const done = () => {
+    const prev = btn.textContent
+    btn.textContent = 'Link /q3-03/ disalin ✓'
+    setTimeout(() => { btn.textContent = prev }, 1800)
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(cleanUrl).then(done).catch(done)
+  } else {
+    done()
+  }
+}
+
+renderVisuals()
+renderTrail()
+</script>
+</body>
+</html>

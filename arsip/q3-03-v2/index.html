@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision Readiness Board · Q3.03</title>
+<style>
+:root{color-scheme:light;--ink:#252924;--muted:#62675f;--line:#dcded5;--green:#254fbe;--bg:#f6f6f0;--paper:#fffffc;--bluewash:#edf1fc;--serif:Georgia,"Times New Roman",serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,select,textarea{font:inherit}button{cursor:pointer}header{border-bottom:1px solid var(--line);background:var(--paper)}.bar,main{max-width:1240px;margin:auto;padding:0 44px}.bar{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:13px;font-weight:650;font-size:15px;letter-spacing:-.02em}.mark{height:28px;width:27px;display:flex;align-items:end;gap:4px}.mark i{display:block;width:6px;background:var(--green)}.mark i:nth-child(1){height:12px}.mark i:nth-child(2){height:20px}.mark i:nth-child(3){height:28px}.top{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}.top:before{content:"";width:6px;height:6px;border-radius:50%;background:#a37c32}main{padding-top:37px;padding-bottom:28px}.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:28px}.breadcrumb span{margin:0 9px;color:#b4b7ab}.eyebrow,.section-label{font:11px/1.5 ui-monospace,SFMono-Regular,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 11px}h1{font:normal clamp(33px,4.2vw,48px)/1.12 var(--serif);letter-spacing:-.035em;margin:0 0 17px}h2{font-size:19px;font-weight:650;line-height:1.3;letter-spacing:-.025em;margin:0 0 9px}p{margin:0 0 14px}.muted,.small{color:var(--muted)}.small{font-size:12px}.summary{display:flex;align-items:start;justify-content:space-between;gap:24px;margin-bottom:31px}.meeting-meta{display:flex;flex-wrap:wrap;align-items:center;gap:9px;font-size:13px;color:var(--muted)}.meeting-meta .divider{color:#b0b3a8;margin:0 4px}.state-label{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;margin-bottom:8px}.status-pill{font-size:13px!important;padding:7px 12px!important}.readiness{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:22px;padding:17px 0;margin-bottom:30px}.readiness .measure{font-size:14px;white-space:nowrap}.readiness strong{font-size:20px;letter-spacing:-.04em;color:var(--ink);margin-right:5px}.readiness .track{height:4px;width:100px;background:#dfe3d7;flex:none}.readiness .track span{display:block;height:100%;background:var(--green)}.readiness .explain{font-size:12px;color:var(--muted);margin-left:auto}.grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr);gap:30px;align-items:start}.card{background:var(--paper);border:1px solid var(--line);border-radius:3px;padding:25px;min-width:0}.card+.card{margin-top:22px}.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px}.section-heading .count{font:11px ui-monospace,monospace;color:var(--muted)}.column-head{display:grid;grid-template-columns:1fr 150px 45px;gap:12px;font:10px ui-monospace,monospace;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;padding:17px 0 10px;border-bottom:1px solid var(--line)}.row{display:grid;grid-template-columns:minmax(0,1fr) 150px 45px;align-items:center;gap:12px;padding:19px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0;padding-bottom:3px}.person{display:flex;align-items:center;gap:12px;min-width:0}.avatar{width:33px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:2px;color:#6d7363;font:16px var(--serif);flex:none;background:#f6f6ef}.person strong{font-weight:600}.row .small{display:block;font-size:11px;margin-top:2px}.pill{display:inline-flex;align-items:center;gap:7px;width:max-content;max-width:100%;border:1px solid #dcded6;border-radius:3px;padding:4px 8px;background:#f2f3ec;color:#555c50;font-size:11px;font-weight:550;white-space:nowrap}.pill:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;flex:none}.good{background:#eef4ed;color:#3b643e;border-color:#d7e4d4}.warn{background:#fbf5e8;color:#826018;border-color:#eadfbe}.alert{background:#fbefec;color:#9a4936;border-color:#edd9d0}.row button{padding:3px 0;border:0;background:transparent;font-size:12px;color:var(--green);text-underline-offset:4px;min-height:36px}.row button:hover{text-decoration:underline}.decision-panel{border-top:3px solid var(--green);padding-top:23px}.decision-panel h2{font:normal 28px/1.13 var(--serif);letter-spacing:-.025em;margin-bottom:16px}.note{background:#f3f4ee;border-left:2px solid #c8cfbc;padding:13px 15px;margin:17px 0;font-size:13px;overflow-wrap:anywhere}.note ul{padding-left:18px;margin:8px 0 0}.note li+li{margin-top:7px}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:21px}button{font-size:12px;font-weight:550;padding:10px 13px;border-radius:3px;border:1px solid #cdd1c6;background:var(--paper);color:var(--ink);min-height:40px;transition:background .15s}button:hover{background:#f0f1e9}button.primary{background:var(--green);border-color:var(--green);color:#fff}button.primary:hover{background:#1c409e}button:disabled{opacity:.5;cursor:default}button:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--green);outline-offset:4px}label{display:block;font-size:12px;font-weight:600;margin-top:16px}textarea,select{display:block;width:100%;padding:11px 10px;border:1px solid #aeb5a3;border-radius:3px;color:var(--ink);background:var(--paper);font-size:13px;margin:8px 0}textarea{resize:vertical;min-height:95px}.footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:19px;margin-top:33px;gap:12px}.footer .small{font-size:11px}.footer button{background:transparent;border-color:transparent;color:var(--muted)}pre{font:inherit;white-space:pre-wrap;margin:0}.history{list-style:none;padding:0;margin:16px 0 0}.history li{position:relative;padding:0 0 15px 17px;border-left:1px solid var(--line);font-size:12px;line-height:1.6;overflow-wrap:anywhere}.history li:last-child{padding-bottom:0}.history li:before{content:"";position:absolute;left:-3px;top:7px;width:5px;height:5px;border-radius:50%;background:#859477}.history-card{background:transparent;border:0;padding:0 1px}.history-card h2{font-size:14px}.history-empty{font-size:12px;padding:10px 0 0;color:var(--muted)}.history time{display:block;font:10px ui-monospace,monospace;color:var(--muted);margin-bottom:3px}.previous{font-size:12px;border-top:1px solid var(--line);padding-top:12px;margin-top:16px;color:var(--muted)}.panel-label{margin-bottom:15px}.members-card{padding-bottom:22px}
+@media(max-width:960px){.bar,main{padding-left:28px;padding-right:28px}.grid{grid-template-columns:minmax(0,1.35fr) minmax(290px,1fr);gap:20px}.card{padding:20px}.column-head,.row{grid-template-columns:minmax(0,1fr) 133px 35px;gap:8px}.avatar{display:none}.readiness{gap:15px}.readiness .explain{max-width:210px}.decision-panel h2{font-size:25px}}
+@media(max-width:760px){.bar,main{padding-left:20px;padding-right:20px}.bar{min-height:65px}.brand{font-size:13px;gap:10px}.mark{transform:scale(.8);transform-origin:left center;width:23px}.top{font-size:10px;white-space:nowrap}.breadcrumb{margin-bottom:24px}main{padding-top:24px}.summary{margin-bottom:24px;gap:14px;flex-direction:column}.state-label{display:none}.status-pill{padding:5px 9px!important;font-size:11px!important}.meeting-meta{font-size:12px;gap:6px}.meeting-meta .divider{margin:0 2px}h1{font-size:36px;margin-bottom:15px}.grid{grid-template-columns:1fr;gap:23px}.readiness{gap:12px;flex-wrap:wrap;margin-bottom:23px;padding:14px 0}.readiness .measure{font-size:12px}.readiness strong{font-size:18px}.readiness .track{width:70px}.readiness .explain{max-width:none;width:100%;margin-left:0;font-size:11px}.card{padding:20px 17px}.column-head,.row{grid-template-columns:minmax(0,1fr) 133px 35px;gap:7px}.row{padding:17px 0}.person strong{font-size:14px}.row .small{font-size:10px}.column-head{font-size:9px}.section-heading .count{font-size:10px}.pill{font-size:10px;padding:4px 6px;gap:5px}.decision-panel h2{font-size:28px}.history-card{padding:0}.footer{align-items:start}.footer .small{max-width:180px}.footer button{padding:0;min-height:26px;font-size:11px}.card+.card{margin-top:24px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="brand"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Decision Readiness Board</div><span class="top">Simulasi interaktif</span></div></header>
+<main>
+<nav class="breadcrumb" aria-label="Lokasi">Koordinasi kelompok <span>/</span> Usulan 01</nav>
+<div class="summary"><div><p class="eyebrow">Usulan pertemuan</p><h1>Rapat pembagian tugas</h1><div class="meeting-meta"><span>Rabu, 11 November 2026</span><span class="divider" aria-hidden="true">/</span><span>19.30 WIB</span><span class="divider" aria-hidden="true">/</span><span>Daring</span></div></div><div><span class="state-label">Status keputusan</span><div id="status" aria-live="polite"></div></div></div>
+<div class="readiness" id="readiness" aria-live="polite"></div>
+<div class="grid">
+<section class="card members-card" aria-labelledby="members-title"><div class="section-heading"><h2 id="members-title">Respons anggota</h2><span class="count">05 anggota</span></div><p class="small">Jawaban terakhir untuk usulan waktu ini.</p><div class="column-head" aria-hidden="true"><span>Anggota / pembaruan</span><span>Respons</span><span></span></div><div id="members"></div></section>
+<div><section class="card decision-panel" id="panel" aria-label="Panel keputusan"></section><section class="card history-card" aria-labelledby="history-title"><p class="section-label">Jejak perubahan</p><h2 id="history-title">Riwayat keputusan</h2><div id="history"></div></section></div>
+</div>
+<div class="footer"><span class="small">Skenario fiktif · Data direset saat halaman dimuat ulang.</span><button id="reset">Ulangi simulasi ↺</button></div>
+</main>
+<script>
+const $ = id => document.getElementById(id)
+const initialMembers = [
+  {name:'Alya', required:true, response:'Tersedia · pasti', time:'18.02'},
+  {name:'Bima', required:true, response:'Belum menjawab', time:'—'},
+  {name:'Citra', required:true, response:'Mungkin · tentatif', time:'18.06'},
+  {name:'Damar', required:false, response:'Tersedia · pasti', time:'18.07'},
+  {name:'Eka', required:false, response:'Tidak tersedia', time:'18.10'}
+]
+const responses = ['Belum menjawab','Mungkin · tentatif','Belum tahu','Tersedia · pasti','Tidak tersedia']
+const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))
+let members, status, history, screen, clock, finalReason
+function reset() {
+  members = initialMembers.map(member => ({...member}))
+  status = 'Usulan'
+  history = []
+  screen = 'board'
+  clock = 10
+  finalReason = ''
+  render()
+}
+function time() { return '18.' + String(++clock).padStart(2,'0') }
+function pill(label, tone='') { return '<span class="pill '+tone+'">'+esc(label)+'</span>' }
+function button(label, id, primary=false) { return '<button type="button" id="'+id+'" class="'+(primary?'primary':'')+'">'+label+'</button>' }
+function record(label, at) { history.unshift(at+' WIB · '+label) }
+function render(focus=false) {
+  const pending = members.filter(member => member.required && member.response !== 'Tersedia · pasti')
+  const canFinalize = pending.length === 0
+  $('status').innerHTML = pill(status, {Final:'good',Sementara:'warn','Perlu tinjau ulang':'alert'}[status] || '').replace('class="pill ', 'class="pill status-pill ')
+  $('readiness').innerHTML = '<span class="measure"><strong>'+ (3-pending.length) +' / 3</strong> anggota wajib sudah pasti</span><span class="track" aria-hidden="true"><span style="width:'+((3-pending.length)/3*100)+'%"></span></span><span class="explain">'+(canFinalize?'Respons lengkap. Keputusan tetap ditetapkan koordinator.':pending.length+' anggota wajib masih perlu dikonfirmasi.')+'</span>'
+  $('members').innerHTML = members.map((member,index) =>
+    '<div class="row"><div class="person"><span class="avatar" aria-hidden="true">'+member.name[0]+'</span><div><strong>'+member.name+'</strong><span class="small">'+(member.required?'Wajib hadir':'Opsional')+' · '+(member.time==='—'?'Belum tercatat':member.time+' WIB')+'</span></div></div>'+
+    pill(member.response, member.response==='Tersedia · pasti'?'good':member.response==='Tidak tersedia'?'alert':'warn')+
+    '<button type="button" data-index="'+index+'" aria-label="Ubah respons '+member.name+'">Ubah</button></div>').join('')
+  $('members').querySelectorAll('button').forEach(control => control.onclick = () => {
+    screen = Number(control.dataset.index)
+    render(true)
+  })
+  $('history').innerHTML = history.length ? '<ol class="history">'+history.map(item=>'<li><time>'+esc(item.split(' WIB · ')[0])+' WIB</time>'+esc(item.split(' WIB · ').slice(1).join(' WIB · '))+'</li>').join('')+'</ol>' : '<p class="history-empty">Belum ada perubahan. Usulan masih terbuka.</p>'
+  let panel, actions = {}
+  if (typeof screen === 'number') {
+    const member = members[screen]
+    panel = '<h2 id="panel-title">Ubah respons '+member.name+'</h2><p class="muted">Catat jawaban terakhir dari WhatsApp.</p><form id="response-form"><label for="response">Respons terbaru</label><select id="response">'+
+      responses.map(value=>'<option'+(value===member.response?' selected':'')+'>'+value+'</option>').join('')+
+      '</select><div class="actions"><button class="primary">Simpan respons</button>'+button('Batal','back')+'</div></form>'
+    actions.back = () => openScreen('board')
+  } else if (screen === 'review') {
+    panel = '<h2 id="panel-title">Tinjau keputusan</h2><p class="muted">Aturan simulasi: semua anggota wajib perlu memastikan bisa hadir. Respons anggota opsional tidak menghalangi keputusan.</p>'+
+      (canFinalize ? '<div class="note">Ketiga anggota wajib sudah tersedia dengan pasti.</div><form id="final-form"><label for="reason">Alasan menetapkan jadwal final</label><textarea id="reason" rows="2" required placeholder="Tulis dasar keputusan"></textarea><div class="actions"><button class="primary">Tetapkan final</button>'+button('Kembali','back')+'</div></form>' :
+      '<div class="note"><strong>Perlu dikonfirmasi</strong><ul>'+pending.map(member=>'<li>'+member.name+' · '+member.response+'</li>').join('')+'</ul></div><div class="actions">'+button('Tandai sementara','temporary',true)+button('Kembali','back')+'</div>')
+    actions.back = () => openScreen('board')
+    actions.temporary = () => {
+      if (status !== 'Sementara') record('Sementara · perlu klarifikasi '+pending.map(member=>member.name).join(', '), time())
+      status = 'Sementara'
+      openScreen('followup')
+    }
+  } else if (screen === 'followup') {
+    panel = '<h2 id="panel-title">Konfirmasi via WhatsApp</h2><p class="muted">Teks simulasi untuk anggota wajib yang masih menghalangi keputusan.</p><div class="note"><pre>Halo '+esc(pending.map(member=>member.name).join(' dan '))+', apakah sudah pasti bisa hadir Rabu pukul 19.30 WIB? Jadwal ini masih sementara.</pre></div><div class="actions">'+button('Kembali ke board','back',true)+'</div>'
+    actions.back = () => openScreen('board')
+  } else if (screen === 'announcement') {
+    panel = '<h2 id="panel-title">Pengumuman jadwal</h2><p class="muted">Teks untuk diumumkan di WhatsApp dalam skenario latihan.</p><div class="note"><pre>JADWAL FINAL\nRapat pembagian tugas\nRabu, 11 November 2026 · 19.30 WIB · Daring</pre></div><div class="actions">'+button('Tandai diumumkan (simulasi)','announce',true)+button('Kembali','back')+'</div>'
+    actions.announce = () => {
+      record('Pengumuman jadwal ditandai dalam simulasi', time())
+      openScreen('board')
+    }
+    actions.back = () => openScreen('board')
+  } else {
+    const final = status === 'Final'
+    const title = final?'Jadwal ditetapkan':status==='Perlu tinjau ulang'?'Respons berubah setelah final':canFinalize?'Siap untuk ditinjau':'Siapa yang perlu dikonfirmasi?'
+    const detail = final?'Alasan final: '+finalReason:canFinalize?'Semua anggota wajib tersedia dengan pasti. Koordinator dapat menetapkan keputusan setelah meninjau usulan.':
+      'Anggota wajib yang perlu ditindaklanjuti: '+pending.map(member=>member.name).join(', ')+'.'
+    panel = '<h2 id="panel-title">'+title+'</h2><div class="note">'+esc(detail)+'</div><div class="actions">'+
+      (final ? button('Lihat pengumuman','announcement',true) : button('Tinjau keputusan','review',true))+'</div>'
+    actions.review = () => openScreen('review')
+    actions.announcement = () => openScreen('announcement')
+  }
+  $('panel').innerHTML = '<p class="section-label panel-label">Keputusan koordinator</p>'+panel+(status==='Perlu tinjau ulang' && finalReason ? '<p class="previous">Alasan final sebelumnya: '+esc(finalReason)+'</p>' : '')
+  Object.entries(actions).forEach(([id, action]) => { if ($(id)) $(id).onclick = action })
+  if ($('response-form')) $('response-form').onsubmit = event => {
+    event.preventDefault()
+    const member = members[screen]
+    const next = $('response').value
+    if (member.response !== next) {
+      const at = time()
+      record(member.name+' · '+member.response+' → '+next, at)
+      member.response = next
+      member.time = at
+      if (status === 'Final') {
+        status = 'Perlu tinjau ulang'
+        record('Perlu tinjau ulang · respons berubah setelah final', at)
+      }
+    }
+    openScreen('board')
+  }
+  if ($('final-form')) {
+    $('reason').oninput = event => event.target.setCustomValidity('')
+    $('final-form').onsubmit = event => {
+      event.preventDefault()
+      finalReason = $('reason').value.trim()
+      if (!finalReason) {
+        $('reason').setCustomValidity('Isi alasan sebelum menetapkan final.')
+        $('reason').reportValidity()
+        return
+      }
+      status = 'Final'
+      record('Final · '+finalReason, time())
+      openScreen('board')
+    }
+  }
+  if (focus) {
+    const title = $('panel-title')
+    title.tabIndex = -1
+    title.focus()
+  }
+}
+function openScreen(next) { screen = next; render(true) }
+$('reset').onclick = () => { reset(); $('reset').focus() }
+reset()
+</script>
+</body>
+</html>

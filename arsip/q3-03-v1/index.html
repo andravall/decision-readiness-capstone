@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision Readiness Board · Q3.03</title>
+<style>
+:root{color-scheme:light;--ink:#172c2a;--muted:#50625e;--line:#d7e1dc;--green:#095d4d;--bg:#f1f5f2}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}header{background:#102f2b;color:#fff}.bar,main{max-width:1120px;margin:auto;padding:0 32px}.bar{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px;font-weight:750}.mark{background:#bdf0d8;color:#102f2b;border-radius:9px;padding:5px 8px;font-size:13px}.top{font-size:13px;color:#d1e7df}main{padding-top:30px;padding-bottom:28px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.13em;color:var(--green);margin:0 0 7px}h1{font-size:clamp(29px,5vw,46px);line-height:1.08;letter-spacing:-.04em;margin:0 0 9px}h2{font-size:22px;line-height:1.2;margin:0 0 10px}p{margin:0 0 14px}.muted,.small{color:var(--muted)}.small{font-size:13px}.summary{display:flex;align-items:start;justify-content:space-between;gap:14px;margin-bottom:24px}.grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px;align-items:start}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:21px;min-width:0}.card+.card{margin-top:14px}.row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}.row:first-of-type{margin-top:14px}.row .small{display:block}.pill{display:inline-block;border-radius:24px;padding:5px 10px;background:#eef1ef;font-size:13px;font-weight:750;white-space:nowrap}.good{background:#e1f4e8;color:#155339}.warn{background:#fff1d2;color:#754510}.alert{background:#fce6e1;color:#862e26}.note{background:#edf5f1;border:1px solid #d6e6dd;border-radius:10px;padding:11px 13px;margin:12px 0}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}button{font:inherit;font-size:14px;font-weight:700;padding:9px 12px;border-radius:8px;border:1px solid #bdcec6;background:#fff;color:var(--ink);cursor:pointer}button.primary{background:var(--green);border-color:var(--green);color:#fff}button:disabled{opacity:.5;cursor:default}button:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid #167d68;outline-offset:3px}label{display:block;font-weight:700;margin-top:10px}textarea,select{display:block;width:100%;padding:9px;border:1px solid #95aba1;border-radius:7px;color:var(--ink);background:white;font:inherit;margin:5px 0 8px}textarea{resize:vertical}.footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}pre{font:inherit;white-space:pre-wrap;margin:0}.history{padding-left:19px;margin:8px 0 0}.history li+li{margin-top:5px}
+@media(max-width:740px){.grid{grid-template-columns:1fr}.bar,main{padding-left:16px;padding-right:16px}.top{display:none}.summary{flex-direction:column}.row{gap:7px}.card{padding:15px}.row button{padding:7px}.pill{font-size:12px;padding:4px 7px}}
+</style>
+</head>
+<body>
+<header><div class="bar"><div class="brand"><span class="mark" aria-hidden="true">DR</span> Decision Readiness Board</div><span class="top">Q3.03 · PROTOTIPE INDIVIDU</span></div></header>
+<main>
+<p class="eyebrow">KOORDINASI KELOMPOK · SIMULASI</p>
+<div class="summary"><div><h1>Rapat pembagian tugas</h1><p class="muted">Rabu, 11 November 2026 · 19.30 WIB · Daring</p></div><div id="status" aria-live="polite"></div></div>
+<div class="grid">
+<section class="card" aria-labelledby="members-title">
+<h2 id="members-title">Respons anggota</h2>
+<p class="muted">Ringkasan satu usulan waktu untuk lima anggota.</p>
+<div id="members"></div>
+</section>
+<div>
+<section class="card" id="panel" aria-label="Panel tindakan"></section>
+<section class="card" aria-labelledby="history-title"><h2 id="history-title">Riwayat keputusan</h2><div id="history" class="small"></div></section>
+</div>
+</div>
+<div class="footer"><span class="small">Data fiktif · Waktu pembaruan simulasi</span><button id="reset">Ulangi simulasi</button></div>
+</main>
+<script>
+const $ = id => document.getElementById(id)
+const initialMembers = [
+  {name:'Alya', required:true, response:'Tersedia · pasti', time:'18.02'},
+  {name:'Bima', required:true, response:'Belum menjawab', time:'—'},
+  {name:'Citra', required:true, response:'Mungkin · tentatif', time:'18.06'},
+  {name:'Damar', required:false, response:'Tersedia · pasti', time:'18.07'},
+  {name:'Eka', required:false, response:'Tidak tersedia', time:'18.10'}
+]
+const responses = ['Belum menjawab','Mungkin · tentatif','Belum tahu','Tersedia · pasti','Tidak tersedia']
+const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))
+let members, status, history, screen, clock, finalReason
+function reset() {
+  members = initialMembers.map(member => ({...member}))
+  status = 'Usulan'
+  history = []
+  screen = 'board'
+  clock = 10
+  finalReason = ''
+  render()
+}
+function time() { return '18.' + String(++clock).padStart(2,'0') }
+function pill(label, tone='') { return '<span class="pill '+tone+'">'+esc(label)+'</span>' }
+function button(label, id, primary=false) { return '<button type="button" id="'+id+'" class="'+(primary?'primary':'')+'">'+label+'</button>' }
+function record(label, at) { history.unshift(at+' WIB · '+label) }
+function render(focus=false) {
+  const pending = members.filter(member => member.required && member.response !== 'Tersedia · pasti')
+  const canFinalize = pending.length === 0
+  $('status').innerHTML = pill(status, {Final:'good',Sementara:'warn','Perlu tinjau ulang':'alert'}[status] || '')
+  $('members').innerHTML = members.map((member,index) =>
+    '<div class="row"><div><strong>'+member.name+'</strong><span class="small">'+(member.required?'Wajib hadir':'Opsional')+' · '+(member.time==='—'?'Belum tercatat':member.time+' WIB')+'</span></div>'+
+    pill(member.response, member.response==='Tersedia · pasti'?'good':member.response==='Tidak tersedia'?'alert':'warn')+
+    '<button type="button" data-index="'+index+'" aria-label="Ubah respons '+member.name+'">Ubah</button></div>').join('')
+  $('members').querySelectorAll('button').forEach(control => control.onclick = () => {
+    screen = Number(control.dataset.index)
+    render(true)
+  })
+  $('history').innerHTML = history.length ? '<ol class="history">'+history.map(item=>'<li>'+esc(item)+'</li>').join('')+'</ol>' : 'Usulan aktif. Keputusan belum dicatat.'
+  let panel, actions = {}
+  if (typeof screen === 'number') {
+    const member = members[screen]
+    panel = '<h2 id="panel-title">Ubah respons '+member.name+'</h2><p class="muted">Catat jawaban terakhir dari WhatsApp.</p><form id="response-form"><label for="response">Respons terbaru</label><select id="response">'+
+      responses.map(value=>'<option'+(value===member.response?' selected':'')+'>'+value+'</option>').join('')+
+      '</select><div class="actions"><button class="primary">Simpan respons</button>'+button('Batal','back')+'</div></form>'
+    actions.back = () => openScreen('board')
+  } else if (screen === 'review') {
+    panel = '<h2 id="panel-title">Tinjau keputusan</h2><p class="muted">Aturan simulasi: semua anggota wajib perlu memastikan bisa hadir. Respons anggota opsional tidak menghalangi keputusan.</p>'+
+      (canFinalize ? '<div class="note">Ketiga anggota wajib sudah tersedia dengan pasti.</div><form id="final-form"><label for="reason">Alasan menetapkan jadwal final</label><textarea id="reason" rows="2" required placeholder="Tulis dasar keputusan"></textarea><div class="actions"><button class="primary">Tetapkan final</button>'+button('Kembali','back')+'</div></form>' :
+      '<div class="note"><strong>Perlu dikonfirmasi</strong><ul>'+pending.map(member=>'<li>'+member.name+' · '+member.response+'</li>').join('')+'</ul></div><div class="actions">'+button('Tandai sementara','temporary',true)+button('Kembali','back')+'</div>')
+    actions.back = () => openScreen('board')
+    actions.temporary = () => {
+      if (status !== 'Sementara') record('Sementara · perlu klarifikasi '+pending.map(member=>member.name).join(', '), time())
+      status = 'Sementara'
+      openScreen('followup')
+    }
+  } else if (screen === 'followup') {
+    panel = '<h2 id="panel-title">Konfirmasi via WhatsApp</h2><p class="muted">Teks simulasi untuk anggota wajib yang masih menghalangi keputusan.</p><div class="note"><pre>Halo '+esc(pending.map(member=>member.name).join(' dan '))+', apakah sudah pasti bisa hadir Rabu pukul 19.30 WIB? Jadwal ini masih sementara.</pre></div><div class="actions">'+button('Kembali ke board','back',true)+'</div>'
+    actions.back = () => openScreen('board')
+  } else if (screen === 'announcement') {
+    panel = '<h2 id="panel-title">Pengumuman jadwal</h2><p class="muted">Teks untuk diumumkan di WhatsApp dalam skenario latihan.</p><div class="note"><pre>JADWAL FINAL\nRapat pembagian tugas\nRabu, 11 November 2026 · 19.30 WIB · Daring</pre></div><div class="actions">'+button('Tandai diumumkan (simulasi)','announce',true)+button('Kembali','back')+'</div>'
+    actions.announce = () => {
+      record('Pengumuman jadwal ditandai dalam simulasi', time())
+      openScreen('board')
+    }
+    actions.back = () => openScreen('board')
+  } else {
+    const final = status === 'Final'
+    const title = final?'Jadwal ditetapkan':status==='Perlu tinjau ulang'?'Respons berubah setelah final':canFinalize?'Siap untuk ditinjau':'Siapa yang perlu dikonfirmasi?'
+    const detail = final?'Alasan final: '+finalReason:canFinalize?'Semua anggota wajib tersedia dengan pasti. Saya masih perlu menegaskan keputusan.':
+      'Anggota wajib yang perlu ditindaklanjuti: '+pending.map(member=>member.name).join(', ')+'.'
+    panel = '<h2 id="panel-title">'+title+'</h2><div class="note">'+esc(detail)+'</div><div class="actions">'+
+      (final ? button('Lihat pengumuman','announcement',true) : button('Tinjau keputusan','review',true))+'</div>'
+    actions.review = () => openScreen('review')
+    actions.announcement = () => openScreen('announcement')
+  }
+  $('panel').innerHTML = panel
+  Object.entries(actions).forEach(([id, action]) => { if ($(id)) $(id).onclick = action })
+  if ($('response-form')) $('response-form').onsubmit = event => {
+    event.preventDefault()
+    const member = members[screen]
+    const next = $('response').value
+    if (member.response !== next) {
+      const at = time()
+      record(member.name+' · '+member.response+' → '+next, at)
+      member.response = next
+      member.time = at
+      if (status === 'Final') {
+        status = 'Perlu tinjau ulang'
+        record('Perlu tinjau ulang · respons berubah setelah final', at)
+      }
+    }
+    openScreen('board')
+  }
+  if ($('final-form')) {
+    $('reason').oninput = event => event.target.setCustomValidity('')
+    $('final-form').onsubmit = event => {
+      event.preventDefault()
+      finalReason = $('reason').value.trim()
+      if (!finalReason) {
+        $('reason').setCustomValidity('Isi alasan sebelum menetapkan final.')
+        $('reason').reportValidity()
+        return
+      }
+      status = 'Final'
+      record('Final · '+finalReason, time())
+      openScreen('board')
+    }
+  }
+  if (focus) {
+    const title = $('panel-title')
+    title.tabIndex = -1
+    title.focus()
+  }
+}
+function openScreen(next) { screen = next; render(true) }
+$('reset').onclick = () => { reset(); $('reset').focus() }
+reset()
+</script>
+</body>
+</html>
