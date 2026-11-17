@@ -1,4 +1,17 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": true
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/arsip/(.*)",
+      "destination": "/arsip/$1"
+    },
+    {
+      "source": "/assets/(.*)",
+      "destination": "/assets/$1"
+    },
+    {
+      "source": "/((?!arsip/|assets/).*)",
+      "destination": "/index.html"
+    }
+  ]
 }

@@ -1,0 +1,108 @@
+import React from 'react';
+import { RESPONSE_TONES, ReadinessEvaluation } from '../domain/readiness';
+import { useLanguage } from '../i18n/LanguageContext';
+
+interface ReadinessDiagnosticsProps {
+  evaluation: ReadinessEvaluation;
+  totalMembers: number;
+}
+
+export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
+  evaluation,
+  totalMembers
+}) => {
+  const { t } = useLanguage();
+  const { requiredMembers, optionalMembers, pendingRequired, readyCount, canFinalize } = evaluation;
+
+  const optSummary = optionalMembers.length
+    ? optionalMembers.map((m) => `${m.name} (${t.responses[m.response].short})`).join(', ')
+    : t.common.noOptionalMsg;
+
+  return (
+    <section className="diagnostics" aria-label={t.common.readinessTitle} aria-live="polite">
+      <div className="diag-card">
+        <div>
+          <div className="diag-head">
+            <span className="diag-label">{t.common.readinessTitle}</span>
+            <span className="diag-label">{t.common.ruleTarget(requiredMembers.length)}</span>
+          </div>
+          <div className="diag-metric">
+            <strong data-testid="ready-ratio">
+              {readyCount} / {requiredMembers.length}
+            </strong>
+            <span>{t.common.requiredConfirmedSuffix}</span>
+          </div>
+        </div>
+        <div className="req-segments">
+          {requiredMembers.map((m) => {
+            const tone = RESPONSE_TONES[m.response];
+            const sym =
+              tone === 'good' ? '✓' : tone === 'alert' ? '✕' : tone === 'warn' ? '◐' : '○';
+            return (
+              <div
+                key={m.id}
+                className={`req-seg seg-${tone}`}
+                title={`${m.name}: ${t.responses[m.response].label}`}
+              >
+                <span className="req-seg-name">{m.name}</span>
+                <span aria-hidden="true">{sym}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="diag-card">
+        <div>
+          <div className="diag-head">
+            <span className="diag-label">{t.common.blockersTitle}</span>
+            <span className="diag-label">
+              {canFinalize ? t.common.zeroPending : t.common.pendingCountLabel(pendingRequired.length)}
+            </span>
+          </div>
+          <div className="diag-metric">
+            <strong>
+              {canFinalize
+                ? t.common.readyToReviewMetric
+                : t.common.peopleCountMetric(pendingRequired.length)}
+            </strong>
+            <span>{canFinalize ? t.common.ruleMetSub : t.common.blockingFinalSub}</span>
+          </div>
+        </div>
+        {canFinalize ? (
+          <p className="diag-subtext" style={{ color: 'var(--good-ink)', fontWeight: 600 }}>
+            {t.common.noBlockersMsg}
+          </p>
+        ) : (
+          <div className="blocker-chips">
+            {pendingRequired.map((m) => {
+              const tone = RESPONSE_TONES[m.response];
+              return (
+                <span
+                  key={m.id}
+                  className={`blocker-chip${tone === 'alert' ? ' is-alert' : ''}`}
+                >
+                  {m.name} · {t.responses[m.response].label}
+                </span>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <div className="diag-card">
+        <div>
+          <div className="diag-head">
+            <span className="diag-label">{t.common.optionalTitle}</span>
+            <span className="diag-label">{t.common.membersCount(totalMembers)}</span>
+          </div>
+          <div className="diag-metric">
+            <strong>{t.common.optionalCountMetric(optionalMembers.length)}</strong>
+            <span>{t.common.notBlockingSub}</span>
+          </div>
+        </div>
+        <p className="diag-subtext">{optSummary}</p>
+      </div>
+    </section>
+  );
+};
