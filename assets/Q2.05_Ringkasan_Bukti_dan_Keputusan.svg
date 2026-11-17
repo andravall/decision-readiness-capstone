@@ -1,54 +1,201 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1300" viewBox="0 0 1800 1300">
-<title>Q2.05 | Dari bukti ke keputusan</title>
-<rect x="0" y="0" width="1800" height="1300" rx="0" fill="#F5F7FA"/>
-<text x="70" y="91" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#14283F">Q2.05 | Dari bukti ke keputusan</text>
-<text x="72" y="150" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#52637A">Decision Readiness Board · Analisis H1 · Durasi membaca dan menjawab skenario</text>
-<rect x="70" y="230" width="520" height="230" rx="20" fill="#FFFFFF"/>
-<text x="98" y="277" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#137D83">HASIL TERLAPOR</text>
-<text x="98" y="345" font-family="Arial, sans-serif" font-size="37" font-weight="700" fill="#14283F">3/3 benar</text>
-<text x="98" y="405" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#14283F">Chat dan board memiliki ketepatan</text>
-<text x="98" y="436.25" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#14283F">sama.</text>
-<rect x="640" y="230" width="520" height="230" rx="20" fill="#FFFFFF"/>
-<text x="668" y="277" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#355AA8">DURASI RATA-RATA</text>
-<text x="668" y="345" font-family="Arial, sans-serif" font-size="37" font-weight="700" fill="#14283F">75 → 40 detik</text>
-<text x="668" y="405" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#14283F">Selisih 35 detik pada laporan</text>
-<text x="668" y="436.25" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#14283F">K1–K3.</text>
-<rect x="1210" y="230" width="520" height="230" rx="20" fill="#FFFFFF"/>
-<text x="1238" y="277" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#98631E">KEKUATAN BUKTI</text>
-<text x="1238" y="345" font-family="Arial, sans-serif" font-size="37" font-weight="700" fill="#14283F">Masih terbatas</text>
-<text x="1238" y="405" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#14283F">Dokumentasi asal dan prosedur</text>
-<text x="1238" y="436.25" font-family="Arial, sans-serif" font-size="25" font-weight="400" fill="#14283F">belum memadai.</text>
-<rect x="70" y="510" width="900" height="570" rx="20" fill="#FFFFFF"/>
-<text x="100" y="570" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#14283F">Durasi yang dilaporkan peserta</text>
-<rect x="105" y="610" width="22" height="22" rx="4" fill="#355AA8"/>
-<text x="140" y="626" font-family="Arial, sans-serif" font-size="24" font-weight="400" fill="#14283F">Chat</text>
-<rect x="325" y="610" width="22" height="22" rx="4" fill="#137D83"/>
-<text x="360" y="626" font-family="Arial, sans-serif" font-size="24" font-weight="400" fill="#14283F">Board</text>
-<text x="105" y="722" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#14283F">K1</text>
-<rect x="195" y="680" width="546" height="35" rx="5" fill="#355AA8"/>
-<text x="751" y="702" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#355AA8">78</text>
-<rect x="195" y="725" width="294" height="35" rx="5" fill="#137D83"/>
-<text x="499" y="747" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#137D83">42</text>
-<text x="105" y="842" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#14283F">K2</text>
-<rect x="195" y="800" width="525" height="35" rx="5" fill="#355AA8"/>
-<text x="730" y="822" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#355AA8">75</text>
-<rect x="195" y="845" width="280" height="35" rx="5" fill="#137D83"/>
-<text x="485" y="867" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#137D83">40</text>
-<text x="105" y="962" font-family="Arial, sans-serif" font-size="27" font-weight="700" fill="#14283F">K3</text>
-<rect x="195" y="920" width="504" height="35" rx="5" fill="#355AA8"/>
-<text x="709" y="942" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#355AA8">72</text>
-<rect x="195" y="965" width="266" height="35" rx="5" fill="#137D83"/>
-<text x="471" y="987" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#137D83">38</text>
-<text x="105" y="1061" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#52637A">Satuan: detik · Pengukuran mandiri, belum diverifikasi</text>
-<rect x="1020" y="510" width="710" height="570" rx="20" fill="#FFFFFF"/>
-<text x="1050" y="565" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#98631E">VERDICT</text>
-<text x="1050" y="643" font-family="Arial, sans-serif" font-size="43" font-weight="700" fill="#14283F">Inconclusive</text>
-<text x="1050" y="711" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#14283F">Ambang tercapai secara indikatif. Bukti</text>
-<text x="1050" y="746.0" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#14283F">pelaksanaan belum cukup untuk validasi</text>
-<text x="1050" y="781.0" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#14283F">memadai.</text>
-<text x="1050" y="858" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#137D83">KEPUTUSAN SAYA</text>
-<text x="1050" y="927" font-family="Arial, sans-serif" font-size="35" font-weight="700" fill="#14283F">Validasi tambahan sebelum MVP</text>
-<text x="75" y="1148" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#14283F">Pertahankan ambang H1. Dokumentasikan uji ulang dan periksa pembaruan status secara terpisah.</text>
-<text x="72" y="1216" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#52637A">Sumber: Q2.04 revisi §4.2, §5.3 dan §6; evaluasi Q2.05. Selisih waktu ini tidak mengukur penghematan keseluruhan koordinasi atau membuktikan</text>
-<text x="72" y="1242.25" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#52637A">peningkatan akurasi.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1060" viewBox="0 0 1600 1060" role="img" aria-labelledby="q205-title q205-desc">
+  <title id="q205-title">Q2.05 — Ringkasan Bukti Eksperimen dan Keputusan Sebelum MVP</title>
+  <desc id="q205-desc">Evaluasi hipotesis H1 Decision Readiness Board terhadap rangkuman chat setara: ketepatan sama 3/3, rata-rata durasi baca skenario terlapor 75 detik menjadi 40 detik pada K1–K3, kekuatan bukti prosedur masih terbatas sehingga verdict ditetapkan inconclusive dan diputuskan validasi tambahan sebelum MVP.</desc>
+
+  <defs>
+    <pattern id="q205-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#141714" fill-opacity="0.05"/>
+    </pattern>
+    <filter id="q205-shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#141714" flood-opacity="0.04"/>
+    </filter>
+    <clipPath id="q205-clip">
+      <rect x="28" y="28" width="1544" height="1004" rx="16"/>
+    </clipPath>
+    <style>
+      .sans { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif; }
+      .serif { font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Charter, Georgia, serif; }
+      .mono { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; }
+      .eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: 0.11em; fill: #6E756B; }
+      .h1 { font-size: 35px; fill: #141714; letter-spacing: -0.022em; }
+      .sub { font-size: 14.8px; fill: #484E46; }
+      .kpi-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
+      .kpi-val { font-size: 30px; font-weight: 700; fill: #141714; letter-spacing: -0.03em; }
+      .kpi-desc { font-size: 13.2px; fill: #484E46; }
+      .panel-h2 { font-size: 20px; font-weight: 650; fill: #141714; letter-spacing: -0.015em; }
+      .axis-txt { font-size: 11px; fill: #6E756B; }
+      .bar-val { font-size: 12.5px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1060" fill="#EAE8DF"/>
+
+  <g clip-path="url(#q205-clip)">
+    <rect x="28" y="28" width="1544" height="1004" fill="#FAF9F5"/>
+    <rect x="28" y="28" width="1544" height="1004" fill="url(#q205-dots)"/>
+    <rect x="28" y="28" width="1544" height="5" fill="#1B44C8"/>
+  </g>
+  <rect x="28" y="28" width="1544" height="1004" rx="16" fill="none" stroke="#D5D5CA" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="72" y="78" class="mono eyebrow">Q2.05 · FOLLOW THE SIGNAL · EVIDENCE-TO-DECISION REPORT</text>
+  <text x="72" y="120" class="serif h1">Dari bukti eksperimen menuju keputusan sebelum MVP</text>
+  <text x="72" y="149" class="sans sub">Decision Readiness Board · Evaluasi hipotesis H1 terhadap rangkuman percakapan chat berinformasi setara</text>
+
+  <!-- Right Threshold Box -->
+  <g filter="url(#q205-shadow)">
+    <rect x="1064" y="60" width="464" height="94" rx="10" fill="#FFFFFF" stroke="#DDDDD3" stroke-width="1.3"/>
+    <rect x="1064" y="72" width="4" height="70" rx="2" fill="#1B44C8"/>
+  </g>
+  <text x="1084" y="83" class="mono" font-size="10.5" font-weight="700" letter-spacing="0.08em" fill="#1B44C8">SYARAT AMBANG H1 (DITETAPKAN SEBELUM UJI · Q2.03)</text>
+  <text x="1084" y="108" class="sans" font-size="13" fill="#141714">1. Minimal ≥2 dari ≥3 koordinator tepat tanpa membuka chat</text>
+  <text x="1084" y="131" class="sans" font-size="13" fill="#141714">2. Pada ≥2 orang yang tepat, durasi baca board ≤ durasi chat</text>
+
+  <line x1="72" y1="174" x2="1528" y2="174" stroke="#E2E2D8" stroke-width="1.2"/>
+
+  <!-- ================= TOP 3 KPI DIAGNOSTIC CARDS (y = 196, h = 148) ================= -->
+
+  <!-- KPI 1 -->
+  <g transform="translate(72, 196)" filter="url(#q205-shadow)">
+    <rect width="468" height="148" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.4"/>
+    <text x="24" y="30" class="mono kpi-label" fill="#135C3B">01 · KETEPATAN TERLAPOR</text>
+    <rect x="314" y="14" width="130" height="22" rx="11" fill="#EAF6EF" stroke="#B7DFC8"/>
+    <text x="379" y="29" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" fill="#135C3B">SETARA 100%</text>
+    <text x="24" y="74" class="sans kpi-val">3 / 3 tepat</text>
+    <text x="24" y="105" class="sans kpi-desc">Kondisi chat (3/3) dan board (3/3) menghasilkan</text>
+    <text x="24" y="125" class="sans kpi-desc">ketepatan identifikasi status &amp; alasan yang sama.</text>
+  </g>
+
+  <!-- KPI 2 -->
+  <g transform="translate(566, 196)" filter="url(#q205-shadow)">
+    <rect width="468" height="148" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.4"/>
+    <text x="24" y="30" class="mono kpi-label" fill="#1B44C8">02 · RATA-RATA DURASI BACA (K1–K3)</text>
+    <rect x="330" y="14" width="114" height="22" rx="11" fill="#EEF2FD" stroke="#C5D3F8"/>
+    <text x="387" y="29" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" fill="#1B44C8">−35 DETIK</text>
+    <text x="24" y="74" class="sans kpi-val">75 → 40 detik</text>
+    <text x="24" y="105" class="sans kpi-desc">Selisih 46,7% khusus pada durasi membaca &amp;</text>
+    <text x="24" y="125" class="sans kpi-desc">menjawab skenario C/D yang dilaporkan peserta.</text>
+  </g>
+
+  <!-- KPI 3 -->
+  <g transform="translate(1060, 196)" filter="url(#q205-shadow)">
+    <rect width="468" height="148" rx="12" fill="#FFFFFF" stroke="#DFB864" stroke-width="1.6"/>
+    <text x="24" y="30" class="mono kpi-label" fill="#824B0A">03 · KEKUATAN &amp; JEJAK BUKTI</text>
+    <rect x="318" y="14" width="126" height="22" rx="11" fill="#FEF6E4" stroke="#EFD393"/>
+    <text x="381" y="29" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" fill="#824B0A">BELUM UTUH</text>
+    <text x="24" y="74" class="sans kpi-val">Masih terbatas</text>
+    <text x="24" y="105" class="sans kpi-desc">Bukti pesan mentah, rekaman stopwatch, urutan</text>
+    <text x="24" y="125" class="sans kpi-desc">paparan, dan catatan bantuan tahap K belum lengkap.</text>
+  </g>
+
+  <!-- ================= MAIN ANALYTICAL STAGE (y = 368, h = 516) ================= -->
+
+  <!-- Left Panel: Precision Paired Bar Chart (w = 876) -->
+  <g transform="translate(72, 368)" filter="url(#q205-shadow)">
+    <rect width="876" height="516" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.4"/>
+    <text x="28" y="38" class="sans panel-h2">Durasi tugas skenario yang dilaporkan per peserta (Seri K1–K3)</text>
+    <text x="28" y="61" class="sans" font-size="13" fill="#6E756B">Membandingkan waktu membaca rangkuman chat setara dengan pembacaan Decision Readiness Board</text>
+
+    <!-- Legend -->
+    <rect x="646" y="24" width="14" height="14" rx="3" fill="#475569"/>
+    <text x="667" y="35.5" class="sans" font-size="12.5" font-weight="600" fill="#3A4039">Rangkuman Chat</text>
+    <rect x="784" y="24" width="14" height="14" rx="3" fill="#1B44C8"/>
+    <text x="805" y="35.5" class="sans" font-size="12.5" font-weight="600" fill="#1B44C8">Board</text>
+
+    <line x1="28" y1="80" x2="848" y2="80" stroke="#E6E6DC" stroke-width="1"/>
+
+    <!-- Chart Plot Area: x0 = 210, scale = 6.8 px per second (max 85s = 578px -> x = 788) -->
+    <!-- Vertical Gridlines: 0, 20, 40, 60, 80s -->
+    <g stroke="#EAEAE0" stroke-width="1" stroke-dasharray="3 3">
+      <line x1="210" y1="98" x2="210" y2="434"/>
+      <line x1="346" y1="98" x2="346" y2="434"/>
+      <line x1="482" y1="98" x2="482" y2="434"/>
+      <line x1="618" y1="98" x2="618" y2="434"/>
+      <line x1="754" y1="98" x2="754" y2="434"/>
+    </g>
+
+    <!-- Mean Reference Line for Board (40s -> x = 210 + 272 = 482) -->
+    <line x1="482" y1="94" x2="482" y2="436" stroke="#1B44C8" stroke-width="1.3" stroke-dasharray="5 4" opacity="0.55"/>
+    <text x="482" y="90" text-anchor="middle" class="mono" font-size="10" font-weight="600" fill="#1B44C8">RATA-RATA BOARD 40s</text>
+
+    <!-- Mean Reference Line for Chat (75s -> x = 210 + 510 = 720) -->
+    <line x1="720" y1="94" x2="720" y2="436" stroke="#475569" stroke-width="1.3" stroke-dasharray="5 4" opacity="0.55"/>
+    <text x="720" y="90" text-anchor="middle" class="mono" font-size="10" font-weight="600" fill="#475569">RATA-RATA CHAT 75s</text>
+
+    <!-- Row K1: Chat 78s (530.4px), Board 42s (285.6px) -->
+    <text x="28" y="138" class="sans" font-size="16" font-weight="700" fill="#141714">K1</text>
+    <text x="28" y="157" class="mono" font-size="10.5" fill="#6E756B">Chat C → Board D</text>
+    <rect x="210" y="118" width="530" height="24" rx="4" fill="#475569"/>
+    <text x="750" y="135" class="mono bar-val" fill="#475569">78 dtk</text>
+    <rect x="210" y="148" width="286" height="24" rx="4" fill="#1B44C8"/>
+    <text x="506" y="165" class="mono bar-val" fill="#1B44C8">42 dtk</text>
+    <rect x="564" y="149" width="70" height="21" rx="10.5" fill="#EEF2FD" stroke="#C5D3F8"/>
+    <text x="599" y="163.5" text-anchor="middle" class="mono" font-size="10" font-weight="700" fill="#1B44C8">−36 dtk</text>
+
+    <!-- Row K2: Chat 75s (510px), Board 40s (272px) -->
+    <text x="28" y="250" class="sans" font-size="16" font-weight="700" fill="#141714">K2</text>
+    <text x="28" y="269" class="mono" font-size="10.5" fill="#6E756B">Board C → Chat D</text>
+    <rect x="210" y="230" width="510" height="24" rx="4" fill="#475569"/>
+    <text x="730" y="247" class="mono bar-val" fill="#475569">75 dtk</text>
+    <rect x="210" y="260" width="272" height="24" rx="4" fill="#1B44C8"/>
+    <text x="492" y="277" class="mono bar-val" fill="#1B44C8">40 dtk</text>
+    <rect x="550" y="261" width="70" height="21" rx="10.5" fill="#EEF2FD" stroke="#C5D3F8"/>
+    <text x="585" y="275.5" text-anchor="middle" class="mono" font-size="10" font-weight="700" fill="#1B44C8">−35 dtk</text>
+
+    <!-- Row K3: Chat 72s (489.6px), Board 38s (258.4px) -->
+    <text x="28" y="362" class="sans" font-size="16" font-weight="700" fill="#141714">K3</text>
+    <text x="28" y="381" class="mono" font-size="10.5" fill="#6E756B">Chat D → Board C</text>
+    <rect x="210" y="342" width="490" height="24" rx="4" fill="#475569"/>
+    <text x="710" y="359" class="mono bar-val" fill="#475569">72 dtk</text>
+    <rect x="210" y="372" width="258" height="24" rx="4" fill="#1B44C8"/>
+    <text x="478" y="389" class="mono bar-val" fill="#1B44C8">38 dtk</text>
+    <rect x="536" y="373" width="70" height="21" rx="10.5" fill="#EEF2FD" stroke="#C5D3F8"/>
+    <text x="571" y="387.5" text-anchor="middle" class="mono" font-size="10" font-weight="700" fill="#1B44C8">−34 dtk</text>
+
+    <!-- X-Axis Ticks -->
+    <text x="210" y="454" text-anchor="middle" class="mono axis-txt">0 dtk</text>
+    <text x="346" y="454" text-anchor="middle" class="mono axis-txt">20 dtk</text>
+    <text x="482" y="454" text-anchor="middle" class="mono axis-txt">40 dtk</text>
+    <text x="618" y="454" text-anchor="middle" class="mono axis-txt">60 dtk</text>
+    <text x="754" y="454" text-anchor="middle" class="mono axis-txt">80 dtk</text>
+
+    <line x1="28" y1="470" x2="848" y2="470" stroke="#E6E6DC" stroke-width="1"/>
+    <text x="28" y="494" class="sans" font-size="12" fill="#6E756B">Catatan: Eksplorasi awal R1–R3 memakai pertanyaan WA terarah sehingga dipisahkan dari rekap komparatif K1–K3 di atas.</text>
+  </g>
+
+  <!-- Right Panel: Verdict & Strategic Decision (x = 972, w = 556) -->
+  <g transform="translate(972, 368)" filter="url(#q205-shadow)">
+    <rect width="556" height="516" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.4"/>
+
+    <!-- Verdict Block -->
+    <rect x="24" y="24" width="508" height="214" rx="10" fill="#FFFDF7" stroke="#DFB864" stroke-width="1.6"/>
+    <rect x="24" y="36" width="4" height="190" rx="2" fill="#B76E14"/>
+    <text x="46" y="52" class="mono" font-size="11" font-weight="700" letter-spacing="0.09em" fill="#824B0A">VERDICT EVALUASI BUKTI H1</text>
+    <rect x="392" y="36" width="120" height="24" rx="12" fill="#FEF6E4" stroke="#EFD393"/>
+    <text x="452" y="52" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#824B0A">INCONCLUSIVE</text>
+
+    <text x="46" y="92" class="serif" font-size="31" fill="#141714">Indikatif, belum final</text>
+    <text x="46" y="124" class="sans" font-size="13.8" fill="#3A4039">• Rekap angka K1–K3 memenuhi ambang awal secara indikatif,</text>
+    <text x="58" y="145" class="sans" font-size="13.8" fill="#3A4039">namun bukti pelaksanaan asal belum cukup terverifikasi.</text>
+    <text x="46" y="175" class="sans" font-size="13.8" fill="#3A4039">• Preferensi peserta (skor kemudahan 5/5 vs 3/5) belum</text>
+    <text x="58" y="196" class="sans" font-size="13.8" fill="#3A4039">menjawab beban pengisian dan pembaruan status (H3).</text>
+
+    <!-- Decision Block -->
+    <rect x="24" y="256" width="508" height="236" rx="10" fill="#F6F8FE" stroke="#B9CAF6" stroke-width="1.6"/>
+    <rect x="24" y="268" width="4" height="212" rx="2" fill="#1B44C8"/>
+    <text x="46" y="284" class="mono" font-size="11" font-weight="700" letter-spacing="0.09em" fill="#1B44C8">KEPUTUSAN SAYA SEBELUM MVP PENUH</text>
+    <text x="46" y="322" class="serif" font-size="27" fill="#141714">Validasi tambahan sebelum MVP</text>
+
+    <text x="46" y="356" class="sans" font-size="13.8" font-weight="600" fill="#141714">Tindak lanjut wajib yang saya tetapkan:</text>
+    <text x="46" y="382" class="sans" font-size="13.5" fill="#3A4039">1. Pertahankan ambang H1 dan ulangi pengujian dengan</text>
+    <text x="62" y="402" class="sans" font-size="13.5" fill="#3A4039">instrumen, urutan, bantuan, dan stopwatch terdokumentasi.</text>
+    <text x="46" y="428" class="sans" font-size="13.5" fill="#3A4039">2. Uji beban pembaruan respons (H3) &amp; pemahaman istilah</text>
+    <text x="62" y="448" class="sans" font-size="13.5" fill="#3A4039">status (H2) secara terpisah; tahan fitur tambahan (Later).</text>
+  </g>
+
+  <!-- Footer Citation & Claim Boundary -->
+  <rect x="72" y="906" width="1456" height="96" rx="10" fill="#F2F1EA" stroke="#DDDDD3" stroke-width="1.2"/>
+  <text x="96" y="936" class="sans" font-size="14" font-weight="650" fill="#141714">Prinsip batas klaim: selisih 35 detik pada laporan K1–K3 tidak diklaim sebagai penghematan seluruh proses penjadwalan kelompok.</text>
+  <text x="96" y="964" class="sans" font-size="12.5" fill="#52584F">Sumber: portofolio Q2.04 revisi (§4.2, §5.3, §6) dan laporan evaluasi Q2.05. Board tetap dipertahankan sebagai kandidat solusi dengan ruang lingkup uji terkendali.</text>
+  <text x="96" y="985" class="mono" font-size="11" fill="#6E756B">MOHAMMAD FERDINAND VALLIANDRA · 5026231159 · SI CAPSTONE</text>
 </svg>
