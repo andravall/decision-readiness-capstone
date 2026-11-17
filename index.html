@@ -752,7 +752,8 @@ a:focus-visible {
 @media (max-width: 680px) {
   .container { padding-left: 16px; padding-right: 16px; }
   .brand-tag { display: none; }
-  .brand-name { font-size: 13.5px; }
+  .brand-name { font-size: 13.5px; overflow: hidden; text-overflow: ellipsis; }
+  .top-actions .btn-hide-xs { display: none; }
   main.container { padding-top: 18px; }
   .hero-body { padding: 20px 18px; }
   .question-box { padding: 16px; }
@@ -801,7 +802,7 @@ a:focus-visible {
     </nav>
 
     <div class="top-actions">
-      <a class="btn btn-sm" href="./q3-03/">Q3.03</a>
+      <a class="btn btn-sm btn-hide-xs" href="./q3-03/">Q3.03</a>
       <a class="btn primary btn-sm" href="./q3-04-core/">MVP Q3.04 →</a>
     </div>
   </div>
