@@ -1,4 +1,7 @@
 import { AuditEntry, Locale, ProtocolStatusKey, ResponseKey, ValidationErrorCode } from '../domain/types';
+import { QUEST_CATALOG, QuestLinkItem, QuestTrailItem } from './questCatalog';
+
+export type { QuestLinkItem, QuestTrailItem };
 
 export interface ResponseTranslation {
   label: string;
@@ -18,16 +21,6 @@ export interface VisualArtifactItem {
   caption: string;
   png: string;
   svg: string;
-}
-
-export interface QuestTrailItem {
-  phase: 'Q1' | 'Q2' | 'Q3' | 'Q3+';
-  code: string;
-  title: string;
-  status: string;
-  tone: 'good' | 'warn' | 'accent' | 'neutral';
-  summary: string;
-  boundary: string;
 }
 
 export interface TranslationDictionary {
@@ -314,10 +307,19 @@ export interface TranslationDictionary {
     trailTitle: string;
     trailSub: string;
     filterAll: (n: number) => string;
-    filterQ1: string;
-    filterQ2: string;
-    filterQ3: string;
-    filterNext: string;
+    filterQ1: (n: number) => string;
+    filterQ2: (n: number) => string;
+    filterQ3: (n: number) => string;
+    filterQ4: (n: number) => string;
+    filterQ5: (n: number) => string;
+    stateFilterAll: string;
+    stateFilterDone: (n: number) => string;
+    stateFilterUpcoming: (n: number) => string;
+    coursePortalBtn: string;
+    telemetrySubmitted: (n: number) => string;
+    telemetryActiveWeb: (n: number) => string;
+    telemetryUpcoming: (n: number) => string;
+    notionPermNote: string;
     footerLeft: string;
     footerRight: string;
     visuals: VisualArtifactItem[];
@@ -687,14 +689,23 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       mobileTapZoomHint: 'Ketuk gambar untuk memperbesar & menggeser detail diagram',
       fitScreenBtn: 'Pas layar',
       zoomInBtn: 'Perbesar 165%',
-      trailEyebrow: 'Keterlacakan Lintas Tahap',
-      trailTitle: 'Peta perjalanan bukti (Q1 → Q5)',
-      trailSub: 'Ringkasan temuan, keputusan, dan batas metodologis yang saya pertahankan pada setiap tahap.',
-      filterAll: (n) => `Semua Tahap (${n})`,
-      filterQ1: 'Q1 · Discover',
-      filterQ2: 'Q2 · Validate',
-      filterQ3: 'Q3 · Aktif',
-      filterNext: 'Q3.05–Q5 · Berikutnya',
+      trailEyebrow: 'Keterlacakan Lintas Tahap & Tautan Pengumpulan',
+      trailTitle: 'Perjalanan lengkap proyek & peta kurikulum (Q1.02 → Q5)',
+      trailSub: 'Rincian setiap karya yang telah saya kerjakan beserta tautan pengumpulan Notion/artefak, dilanjutkan peta resmi SI Capstone setelah Q3.04 hingga sidang akhir.',
+      filterAll: (n) => `Semua (${n})`,
+      filterQ1: (n) => `Q1 · Discover (${n})`,
+      filterQ2: (n) => `Q2 · Validate (${n})`,
+      filterQ3: (n) => `Q3 · Build (${n})`,
+      filterQ4: (n) => `Q4 · Transform (${n})`,
+      filterQ5: (n) => `Q5 · Legacy (${n})`,
+      stateFilterAll: 'Semua Tahap',
+      stateFilterDone: (n) => `Sudah Dikerjakan (${n})`,
+      stateFilterUpcoming: (n) => `Tahap Berikutnya (${n})`,
+      coursePortalBtn: 'Portal Resmi SI Capstone ↗',
+      telemetrySubmitted: (n) => `${n} Terkumpul di Notion`,
+      telemetryActiveWeb: (n) => `${n} Aplikasi Aktif di Web`,
+      telemetryUpcoming: (n) => `${n} Peta Lanjutan Q3.05–Q5`,
+      notionPermNote: 'Tautan pengumpulan Q1.02–Q3.02 mengarah ke workspace Notion ITS (akses mengikuti izin akun ruang kuliah); Q3.03 & Q3.04 dapat langsung dijalankan di portal ini.',
       footerLeft: 'Mohammad Ferdinand Valliandra (5026231159) · SI Capstone Kelas A · Pembaruan 18 November 2026 WIB',
       footerRight: 'Catatan: Portal ini memfasilitasi akses artefak lintas tahap dan tidak menggantikan verifikasi review pengguna nyata maupun pengumpulan resmi LMS.',
       visuals: [
@@ -739,107 +750,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           svg: '/assets/Q2.07_Peta_Perubahan_Pemahaman.svg'
         }
       ],
-      quests: [
-        {
-          phase: 'Q1',
-          code: 'Q1.02 · Scan the Signals',
-          title: 'Reality Signal Map',
-          status: 'Arsip selesai',
-          tone: 'good',
-          summary: 'Memetakan 10 sinyal masalah harian bersama Muhammad Faiz Roihan (Faiz S01–S05; saya S06–S10). Sinyal S07 mengenai koordinasi waktu pertemuan kelompok yang berulang dipilih untuk ditelusuri lebih lanjut.',
-          boundary: 'Batas bukti: skor dan durasi awal masih berupa perkiraan penyaringan sinyal, belum membuktikan kebutuhan aplikasi baru.'
-        },
-        {
-          phase: 'Q1',
-          code: 'Q1.03 · Enter Their World',
-          title: 'User Context Observation Pack',
-          status: 'Arsip selesai',
-          tone: 'good',
-          summary: 'Mengamati langsung P01 mengoordinasikan rapat via WhatsApp pada 17 September 2026 (pesan awal 20.55, rangkuman/kompromi 20.58, pengumuman 21.00, konfirmasi lengkap 21.51). Mulai tahap ini proyek dikerjakan secara individu.',
-          boundary: 'Batas bukti: berasal dari satu kejadian observasi dengan keterlibatan menyiapkan kerangka pesan; jeda 51 menit pasca-pengumuman tidak diklaim sebagai waktu kerja yang hilang.'
-        },
-        {
-          phase: 'Q1',
-          code: 'Q1.04–Q1.05 · Hear & Decode',
-          title: 'Interview Evidence & Human Insight Atlas',
-          status: 'Arsip selesai',
-          tone: 'good',
-          summary: 'Wawancara tatap muka P01, P02, P03 (24 September 2026) dan sintesis pain PP02: menyatakan tersedia di chat atau polling belum tentu berarti berkomitmen pada jadwal final.',
-          boundary: 'Batas bukti: analisis bertumpu pada catatan wawancara terkonfirmasi tanpa transkrip verbatim; persona Raka adalah komposit sintesis, bukan partisipan baru.'
-        },
-        {
-          phase: 'Q1',
-          code: 'Q1.06–Q1.08 · Prove, Pitch & Shift',
-          title: 'Problem Proof, Pitch & Lens Shift',
-          status: 'Arsip selesai',
-          tone: 'good',
-          summary: 'Memilih keputusan Refine untuk mempersempit masalah pada kesulitan koordinator membaca kecukupan/kepastian respons dan menjelaskan dasar penetapan jadwal.',
-          boundary: 'Batas bukti: cerita lanjutan P02 menunjukkan keterlambatan mulai rapat 15–30 menit terkait perjalanan/kegiatan lain, sehingga tidak seluruhnya disebabkan menunggu konfirmasi.'
-        },
-        {
-          phase: 'Q2',
-          code: 'Q2.02–Q2.03 · Idea Storm & Bet Lab',
-          title: 'Pemilihan Kandidat & Hipotesis H1–H4',
-          status: 'Arsip selesai',
-          tone: 'good',
-          summary: 'Membandingkan enam alternatif solusi dan menetapkan Decision Readiness Board dengan aturan Confirmation Protocol sebagai kandidat uji, disertai prioritas hipotesis H1 atas rangkuman chat setara.',
-          boundary: 'Koreksi terbuka: skor matriks awal board adalah 17/20 (bukan 20/20 pada berkas awal), sedangkan Confirmation Protocol 19/20; pemilihan didasarkan pada kesesuaian pekerjaan dan kelayakan pengujian.'
-        },
-        {
-          phase: 'Q2',
-          code: 'Q2.04–Q2.07 · Experiment & Decision',
-          title: 'Evaluasi Bukti & Lean Evidence Trail',
-          status: 'H1 Inconclusive',
-          tone: 'warn',
-          summary: 'Eksplorasi R1–R3 dan laporan lanjutan K1–K3 mencatat rata-rata durasi baca skenario 40 detik pada board vs 75 detik pada chat dengan ketepatan setara (3/3). Pada Q2.05 ditetapkan keputusan validasi tambahan sebelum MVP.',
-          boundary: 'Batas bukti: kelengkapan pesan mentah, stopwatch, dan kontrol urutan pada seri K belum memadai untuk menutup validasi H1 maupun menguji beban pembaruan (H3).'
-        },
-        {
-          phase: 'Q3',
-          code: 'Q3.02 · Design The Experience',
-          title: 'Experience Design Blueprint',
-          status: 'Arsip & draf Forum siap',
-          tone: 'good',
-          summary: 'Menurunkan satu user story koordinator menjadi diagram alur bercabang, pemisahan fitur Must Have vs Later, dan kriteria pengujian kesiapan keputusan.',
-          boundary: 'Batas status: merupakan hipotesis desain individu; naskah diskusi Forum Walk in Their Shoes telah disiapkan dan menunggu bukti posting/masukan sejawat.'
-        },
-        {
-          phase: 'Q3',
-          code: 'Q3.03 · Sketch The Future',
-          title: 'First Clickable Prototype Portfolio',
-          status: 'Aktif · Menunggu review nyata',
-          tone: 'accent',
-          summary: 'Membangun prototipe interaktif (Versi AGY di rute /q3-03) yang memvisualisasikan kepastian anggota wajib vs opsional, tahapan protokol, alasan keputusan, dan peninjauan ulang pasca-final.',
-          boundary: 'Batas status: pemeriksaan lintas ukuran layar telah dilakukan mandiri; minimal satu sesi review pengguna tanpa petunjuk tombol masih wajib dijalankan.'
-        },
-        {
-          phase: 'Q3',
-          code: 'Q3.04 · Build The Core',
-          title: 'MVP Core Build Portfolio (Make It Work. Prove It!)',
-          status: 'Selesai diuji internal',
-          tone: 'good',
-          summary: 'Mengimplementasikan fungsi inti di rute /q3-04-core: pembuatan usulan pertemuan baru dengan validasi input, penyimpanan persisten localStorage + tautan snapshot, evaluasi kesiapan anggota wajib, dan deteksi perubahan pasca-final.',
-          boundary: 'Batas bukti: 6 skenario pengujian internal (IT-01 s.d. IT-06) lulus verifikasi teknis; belum diuji pengguna luar sehingga status validasi H1 dari Q2.05 tetap dipertahankan inconclusive.'
-        },
-        {
-          phase: 'Q3+',
-          code: 'Q3.05–Q3.13 · Mentor, Test & Iterate',
-          title: 'Meet The Mentor hingga Ready For Impact',
-          status: 'Tahap berikutnya',
-          tone: 'warn',
-          summary: 'Konsultasi progres fungsi inti bersama mentor (Q3.05), penyempurnaan integrasi alur (Q3.06), pengujian langsung pada kelompok nyata (Q3.07), analisis hambatan, dan iterasi.',
-          boundary: 'Status jujur: menunggu review mentor serta pelaksanaan pengujian langsung bersama pengguna.'
-        },
-        {
-          phase: 'Q3+',
-          code: 'Q4–Q5 · Transform & Leave Your Legacy',
-          title: 'Evaluasi Dampak & The Impact Defense',
-          status: 'Rencana kurikuler',
-          tone: 'neutral',
-          summary: 'Pengukuran nilai nyata penggunaan solusi, peninjauan keputusan kritis, keberlanjutan, dan pembelaan bukti akhir semester.',
-          boundary: 'Status jujur: slot disiapkan sebagai peta kesinambungan portal satu domain; belum ada klaim dampak lapangan.'
-        }
-      ]
+      quests: QUEST_CATALOG.id
     }
   },
   en: {
@@ -1203,14 +1114,23 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       mobileTapZoomHint: 'Tap diagram to zoom & pan full details',
       fitScreenBtn: 'Fit screen',
       zoomInBtn: 'Zoom 165%',
-      trailEyebrow: 'Cross-Phase Traceability',
-      trailTitle: 'Evidence journey map (Q1 → Q5)',
-      trailSub: 'Summary of findings, decisions, and methodological boundaries maintained across every quest.',
-      filterAll: (n) => `All Phases (${n})`,
-      filterQ1: 'Q1 · Discover',
-      filterQ2: 'Q2 · Validate',
-      filterQ3: 'Q3 · Active',
-      filterNext: 'Q3.05–Q5 · Upcoming',
+      trailEyebrow: 'Cross-Phase Traceability & Submission Links',
+      trailTitle: 'Complete project work & curriculum roadmap (Q1.02 → Q5)',
+      trailSub: 'Granular record of every quest I have completed with direct Notion submission/artifact links, followed by the official SI Capstone roadmap from Q3.05 through final defense.',
+      filterAll: (n) => `All (${n})`,
+      filterQ1: (n) => `Q1 · Discover (${n})`,
+      filterQ2: (n) => `Q2 · Validate (${n})`,
+      filterQ3: (n) => `Q3 · Build (${n})`,
+      filterQ4: (n) => `Q4 · Transform (${n})`,
+      filterQ5: (n) => `Q5 · Legacy (${n})`,
+      stateFilterAll: 'All Stages',
+      stateFilterDone: (n) => `Completed & Active (${n})`,
+      stateFilterUpcoming: (n) => `Upcoming Roadmap (${n})`,
+      coursePortalBtn: 'Official SI Capstone Portal ↗',
+      telemetrySubmitted: (n) => `${n} Notion Submissions`,
+      telemetryActiveWeb: (n) => `${n} Live Web Builds`,
+      telemetryUpcoming: (n) => `${n} Upcoming Milestones (Q3.05–Q5)`,
+      notionPermNote: 'Q1.02–Q3.02 submission links point to the ITS Notion course workspace (access follows workspace permissions); Q3.03 & Q3.04 run directly on this portal.',
       footerLeft: 'Mohammad Ferdinand Valliandra (5026231159) · SI Capstone Class A · Updated Nov 18, 2026 WIB',
       footerRight: 'Note: This hub facilitates cross-stage artifact inspection and does not replace real user review verification or official LMS submission.',
       visuals: [
@@ -1255,107 +1175,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           svg: '/assets/Q2.07_Peta_Perubahan_Pemahaman.svg'
         }
       ],
-      quests: [
-        {
-          phase: 'Q1',
-          code: 'Q1.02 · Scan the Signals',
-          title: 'Reality Signal Map',
-          status: 'Archived',
-          tone: 'good',
-          summary: 'Mapped 10 everyday friction signals with Muhammad Faiz Roihan (Faiz S01–S05; I handled S06–S10). Signal S07 on repetitive group scheduling coordination was prioritized for deeper field inquiry.',
-          boundary: 'Evidence boundary: initial scores and durations were early screening estimates, not proof of demand for a new app.'
-        },
-        {
-          phase: 'Q1',
-          code: 'Q1.03 · Enter Their World',
-          title: 'User Context Observation Pack',
-          status: 'Archived',
-          tone: 'good',
-          summary: 'Observed P01 coordinating a group meeting on WhatsApp on Sep 17, 2026 (initial prompt 20:55, summary/compromise 20:58, announcement 21:00, final confirmation 21:51). Individual project work began from this stage onward.',
-          boundary: 'Evidence boundary: single observed episode where I also belonged to the group and helped draft the prompt; the 51-minute post-announcement gap is not claimed as lost productive work time.'
-        },
-        {
-          phase: 'Q1',
-          code: 'Q1.04–Q1.05 · Hear & Decode',
-          title: 'Interview Evidence & Human Insight Atlas',
-          status: 'Archived',
-          tone: 'good',
-          summary: 'In-person interviews with P01, P02, P03 (Sep 24, 2026) synthesized critical pain PP02: stating availability in chat or polls does not automatically equal commitment to a final slot.',
-          boundary: 'Evidence boundary: grounded in confirmed interview notes rather than verbatim recordings; persona Raka is a synthesis composite, not an extra participant.'
-        },
-        {
-          phase: 'Q1',
-          code: 'Q1.06–Q1.08 · Prove, Pitch & Shift',
-          title: 'Problem Proof, Pitch & Lens Shift',
-          status: 'Archived',
-          tone: 'good',
-          summary: 'Selected a Refine decision—narrowing the problem to helping coordinators read response sufficiency/certainty and explain scheduling decisions clearly.',
-          boundary: 'Evidence boundary: P02’s follow-up account linked 15–30 min meeting start delays to commuting/prior activities rather than waiting on chat confirmations.'
-        },
-        {
-          phase: 'Q2',
-          code: 'Q2.02–Q2.03 · Idea Storm & Bet Lab',
-          title: 'Candidate Selection & Hypotheses H1–H4',
-          status: 'Archived',
-          tone: 'good',
-          summary: 'Compared six alternatives and selected Decision Readiness Board governed by Confirmation Protocol as the testable bet, prioritizing H1 against an information-equivalent chat summary.',
-          boundary: 'Open score correction: Board’s true initial matrix total is 17/20 (not 20/20 as mistotaled in the early file), while Confirmation Protocol scored 19/20; selection rests on task fit and testability.'
-        },
-        {
-          phase: 'Q2',
-          code: 'Q2.04–Q2.07 · Experiment & Decision',
-          title: 'Evidence Evaluation & Lean Trail',
-          status: 'H1 Inconclusive',
-          tone: 'warn',
-          summary: 'Exploratory R1–R3 and comparative K1–K3 reports recorded 40s average scenario reading time on Board vs 75s on Chat with equal accuracy (3/3). Q2.05 established additional validation before full MVP.',
-          boundary: 'Evidence boundary: raw message logs, stopwatch proof, and counterbalancing records in series K were incomplete to close H1 or test update burden (H3).'
-        },
-        {
-          phase: 'Q3',
-          code: 'Q3.02 · Design The Experience',
-          title: 'Experience Design Blueprint',
-          status: 'Blueprint & Forum draft',
-          tone: 'good',
-          summary: 'Translated one coordinator user story into a branching user flow, Must Have vs Later scope discipline, and testable readiness criteria.',
-          boundary: 'Status boundary: individual design hypothesis; Walk in Their Shoes forum post is drafted and awaiting live peer feedback.'
-        },
-        {
-          phase: 'Q3',
-          code: 'Q3.03 · Sketch The Future',
-          title: 'First Clickable Prototype Portfolio',
-          status: 'Active · Awaiting peer review',
-          tone: 'accent',
-          summary: 'Built an isolated interactive prototype (/q3-03) visualizing required vs optional certainty, Confirmation Protocol stages, coordinator rationale, and post-final drift review.',
-          boundary: 'Status boundary: self-verified across viewports; at least one unguided usability review session remains required before final sign-off.'
-        },
-        {
-          phase: 'Q3',
-          code: 'Q3.04 · Build The Core',
-          title: 'MVP Core Build Portfolio (Make It Work. Prove It!)',
-          status: 'Internally verified',
-          tone: 'good',
-          summary: 'Implemented the working core on /q3-04-core: brand-new proposal creation with strict validation, localStorage persistence + URL snapshot sharing, dynamic readiness evaluation, and post-final drift alerts.',
-          boundary: 'Evidence boundary: 6 internal test scenarios (IT-01 to IT-06) passed technical verification; external user testing has not yet occurred, keeping H1 inconclusive.'
-        },
-        {
-          phase: 'Q3+',
-          code: 'Q3.05–Q3.13 · Mentor, Test & Iterate',
-          title: 'Meet The Mentor through Ready For Impact',
-          status: 'Next stage',
-          tone: 'warn',
-          summary: 'Mentor progress review (Q3.05), end-to-end integration (Q3.06), real-world group testing (Q3.07), friction analysis, and evidence-driven iteration.',
-          boundary: 'Honest status: awaiting mentor review and live participant testing.'
-        },
-        {
-          phase: 'Q3+',
-          code: 'Q4–Q5 · Transform & Leave Your Legacy',
-          title: 'Impact Evaluation & The Impact Defense',
-          status: 'Curriculum roadmap',
-          tone: 'neutral',
-          summary: 'Real-world impact evaluation, critical decision review, sustainability planning, and final capstone defense.',
-          boundary: 'Honest status: roadmap slot prepared for single-domain continuity; no field impact claimed yet.'
-        }
-      ]
+      quests: QUEST_CATALOG.en
     }
   }
 };

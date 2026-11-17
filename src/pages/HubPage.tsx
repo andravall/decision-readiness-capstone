@@ -8,15 +8,34 @@ import { VisualArtifactItem } from '../i18n/translations';
 export const HubPage: React.FC = () => {
   const { locale, t } = useLanguage();
   const [activeVisualIdx, setActiveVisualIdx] = useState(0);
-  const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q3+'>('ALL');
+  const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'>('ALL');
+  const [stateFilter, setStateFilter] = useState<'all' | 'done' | 'upcoming'>('all');
   const [lightboxItem, setLightboxItem] = useState<VisualArtifactItem | null>(null);
   const [copiedRoute, setCopiedRoute] = useState<'q303' | 'q304' | null>(null);
 
   const currentVisual = t.hub.visuals[activeVisualIdx] || t.hub.visuals[0];
-  const filteredQuests =
-    activePhase === 'ALL'
-      ? t.hub.quests
-      : t.hub.quests.filter((q) => q.phase === activePhase);
+
+  const allQuests = t.hub.quests;
+  const countByPhase = (ph: 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5') =>
+    allQuests.filter((q) => q.phase === ph).length;
+
+  const doneCount = allQuests.filter((q) => q.completed).length;
+  const upcomingCount = allQuests.filter((q) => !q.completed).length;
+  const submittedNotionCount = allQuests.filter((q) =>
+    q.links?.some((l) => l.kind === 'submission')
+  ).length;
+  const liveWebCount = allQuests.filter((q) =>
+    q.links?.some((l) => l.kind === 'internal')
+  ).length;
+
+  const filteredQuests = allQuests.filter((q) => {
+    const matchPhase = activePhase === 'ALL' || q.phase === activePhase;
+    const matchState =
+      stateFilter === 'all' ||
+      (stateFilter === 'done' && q.completed) ||
+      (stateFilter === 'upcoming' && !q.completed);
+    return matchPhase && matchState;
+  });
 
   const handleCopyLink = (path: string, which: 'q303' | 'q304') => {
     const fullUrl = `${window.location.origin}${path}`;
@@ -30,6 +49,9 @@ export const HubPage: React.FC = () => {
       finish();
     }
   };
+
+  const submittedPct = Math.round((submittedNotionCount / allQuests.length) * 100);
+  const liveWebPct = Math.round((liveWebCount / allQuests.length) * 100);
 
   return (
     <>
@@ -284,22 +306,65 @@ export const HubPage: React.FC = () => {
           </div>
         </section>
 
-        {/* 03 // EVIDENCE TRAIL */}
+        {/* 03 // COMPLETE CAPSTONE JOURNEY, SUBMISSIONS & CURRICULUM ROADMAP */}
         <div className="section-head" id="trail">
           <div>
             <span className="section-coord">03 // {t.hub.trailEyebrow}</span>
             <h2>{t.hub.trailTitle}</h2>
             <p>{t.hub.trailSub}</p>
           </div>
-          <div className="scroll-tabs-wrap">
-            <div className="segmented-strip" role="group">
+          <a
+            className="btn btn-sm"
+            href="https://idits.notion.site/ebd//374333dd1d2880d78769c73a477ba254"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {t.hub.coursePortalBtn}
+          </a>
+        </div>
+
+        {/* Semester Progress Telemetry */}
+        <div className="trail-telemetry">
+          <div className="trail-telemetry-top">
+            <div className="trail-stats">
+              <span className="trail-stat-item">
+                <span className="trail-stat-dot good" aria-hidden="true" />
+                <span>{t.hub.telemetrySubmitted(submittedNotionCount)}</span>
+              </span>
+              <span className="trail-stat-item">
+                <span className="trail-stat-dot accent" aria-hidden="true" />
+                <span>{t.hub.telemetryActiveWeb(liveWebCount)}</span>
+              </span>
+              <span className="trail-stat-item">
+                <span className="trail-stat-dot upcoming" aria-hidden="true" />
+                <span>{t.hub.telemetryUpcoming(upcomingCount)}</span>
+              </span>
+            </div>
+            <span className="diag-label">
+              {doneCount} / {allQuests.length} {locale === 'id' ? 'TAHAP AKTIF/SELESAI' : 'COMPLETED / ACTIVE'}
+            </span>
+          </div>
+
+          <div className="trail-progress-track" aria-hidden="true">
+            <div className="trail-progress-seg good" style={{ width: `${submittedPct}%` }} />
+            <div className="trail-progress-seg accent" style={{ width: `${liveWebPct}%` }} />
+          </div>
+
+          <p className="trail-perm-note">{t.hub.notionPermNote}</p>
+        </div>
+
+        {/* Phase & Status Dual Filters */}
+        <div className="trail-controls">
+          <div className="scroll-tabs-wrap" style={{ flex: '1 1 auto' }}>
+            <div className="segmented-strip" role="group" aria-label="Filter by Quest phase">
               {(
                 [
-                  { key: 'ALL', label: t.hub.filterAll(t.hub.quests.length) },
-                  { key: 'Q1', label: t.hub.filterQ1 },
-                  { key: 'Q2', label: t.hub.filterQ2 },
-                  { key: 'Q3', label: t.hub.filterQ3 },
-                  { key: 'Q3+', label: t.hub.filterNext }
+                  { key: 'ALL', label: t.hub.filterAll(allQuests.length) },
+                  { key: 'Q1', label: t.hub.filterQ1(countByPhase('Q1')) },
+                  { key: 'Q2', label: t.hub.filterQ2(countByPhase('Q2')) },
+                  { key: 'Q3', label: t.hub.filterQ3(countByPhase('Q3')) },
+                  { key: 'Q4', label: t.hub.filterQ4(countByPhase('Q4')) },
+                  { key: 'Q5', label: t.hub.filterQ5(countByPhase('Q5')) }
                 ] as const
               ).map((f) => (
                 <button
@@ -313,20 +378,88 @@ export const HubPage: React.FC = () => {
               ))}
             </div>
           </div>
+
+          <div className="scroll-tabs-wrap">
+            <div className="state-switch" role="group" aria-label="Filter by completion status">
+              <button
+                type="button"
+                className={`state-switch-btn${stateFilter === 'all' ? ' is-active' : ''}`}
+                onClick={() => setStateFilter('all')}
+              >
+                {t.hub.stateFilterAll}
+              </button>
+              <button
+                type="button"
+                className={`state-switch-btn${stateFilter === 'done' ? ' is-active' : ''}`}
+                onClick={() => setStateFilter('done')}
+              >
+                {t.hub.stateFilterDone(doneCount)}
+              </button>
+              <button
+                type="button"
+                className={`state-switch-btn${stateFilter === 'upcoming' ? ' is-active' : ''}`}
+                onClick={() => setStateFilter('upcoming')}
+              >
+                {t.hub.stateFilterUpcoming(upcomingCount)}
+              </button>
+            </div>
+          </div>
         </div>
 
         <section className="trail-grid" aria-live="polite">
-          {filteredQuests.map((q) => (
-            <article key={q.code} className="quest-card">
-              <div className="quest-top">
-                <span className="quest-code">{q.code}</span>
-                <span className={`pill ${q.tone}`}>{q.status}</span>
-              </div>
-              <h3>{q.title}</h3>
-              <p className="quest-summary">{q.summary}</p>
-              <div className="quest-boundary">{q.boundary}</div>
-            </article>
-          ))}
+          {filteredQuests.map((q) => {
+            const spineCls = !q.completed
+              ? ' is-upcoming'
+              : q.tone === 'accent'
+                ? ' tone-spine-accent'
+                : q.tone === 'warn'
+                  ? ' tone-spine-warn'
+                  : '';
+
+            return (
+              <article key={q.code + q.challengeName} className={`quest-card${spineCls}`}>
+                <div className="quest-top">
+                  <div className="quest-code-wrap">
+                    <span className="quest-code">{q.code}</span>
+                    <span className="quest-challenge">· {q.challengeName}</span>
+                  </div>
+                  <span className={`pill ${q.tone}`}>{q.status}</span>
+                </div>
+
+                <h3>{q.title}</h3>
+                <div className="quest-deliverable">{q.deliverable}</div>
+                <p className="quest-summary">{q.summary}</p>
+
+                {q.links && q.links.length > 0 && (
+                  <div className="quest-links">
+                    {q.links.map((lnk) =>
+                      lnk.kind === 'internal' ? (
+                        <Link
+                          key={lnk.href}
+                          to={lnk.href}
+                          className="quest-link-btn kind-internal"
+                        >
+                          {lnk.label}
+                        </Link>
+                      ) : (
+                        <a
+                          key={lnk.href}
+                          href={lnk.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`quest-link-btn kind-${lnk.kind}`}
+                        >
+                          {lnk.label}
+                        </a>
+                      )
+                    )}
+                  </div>
+                )}
+
+                <div className="quest-boundary">{q.boundary}</div>
+              </article>
+            );
+          })}
         </section>
 
         <footer className="workspace-footer">

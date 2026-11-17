@@ -657,6 +657,7 @@ button {
   flex-wrap: wrap;
   gap: 16px;
   margin: 40px 0 18px;
+  scroll-margin-top: 108px;
 }
 
 .section-coord {
@@ -937,7 +938,121 @@ button {
   color: var(--obsidian-ink);
 }
 
-/* Evidence Trail Cards */
+/* Evidence Trail Telemetry, Controls & Cards */
+.trail-telemetry {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trail-telemetry-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.trail-stats {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.trail-stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.trail-stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.trail-stat-dot.good {
+  background: var(--good-ink);
+}
+
+.trail-stat-dot.accent {
+  background: var(--accent);
+}
+
+.trail-stat-dot.upcoming {
+  background: #b8bab0;
+}
+
+.trail-progress-track {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  display: flex;
+  overflow: hidden;
+}
+
+.trail-progress-seg.good {
+  background: var(--good-ink);
+}
+
+.trail-progress-seg.accent {
+  background: var(--accent);
+}
+
+.trail-perm-note {
+  font-size: 11.8px;
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.trail-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.state-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 9px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--line-strong);
+  gap: 2px;
+}
+
+.state-switch-btn {
+  border: 0;
+  background: transparent;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11.8px;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+}
+
+.state-switch-btn.is-active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow-xs);
+}
+
 .trail-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -947,35 +1062,87 @@ button {
 .quest-card {
   background: var(--surface);
   border: 1px solid var(--line-strong);
+  border-left: 3.5px solid var(--good-ink);
   border-radius: var(--radius-md);
   padding: 18px 20px;
   box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 9px;
+  transition: transform 0.16s var(--ease), box-shadow 0.16s var(--ease);
+}
+
+.quest-card.tone-spine-accent {
+  border-left-color: var(--accent);
+}
+
+.quest-card.tone-spine-warn {
+  border-left-color: #d48217;
+}
+
+.quest-card.is-upcoming {
+  background: var(--surface-raised);
+  border-left: 3.5px solid #b5b7ac;
+  box-shadow: none;
 }
 
 .quest-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quest-code-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
 }
 
 .quest-code {
-  font: 700 11.5px/1 var(--font-mono);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 11.5px;
+  line-height: 1.2;
   color: var(--accent);
+}
+
+.quest-card.is-upcoming .quest-code {
+  color: var(--ink-secondary);
+}
+
+.quest-challenge {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--ink-muted);
 }
 
 .quest-card h3 {
   font-size: 16px;
   font-weight: 700;
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.022em;
+  line-height: 1.25;
+}
+
+.quest-deliverable {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 8px;
+  width: fit-content;
+  max-width: 100%;
 }
 
 .quest-summary {
-  font-size: 13.2px;
+  font-size: 13.1px;
   color: var(--ink-secondary);
   margin: 0;
   line-height: 1.56;
@@ -985,9 +1152,56 @@ button {
   margin-top: auto;
   padding-top: 10px;
   border-top: 1px dashed var(--line-strong);
-  font-size: 11.8px;
+  font-size: 11.7px;
   color: var(--ink-muted);
   line-height: 1.48;
+}
+
+.quest-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding-top: 4px;
+}
+
+.quest-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  min-height: 32px;
+  border-radius: 7px;
+  font-size: 11.8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  transition: all 0.14s var(--ease);
+}
+
+.quest-link-btn:hover {
+  background: var(--surface-sunken);
+}
+
+.quest-link-btn.kind-submission {
+  background: var(--obsidian);
+  border-color: var(--obsidian);
+  color: var(--obsidian-ink);
+}
+
+.quest-link-btn.kind-submission:hover {
+  background: #232825;
+}
+
+.quest-link-btn.kind-internal {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.quest-link-btn.kind-internal:hover {
+  background: var(--accent-hover);
 }
 
 /* ==========================================================================
