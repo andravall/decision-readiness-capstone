@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { InteractiveAmbientBackground } from './components/InteractiveAmbientBackground';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { CoreMvpQ304Page } from './pages/CoreMvpQ304Page';
 import { HubPage } from './pages/HubPage';
@@ -17,6 +18,7 @@ export const App: React.FC = () => {
   return (
     <LanguageProvider>
       <BrowserRouter>
+        <InteractiveAmbientBackground />
         <ScrollToTopOnRoute />
         <Routes>
           <Route path="/" element={<HubPage />} />

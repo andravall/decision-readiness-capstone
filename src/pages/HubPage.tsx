@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { BlueprintStudio } from '../components/BlueprintStudio';
 import { DiagramLightbox } from '../components/DiagramLightbox';
 import {
   BoardMatrixIcon,
   CalendarProposalIcon,
-  ChartCompareIcon,
   ChatClarifyIcon,
   ChatVsCommitIcon,
   CompassHubIcon,
@@ -13,7 +13,6 @@ import {
   NotionDocIcon,
   PhaseBadgeIcon,
   PrototypeCursorIcon,
-  PulseImpactIcon,
   ShareLinkIcon,
   ShieldLockIcon,
   StopwatchScaleIcon,
@@ -27,14 +26,11 @@ import { VisualArtifactItem } from '../i18n/translations';
 
 export const HubPage: React.FC = () => {
   const { locale, t } = useLanguage();
-  const [activeVisualIdx, setActiveVisualIdx] = useState(0);
   const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'>('ALL');
   const [stateFilter, setStateFilter] = useState<'all' | 'done' | 'upcoming'>('all');
   const [heroStageIdx, setHeroStageIdx] = useState<0 | 1 | 2>(0);
   const [lightboxItem, setLightboxItem] = useState<VisualArtifactItem | null>(null);
   const [copiedRoute, setCopiedRoute] = useState<'q303' | 'q304' | null>(null);
-
-  const currentVisual = t.hub.visuals[activeVisualIdx] || t.hub.visuals[0];
 
   const allQuests = t.hub.quests;
   const countByPhase = (ph: 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5') =>
@@ -158,14 +154,6 @@ export const HubPage: React.FC = () => {
             rule: 'Once all required members confirm certainty, the coordinator deliberately locks Final status with rationale.'
           }
         ];
-
-  const blueprintIcons = [
-    <FlowBranchIcon key="b0" size={15} />,
-    <WireframeGridIcon key="b1" size={15} />,
-    <ChartCompareIcon key="b2" size={15} />,
-    <CompassHubIcon key="b3" size={15} />,
-    <PulseImpactIcon key="b4" size={15} />
-  ];
 
   const activeHeroStage = heroProtocolStages[heroStageIdx];
 
@@ -457,65 +445,14 @@ export const HubPage: React.FC = () => {
           </div>
         </div>
 
-        <section className="blueprint-studio" aria-label={t.hub.visualsTitle}>
-          <div className="blueprint-rail" role="tablist">
-            {t.hub.visuals.map((v, idx) => (
-              <button
-                key={v.id}
-                type="button"
-                role="tab"
-                aria-selected={idx === activeVisualIdx}
-                className={`blueprint-rail-btn interactive-icon-trigger${idx === activeVisualIdx ? ' is-active' : ''}`}
-                onClick={() => setActiveVisualIdx(idx)}
-              >
-                <span className="blueprint-rail-icon">
-                  {blueprintIcons[idx] || <WireframeGridIcon size={15} />}
-                </span>
-                <span className="blueprint-rail-label">{v.tab}</span>
-              </button>
-            ))}
-          </div>
-
-          <div className="blueprint-stage" key={currentVisual.id}>
-            <div className="visual-stage-head">
-              <div>
-                <strong style={{ display: 'block', fontSize: '15px', letterSpacing: '-0.015em' }}>
-                  {currentVisual.title}
-                </strong>
-                <span style={{ fontSize: '12.5px', color: 'var(--ink-muted)' }}>
-                  {currentVisual.caption}
-                </span>
-              </div>
-              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                <button
-                  type="button"
-                  className="btn btn-sm diagram-preview-trigger"
-                  onClick={() => setLightboxItem(currentVisual)}
-                >
-                  {t.hub.expandBtn}
-                </button>
-                <a
-                  className="btn btn-sm"
-                  href={currentVisual.svg}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t.hub.svgVectorBtn}
-                </a>
-              </div>
-            </div>
-
-            <div className="visual-frame">
-              <img
-                className="blueprint-img-enter"
-                src={currentVisual.png}
-                alt={currentVisual.title}
-                onClick={() => setLightboxItem(currentVisual)}
-              />
-            </div>
-            <div className="mobile-zoom-hint">{t.hub.mobileTapZoomHint}</div>
-          </div>
-        </section>
+        <BlueprintStudio
+          locale={locale}
+          visuals={t.hub.visuals}
+          expandLabel={t.hub.expandBtn}
+          svgLabel={t.hub.svgVectorBtn}
+          mobileHint={t.hub.mobileTapZoomHint}
+          onOpenLightbox={(item) => setLightboxItem(item)}
+        />
 
         {/* 03 // COMPLETE CAPSTONE JOURNEY, SUBMISSIONS & CURRICULUM ROADMAP */}
         <div className="section-head" id="trail">
