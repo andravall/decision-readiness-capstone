@@ -62,7 +62,8 @@ export const PrototypeQ303Page: React.FC = () => {
     return `18.${String(next).padStart(2, '0')} WIB`;
   };
 
-  const scrollToPanelOnMobile = () => {
+  const scrollToPanelOnMobile = (target: WorkbenchScreen = 'board') => {
+    if (target !== 'board') return;
     setTimeout(() => {
       if (window.innerWidth <= 1020 && panelRef.current) {
         panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -319,7 +320,7 @@ export const PrototypeQ303Page: React.FC = () => {
             onSelectEdit={(idx) => {
               const next = screen === idx ? 'board' : idx;
               setScreen(next);
-              if (typeof next === 'number') scrollToPanelOnMobile();
+              scrollToPanelOnMobile(next);
             }}
           />
 
@@ -341,7 +342,7 @@ export const PrototypeQ303Page: React.FC = () => {
               panelRef={panelRef}
               onChangeScreen={(next) => {
                 setScreen(next);
-                scrollToPanelOnMobile();
+                scrollToPanelOnMobile(next);
               }}
               onSaveMemberUpdate={handleSaveMember}
               onMarkProvisional={handleMarkProvisional}

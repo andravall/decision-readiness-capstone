@@ -1,9 +1,15 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#111412" />
+    <meta name="theme-color" content="#07090e" />
+    <script>
+      try {
+        var t = localStorage.getItem('drb_capstone_theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
     <meta
       name="description"
       content="Decision Readiness Board with Confirmation Protocol — SI Capstone Interactive Evidence Hub, Clickable Prototype (Q3.03), and Working Core MVP (Q3.04)."

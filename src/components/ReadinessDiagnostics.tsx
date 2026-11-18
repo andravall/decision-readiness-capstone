@@ -28,35 +28,61 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
   const pct =
     requiredMembers.length > 0 ? Math.round((readyCount / requiredMembers.length) * 100) : 0;
 
+  const radius = 21;
+  const circumference = 2 * Math.PI * radius;
+  const dashOffset = circumference - (pct / 100) * circumference;
+
   return (
     <section className="diagnostics" aria-label={t.common.readinessTitle} aria-live="polite">
       <div
         className="diag-card spotlight-card interactive-icon-trigger"
         onPointerMove={handleSpotlightMove}
       >
-        <div>
-          <div className="diag-head">
-            <span className="diag-label-with-icon">
-              <span className={`icon-chip ${canFinalize ? 'tone-good' : 'tone-accent'}`}>
-                <UsersCheckIcon size={14} />
+        <div className="diag-ring-layout">
+          <div className="diag-ring-copy">
+            <div className="diag-head">
+              <span className="diag-label-with-icon">
+                <span className={`icon-chip ${canFinalize ? 'tone-good' : 'tone-accent'}`}>
+                  <UsersCheckIcon size={14} />
+                </span>
+                <span className="diag-label">{t.common.readinessTitle}</span>
               </span>
-              <span className="diag-label">{t.common.readinessTitle}</span>
-            </span>
-            <span className="diag-label">{t.common.ruleTarget(requiredMembers.length)}</span>
+              <span className="diag-label">{t.common.ruleTarget(requiredMembers.length)}</span>
+            </div>
+            <div className="diag-metric">
+              <strong data-testid="ready-ratio">
+                {readyCount} / {requiredMembers.length}
+              </strong>
+              <span>{t.common.requiredConfirmedSuffix}</span>
+            </div>
           </div>
-          <div className="diag-metric">
-            <strong data-testid="ready-ratio">
-              {readyCount} / {requiredMembers.length}
-            </strong>
-            <span>{t.common.requiredConfirmedSuffix}</span>
-          </div>
-          <div className="readiness-meter-bar" aria-hidden="true">
-            <div
-              className={`readiness-meter-fill${canFinalize ? ' is-complete' : ''}`}
-              style={{ width: `${pct}%` }}
-            />
+
+          <div className="radial-gauge" aria-hidden="true">
+            <svg width="52" height="52" viewBox="0 0 52 52">
+              <circle
+                className="radial-gauge-track"
+                cx="26"
+                cy="26"
+                r={radius}
+                fill="none"
+                strokeWidth="4.5"
+              />
+              <circle
+                className={`radial-gauge-fill${canFinalize ? ' is-complete' : ''}`}
+                cx="26"
+                cy="26"
+                r={radius}
+                fill="none"
+                strokeWidth="4.5"
+                strokeDasharray={circumference}
+                strokeDashoffset={dashOffset}
+                strokeLinecap="round"
+              />
+            </svg>
+            <span className="radial-gauge-pct">{pct}%</span>
           </div>
         </div>
+
         <div className="req-segments">
           {requiredMembers.map((m) => {
             const tone = RESPONSE_TONES[m.response];

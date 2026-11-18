@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useTheme } from '../i18n/ThemeContext';
 
 interface Particle {
   x: number;
@@ -6,7 +7,7 @@ interface Particle {
   vx: number;
   vy: number;
   r: number;
-  kind: 0 | 1 | 2; // 0: cobalt, 1: emerald, 2: amber
+  kind: 0 | 1 | 2;
   phase: number;
 }
 
@@ -18,14 +19,17 @@ interface Ripple {
 }
 
 /**
- * Interactive background layer combining:
- * 1. Subtle architectural paper grain texture (SVG feTurbulence overlay)
- * 2. Cursor-reactive magnetic coordinate grid (crosshairs & illuminated nodes near pointer)
- * 3. Floating readiness signal particles that gently gravitate & link near the cursor
- * 4. Click/tap confirmation ripple waves
+ * Dual-theme kinetic ambient background:
+ * - Atmospheric breathing radial aurora orbs
+ * - Cursor & touch-reactive magnetic coordinate crosshairs (+)
+ * - Floating readiness signal particles that link inside the confirmation field
+ * - Click / tap confirmation ripple waves (desktop & mobile)
  */
 export const InteractiveAmbientBackground: React.FC = () => {
+  const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -46,7 +50,8 @@ export const InteractiveAmbientBackground: React.FC = () => {
       y: -9999,
       targetX: -9999,
       targetY: -9999,
-      active: false
+      active: false,
+      lastTouchAt: 0
     };
 
     const particles: Particle[] = [];
@@ -62,15 +67,15 @@ export const InteractiveAmbientBackground: React.FC = () => {
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const targetCount = width < 720 ? 22 : 46;
+      const targetCount = width < 720 ? 28 : 54;
       particles.length = 0;
       for (let i = 0; i < targetCount; i++) {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.32,
-          vy: (Math.random() - 0.5) * 0.32,
-          r: 1.6 + Math.random() * 1.4,
+          vx: (Math.random() - 0.5) * 0.36,
+          vy: (Math.random() - 0.5) * 0.36,
+          r: 1.5 + Math.random() * 1.5,
           kind: (i % 3) as 0 | 1 | 2,
           phase: Math.random() * Math.PI * 2
         });
@@ -79,43 +84,51 @@ export const InteractiveAmbientBackground: React.FC = () => {
 
     initCanvas();
 
-    const onPointerMove = (e: PointerEvent) => {
-      pointer.targetX = e.clientX;
-      pointer.targetY = e.clientY;
+    const activateAt = (cx: number, cy: number, spawnRipple = false) => {
+      pointer.targetX = cx;
+      pointer.targetY = cy;
       pointer.active = true;
       if (pointer.x < -1000) {
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
+        pointer.x = cx;
+        pointer.y = cy;
       }
+      if (spawnRipple) {
+        ripples.push({ x: cx, y: cy, radius: 6, alpha: 0.45 });
+        if (ripples.length > 6) ripples.shift();
+      }
+    };
+
+    const onPointerMove = (e: PointerEvent) => {
+      activateAt(e.clientX, e.clientY, false);
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      pointer.lastTouchAt = performance.now();
+      activateAt(e.clientX, e.clientY, true);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      pointer.lastTouchAt = performance.now();
+      activateAt(touch.clientX, touch.clientY, false);
     };
 
     const onPointerLeave = () => {
       pointer.active = false;
     };
 
-    const onPointerDown = (e: PointerEvent) => {
-      pointer.targetX = e.clientX;
-      pointer.targetY = e.clientY;
-      pointer.x = e.clientX;
-      pointer.y = e.clientY;
-      pointer.active = true;
-      ripples.push({ x: e.clientX, y: e.clientY, radius: 6, alpha: 0.36 });
-      if (ripples.length > 5) ripples.shift();
-    };
-
     window.addEventListener('pointermove', onPointerMove, { passive: true });
-    document.addEventListener('mouseleave', onPointerLeave);
     window.addEventListener('pointerdown', onPointerDown, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    document.addEventListener('mouseleave', onPointerLeave);
     window.addEventListener('resize', initCanvas, { passive: true });
 
-    const COLORS = [
-      '29, 78, 216', // Cobalt
-      '14, 105, 66', // Emerald
-      '180, 98, 12' // Warm Amber
-    ];
+    const DARK_COLORS = ['96, 165, 250', '52, 211, 153', '251, 191, 36'];
+    const LIGHT_COLORS = ['37, 99, 235', '5, 150, 105', '217, 119, 6'];
 
-    const GRID_STEP = 36;
-    const MAGNET_RADIUS = 185;
+    const GRID_STEP = 38;
+    const MAGNET_RADIUS = 195;
 
     const render = (time: number) => {
       if (document.hidden) {
@@ -123,9 +136,14 @@ export const InteractiveAmbientBackground: React.FC = () => {
         return;
       }
 
+      const isDark = themeRef.current === 'dark';
       ctx.clearRect(0, 0, width, height);
 
-      // Smoothly interpolate pointer position
+      // Fade out touch magnet gently 2.2s after finger lifts on mobile
+      if (pointer.lastTouchAt > 0 && time - pointer.lastTouchAt > 2200 && width < 900) {
+        pointer.active = false;
+      }
+
       if (pointer.active) {
         pointer.x += (pointer.targetX - pointer.x) * 0.16;
         pointer.y += (pointer.targetY - pointer.y) * 0.16;
@@ -134,25 +152,54 @@ export const InteractiveAmbientBackground: React.FC = () => {
         pointer.y += (-9999 - pointer.y) * 0.04;
       }
 
-      // 1. Soft radial ambient glow around active pointer
+      // 1. Slow breathing atmospheric aurora beams at top corners
+      const driftX = Math.sin(time * 0.0004) * 55;
+      const driftY = Math.cos(time * 0.00035) * 35;
+
+      const orb1 = ctx.createRadialGradient(
+        width * 0.18 + driftX,
+        height * 0.14 + driftY,
+        10,
+        width * 0.18 + driftX,
+        height * 0.14 + driftY,
+        Math.max(width * 0.42, 340)
+      );
+      orb1.addColorStop(0, isDark ? 'rgba(37, 99, 235, 0.13)' : 'rgba(37, 99, 235, 0.065)');
+      orb1.addColorStop(1, 'rgba(37, 99, 235, 0)');
+      ctx.fillStyle = orb1;
+      ctx.fillRect(0, 0, width, height);
+
+      const orb2 = ctx.createRadialGradient(
+        width * 0.84 - driftX,
+        height * 0.24 - driftY,
+        10,
+        width * 0.84 - driftX,
+        height * 0.24 - driftY,
+        Math.max(width * 0.36, 300)
+      );
+      orb2.addColorStop(0, isDark ? 'rgba(16, 185, 129, 0.09)' : 'rgba(16, 185, 129, 0.05)');
+      orb2.addColorStop(1, 'rgba(16, 185, 129, 0)');
+      ctx.fillStyle = orb2;
+      ctx.fillRect(0, 0, width, height);
+
+      // 2. Active pointer / touch spotlight & magnetic grid crosshairs
       if (pointer.x > -500) {
         const grad = ctx.createRadialGradient(
           pointer.x,
           pointer.y,
-          8,
+          6,
           pointer.x,
           pointer.y,
-          MAGNET_RADIUS * 1.15
+          MAGNET_RADIUS * 1.2
         );
-        grad.addColorStop(0, 'rgba(29, 78, 216, 0.065)');
-        grad.addColorStop(0.55, 'rgba(16, 185, 129, 0.028)');
-        grad.addColorStop(1, 'rgba(29, 78, 216, 0)');
+        grad.addColorStop(0, isDark ? 'rgba(59, 130, 246, 0.14)' : 'rgba(37, 99, 235, 0.08)');
+        grad.addColorStop(0.55, isDark ? 'rgba(16, 185, 129, 0.05)' : 'rgba(16, 185, 129, 0.03)');
+        grad.addColorStop(1, 'rgba(59, 130, 246, 0)');
         ctx.fillStyle = grad;
         ctx.beginPath();
-        ctx.arc(pointer.x, pointer.y, MAGNET_RADIUS * 1.15, 0, Math.PI * 2);
+        ctx.arc(pointer.x, pointer.y, MAGNET_RADIUS * 1.2, 0, Math.PI * 2);
         ctx.fill();
 
-        // 2. Illuminate & gently warp architectural grid nodes near cursor
         const minCol = Math.max(0, Math.floor((pointer.x - MAGNET_RADIUS) / GRID_STEP));
         const maxCol = Math.min(
           Math.ceil(width / GRID_STEP),
@@ -173,15 +220,16 @@ export const InteractiveAmbientBackground: React.FC = () => {
             const dist = Math.hypot(dx, dy);
             if (dist < MAGNET_RADIUS) {
               const strength = 1 - dist / MAGNET_RADIUS;
-              const pull = strength * strength * 5.5;
+              const pull = strength * strength * 6;
               const angle = Math.atan2(dy, dx);
               const px = gx + Math.cos(angle) * pull;
               const py = gy + Math.sin(angle) * pull;
 
-              if ((r + c) % 3 === 0 && strength > 0.42) {
-                // Crisp architectural micro-crosshair (+)
-                const arm = 2.6 + strength * 1.8;
-                ctx.strokeStyle = `rgba(29, 78, 216, ${(strength * 0.42).toFixed(3)})`;
+              if ((r + c) % 3 === 0 && strength > 0.38) {
+                const arm = 2.8 + strength * 2;
+                ctx.strokeStyle = isDark
+                  ? `rgba(96, 165, 250, ${(strength * 0.55).toFixed(3)})`
+                  : `rgba(37, 99, 235, ${(strength * 0.45).toFixed(3)})`;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(px - arm, py);
@@ -190,9 +238,11 @@ export const InteractiveAmbientBackground: React.FC = () => {
                 ctx.lineTo(px, py + arm);
                 ctx.stroke();
               } else {
-                ctx.fillStyle = `rgba(17, 20, 18, ${(strength * 0.28).toFixed(3)})`;
+                ctx.fillStyle = isDark
+                  ? `rgba(226, 232, 240, ${(strength * 0.34).toFixed(3)})`
+                  : `rgba(15, 23, 42, ${(strength * 0.28).toFixed(3)})`;
                 ctx.beginPath();
-                ctx.arc(px, py, 1.1 + strength * 1.1, 0, Math.PI * 2);
+                ctx.arc(px, py, 1 + strength * 1.1, 0, Math.PI * 2);
                 ctx.fill();
               }
             }
@@ -200,8 +250,10 @@ export const InteractiveAmbientBackground: React.FC = () => {
         }
       }
 
-      // 3. Update & render floating Readiness Signal Particles
+      // 3. Floating Readiness Signal Particles
+      const palette = isDark ? DARK_COLORS : LIGHT_COLORS;
       const nearCursor: Particle[] = [];
+
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -217,32 +269,32 @@ export const InteractiveAmbientBackground: React.FC = () => {
         const dist = Math.hypot(dx, dy);
         let boost = 0;
 
-        if (dist < MAGNET_RADIUS * 1.15 && dist > 1) {
-          boost = 1 - dist / (MAGNET_RADIUS * 1.15);
-          // Gentle orbital attraction toward cursor
-          p.x += (dx / dist) * boost * 0.65;
-          p.y += (dy / dist) * boost * 0.65;
+        if (dist < MAGNET_RADIUS * 1.18 && dist > 1) {
+          boost = 1 - dist / (MAGNET_RADIUS * 1.18);
+          p.x += (dx / dist) * boost * 0.68;
+          p.y += (dy / dist) * boost * 0.68;
           nearCursor.push(p);
         }
 
-        const pulse = 0.5 + 0.5 * Math.sin(time * 0.0022 + p.phase);
-        const alpha = 0.14 + pulse * 0.1 + boost * 0.52;
-        const rgb = COLORS[p.kind];
+        const pulse = 0.5 + 0.5 * Math.sin(time * 0.0024 + p.phase);
+        const baseAlpha = isDark ? 0.22 : 0.16;
+        const alpha = baseAlpha + pulse * 0.12 + boost * 0.54;
 
-        ctx.fillStyle = `rgba(${rgb}, ${alpha.toFixed(3)})`;
+        ctx.fillStyle = `rgba(${palette[p.kind]}, ${alpha.toFixed(3)})`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r + boost * 1.3, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.r + boost * 1.35, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // 4. Connect signal particles inside cursor's Confirmation Field
+      // 4. Constellation Links near Pointer/Touch
       for (let i = 0; i < nearCursor.length; i++) {
         const a = nearCursor[i];
-        // Line from particle to cursor center if very close
         const dCursor = Math.hypot(pointer.x - a.x, pointer.y - a.y);
-        if (dCursor < 125) {
-          const lineAlpha = (1 - dCursor / 125) * 0.18;
-          ctx.strokeStyle = `rgba(29, 78, 216, ${lineAlpha.toFixed(3)})`;
+        if (dCursor < 130) {
+          const lineAlpha = (1 - dCursor / 130) * (isDark ? 0.28 : 0.2);
+          ctx.strokeStyle = isDark
+            ? `rgba(96, 165, 250, ${lineAlpha.toFixed(3)})`
+            : `rgba(37, 99, 235, ${lineAlpha.toFixed(3)})`;
           ctx.lineWidth = 0.9;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -250,13 +302,14 @@ export const InteractiveAmbientBackground: React.FC = () => {
           ctx.stroke();
         }
 
-        // Lines between nearby aligned particles
         for (let j = i + 1; j < nearCursor.length; j++) {
           const b = nearCursor[j];
           const dPair = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dPair < 115) {
-            const pairAlpha = (1 - dPair / 115) * 0.2;
-            ctx.strokeStyle = `rgba(14, 105, 66, ${pairAlpha.toFixed(3)})`;
+          if (dPair < 118) {
+            const pairAlpha = (1 - dPair / 118) * (isDark ? 0.25 : 0.18);
+            ctx.strokeStyle = isDark
+              ? `rgba(52, 211, 153, ${pairAlpha.toFixed(3)})`
+              : `rgba(5, 150, 105, ${pairAlpha.toFixed(3)})`;
             ctx.lineWidth = 0.85;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -266,17 +319,19 @@ export const InteractiveAmbientBackground: React.FC = () => {
         }
       }
 
-      // 5. Render click/tap Confirmation Ripples
+      // 5. Confirmation Ripples
       for (let i = ripples.length - 1; i >= 0; i--) {
         const rp = ripples[i];
-        rp.radius += 2.8;
-        rp.alpha *= 0.94;
+        rp.radius += 3;
+        rp.alpha *= 0.93;
         if (rp.alpha < 0.01) {
           ripples.splice(i, 1);
           continue;
         }
-        ctx.strokeStyle = `rgba(29, 78, 216, ${rp.alpha.toFixed(3)})`;
-        ctx.lineWidth = 1.25;
+        ctx.strokeStyle = isDark
+          ? `rgba(96, 165, 250, ${rp.alpha.toFixed(3)})`
+          : `rgba(37, 99, 235, ${rp.alpha.toFixed(3)})`;
+        ctx.lineWidth = 1.35;
         ctx.beginPath();
         ctx.arc(rp.x, rp.y, rp.radius, 0, Math.PI * 2);
         ctx.stroke();
@@ -290,8 +345,9 @@ export const InteractiveAmbientBackground: React.FC = () => {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('pointermove', onPointerMove);
-      document.removeEventListener('mouseleave', onPointerLeave);
       window.removeEventListener('pointerdown', onPointerDown);
+      window.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('mouseleave', onPointerLeave);
       window.removeEventListener('resize', initCanvas);
     };
   }, []);

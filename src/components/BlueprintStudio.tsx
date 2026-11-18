@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Locale } from '../domain/types';
+import { useTheme } from '../i18n/ThemeContext';
 import { VisualArtifactItem } from '../i18n/translations';
 import {
   ChartCompareIcon,
@@ -152,10 +153,15 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
   mobileHint,
   onOpenLightbox
 }) => {
+  const { theme } = useTheme();
   const [activeIdx, setActiveIdx] = useState(0);
   const [stageScale, setStageScale] = useState<1 | 1.45>(1);
-  const [darkMat, setDarkMat] = useState(false);
+  const [darkMat, setDarkMat] = useState(() => theme === 'dark');
   const [loupeActive, setLoupeActive] = useState(true);
+
+  useEffect(() => {
+    setDarkMat(theme === 'dark');
+  }, [theme]);
   const [loupePos, setLoupePos] = useState<{
     visible: boolean;
     x: number;

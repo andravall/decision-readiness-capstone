@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BlueprintStudio } from '../components/BlueprintStudio';
 import { DiagramLightbox } from '../components/DiagramLightbox';
@@ -13,6 +13,7 @@ import {
   NotionDocIcon,
   PhaseBadgeIcon,
   PrototypeCursorIcon,
+  SearchFilterIcon,
   ShareLinkIcon,
   ShieldLockIcon,
   StopwatchScaleIcon,
@@ -24,13 +25,64 @@ import { handleSpotlightMove } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import { VisualArtifactItem } from '../i18n/translations';
 
+type MiniStatus = 'certain' | 'tentative' | 'none';
+
+const NEXT_MINI_STATUS: Record<MiniStatus, MiniStatus> = {
+  none: 'tentative',
+  tentative: 'certain',
+  certain: 'none'
+};
+
 export const HubPage: React.FC = () => {
   const { locale, t } = useLanguage();
   const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'>('ALL');
   const [stateFilter, setStateFilter] = useState<'all' | 'done' | 'upcoming'>('all');
-  const [heroStageIdx, setHeroStageIdx] = useState<0 | 1 | 2>(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showAllQuests, setShowAllQuests] = useState(false);
   const [lightboxItem, setLightboxItem] = useState<VisualArtifactItem | null>(null);
   const [copiedRoute, setCopiedRoute] = useState<'q303' | 'q304' | null>(null);
+
+  // Interactive Live Hero Mini-Board State
+  const [heroRoster, setHeroRoster] = useState<{ name: string; status: MiniStatus }[]>([
+    { name: 'Alya', status: 'certain' },
+    { name: 'Bima', status: 'none' },
+    { name: 'Citra', status: 'tentative' }
+  ]);
+
+  const tiltRef = useRef<HTMLDivElement | null>(null);
+
+  const handleHeroTiltMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType === 'touch') return;
+    const el = tiltRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.setProperty('--rx', `${(-ny * 5.5).toFixed(2)}deg`);
+    el.style.setProperty('--ry', `${(nx * 6.5).toFixed(2)}deg`);
+    el.style.setProperty('--gx', `${Math.round((nx + 0.5) * 100)}%`);
+    el.style.setProperty('--gy', `${Math.round((ny + 0.5) * 100)}%`);
+  };
+
+  const handleHeroTiltLeave = () => {
+    const el = tiltRef.current;
+    if (!el) return;
+    el.style.setProperty('--rx', '0deg');
+    el.style.setProperty('--ry', '0deg');
+  };
+
+  const toggleHeroMember = (idx: number) => {
+    setHeroRoster((prev) =>
+      prev.map((m, i) => (i === idx ? { ...m, status: NEXT_MINI_STATUS[m.status] } : m))
+    );
+  };
+
+  const heroReadyCount = heroRoster.filter((m) => m.status === 'certain').length;
+  const heroAllReady = heroReadyCount === heroRoster.length;
+  const heroPct = Math.round((heroReadyCount / heroRoster.length) * 100);
+  const ringR = 18;
+  const ringC = 2 * Math.PI * ringR;
+  const ringOffset = ringC - (heroPct / 100) * ringC;
 
   const allQuests = t.hub.quests;
   const countByPhase = (ph: 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5') =>
@@ -45,14 +97,25 @@ export const HubPage: React.FC = () => {
     q.links?.some((l) => l.kind === 'internal')
   ).length;
 
+  const qNorm = searchQuery.trim().toLowerCase();
   const filteredQuests = allQuests.filter((q) => {
     const matchPhase = activePhase === 'ALL' || q.phase === activePhase;
     const matchState =
       stateFilter === 'all' ||
       (stateFilter === 'done' && q.completed) ||
       (stateFilter === 'upcoming' && !q.completed);
-    return matchPhase && matchState;
+    const matchQuery =
+      !qNorm ||
+      q.code.toLowerCase().includes(qNorm) ||
+      q.challengeName.toLowerCase().includes(qNorm) ||
+      q.title.toLowerCase().includes(qNorm) ||
+      q.summary.toLowerCase().includes(qNorm);
+    return matchPhase && matchState && matchQuery;
   });
+
+  const shouldTruncate =
+    activePhase === 'ALL' && stateFilter === 'all' && !qNorm && !showAllQuests;
+  const visibleQuests = shouldTruncate ? filteredQuests.slice(0, 8) : filteredQuests;
 
   const handleCopyLink = (path: string, which: 'q303' | 'q304') => {
     const fullUrl = `${window.location.origin}${path}`;
@@ -70,92 +133,12 @@ export const HubPage: React.FC = () => {
   const submittedPct = Math.round((submittedNotionCount / allQuests.length) * 100);
   const liveWebPct = Math.round((liveWebCount / allQuests.length) * 100);
 
-  const heroProtocolStages =
-    locale === 'id'
-      ? [
-          {
-            num: '01 · OPEN',
-            label: 'Usulan waktu',
-            icon: <CalendarProposalIcon size={15} />,
-            badge: '1/3 Wajib Pasti',
-            badgeTone: 'neutral',
-            members: [
-              { name: 'Alya', state: '✓ Pasti', cls: 'good' },
-              { name: 'Bima', state: '○ Belum', cls: 'muted' },
-              { name: 'Citra', state: '◐ Tentatif', cls: 'warn' }
-            ],
-            rule: 'Usulan waktu dibuka; papan kesiapan langsung menyorot anggota wajib yang belum membalas atau masih tentatif.'
-          },
-          {
-            num: '02 · CLARIFY',
-            label: 'Sementara',
-            icon: <ChatClarifyIcon size={15} />,
-            badge: 'Klarifikasi WA',
-            badgeTone: 'warn',
-            members: [
-              { name: 'Alya', state: '✓ Pasti', cls: 'good' },
-              { name: 'Bima', state: '💬 Ditanya', cls: 'accent' },
-              { name: 'Citra', state: '✓ Pasti', cls: 'good' }
-            ],
-            rule: 'Selama syarat wajib hadir belum utuh, status ditahan Sementara dan klarifikasi terarah dikirim ke WhatsApp.'
-          },
-          {
-            num: '03 · LOCK',
-            label: 'Final sadar',
-            icon: <ShieldLockIcon size={15} />,
-            badge: '3/3 Terkunci',
-            badgeTone: 'good',
-            members: [
-              { name: 'Alya', state: '✓ Pasti', cls: 'good' },
-              { name: 'Bima', state: '✓ Pasti', cls: 'good' },
-              { name: 'Citra', state: '✓ Pasti', cls: 'good' }
-            ],
-            rule: 'Saat seluruh anggota wajib menyatakan pasti, koordinator menetapkan status Final beserta alasan tertulis.'
-          }
-        ]
-      : [
-          {
-            num: '01 · OPEN',
-            label: 'Time proposal',
-            icon: <CalendarProposalIcon size={15} />,
-            badge: '1/3 Confirmed',
-            badgeTone: 'neutral',
-            members: [
-              { name: 'Alya', state: '✓ Certain', cls: 'good' },
-              { name: 'Bima', state: '○ No reply', cls: 'muted' },
-              { name: 'Citra', state: '◐ Tentative', cls: 'warn' }
-            ],
-            rule: 'Time slot opens; the readiness board immediately highlights unanswered or tentative required members.'
-          },
-          {
-            num: '02 · CLARIFY',
-            label: 'Provisional',
-            icon: <ChatClarifyIcon size={15} />,
-            badge: 'WA Follow-up',
-            badgeTone: 'warn',
-            members: [
-              { name: 'Alya', state: '✓ Certain', cls: 'good' },
-              { name: 'Bima', state: '💬 Pinged', cls: 'accent' },
-              { name: 'Citra', state: '✓ Certain', cls: 'good' }
-            ],
-            rule: 'While required certainty is incomplete, schedule stays Provisional with a targeted WhatsApp follow-up.'
-          },
-          {
-            num: '03 · LOCK',
-            label: 'Coordinator final',
-            icon: <ShieldLockIcon size={15} />,
-            badge: '3/3 Locked',
-            badgeTone: 'good',
-            members: [
-              { name: 'Alya', state: '✓ Certain', cls: 'good' },
-              { name: 'Bima', state: '✓ Certain', cls: 'good' },
-              { name: 'Citra', state: '✓ Certain', cls: 'good' }
-            ],
-            rule: 'Once all required members confirm certainty, the coordinator deliberately locks Final status with rationale.'
-          }
-        ];
-
-  const activeHeroStage = heroProtocolStages[heroStageIdx];
+  const miniStatusLabel = (st: MiniStatus) => {
+    if (locale === 'id') {
+      return st === 'certain' ? '✓ Pasti hadir' : st === 'tentative' ? '◐ Tentatif' : '○ Belum balas';
+    }
+    return st === 'certain' ? '✓ Confirmed' : st === 'tentative' ? '◐ Tentative' : '○ No reply';
+  };
 
   return (
     <>
@@ -164,161 +147,293 @@ export const HubPage: React.FC = () => {
         rightSlot={
           <Link className="btn primary btn-sm interactive-icon-trigger" to="/q3-04-core">
             <CoreDatabaseCheckIcon size={13} />
-            <span>{t.nav.openMvpCta}</span>
+            <span className="hide-mobile">{t.nav.openMvpCta}</span>
+            <span className="mobile-only-label">Q3.04 →</span>
           </Link>
         }
       />
 
       <main className="container workspace page-enter" id="top">
-        {/* 00 // ARCHITECTURAL EDITORIAL MASTHEAD */}
-        <section className="hub-masthead" aria-labelledby="hub-title">
-          <div className="hub-masthead-grid">
-            <div className="hub-hero-copy">
-              <div>
-                <p className="eyebrow">
-                  <span className="eyebrow-dot pulse-dot" aria-hidden="true" />
-                  <span>{t.hub.eyebrow}</span>
-                </p>
-                <h1 className="hub-display-title" id="hub-title">
-                  {t.hub.heroTitle}
-                </h1>
-                <p className="hub-lead">{t.hub.heroLead}</p>
+        {/* 00 // SCULPTURAL ASYMMETRIC HERO + INTERACTIVE 3D MINI-BOARD OS */}
+        <section className="hero-stage" aria-labelledby="hub-title">
+          <div className="hero-editorial-col">
+            <div>
+              <div className="hero-kicker">
+                <span className="eyebrow-dot pulse-dot" aria-hidden="true" />
+                <span>{t.hub.eyebrow}</span>
               </div>
 
-              <div className="author-ledger" aria-label="Project authorship">
-                <div className="author-cell">
-                  <span className="author-cell-key">
-                    {locale === 'id' ? 'Penyusun' : 'Author'}
-                  </span>
-                  <span className="author-cell-val">M. Ferdinand Valliandra</span>
-                </div>
-                <div className="author-cell">
-                  <span className="author-cell-key">NRP · Kelas</span>
-                  <span className="author-cell-val" style={{ fontFamily: 'var(--font-mono)' }}>
-                    5026231159 · SI-A
-                  </span>
-                </div>
-                <div className="author-cell">
-                  <span className="author-cell-key">
-                    {locale === 'id' ? 'Pengerjaan' : 'Scope'}
-                  </span>
-                  <span className="author-cell-val">
-                    {locale === 'id'
-                      ? 'Q1.02 Tim · Q1.03+ Individu'
-                      : 'Q1.02 Pair · Q1.03+ Solo'}
-                  </span>
-                </div>
+              <h1 className="hub-display-title" id="hub-title">
+                {t.hub.heroTitle}
+              </h1>
+
+              <p className="hub-lead">{t.hub.heroLead}</p>
+
+              <div className="hero-cta-row">
+                <Link className="btn primary btn-shimmer interactive-icon-trigger" to="/q3-04-core">
+                  <CoreDatabaseCheckIcon size={15} />
+                  <span>{t.hub.cardQ304OpenBtn} →</span>
+                </Link>
+                <Link className="btn interactive-icon-trigger" to="/q3-03">
+                  <PrototypeCursorIcon size={15} />
+                  <span>{t.hub.cardQ303OpenBtn}</span>
+                </Link>
               </div>
             </div>
 
-            <aside
-              className="hub-thesis-panel spotlight-dark"
-              aria-label={t.hub.questionLabel}
-              onPointerMove={handleSpotlightMove}
-            >
-              <div>
-                <div className="thesis-index-bar">
-                  <span>00 // {t.hub.questionLabel}</span>
-                  <span>CONFIRMATION PROTOCOL</span>
+            <div className="author-ledger" aria-label="Project authorship">
+              <div className="author-cell">
+                <span className="author-cell-key">
+                  {locale === 'id' ? 'Penyusun' : 'Author'}
+                </span>
+                <span className="author-cell-val">M. Ferdinand Valliandra</span>
+              </div>
+              <div className="author-cell">
+                <span className="author-cell-key">NRP · Kelas</span>
+                <span className="author-cell-val" style={{ fontFamily: 'var(--font-mono)' }}>
+                  5026231159 · SI-A
+                </span>
+              </div>
+              <div className="author-cell">
+                <span className="author-cell-key">
+                  {locale === 'id' ? 'Pengerjaan' : 'Scope'}
+                </span>
+                <span className="author-cell-val">
+                  {locale === 'id' ? 'Q1.02 Tim · Q1.03+ Individu' : 'Q1.02 Pair · Q1.03+ Solo'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: 3D-TILTING LIVE MINI READINESS OS WIDGET */}
+          <div
+            ref={tiltRef}
+            className={`hero-os-card${heroAllReady ? ' is-all-ready' : ''}`}
+            onPointerMove={handleHeroTiltMove}
+            onPointerLeave={handleHeroTiltLeave}
+          >
+            <div className="hero-os-glare" aria-hidden="true" />
+
+            <div className="hero-os-topbar">
+              <div className="window-dots" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <span className="hero-os-domain">readiness-board.protocol</span>
+              <span className={`hero-os-pill${heroAllReady ? ' is-ready' : ''}`}>
+                {heroAllReady
+                  ? locale === 'id'
+                    ? '✓ Siap Final'
+                    : '✓ Ready to Lock'
+                  : locale === 'id'
+                    ? '◐ Klarifikasi'
+                    : '◐ Clarifying'}
+              </span>
+            </div>
+
+            <div className="hero-os-body">
+              <div className="hero-question-row">
+                <div>
+                  <span className="hero-q-label">{t.hub.questionLabel}</span>
+                  <blockquote className="hero-q-quote">{t.hub.questionQuote}</blockquote>
                 </div>
-                <blockquote className="thesis-quote">{t.hub.questionQuote}</blockquote>
-                <p className="thesis-body">
-                  <strong>{t.hub.candidateSummaryLabel}</strong> {t.hub.candidateSummaryBody}
-                </p>
+
+                <div className="hero-mini-ring" aria-hidden="true">
+                  <svg width="46" height="46" viewBox="0 0 46 46">
+                    <circle
+                      className="radial-gauge-track"
+                      cx="23"
+                      cy="23"
+                      r={ringR}
+                      fill="none"
+                      strokeWidth="4"
+                    />
+                    <circle
+                      className={`radial-gauge-fill${heroAllReady ? ' is-complete' : ''}`}
+                      cx="23"
+                      cy="23"
+                      r={ringR}
+                      fill="none"
+                      strokeWidth="4"
+                      strokeDasharray={ringC}
+                      strokeDashoffset={ringOffset}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span className="hero-mini-ring-txt">
+                    {heroReadyCount}/{heroRoster.length}
+                  </span>
+                </div>
               </div>
 
-              <div>
-                <div
-                  className="thesis-mini-flow"
-                  role="tablist"
-                  aria-label="Confirmation Protocol interactive stage preview"
-                >
-                  {heroProtocolStages.map((st, idx) => {
-                    const active = heroStageIdx === idx;
-                    return (
-                      <button
-                        key={st.num}
-                        type="button"
-                        role="tab"
-                        aria-selected={active}
-                        className={`thesis-flow-chip interactive-icon-trigger${active ? ' is-active' : ''}`}
-                        onClick={() => setHeroStageIdx(idx as 0 | 1 | 2)}
-                      >
-                        <span className="thesis-chip-head">
-                          <span className="thesis-flow-num">{st.num}</span>
-                          <span className="thesis-chip-icon">{st.icon}</span>
-                        </span>
-                        <span className="thesis-flow-label">{st.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+              <div className="hero-interactive-label">
+                <span>
+                  {locale === 'id'
+                    ? 'INTERAKTIF · KETUK BARIS ANGGOTA UNTUK UJI AMBANG KEPASTIAN'
+                    : 'INTERACTIVE · TAP ANY MEMBER TO TEST READINESS THRESHOLD'}
+                </span>
+              </div>
 
-                {/* Interactive Mini Readiness Board Graphic */}
-                <div className="hero-live-board-viz" key={heroStageIdx}>
-                  <div className="hero-viz-top">
-                    <div className="hero-viz-members">
-                      {activeHeroStage.members.map((m) => (
-                        <span key={m.name} className={`hero-viz-pill is-${m.cls}`}>
-                          <strong>{m.name}</strong> {m.state}
-                        </span>
-                      ))}
-                    </div>
-                    <span className={`hero-viz-status is-${activeHeroStage.badgeTone}`}>
-                      {activeHeroStage.badge}
+              <div className="hero-roster-mini" role="group" aria-label="Interactive mini board demo">
+                {heroRoster.map((m, idx) => (
+                  <button
+                    key={m.name}
+                    type="button"
+                    className={`hero-member-btn state-${m.status}`}
+                    onClick={() => toggleHeroMember(idx)}
+                  >
+                    <span className="hero-m-left">
+                      <span className="hero-m-avatar">{m.name[0]}</span>
+                      <span className="hero-m-name">{m.name}</span>
+                      <span className="hero-m-req">
+                        {locale === 'id' ? 'WAJIB' : 'REQ'}
+                      </span>
                     </span>
-                  </div>
-                  <p className="thesis-stage-caption">{activeHeroStage.rule}</p>
+                    <span className={`hero-m-badge state-${m.status}`}>
+                      {miniStatusLabel(m.status)}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="hero-protocol-bar">
+                <span className={`hp-step${heroReadyCount < 2 ? ' is-on' : ' is-done'}`}>
+                  <CalendarProposalIcon size={12} />
+                  <span>01 {locale === 'id' ? 'Usulan' : 'Open'}</span>
+                </span>
+                <span className="hp-line" />
+                <span
+                  className={`hp-step${
+                    heroReadyCount >= 1 && !heroAllReady
+                      ? ' is-on warn'
+                      : heroAllReady
+                        ? ' is-done'
+                        : ''
+                  }`}
+                >
+                  <ChatClarifyIcon size={12} />
+                  <span>02 {locale === 'id' ? 'Sementara' : 'Clarify'}</span>
+                </span>
+                <span className="hp-line" />
+                <span className={`hp-step${heroAllReady ? ' is-on good' : ''}`}>
+                  <ShieldLockIcon size={12} />
+                  <span>03 Final</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* BENTO TELEMETRY STRIP (4 VISUAL DATA CARDS) */}
+        <section className="bento-telemetry-grid" aria-label="Key project findings">
+          <article
+            className="bento-stat-card spotlight-card interactive-icon-trigger"
+            onPointerMove={handleSpotlightMove}
+          >
+            <div className="ep-cell-head">
+              <span className="ep-icon-tile tone-accent">
+                <ChatVsCommitIcon size={16} />
+              </span>
+              <span className="diag-label">{t.hub.ep1Label}</span>
+            </div>
+            <strong className="ep-value">{t.hub.ep1Val}</strong>
+            <div className="mini-compare-bars" aria-hidden="true">
+              <div className="mcb-row">
+                <span>Chat Poll</span>
+                <div className="mcb-track">
+                  <div className="mcb-fill muted" style={{ width: '52%' }} />
                 </div>
               </div>
-            </aside>
-          </div>
-
-          <div className="epistemic-strip">
-            <div className="ep-cell interactive-icon-trigger">
-              <div className="ep-cell-head">
-                <span className="ep-icon-tile tone-accent">
-                  <ChatVsCommitIcon size={17} />
-                </span>
-                <span className="diag-label">{t.hub.ep1Label}</span>
+              <div className="mcb-row">
+                <span>Final Lock</span>
+                <div className="mcb-track">
+                  <div className="mcb-fill accent" style={{ width: '100%' }} />
+                </div>
               </div>
-              <span className="ep-value">{t.hub.ep1Val}</span>
-              <span className="diag-subtext">{t.hub.ep1Note}</span>
             </div>
+            <p className="diag-subtext">{t.hub.ep1Note}</p>
+          </article>
 
-            <div className="ep-cell interactive-icon-trigger">
-              <div className="ep-cell-head">
-                <span className="ep-icon-tile tone-good">
-                  <BoardMatrixIcon size={17} />
-                </span>
-                <span className="diag-label">{t.hub.ep2Label}</span>
-              </div>
-              <span className="ep-value">{t.hub.ep2Val}</span>
-              <span className="diag-subtext">{t.hub.ep2Note}</span>
+          <article
+            className="bento-stat-card spotlight-card interactive-icon-trigger"
+            onPointerMove={handleSpotlightMove}
+          >
+            <div className="ep-cell-head">
+              <span className="ep-icon-tile tone-good">
+                <BoardMatrixIcon size={16} />
+              </span>
+              <span className="diag-label">{t.hub.ep2Label}</span>
             </div>
+            <strong className="ep-value">{t.hub.ep2Val}</strong>
+            <div className="mini-compare-bars" aria-hidden="true">
+              <div className="mcb-row">
+                <span>Board 17/20</span>
+                <div className="mcb-track">
+                  <div className="mcb-fill accent" style={{ width: '85%' }} />
+                </div>
+              </div>
+              <div className="mcb-row">
+                <span>Protocol 19/20</span>
+                <div className="mcb-track">
+                  <div className="mcb-fill good" style={{ width: '95%' }} />
+                </div>
+              </div>
+            </div>
+            <p className="diag-subtext">{t.hub.ep2Note}</p>
+          </article>
 
-            <div className="ep-cell interactive-icon-trigger">
-              <div className="ep-cell-head">
-                <span className="ep-icon-tile tone-warn">
-                  <StopwatchScaleIcon size={17} />
-                </span>
-                <span className="diag-label">{t.hub.ep3Label}</span>
-              </div>
-              <span className="ep-value">{t.hub.ep3Val}</span>
-              <span className="diag-subtext">{t.hub.ep3Note}</span>
+          <article
+            className="bento-stat-card spotlight-card interactive-icon-trigger"
+            onPointerMove={handleSpotlightMove}
+          >
+            <div className="ep-cell-head">
+              <span className="ep-icon-tile tone-warn">
+                <StopwatchScaleIcon size={16} />
+              </span>
+              <span className="diag-label">{t.hub.ep3Label}</span>
             </div>
+            <strong className="ep-value">{t.hub.ep3Val}</strong>
+            <div className="mini-compare-bars" aria-hidden="true">
+              <div className="mcb-row">
+                <span>Board 40s</span>
+                <div className="mcb-track">
+                  <div className="mcb-fill good" style={{ width: '53%' }} />
+                </div>
+              </div>
+              <div className="mcb-row">
+                <span>Chat 75s</span>
+                <div className="mcb-track">
+                  <div className="mcb-fill warn" style={{ width: '100%' }} />
+                </div>
+              </div>
+            </div>
+            <p className="diag-subtext">{t.hub.ep3Note}</p>
+          </article>
 
-            <div className="ep-cell interactive-icon-trigger">
-              <div className="ep-cell-head">
-                <span className="ep-icon-tile tone-accent">
-                  <CoreDatabaseCheckIcon size={17} />
-                </span>
-                <span className="diag-label">{t.hub.ep4Label}</span>
-              </div>
-              <span className="ep-value">{t.hub.ep4Val}</span>
-              <span className="diag-subtext">{t.hub.ep4Note}</span>
+          <article
+            className="bento-stat-card spotlight-card interactive-icon-trigger"
+            onPointerMove={handleSpotlightMove}
+          >
+            <div className="ep-cell-head">
+              <span className="ep-icon-tile tone-accent">
+                <CoreDatabaseCheckIcon size={16} />
+              </span>
+              <span className="diag-label">{t.hub.ep4Label}</span>
             </div>
-          </div>
+            <strong className="ep-value">{t.hub.ep4Val}</strong>
+            <div className="mini-route-pills">
+              <Link to="/q3-03" className="mini-route-tag">
+                <span>/q3-03</span>
+                <span>Sim →</span>
+              </Link>
+              <Link to="/q3-04-core" className="mini-route-tag is-live">
+                <span>/q3-04-core</span>
+                <span>MVP →</span>
+              </Link>
+            </div>
+            <p className="diag-subtext">{t.hub.ep4Note}</p>
+          </article>
         </section>
 
         {/* 01 // INTERACTIVE PRODUCT WORKSPACES */}
@@ -377,7 +492,7 @@ export const HubPage: React.FC = () => {
                 </button>
               </div>
             </div>
-            <Link className="btn obsidian btn-full interactive-icon-trigger" to="/q3-03">
+            <Link className="btn btn-full interactive-icon-trigger" to="/q3-03">
               <PrototypeCursorIcon size={15} />
               <span>{t.hub.cardQ303OpenBtn} →</span>
             </Link>
@@ -426,14 +541,14 @@ export const HubPage: React.FC = () => {
                 </button>
               </div>
             </div>
-            <Link className="btn primary btn-full interactive-icon-trigger" to="/q3-04-core">
+            <Link className="btn primary btn-shimmer btn-full interactive-icon-trigger" to="/q3-04-core">
               <CoreDatabaseCheckIcon size={15} />
               <span>{t.hub.cardQ304OpenBtn} →</span>
             </Link>
           </article>
         </section>
 
-        {/* 02 // MASTER-DETAIL BLUEPRINT STUDIO */}
+        {/* 02 // INTERACTIVE CAD BLUEPRINT STUDIO */}
         <div className="section-head" id="visuals">
           <div>
             <span className="section-coord">
@@ -506,7 +621,7 @@ export const HubPage: React.FC = () => {
           <p className="trail-perm-note">{t.hub.notionPermNote}</p>
         </div>
 
-        {/* Phase & Status Dual Filters with Interactive Quest Icons */}
+        {/* Phase, Search & Status Controls */}
         <div className="trail-controls">
           <div className="scroll-tabs-wrap" style={{ flex: '1 1 auto' }}>
             <div className="segmented-strip" role="group" aria-label="Filter by Quest phase">
@@ -540,29 +655,42 @@ export const HubPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="scroll-tabs-wrap">
-            <div className="state-switch" role="group" aria-label="Filter by completion status">
-              <button
-                type="button"
-                className={`state-switch-btn${stateFilter === 'all' ? ' is-active' : ''}`}
-                onClick={() => setStateFilter('all')}
-              >
-                {t.hub.stateFilterAll}
-              </button>
-              <button
-                type="button"
-                className={`state-switch-btn${stateFilter === 'done' ? ' is-active' : ''}`}
-                onClick={() => setStateFilter('done')}
-              >
-                {t.hub.stateFilterDone(doneCount)}
-              </button>
-              <button
-                type="button"
-                className={`state-switch-btn${stateFilter === 'upcoming' ? ' is-active' : ''}`}
-                onClick={() => setStateFilter('upcoming')}
-              >
-                {t.hub.stateFilterUpcoming(upcomingCount)}
-              </button>
+          <div className="trail-right-filters">
+            <div className="trail-search-box">
+              <SearchFilterIcon size={13} />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder={locale === 'id' ? 'Cari Q1.04, H1, MVP...' : 'Search Q1.04, H1, MVP...'}
+                aria-label={locale === 'id' ? 'Cari tahapan' : 'Search stages'}
+              />
+            </div>
+
+            <div className="scroll-tabs-wrap">
+              <div className="state-switch" role="group" aria-label="Filter by completion status">
+                <button
+                  type="button"
+                  className={`state-switch-btn${stateFilter === 'all' ? ' is-active' : ''}`}
+                  onClick={() => setStateFilter('all')}
+                >
+                  {t.hub.stateFilterAll}
+                </button>
+                <button
+                  type="button"
+                  className={`state-switch-btn${stateFilter === 'done' ? ' is-active' : ''}`}
+                  onClick={() => setStateFilter('done')}
+                >
+                  {t.hub.stateFilterDone(doneCount)}
+                </button>
+                <button
+                  type="button"
+                  className={`state-switch-btn${stateFilter === 'upcoming' ? ' is-active' : ''}`}
+                  onClick={() => setStateFilter('upcoming')}
+                >
+                  {t.hub.stateFilterUpcoming(upcomingCount)}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -570,9 +698,9 @@ export const HubPage: React.FC = () => {
         <section
           className="trail-grid"
           aria-live="polite"
-          key={`${activePhase}-${stateFilter}`}
+          key={`${activePhase}-${stateFilter}-${qNorm}-${showAllQuests ? 'all' : 'compact'}`}
         >
-          {filteredQuests.map((q, idx) => {
+          {visibleQuests.map((q, idx) => {
             const spineCls = !q.completed
               ? ' is-upcoming'
               : q.tone === 'accent'
@@ -640,6 +768,25 @@ export const HubPage: React.FC = () => {
             );
           })}
         </section>
+
+        {activePhase === 'ALL' && stateFilter === 'all' && !qNorm && filteredQuests.length > 8 && (
+          <div className="trail-expand-bar">
+            <button
+              type="button"
+              className="btn primary btn-shimmer"
+              onClick={() => setShowAllQuests((v) => !v)}
+              data-testid="btn-toggle-all-quests"
+            >
+              {showAllQuests
+                ? locale === 'id'
+                  ? 'Ringkas tampilan daftar ↑'
+                  : 'Collapse stage list ↑'
+                : locale === 'id'
+                  ? `Tampilkan seluruh ${filteredQuests.length} tahapan (Q1.02 → Q5.04) ↓`
+                  : `Explore all ${filteredQuests.length} stages (Q1.02 → Q5.04) ↓`}
+            </button>
+          </div>
+        )}
 
         <footer className="workspace-footer">
           <span>{t.hub.footerLeft}</span>

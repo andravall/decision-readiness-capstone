@@ -1,67 +1,170 @@
-:root {
+:root,
+[data-theme="light"] {
   color-scheme: light;
 
-  /* Architectural Paper & Obsidian Ink Palette */
-  --bg: #f4f3ee;
-  --bg-grid: rgba(17, 20, 18, 0.045);
-  --surface: #ffffff;
-  --surface-raised: #faf9f5;
-  --surface-sunken: #eeede5;
-
-  /* Dark Obsidian Command Surfaces */
-  --obsidian: #111412;
-  --obsidian-raised: #191d1a;
-  --obsidian-border: #272d29;
-  --obsidian-ink: #f6f5f0;
-  --obsidian-muted: #9aa39c;
+  /* Crisp Architectural Silver-Daylight Canvas (Zero Muddy Beige) */
+  --bg: #f6f8fc;
+  --bg-grid: rgba(15, 23, 42, 0.055);
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-solid: #ffffff;
+  --surface-raised: #f1f5f9;
+  --surface-sunken: #e7edf6;
+  --topbar-bg: rgba(255, 255, 255, 0.84);
 
   /* Primary Ink Hierarchy */
-  --ink: #111412;
-  --ink-secondary: #434943;
-  --ink-muted: #687068;
+  --ink: #0b101b;
+  --ink-secondary: #3b4659;
+  --ink-muted: #64748b;
 
-  /* Hairline Structural Rules */
-  --line: #dfded5;
-  --line-strong: #c6c5b9;
+  /* Precision Structural Rules */
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --line-hover: #94a3b8;
+
+  /* Active Segmented Command Pill */
+  --active-pill-bg: #0b101b;
+  --active-pill-ink: #f8fafc;
+
+  /* Signature Dark Command Surfaces (Hero OS & Blueprint Dossier) */
+  --obsidian: #0c111d;
+  --obsidian-raised: #141c2c;
+  --obsidian-border: rgba(255, 255, 255, 0.11);
+  --obsidian-ink: #f4f7fc;
+  --obsidian-muted: #94a3b8;
 
   /* High-Clarity Signal Accents */
-  --accent: #1d4ed8;
-  --accent-hover: #173fb2;
-  --accent-soft: #eef3ff;
-  --accent-border: #bfd2fc;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-ink: #1d4ed8;
+  --accent-soft: #eff6ff;
+  --accent-border: #bfdbfe;
+  --accent-glow: rgba(37, 99, 235, 0.22);
 
-  --good-ink: #0e6942;
-  --good-bg: #e8f7ef;
-  --good-border: #aadcc2;
+  --good-ink: #047857;
+  --good-solid: #059669;
+  --good-bg: #ecfdf5;
+  --good-border: #a7f3d0;
 
-  --warn-ink: #8f4f08;
-  --warn-bg: #fef5e3;
-  --warn-border: #edd091;
+  --warn-ink: #b45309;
+  --warn-solid: #d97706;
+  --warn-bg: #fffbeb;
+  --warn-border: #fde68a;
 
-  --neutral-ink: #464c46;
-  --neutral-bg: #eff0ea;
-  --neutral-border: #d1d3c8;
+  --neutral-ink: #334155;
+  --neutral-bg: #f1f5f9;
+  --neutral-border: #cbd5e1;
 
-  --alert-ink: #a62424;
-  --alert-bg: #fdf0ef;
-  --alert-border: #f0beb9;
+  --alert-ink: #b91c1c;
+  --alert-solid: #dc2626;
+  --alert-bg: #fef2f2;
+  --alert-border: #fecaca;
 
-  /* Exclusive Font Pair */
+  /* WhatsApp Draft Preview Surfaces */
+  --wa-bg: #f2fbf6;
+  --wa-bar-bg: #e3f6eb;
+  --wa-border: #b7e4c9;
+  --wa-bar-ink: #0f5c38;
+  --wa-body-ink: #0f2419;
+
+  /*Spotlight & Elevation */
+  --spotlight-sheen: rgba(37, 99, 235, 0.065);
+  --grain-opacity: 0.025;
+  --grain-blend: multiply;
+
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04), 0 12px 32px -14px rgba(15, 23, 42, 0.08);
+  --shadow-elevated: 0 18px 42px -14px rgba(15, 23, 42, 0.15), 0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-sheet: 0 -20px 54px rgba(15, 23, 42, 0.28);
+  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.24);
+
+  /* Exclusive Typography Pair */
   --font-sans: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  /* Radii & Precision Elevation */
-  --radius-xs: 6px;
-  --radius-sm: 9px;
-  --radius-md: 13px;
-  --radius-lg: 18px;
-  --radius-xl: 22px;
-
-  --shadow-xs: 0 1px 2px rgba(17, 20, 18, 0.04);
-  --shadow-card: 0 1px 2px rgba(17, 20, 18, 0.04), 0 10px 26px -14px rgba(17, 20, 18, 0.07);
-  --shadow-elevated: 0 12px 36px -12px rgba(17, 20, 18, 0.16), 0 2px 6px rgba(17, 20, 18, 0.06);
-  --shadow-sheet: 0 -16px 48px rgba(17, 20, 18, 0.28);
-  --shadow-focus: 0 0 0 3px rgba(29, 78, 216, 0.22);
-
+  /* Radii & Motion Curve */
+  --radius-xs: 7px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Obsidian Carbon Studio Canvas */
+  --bg: #07090e;
+  --bg-grid: rgba(148, 163, 184, 0.065);
+  --surface: rgba(16, 21, 31, 0.82);
+  --surface-solid: #10151f;
+  --surface-raised: #161d2b;
+  --surface-sunken: #0b0e15;
+  --topbar-bg: rgba(12, 16, 25, 0.78);
+
+  /* Luminous High-Contrast Ink */
+  --ink: #f4f7fc;
+  --ink-secondary: #a3afc2;
+  --ink-muted: #6f7d95;
+
+  /* Specular Hairline Borders */
+  --line: rgba(255, 255, 255, 0.075);
+  --line-strong: rgba(255, 255, 255, 0.135);
+  --line-hover: rgba(255, 255, 255, 0.25);
+
+  /* Crisp Platinum Active Command Pill */
+  --active-pill-bg: #f4f7fc;
+  --active-pill-ink: #090d14;
+
+  /* Deep Carbon Command Surfaces */
+  --obsidian: #0d121c;
+  --obsidian-raised: #151d2d;
+  --obsidian-border: rgba(255, 255, 255, 0.11);
+  --obsidian-ink: #f4f7fc;
+  --obsidian-muted: #94a3b8;
+
+  /* High-Clarity Luminous Signal Accents */
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-ink: #93c5fd;
+  --accent-soft: rgba(59, 130, 246, 0.16);
+  --accent-border: rgba(96, 165, 250, 0.34);
+  --accent-glow: rgba(59, 130, 246, 0.32);
+
+  --good-ink: #34d399;
+  --good-solid: #10b981;
+  --good-bg: rgba(16, 185, 129, 0.14);
+  --good-border: rgba(52, 211, 153, 0.32);
+
+  --warn-ink: #fbbf24;
+  --warn-solid: #f59e0b;
+  --warn-bg: rgba(245, 158, 11, 0.14);
+  --warn-border: rgba(251, 191, 36, 0.32);
+
+  --neutral-ink: #cbd5e1;
+  --neutral-bg: rgba(148, 163, 184, 0.13);
+  --neutral-border: rgba(148, 163, 184, 0.24);
+
+  --alert-ink: #f87171;
+  --alert-solid: #ef4444;
+  --alert-bg: rgba(239, 68, 68, 0.15);
+  --alert-border: rgba(248, 113, 113, 0.34);
+
+  /* WhatsApp Draft Preview Surfaces (Dark Native) */
+  --wa-bg: rgba(16, 185, 129, 0.08);
+  --wa-bar-bg: rgba(16, 185, 129, 0.16);
+  --wa-border: rgba(52, 211, 153, 0.28);
+  --wa-bar-ink: #6ee7b7;
+  --wa-body-ink: #e2f5ec;
+
+  /* Spotlight & Elevation */
+  --spotlight-sheen: rgba(96, 165, 250, 0.11);
+  --grain-opacity: 0.032;
+  --grain-blend: overlay;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-card: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 38px -16px rgba(0, 0, 0, 0.65);
+  --shadow-elevated: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 24px 52px -14px rgba(0, 0, 0, 0.78);
+  --shadow-sheet: 0 -22px 58px rgba(0, 0, 0, 0.75);
+  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.35);
 }

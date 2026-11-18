@@ -236,6 +236,36 @@ export const ShareLinkIcon: React.FC<IconProps> = ({ size = 13, className = '' }
   </svg>
 );
 
+export const SunDayIcon: React.FC<IconProps> = ({ size = 14, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <circle cx="10" cy="10" r="3.8" stroke="currentColor" strokeWidth="1.65" />
+    <path
+      d="M10 2.2V4.2M10 15.8V17.8M2.2 10H4.2M15.8 10H17.8M4.5 4.5L5.9 5.9M14.1 14.1L15.5 15.5M15.5 4.5L14.1 5.9M5.9 14.1L4.5 15.5"
+      stroke="currentColor"
+      strokeWidth="1.65"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+export const MoonNightIcon: React.FC<IconProps> = ({ size = 14, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path
+      d="M16.4 11.8C15.3 15 11.9 16.9 8.5 16.2C5.1 15.5 2.8 12.4 3.1 8.9C3.4 5.5 6.1 2.9 9.5 2.7C8.4 4.3 8.2 6.4 9.1 8.2C10.1 10.2 12.2 11.5 14.5 11.5C15.1 11.5 15.8 11.6 16.4 11.8Z"
+      stroke="currentColor"
+      strokeWidth="1.65"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const SearchFilterIcon: React.FC<IconProps> = ({ size = 14, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <circle cx="9" cy="9" r="5.6" stroke="currentColor" strokeWidth="1.65" />
+    <path d="M13.3 13.3L17 17" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
+  </svg>
+);
+
 export const PhaseBadgeIcon: React.FC<{ phase: 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'; size?: number }> = ({
   phase,
   size = 15

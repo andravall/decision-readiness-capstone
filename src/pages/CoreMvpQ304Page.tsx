@@ -152,7 +152,8 @@ export const CoreMvpQ304Page: React.FC = () => {
     }));
   };
 
-  const scrollToPanelOnMobile = () => {
+  const scrollToPanelOnMobile = (target: WorkbenchScreen = 'board') => {
+    if (target !== 'board') return;
     setTimeout(() => {
       if (window.innerWidth <= 1020 && panelRef.current) {
         panelRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -837,7 +838,7 @@ export const CoreMvpQ304Page: React.FC = () => {
                 onSelectEdit={(idx) => {
                   const next = screen === idx ? 'board' : idx;
                   setScreen(next);
-                  if (typeof next === 'number') scrollToPanelOnMobile();
+                  scrollToPanelOnMobile(next);
                 }}
                 bottomSlot={
                   <form className="inline-add-member" onSubmit={handleInlineAddMember}>
@@ -887,7 +888,7 @@ export const CoreMvpQ304Page: React.FC = () => {
                   panelRef={panelRef}
                   onChangeScreen={(next) => {
                     setScreen(next);
-                    scrollToPanelOnMobile();
+                    scrollToPanelOnMobile(next);
                   }}
                   onSaveMemberUpdate={handleSaveMemberUpdate}
                   onMarkProvisional={() => {
