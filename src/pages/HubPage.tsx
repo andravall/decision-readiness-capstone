@@ -21,7 +21,6 @@ import {
   WireframeGridIcon
 } from '../components/ProjectIcons';
 import { TopNavbar } from '../components/TopNavbar';
-import { handleSpotlightMove } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import { VisualArtifactItem } from '../i18n/translations';
 
@@ -60,8 +59,6 @@ export const HubPage: React.FC = () => {
     const ny = (e.clientY - rect.top) / rect.height - 0.5;
     el.style.setProperty('--rx', `${(-ny * 5.5).toFixed(2)}deg`);
     el.style.setProperty('--ry', `${(nx * 6.5).toFixed(2)}deg`);
-    el.style.setProperty('--gx', `${Math.round((nx + 0.5) * 100)}%`);
-    el.style.setProperty('--gy', `${Math.round((ny + 0.5) * 100)}%`);
   };
 
   const handleHeroTiltLeave = () => {
@@ -212,8 +209,6 @@ export const HubPage: React.FC = () => {
             onPointerMove={handleHeroTiltMove}
             onPointerLeave={handleHeroTiltLeave}
           >
-            <div className="hero-os-glare" aria-hidden="true" />
-
             <div className="hero-os-topbar">
               <div className="window-dots" aria-hidden="true">
                 <span />
@@ -327,10 +322,7 @@ export const HubPage: React.FC = () => {
 
         {/* BENTO TELEMETRY STRIP (4 VISUAL DATA CARDS) */}
         <section className="bento-telemetry-grid" aria-label="Key project findings">
-          <article
-            className="bento-stat-card spotlight-card interactive-icon-trigger"
-            onPointerMove={handleSpotlightMove}
-          >
+          <article className="bento-stat-card interactive-icon-trigger">
             <div className="ep-cell-head">
               <span className="ep-icon-tile tone-accent">
                 <ChatVsCommitIcon size={16} />
@@ -355,10 +347,7 @@ export const HubPage: React.FC = () => {
             <p className="diag-subtext">{t.hub.ep1Note}</p>
           </article>
 
-          <article
-            className="bento-stat-card spotlight-card interactive-icon-trigger"
-            onPointerMove={handleSpotlightMove}
-          >
+          <article className="bento-stat-card interactive-icon-trigger">
             <div className="ep-cell-head">
               <span className="ep-icon-tile tone-good">
                 <BoardMatrixIcon size={16} />
@@ -383,10 +372,7 @@ export const HubPage: React.FC = () => {
             <p className="diag-subtext">{t.hub.ep2Note}</p>
           </article>
 
-          <article
-            className="bento-stat-card spotlight-card interactive-icon-trigger"
-            onPointerMove={handleSpotlightMove}
-          >
+          <article className="bento-stat-card interactive-icon-trigger">
             <div className="ep-cell-head">
               <span className="ep-icon-tile tone-warn">
                 <StopwatchScaleIcon size={16} />
@@ -411,10 +397,7 @@ export const HubPage: React.FC = () => {
             <p className="diag-subtext">{t.hub.ep3Note}</p>
           </article>
 
-          <article
-            className="bento-stat-card spotlight-card interactive-icon-trigger"
-            onPointerMove={handleSpotlightMove}
-          >
+          <article className="bento-stat-card interactive-icon-trigger">
             <div className="ep-cell-head">
               <span className="ep-icon-tile tone-accent">
                 <CoreDatabaseCheckIcon size={16} />
@@ -449,10 +432,7 @@ export const HubPage: React.FC = () => {
         </div>
 
         <section className="dock-grid" aria-label={t.hub.routesTitle}>
-          <article
-            className="dock-card featured-blue spotlight-card interactive-icon-trigger"
-            onPointerMove={handleSpotlightMove}
-          >
+          <article className="dock-card featured-blue interactive-icon-trigger">
             <div>
               <div className="dock-card-head-row">
                 <span className="dock-icon-medallion tone-accent">
@@ -498,10 +478,7 @@ export const HubPage: React.FC = () => {
             </Link>
           </article>
 
-          <article
-            className="dock-card featured-green spotlight-card interactive-icon-trigger"
-            onPointerMove={handleSpotlightMove}
-          >
+          <article className="dock-card featured-green interactive-icon-trigger">
             <div>
               <div className="dock-card-head-row">
                 <span className="dock-icon-medallion tone-good">
@@ -591,7 +568,7 @@ export const HubPage: React.FC = () => {
         </div>
 
         {/* Semester Progress Telemetry */}
-        <div className="trail-telemetry spotlight-card" onPointerMove={handleSpotlightMove}>
+        <div className="trail-telemetry">
           <div className="trail-telemetry-top">
             <div className="trail-stats">
               <span className="trail-stat-item">
@@ -712,9 +689,8 @@ export const HubPage: React.FC = () => {
             return (
               <article
                 key={q.code + q.challengeName}
-                className={`quest-card spotlight-card card-stagger interactive-icon-trigger${spineCls}`}
+                className={`quest-card card-stagger interactive-icon-trigger${spineCls}`}
                 style={{ '--stagger-idx': Math.min(idx, 10) } as React.CSSProperties}
-                onPointerMove={handleSpotlightMove}
               >
                 <div className="quest-top">
                   <div className="quest-code-wrap">

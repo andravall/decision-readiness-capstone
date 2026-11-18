@@ -182,24 +182,8 @@ export const InteractiveAmbientBackground: React.FC = () => {
       ctx.fillStyle = orb2;
       ctx.fillRect(0, 0, width, height);
 
-      // 2. Active pointer / touch spotlight & magnetic grid crosshairs
+      // 2. Magnetic grid crosshairs near pointer (no cursor light/glow halo)
       if (pointer.x > -500) {
-        const grad = ctx.createRadialGradient(
-          pointer.x,
-          pointer.y,
-          6,
-          pointer.x,
-          pointer.y,
-          MAGNET_RADIUS * 1.2
-        );
-        grad.addColorStop(0, isDark ? 'rgba(59, 130, 246, 0.14)' : 'rgba(37, 99, 235, 0.08)');
-        grad.addColorStop(0.55, isDark ? 'rgba(16, 185, 129, 0.05)' : 'rgba(16, 185, 129, 0.03)');
-        grad.addColorStop(1, 'rgba(59, 130, 246, 0)');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(pointer.x, pointer.y, MAGNET_RADIUS * 1.2, 0, Math.PI * 2);
-        ctx.fill();
-
         const minCol = Math.max(0, Math.floor((pointer.x - MAGNET_RADIUS) / GRID_STEP));
         const maxCol = Math.min(
           Math.ceil(width / GRID_STEP),

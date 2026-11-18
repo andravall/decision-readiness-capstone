@@ -340,41 +340,13 @@ button {
   background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
   border-color: rgba(96, 165, 250, 0.45);
   color: #ffffff;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 4px 14px var(--accent-glow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .btn.primary:hover {
   background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
-  border-color: rgba(147, 197, 253, 0.6);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 8px 22px var(--accent-glow);
-}
-
-/* Specular Shimmer Sweep on Flagship CTAs */
-.btn-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-shimmer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 65%;
-  height: 100%;
-  background: linear-gradient(
-    105deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.28) 50%,
-    transparent 80%
-  );
-  transform: skewX(-18deg);
-  transition: left 0.65s var(--ease);
-  pointer-events: none;
-}
-
-.btn-shimmer:hover::after {
-  left: 145%;
+  border-color: rgba(147, 197, 253, 0.55);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.26), 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .btn.obsidian {
@@ -697,18 +669,7 @@ button {
 .hero-os-card.is-all-ready {
   border-color: rgba(52, 211, 153, 0.45);
   box-shadow: inset 0 1px 0 rgba(110, 231, 183, 0.22),
-    0 26px 60px -18px rgba(16, 185, 129, 0.28);
-}
-
-.hero-os-glare {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    360px circle at var(--gx, 30%) var(--gy, 20%),
-    rgba(96, 165, 250, 0.14),
-    transparent 65%
-  );
+    0 26px 60px -18px rgba(16, 185, 129, 0.22);
 }
 
 .hero-os-topbar {
@@ -3603,31 +3564,8 @@ a:focus-visible,
   animation: pulseBeacon 2.4s infinite cubic-bezier(0.66, 0, 0, 1);
 }
 
-/* Pointer-Tracking Radial Spotlight Sheen (Desktop Hover) */
+/* Clean Card Hover Elevation (Zero Cursor Spotlight Light) */
 @media (hover: hover) and (pointer: fine) {
-  .spotlight-card {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .spotlight-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    background: radial-gradient(
-      380px circle at var(--mx, 50%) var(--my, 50%),
-      var(--spotlight-sheen),
-      transparent 65%
-    );
-    transition: opacity 0.25s var(--ease);
-  }
-
-  .spotlight-card:hover::before {
-    opacity: 1;
-  }
-
   .quest-card:hover {
     transform: translateY(-2px);
     border-color: var(--line-hover);

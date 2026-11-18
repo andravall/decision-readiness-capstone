@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Tracks page vertical scroll progress (0..1) using passive listeners + rAF.
@@ -32,16 +32,4 @@ export function useScrollProgress(): number {
   }, []);
 
   return progress;
-}
-
-/**
- * Updates CSS custom properties (--mx, --my) on pointer-enabled devices
- * to render a subtle cursor-tracking radial spotlight on cards.
- */
-export function handleSpotlightMove(e: React.PointerEvent<HTMLElement>): void {
-  if (e.pointerType === 'touch') return;
-  const el = e.currentTarget;
-  const rect = el.getBoundingClientRect();
-  el.style.setProperty('--mx', `${Math.round(e.clientX - rect.left)}px`);
-  el.style.setProperty('--my', `${Math.round(e.clientY - rect.top)}px`);
 }

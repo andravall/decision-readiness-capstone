@@ -1,6 +1,5 @@
 import React from 'react';
 import { RESPONSE_TONES, ReadinessEvaluation } from '../domain/readiness';
-import { handleSpotlightMove } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
   AlertGateIcon,
@@ -34,10 +33,7 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
 
   return (
     <section className="diagnostics" aria-label={t.common.readinessTitle} aria-live="polite">
-      <div
-        className="diag-card spotlight-card interactive-icon-trigger"
-        onPointerMove={handleSpotlightMove}
-      >
+      <div className="diag-card interactive-icon-trigger">
         <div className="diag-ring-layout">
           <div className="diag-ring-copy">
             <div className="diag-head">
@@ -102,10 +98,7 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
         </div>
       </div>
 
-      <div
-        className="diag-card spotlight-card interactive-icon-trigger"
-        onPointerMove={handleSpotlightMove}
-      >
+      <div className="diag-card interactive-icon-trigger">
         <div>
           <div className="diag-head">
             <span className="diag-label-with-icon">
@@ -148,10 +141,7 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
         )}
       </div>
 
-      <div
-        className="diag-card spotlight-card interactive-icon-trigger"
-        onPointerMove={handleSpotlightMove}
-      >
+      <div className="diag-card interactive-icon-trigger">
         <div>
           <div className="diag-head">
             <span className="diag-label-with-icon">
