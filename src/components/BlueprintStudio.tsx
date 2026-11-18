@@ -162,15 +162,22 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
   useEffect(() => {
     setDarkMat(theme === 'dark');
   }, [theme]);
+  const LOUPE_SIZE = 224;
+  const LOUPE_R = LOUPE_SIZE / 2;
+  const LOUPE_ZOOM = 2.2;
+
   const [loupePos, setLoupePos] = useState<{
     visible: boolean;
-    x: number;
-    y: number;
-    pctX: number;
-    pctY: number;
-  }>({ visible: false, x: 0, y: 0, pctX: 50, pctY: 50 });
+    frameX: number;
+    frameY: number;
+    imgX: number;
+    imgY: number;
+    imgW: number;
+    imgH: number;
+  }>({ visible: false, frameX: 0, frameY: 0, imgX: 0, imgY: 0, imgW: 0, imgH: 0 });
 
   const frameRef = useRef<HTMLDivElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   const currentVisual = visuals[activeIdx] || visuals[0];
   const metaList = BLUEPRINT_DETAILS[locale];
@@ -195,14 +202,32 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
 
   const handleFramePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!loupeActive || stageScale > 1 || e.pointerType === 'touch') return;
-    const el = frameRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const pctX = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    const pctY = Math.max(0, Math.min(100, (y / rect.height) * 100));
-    setLoupePos({ visible: true, x, y, pctX, pctY });
+    const frameEl = frameRef.current;
+    const imgEl = imgRef.current;
+    if (!frameEl || !imgEl) return;
+
+    const imgRect = imgEl.getBoundingClientRect();
+    if (
+      imgRect.width <= 0 ||
+      e.clientX < imgRect.left ||
+      e.clientX > imgRect.right ||
+      e.clientY < imgRect.top ||
+      e.clientY > imgRect.bottom
+    ) {
+      setLoupePos((prev) => (prev.visible ? { ...prev, visible: false } : prev));
+      return;
+    }
+
+    const frameRect = frameEl.getBoundingClientRect();
+    setLoupePos({
+      visible: true,
+      frameX: e.clientX - frameRect.left,
+      frameY: e.clientY - frameRect.top,
+      imgX: e.clientX - imgRect.left,
+      imgY: e.clientY - imgRect.top,
+      imgW: imgRect.width,
+      imgH: imgRect.height
+    });
   };
 
   return (
@@ -380,6 +405,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
             }}
           >
             <img
+              ref={imgRef}
               key={currentVisual.id}
               className="blueprint-img-enter"
               src={currentVisual.png}
@@ -392,13 +418,25 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
             <div
               className="bp-optical-loupe"
               style={{
-                left: `${loupePos.x}px`,
-                top: `${loupePos.y}px`,
-                backgroundImage: `url(${currentVisual.png})`,
-                backgroundPosition: `${loupePos.pctX}% ${loupePos.pctY}%`
+                left: `${loupePos.frameX}px`,
+                top: `${loupePos.frameY}px`
               }}
               aria-hidden="true"
             >
+              <img
+                className="bp-loupe-img"
+                src={currentVisual.png}
+                alt=""
+                style={{
+                  width: `${loupePos.imgW * LOUPE_ZOOM}px`,
+                  height: `${loupePos.imgH * LOUPE_ZOOM}px`,
+                  transform: `translate3d(${LOUPE_R - loupePos.imgX * LOUPE_ZOOM}px, ${
+                    LOUPE_R - loupePos.imgY * LOUPE_ZOOM
+                  }px, 0)`
+                }}
+              />
+              <span className="bp-loupe-reticle" />
+              <span className="bp-loupe-ring" />
               <span className="bp-loupe-tag">2.2×</span>
             </div>
           )}

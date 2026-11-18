@@ -139,16 +139,7 @@ export const HubPage: React.FC = () => {
 
   return (
     <>
-      <TopNavbar
-        mode="hub"
-        rightSlot={
-          <Link className="btn primary btn-sm interactive-icon-trigger" to="/q3-04-core">
-            <CoreDatabaseCheckIcon size={13} />
-            <span className="hide-mobile">{t.nav.openMvpCta}</span>
-            <span className="mobile-only-label">Q3.04 →</span>
-          </Link>
-        }
-      />
+      <TopNavbar mode="hub" />
 
       <main className="container workspace page-enter" id="top">
         {/* 00 // SCULPTURAL ASYMMETRIC HERO + INTERACTIVE 3D MINI-BOARD OS */}

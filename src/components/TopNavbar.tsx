@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useScrollProgress } from '../hooks/useExperienceEffects';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useTheme } from '../i18n/ThemeContext';
 import { BrandLogo } from './BrandLogo';
 import {
   CompassHubIcon,
-  CoreDatabaseCheckIcon,
   MoonNightIcon,
   PrototypeCursorIcon,
-  SunDayIcon
+  SunDayIcon,
+  WireframeGridIcon
 } from './ProjectIcons';
 
 interface TopNavbarProps {
@@ -23,7 +23,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
   const scrollProgress = useScrollProgress();
 
   const brandTitle = mode === 'hub' ? t.nav.hubTitle : t.nav.boardTitle;
-  const compactBrandTitle = mode === 'hub' ? 'Readiness Hub' : 'Readiness OS';
+  const compactBrandTitle = mode === 'hub' ? t.nav.hubTitle : 'Readiness OS';
   const badgeText =
     mode === 'hub'
       ? '5026231159 · SI Capstone'
@@ -60,40 +60,36 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
               </Link>
             )}
 
-            {mode !== 'q303-isolated' && (
-              <nav className="top-nav-desktop" aria-label="Main routes">
-                <NavLink
-                  to="/"
-                  end
-                  className={({ isActive }) =>
-                    `route-pill interactive-icon-trigger${isActive ? ' is-active' : ''}`
-                  }
-                >
-                  <CompassHubIcon size={14} />
-                  <span>{t.nav.hubRoute}</span>
-                </NavLink>
-                <NavLink
-                  to="/q3-03"
-                  className={({ isActive }) =>
-                    `route-pill interactive-icon-trigger${isActive ? ' is-active' : ''}`
-                  }
-                >
-                  <PrototypeCursorIcon size={14} />
-                  <span>{t.nav.q303Route}</span>
-                </NavLink>
-                <NavLink
-                  to="/q3-04-core"
-                  className={({ isActive }) =>
-                    `route-pill interactive-icon-trigger${isActive ? ' is-active' : ''}`
-                  }
-                >
-                  <CoreDatabaseCheckIcon size={14} />
-                  <span>{t.nav.q304Route}</span>
-                </NavLink>
+            {mode === 'hub' && (
+              <nav className="top-nav-desktop" aria-label="Hub sections">
+                <a className="route-pill interactive-icon-trigger" href="#top">
+                  <span>{locale === 'id' ? 'Ikhtisar' : 'Overview'}</span>
+                </a>
+                <a className="route-pill interactive-icon-trigger" href="#routes">
+                  <PrototypeCursorIcon size={13} />
+                  <span>{locale === 'id' ? 'Ruang Kerja' : 'Workspaces'}</span>
+                </a>
+                <a className="route-pill interactive-icon-trigger" href="#visuals">
+                  <WireframeGridIcon size={13} />
+                  <span>Blueprint</span>
+                </a>
+                <a className="route-pill interactive-icon-trigger" href="#trail">
+                  <CompassHubIcon size={13} />
+                  <span>{locale === 'id' ? 'Peta Q1–Q5' : 'Q1–Q5 Roadmap'}</span>
+                </a>
               </nav>
             )}
 
             <div className="topbar-right">
+              {mode === 'q304' && (
+                <Link className="btn btn-sm interactive-icon-trigger" to="/">
+                  <CompassHubIcon size={13} />
+                  <span className="hide-mobile">
+                    {locale === 'id' ? 'Hub Utama' : 'Main Hub'}
+                  </span>
+                </Link>
+              )}
+
               <button
                 type="button"
                 className="theme-toggle-btn interactive-icon-trigger"
@@ -136,39 +132,6 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
               {rightSlot}
             </div>
           </div>
-
-          {mode !== 'q303-isolated' && (
-            <nav className="top-nav-mobile" aria-label="Mobile routes">
-              <NavLink
-                to="/"
-                end
-                className={({ isActive }) =>
-                  `mobile-route-tab interactive-icon-trigger${isActive ? ' is-active' : ''}`
-                }
-              >
-                <CompassHubIcon size={13} />
-                <span>Hub</span>
-              </NavLink>
-              <NavLink
-                to="/q3-03"
-                className={({ isActive }) =>
-                  `mobile-route-tab interactive-icon-trigger${isActive ? ' is-active' : ''}`
-                }
-              >
-                <PrototypeCursorIcon size={13} />
-                <span>Q3.03</span>
-              </NavLink>
-              <NavLink
-                to="/q3-04-core"
-                className={({ isActive }) =>
-                  `mobile-route-tab interactive-icon-trigger${isActive ? ' is-active' : ''}`
-                }
-              >
-                <CoreDatabaseCheckIcon size={13} />
-                <span>Q3.04</span>
-              </NavLink>
-            </nav>
-          )}
 
           <div className="scroll-progress-wrap" aria-hidden="true">
             <div
