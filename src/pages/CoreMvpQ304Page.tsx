@@ -5,7 +5,9 @@ import { MemberRosterList } from '../components/MemberRosterList';
 import { MobileDecisionDock } from '../components/MobileDecisionDock';
 import {
   CalendarProposalIcon,
+  CheckMiniIcon,
   ClockTickIcon,
+  CloseXIcon,
   LocationModeIcon,
   ShareLinkIcon,
   ShieldLockIcon
@@ -517,7 +519,7 @@ export const CoreMvpQ304Page: React.FC = () => {
                     {copiedSnapshot ? t.q304.snapshotCopied : t.q304.copySnapshotBtn}
                   </span>
                   <span className="mobile-only-label">
-                    {copiedSnapshot ? '✓' : 'Snapshot'}
+                    {copiedSnapshot ? <CheckMiniIcon size={12} /> : 'Snapshot'}
                   </span>
                 </button>
                 <button
@@ -528,7 +530,9 @@ export const CoreMvpQ304Page: React.FC = () => {
                   aria-label={t.q304.deleteProposalBtn}
                 >
                   <span className="hide-mobile">{t.q304.deleteProposalBtn}</span>
-                  <span className="mobile-only-label">✕</span>
+                  <span className="mobile-only-label">
+                    <CloseXIcon size={13} />
+                  </span>
                 </button>
               </div>
             )}
@@ -727,7 +731,7 @@ export const CoreMvpQ304Page: React.FC = () => {
                           }}
                           aria-label="Remove row"
                         >
-                          ×
+                          <CloseXIcon size={13} />
                         </button>
                       </div>
                     ))}
@@ -881,7 +885,7 @@ export const CoreMvpQ304Page: React.FC = () => {
                     activeProposal.lastDriftActor &&
                     activeProposal.lastDriftFrom &&
                     activeProposal.lastDriftTo
-                      ? `${activeProposal.lastDriftActor} (${t.responses[activeProposal.lastDriftFrom].label} → ${t.responses[activeProposal.lastDriftTo].label} · ${activeProposal.lastDriftAt})`
+                      ? `${activeProposal.lastDriftActor} (${t.responses[activeProposal.lastDriftFrom].label} ${locale === 'id' ? 'ke' : 'to'} ${t.responses[activeProposal.lastDriftTo].label} · ${activeProposal.lastDriftAt})`
                       : undefined
                   }
                   allowRoleChange

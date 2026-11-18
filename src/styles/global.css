@@ -720,6 +720,9 @@ button {
 }
 
 .hero-os-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-family: var(--font-mono);
   font-size: 10.5px;
   font-weight: 700;
@@ -900,6 +903,9 @@ button {
 }
 
 .hero-m-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-family: var(--font-mono);
   font-size: 10.5px;
   font-weight: 600;
@@ -1115,6 +1121,12 @@ button {
   background: var(--good-bg);
   border-color: var(--good-border);
   color: var(--good-ink);
+}
+
+.mini-route-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* ==========================================================================
@@ -1627,22 +1639,33 @@ button {
 .quest-link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 11px;
-  min-height: 32px;
-  border-radius: 8px;
+  gap: 6.5px;
+  padding: 6px 11.5px;
+  min-height: 33px;
+  border-radius: 9px;
   font-size: 11.8px;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--line-strong);
   background: var(--surface-solid);
   color: var(--ink);
-  transition: all 0.15s var(--ease);
+  transition: all 0.16s var(--ease);
 }
 
 .quest-link-btn:hover {
   background: var(--surface-raised);
   border-color: var(--line-hover);
+}
+
+.quest-link-btn.kind-brief {
+  background: var(--accent-soft);
+  border-color: var(--accent-border);
+  color: var(--accent-ink);
+}
+
+.quest-link-btn.kind-brief:hover {
+  background: var(--surface-raised);
+  border-color: var(--accent);
 }
 
 .quest-link-btn.kind-submission {
@@ -1652,7 +1675,7 @@ button {
 }
 
 .quest-link-btn.kind-submission:hover {
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .quest-link-btn.kind-internal {
@@ -3342,10 +3365,31 @@ textarea:focus {
   transform: translate(-50%, -50%);
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.88), 0 22px 48px rgba(0, 0, 0, 0.52);
-  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.85), 0 22px 48px rgba(15, 23, 42, 0.28);
+  background-color: #f8fafc;
   pointer-events: none;
   z-index: 10;
+}
+
+.bp-optical-loupe.is-dark-loupe {
+  background-color: #0c111d;
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.9), 0 24px 54px rgba(0, 0, 0, 0.68);
+}
+
+.bp-optical-loupe.is-dark-loupe .bp-loupe-ring {
+  border-color: #1e293b;
+  box-shadow: inset 0 3px 14px rgba(0, 0, 0, 0.48);
+}
+
+.bp-optical-loupe.is-dark-loupe .bp-loupe-reticle::before,
+.bp-optical-loupe.is-dark-loupe .bp-loupe-reticle::after {
+  background: rgba(96, 165, 250, 0.68);
+}
+
+.bp-optical-loupe.is-dark-loupe .bp-loupe-tag {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  color: #e2e8f0;
 }
 
 .bp-loupe-img {
@@ -3565,10 +3609,11 @@ a:focus-visible,
 .p-icon .icon-part-hand,
 .p-icon .icon-part-cursor,
 .p-icon .icon-part-pop,
-.p-icon .icon-part-slide {
+.p-icon .icon-part-slide,
+.p-icon .icon-part-ne {
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 0.28s var(--ease);
+  transition: transform 0.24s var(--ease);
 }
 
 .interactive-icon-trigger:hover .icon-part-needle {
@@ -3587,8 +3632,16 @@ a:focus-visible,
   transform: scale(1.16);
 }
 
-.interactive-icon-trigger:hover .icon-part-slide {
-  transform: translateX(1.5px);
+.interactive-icon-trigger:hover .icon-part-slide,
+.quest-link-btn:hover .icon-part-slide,
+.btn:hover .icon-part-slide {
+  transform: translateX(1.6px);
+}
+
+.interactive-icon-trigger:hover .icon-part-ne,
+.quest-link-btn:hover .icon-part-ne,
+.btn:hover .icon-part-ne {
+  transform: translate(1.2px, -1.2px);
 }
 
 .interactive-icon-trigger:hover .dock-icon-medallion,

@@ -3,13 +3,21 @@ import { Link } from 'react-router-dom';
 import { BlueprintStudio } from '../components/BlueprintStudio';
 import { DiagramLightbox } from '../components/DiagramLightbox';
 import {
+  ArrowRightIcon,
+  ArrowUpRightIcon,
   BoardMatrixIcon,
   CalendarProposalIcon,
   ChatClarifyIcon,
   ChatVsCommitIcon,
+  CheckMiniIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
   CompassHubIcon,
   CoreDatabaseCheckIcon,
+  CourseBriefIcon,
+  EmptyCircleMiniIcon,
   FlowBranchIcon,
+  HalfCircleMiniIcon,
   NotionDocIcon,
   PhaseBadgeIcon,
   PrototypeCursorIcon,
@@ -22,6 +30,7 @@ import {
 } from '../components/ProjectIcons';
 import { TopNavbar } from '../components/TopNavbar';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useTheme } from '../i18n/ThemeContext';
 import { VisualArtifactItem } from '../i18n/translations';
 
 type MiniStatus = 'certain' | 'tentative' | 'none';
@@ -34,6 +43,7 @@ const NEXT_MINI_STATUS: Record<MiniStatus, MiniStatus> = {
 
 export const HubPage: React.FC = () => {
   const { locale, t } = useLanguage();
+  const { theme } = useTheme();
   const [activePhase, setActivePhase] = useState<'ALL' | 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'>('ALL');
   const [stateFilter, setStateFilter] = useState<'all' | 'done' | 'upcoming'>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -130,11 +140,33 @@ export const HubPage: React.FC = () => {
   const submittedPct = Math.round((submittedNotionCount / allQuests.length) * 100);
   const liveWebPct = Math.round((liveWebCount / allQuests.length) * 100);
 
-  const miniStatusLabel = (st: MiniStatus) => {
-    if (locale === 'id') {
-      return st === 'certain' ? '✓ Pasti hadir' : st === 'tentative' ? '◐ Tentatif' : '○ Belum balas';
-    }
-    return st === 'certain' ? '✓ Confirmed' : st === 'tentative' ? '◐ Tentative' : '○ No reply';
+  const renderMiniStatusBadge = (st: MiniStatus) => {
+    const icon =
+      st === 'certain' ? (
+        <CheckMiniIcon size={11} />
+      ) : st === 'tentative' ? (
+        <HalfCircleMiniIcon size={11} />
+      ) : (
+        <EmptyCircleMiniIcon size={11} />
+      );
+    const text =
+      locale === 'id'
+        ? st === 'certain'
+          ? 'Pasti hadir'
+          : st === 'tentative'
+            ? 'Tentatif'
+            : 'Belum balas'
+        : st === 'certain'
+          ? 'Confirmed'
+          : st === 'tentative'
+            ? 'Tentative'
+            : 'No reply';
+    return (
+      <>
+        {icon}
+        <span>{text}</span>
+      </>
+    );
   };
 
   return (
@@ -160,7 +192,8 @@ export const HubPage: React.FC = () => {
               <div className="hero-cta-row">
                 <Link className="btn primary btn-shimmer interactive-icon-trigger" to="/q3-04-core">
                   <CoreDatabaseCheckIcon size={15} />
-                  <span>{t.hub.cardQ304OpenBtn} →</span>
+                  <span>{t.hub.cardQ304OpenBtn}</span>
+                  <ArrowRightIcon size={13} />
                 </Link>
                 <Link className="btn interactive-icon-trigger" to="/q3-03">
                   <PrototypeCursorIcon size={15} />
@@ -208,13 +241,16 @@ export const HubPage: React.FC = () => {
               </div>
               <span className="hero-os-domain">readiness-board.protocol</span>
               <span className={`hero-os-pill${heroAllReady ? ' is-ready' : ''}`}>
-                {heroAllReady
-                  ? locale === 'id'
-                    ? '✓ Siap Final'
-                    : '✓ Ready to Lock'
-                  : locale === 'id'
-                    ? '◐ Klarifikasi'
-                    : '◐ Clarifying'}
+                {heroAllReady ? <CheckMiniIcon size={11} /> : <HalfCircleMiniIcon size={11} />}
+                <span>
+                  {heroAllReady
+                    ? locale === 'id'
+                      ? 'Siap Final'
+                      : 'Ready to Lock'
+                    : locale === 'id'
+                      ? 'Klarifikasi'
+                      : 'Clarifying'}
+                </span>
               </span>
             </div>
 
@@ -277,7 +313,7 @@ export const HubPage: React.FC = () => {
                       </span>
                     </span>
                     <span className={`hero-m-badge state-${m.status}`}>
-                      {miniStatusLabel(m.status)}
+                      {renderMiniStatusBadge(m.status)}
                     </span>
                   </button>
                 ))}
@@ -397,13 +433,19 @@ export const HubPage: React.FC = () => {
             </div>
             <strong className="ep-value">{t.hub.ep4Val}</strong>
             <div className="mini-route-pills">
-              <Link to="/q3-03" className="mini-route-tag">
+              <Link to="/q3-03" className="mini-route-tag interactive-icon-trigger">
                 <span>/q3-03</span>
-                <span>Sim →</span>
+                <span className="mini-route-end">
+                  <span>Sim</span>
+                  <ArrowRightIcon size={11} />
+                </span>
               </Link>
-              <Link to="/q3-04-core" className="mini-route-tag is-live">
+              <Link to="/q3-04-core" className="mini-route-tag is-live interactive-icon-trigger">
                 <span>/q3-04-core</span>
-                <span>MVP →</span>
+                <span className="mini-route-end">
+                  <span>MVP</span>
+                  <ArrowRightIcon size={11} />
+                </span>
               </Link>
             </div>
             <p className="diag-subtext">{t.hub.ep4Note}</p>
@@ -456,7 +498,7 @@ export const HubPage: React.FC = () => {
                   className="route-copy-inline"
                   onClick={() => handleCopyLink('/q3-03', 'q303')}
                 >
-                  <ShareLinkIcon size={12} />
+                  {copiedRoute === 'q303' ? <CheckMiniIcon size={12} /> : <ShareLinkIcon size={12} />}
                   <span>
                     {copiedRoute === 'q303' ? t.hub.cardQ303Copied : t.hub.cardQ303CopyBtn}
                   </span>
@@ -465,7 +507,8 @@ export const HubPage: React.FC = () => {
             </div>
             <Link className="btn btn-full interactive-icon-trigger" to="/q3-03">
               <PrototypeCursorIcon size={15} />
-              <span>{t.hub.cardQ303OpenBtn} →</span>
+              <span>{t.hub.cardQ303OpenBtn}</span>
+              <ArrowRightIcon size={13} />
             </Link>
           </article>
 
@@ -502,7 +545,7 @@ export const HubPage: React.FC = () => {
                   className="route-copy-inline"
                   onClick={() => handleCopyLink('/q3-04-core', 'q304')}
                 >
-                  <ShareLinkIcon size={12} />
+                  {copiedRoute === 'q304' ? <CheckMiniIcon size={12} /> : <ShareLinkIcon size={12} />}
                   <span>
                     {copiedRoute === 'q304' ? t.hub.cardQ304Copied : t.hub.cardQ304CopyBtn}
                   </span>
@@ -511,7 +554,8 @@ export const HubPage: React.FC = () => {
             </div>
             <Link className="btn primary btn-shimmer btn-full interactive-icon-trigger" to="/q3-04-core">
               <CoreDatabaseCheckIcon size={15} />
-              <span>{t.hub.cardQ304OpenBtn} →</span>
+              <span>{t.hub.cardQ304OpenBtn}</span>
+              <ArrowRightIcon size={13} />
             </Link>
           </article>
         </section>
@@ -549,12 +593,13 @@ export const HubPage: React.FC = () => {
           </div>
           <a
             className="btn btn-sm interactive-icon-trigger"
-            href="https://idits.notion.site/ebd//374333dd1d2880d78769c73a477ba254"
+            href="https://idits.notion.site/374333dd1d2880d78769c73a477ba254"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <NotionDocIcon size={13} />
+            <CourseBriefIcon size={13} />
             <span>{t.hub.coursePortalBtn}</span>
+            <ArrowUpRightIcon size={12} />
           </a>
         </div>
 
@@ -700,33 +745,53 @@ export const HubPage: React.FC = () => {
 
                 {q.links && q.links.length > 0 && (
                   <div className="quest-links">
-                    {q.links.map((lnk) =>
-                      lnk.kind === 'internal' ? (
-                        <Link
-                          key={lnk.href}
-                          to={lnk.href}
-                          className="quest-link-btn kind-internal"
-                        >
-                          <PrototypeCursorIcon size={13} />
-                          <span>{lnk.label}</span>
-                        </Link>
-                      ) : (
+                    {q.links.map((lnk) => {
+                      if (lnk.kind === 'internal') {
+                        return (
+                          <Link
+                            key={lnk.href}
+                            to={lnk.href}
+                            className="quest-link-btn kind-internal interactive-icon-trigger"
+                          >
+                            <PrototypeCursorIcon size={13} />
+                            <span>{lnk.label}</span>
+                            <ArrowRightIcon size={12} />
+                          </Link>
+                        );
+                      }
+
+                      const resolvedHref =
+                        theme === 'dark' &&
+                        lnk.href.startsWith('/assets/') &&
+                        lnk.href.endsWith('.svg')
+                          ? lnk.href.replace(/\.svg$/, '_dark.svg')
+                          : lnk.href;
+
+                      const leadIcon =
+                        lnk.kind === 'submission' ? (
+                          <NotionDocIcon size={13} />
+                        ) : lnk.kind === 'brief' ? (
+                          <CourseBriefIcon size={13} />
+                        ) : lnk.href.includes('classroom.its.ac.id') ? (
+                          <ChatClarifyIcon size={13} />
+                        ) : (
+                          <WireframeGridIcon size={13} />
+                        );
+
+                      return (
                         <a
                           key={lnk.href}
-                          href={lnk.href}
+                          href={resolvedHref}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`quest-link-btn kind-${lnk.kind}`}
+                          className={`quest-link-btn kind-${lnk.kind} interactive-icon-trigger`}
                         >
-                          {lnk.kind === 'submission' ? (
-                            <NotionDocIcon size={13} />
-                          ) : (
-                            <ShareLinkIcon size={12} />
-                          )}
+                          {leadIcon}
                           <span>{lnk.label}</span>
+                          <ArrowUpRightIcon size={12} />
                         </a>
-                      )
-                    )}
+                      );
+                    })}
                   </div>
                 )}
 
@@ -744,13 +809,16 @@ export const HubPage: React.FC = () => {
               onClick={() => setShowAllQuests((v) => !v)}
               data-testid="btn-toggle-all-quests"
             >
-              {showAllQuests
-                ? locale === 'id'
-                  ? 'Ringkas tampilan daftar ↑'
-                  : 'Collapse stage list ↑'
-                : locale === 'id'
-                  ? `Tampilkan seluruh ${filteredQuests.length} tahapan (Q1.02 → Q5.04) ↓`
-                  : `Explore all ${filteredQuests.length} stages (Q1.02 → Q5.04) ↓`}
+              <span>
+                {showAllQuests
+                  ? locale === 'id'
+                    ? 'Ringkas tampilan daftar'
+                    : 'Collapse stage list'
+                  : locale === 'id'
+                    ? `Tampilkan seluruh ${filteredQuests.length} tahapan (Q1.02–Q5.04)`
+                    : `Explore all ${filteredQuests.length} stages (Q1.02–Q5.04)`}
+              </span>
+              {showAllQuests ? <ChevronUpIcon size={14} /> : <ChevronDownIcon size={14} />}
             </button>
           </div>
         )}

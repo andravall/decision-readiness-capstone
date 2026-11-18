@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="q206-title q206-desc">
+  <title id="q206-title">Q2.06 — Lean Evidence Trail (Peta Jejak Keputusan Q1 hingga Q2.05)</title>
+  <desc id="q206-desc">Rantai penalaran enam tahap dari perumusan masalah Quest 1, pembandingan enam alternatif dan koreksi skor pada Q2.02, penetapan hipotesis H1 pada Q2.03, dua seri bukti pada Q2.04, verdict inconclusive pada Q2.05, hingga rencana pengujian lanjutan.</desc>
+
+  <defs>
+    <pattern id="q206-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#94A3B8" fill-opacity="0.13"/>
+    </pattern>
+    <filter id="q206-shadow" x="-4%" y="-4%" width="108%" height="112%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.42"/>
+    </filter>
+    <marker id="q206-arrow" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="11" markerHeight="11" orient="auto">
+      <path d="M 2 2.2 L 10 6 L 2 9.8" fill="none" stroke="#60A5FA" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <clipPath id="q206-clip">
+      <rect x="28" y="28" width="1544" height="1044" rx="16"/>
+    </clipPath>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400..700&amp;family=Space+Grotesk:wght@400..700&amp;display=swap');
+      .sans { font-family: "Space Grotesk", sans-serif; }
+      .serif { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
+      .mono { font-family: "JetBrains Mono", monospace; }
+      .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; fill: #94A3B8; }
+      .h1 { font-size: 31px; font-weight: 700; fill: #F4F7FC; letter-spacing: -0.03em; }
+      .sub { font-size: 14.8px; fill: #CBD5E1; }
+      .step-idx { font-size: 11.5px; font-weight: 700; }
+      .card-h3 { font-size: 20px; font-weight: 650; fill: #F4F7FC; letter-spacing: -0.015em; }
+      .body-txt { font-size: 13.5px; fill: #CBD5E1; }
+      .anchor-tag { font-size: 10.5px; font-weight: 600; fill: #94A3B8; }
+      .flow-line { fill: none; stroke: #60A5FA; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; marker-end: url(#q206-arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1100" fill="#070A12"/>
+
+  <g clip-path="url(#q206-clip)">
+    <rect x="28" y="28" width="1544" height="1044" fill="#0C111D"/>
+    <rect x="28" y="28" width="1544" height="1044" fill="url(#q206-dots)"/>
+    <rect x="28" y="28" width="1544" height="5" fill="#2563EB"/>
+  </g>
+  <rect x="28" y="28" width="1544" height="1044" rx="16" fill="none" stroke="#28364F" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="72" y="78" class="mono eyebrow">Q2.06 · LEAN CHECKPOINT · PART B EVIDENCE TRAIL</text>
+  <text x="72" y="120" class="serif h1">Peta jejak penalaran dan keputusan (Quest 1 → Q2.05)</text>
+  <text x="72" y="149" class="sans sub">Mohammad Ferdinand Valliandra · 5026231159 · Menelusuri keterkaitan masalah, alternatif, hipotesis, bukti, dan keputusan</text>
+
+  <!-- Top-Right Chain Summary Pill -->
+  <rect x="1084" y="88" width="444" height="44" rx="22" fill="#141D2E" stroke="#28364F" stroke-width="1.3"/>
+  <text x="1306" y="115" text-anchor="middle" class="mono" font-size="11" font-weight="600" fill="#93C5FD">MASALAH → PILIHAN → TARUHAN → BUKTI → KEPUTUSAN → UJI ULANG</text>
+
+  <line x1="72" y1="174" x2="1528" y2="174" stroke="#1E293B" stroke-width="1.2"/>
+
+  <!-- ================= TIER 1: STAGES 01 -> 02 -> 03 (Left-to-Right, y = 204, h = 310) ================= -->
+
+  <!-- Stage 01 (x = 72, w = 452) -->
+  <g transform="translate(72, 204)" filter="url(#q206-shadow)">
+    <rect width="452" height="310" rx="12" fill="#141D2E" stroke="#28364F" stroke-width="1.4"/>
+    <rect x="0" y="0" width="452" height="5" rx="2.5" fill="#10B981"/>
+    <rect x="22" y="22" width="108" height="24" rx="5" fill="#0E2B23" stroke="#1E664E"/>
+    <text x="76" y="38" text-anchor="middle" class="mono step-idx" fill="#6EE7B7">01 · QUEST 1</text>
+    <text x="428" y="38" text-anchor="end" class="mono anchor-tag">DISCOVER &amp; REFINE</text>
+
+    <text x="22" y="78" class="sans card-h3">Masalah pengguna dipersempit</text>
+    <text x="22" y="112" class="sans body-txt">Pertanyaan inti: kapan respons anggota di WhatsApp</text>
+    <text x="22" y="134" class="sans body-txt">sudah cukup untuk menetapkan jadwal kelompok?</text>
+    <text x="22" y="166" class="sans body-txt">• Tersedia belum tentu berarti berkomitmen (PP02).</text>
+    <text x="22" y="190" class="sans body-txt">• Q1.06 (Refine): fokus dibatasi pada keterbacaan</text>
+    <text x="34" y="212" class="sans body-txt">kecukupan respons &amp; alasan, bukan klaim keterlambatan.</text>
+
+    <rect x="22" y="252" width="408" height="36" rx="6" fill="#0F1726" stroke="#1E293B"/>
+    <text x="36" y="275" class="mono anchor-tag">Bukti acuan: Observasi P01 (Q1.03) · Wawancara P01–P03 (Q1.04)</text>
+  </g>
+
+  <!-- Connector 01 -> 02 -->
+  <path class="flow-line" d="M 524 359 L 568 359"/>
+
+  <!-- Stage 02 (x = 574, w = 452) -->
+  <g transform="translate(574, 204)" filter="url(#q206-shadow)">
+    <rect width="452" height="310" rx="12" fill="#141D2E" stroke="#28364F" stroke-width="1.4"/>
+    <rect x="0" y="0" width="452" height="5" rx="2.5" fill="#2563EB"/>
+    <rect x="22" y="22" width="104" height="24" rx="5" fill="#152748" stroke="#2B4D87"/>
+    <text x="74" y="38" text-anchor="middle" class="mono step-idx" fill="#93C5FD">02 · Q2.02</text>
+    <text x="428" y="38" text-anchor="end" class="mono anchor-tag">IDEA STORM</text>
+
+    <text x="22" y="78" class="sans card-h3">Enam alternatif &amp; koreksi skor</text>
+    <text x="22" y="112" class="sans body-txt">Enam kandidat dibandingkan menurut manfaat, risiko,</text>
+    <text x="22" y="134" class="sans body-txt">asumsi, dan kelayakan pengujian cepat.</text>
+    <text x="22" y="166" class="sans body-txt">• Decision Readiness Board dipilih sebagai kandidat</text>
+    <text x="34" y="188" class="sans body-txt">digital; Confirmation Protocol menjadi aturan pakai.</text>
+    <text x="22" y="214" class="sans body-txt">• Koreksi terbuka skor awal: Board 17/20, Protokol 19/20.</text>
+
+    <rect x="22" y="252" width="408" height="36" rx="6" fill="#0F1726" stroke="#1E293B"/>
+    <text x="36" y="275" class="mono anchor-tag">Alasan pilih: kesesuaian kerja koordinator &amp; kelayakan diuji</text>
+  </g>
+
+  <!-- Connector 02 -> 03 -->
+  <path class="flow-line" d="M 1026 359 L 1070 359"/>
+
+  <!-- Stage 03 (x = 1076, w = 452) -->
+  <g transform="translate(1076, 204)" filter="url(#q206-shadow)">
+    <rect width="452" height="310" rx="12" fill="#141D2E" stroke="#28364F" stroke-width="1.4"/>
+    <rect x="0" y="0" width="452" height="5" rx="2.5" fill="#2563EB"/>
+    <rect x="22" y="22" width="104" height="24" rx="5" fill="#152748" stroke="#2B4D87"/>
+    <text x="74" y="38" text-anchor="middle" class="mono step-idx" fill="#93C5FD">03 · Q2.03</text>
+    <text x="428" y="38" text-anchor="end" class="mono anchor-tag">SOLUTION BET</text>
+
+    <text x="22" y="78" class="sans card-h3">Taruhan solusi &amp; ambang H1 / A3</text>
+    <text x="22" y="112" class="sans body-txt">Memetakan asumsi A1–A12 dan memprioritaskan H1 untuk</text>
+    <text x="22" y="134" class="sans body-txt">menguji nilai tambah board atas rangkuman chat setara.</text>
+    <text x="22" y="166" class="sans body-txt">• Syarat 1: ≥2/3 koordinator tepat menemukan status</text>
+    <text x="34" y="188" class="sans body-txt">bermasalah &amp; alasan keputusan tanpa membuka chat.</text>
+    <text x="22" y="214" class="sans body-txt">• Syarat 2: pada ≥2 orang tepat, durasi board ≤ chat.</text>
+
+    <rect x="22" y="252" width="408" height="36" rx="6" fill="#0F1726" stroke="#1E293B"/>
+    <text x="36" y="275" class="mono anchor-tag">Kedua syarat berlaku bersama; H2–H4 diuji terpisah</text>
+  </g>
+
+  <!-- Clean Inter-Tier Orthogonal Return Connector (03 Bottom -> 04 Top, so Tier 2 ALSO reads Left-to-Right!) -->
+  <path class="flow-line" d="M 1302 514 V 538 Q 1302 550 1290 550 H 310 Q 298 550 298 562 V 580"/>
+  <rect x="656" y="536" width="288" height="26" rx="13" fill="#152748" stroke="#2B4D87" stroke-width="1.3"/>
+  <text x="800" y="553" text-anchor="middle" class="mono" font-size="10.5" font-weight="700" letter-spacing="0.06em" fill="#93C5FD">PELAKSANAAN EKSPERIMEN &amp; EVALUASI</text>
+
+  <!-- ================= TIER 2: STAGES 04 -> 05 -> 06 (Left-to-Right, y = 586, h = 316) ================= -->
+
+  <!-- Stage 04 (x = 72, w = 452) -->
+  <g transform="translate(72, 586)" filter="url(#q206-shadow)">
+    <rect width="452" height="316" rx="12" fill="#141D2E" stroke="#28364F" stroke-width="1.4"/>
+    <rect x="0" y="0" width="452" height="5" rx="2.5" fill="#2563EB"/>
+    <rect x="22" y="22" width="104" height="24" rx="5" fill="#152748" stroke="#2B4D87"/>
+    <text x="74" y="38" text-anchor="middle" class="mono step-idx" fill="#93C5FD">04 · Q2.04</text>
+    <text x="428" y="38" text-anchor="end" class="mono anchor-tag">EXPERIMENT PACK</text>
+
+    <text x="22" y="78" class="sans card-h3">Pemisahan dua tahap bukti</text>
+    <text x="22" y="112" class="sans body-txt">• Seri awal R1–R3: tanggapan delapan pertanyaan WA;</text>
+    <text x="34" y="134" class="sans body-txt">pertanyaan sudah menyebut status sehingga bukan uji H1.</text>
+    <text x="22" y="164" class="sans body-txt">• Seri lanjutan K1–K3: skenario C/D mencatat ketepatan</text>
+    <text x="34" y="186" class="sans body-txt">3/3 setara dan rata-rata durasi terlapor 75 vs 40 detik.</text>
+    <text x="22" y="216" class="sans body-txt">• Catatan prosedur, stopwatch, &amp; pesan asli belum utuh.</text>
+
+    <rect x="22" y="256" width="408" height="36" rx="6" fill="#0F1726" stroke="#1E293B"/>
+    <text x="36" y="279" class="mono anchor-tag">Dua seri kode tidak diklaim sebagai enam responden unik</text>
+  </g>
+
+  <!-- Connector 04 -> 05 -->
+  <path class="flow-line" d="M 524 744 L 568 744"/>
+
+  <!-- Stage 05 (x = 574, w = 452 — Highlighted Amber Verdict) -->
+  <g transform="translate(574, 586)" filter="url(#q206-shadow)">
+    <rect width="452" height="316" rx="12" fill="#2A2011" stroke="#785319" stroke-width="1.8"/>
+    <rect x="0" y="0" width="452" height="5" rx="2.5" fill="#F59E0B"/>
+    <rect x="22" y="22" width="104" height="24" rx="5" fill="#2A2011" stroke="#785319"/>
+    <text x="74" y="38" text-anchor="middle" class="mono step-idx" fill="#FCD34D">05 · Q2.05</text>
+    <text x="428" y="38" text-anchor="end" class="mono anchor-tag" fill="#FCD34D">VERDICT &amp; DECISION</text>
+
+    <text x="22" y="78" class="sans card-h3">H1 Inconclusive · Validasi tambahan</text>
+    <text x="22" y="112" class="sans body-txt">Membandingkan capaian angka terhadap kualitas bukti</text>
+    <text x="22" y="134" class="sans body-txt">pelaksanaan secara jujur sebelum melangkah ke MVP.</text>
+    <text x="22" y="166" class="sans body-txt">• Angka K1–K3 mendukung H1 secara indikatif, namun</text>
+    <text x="34" y="188" class="sans body-txt">keterlacakan prosedur belum cukup untuk klaim final.</text>
+    <text x="22" y="216" class="sans body-txt">• Keputusan: lakukan validasi tambahan sebelum MVP penuh.</text>
+
+    <rect x="22" y="256" width="408" height="36" rx="6" fill="#2A2011" stroke="#785319"/>
+    <text x="36" y="279" class="mono anchor-tag" fill="#FCD34D">Board tetap kandidat · Protokol tetap pembanding ringan</text>
+  </g>
+
+  <!-- Connector 05 -> 06 -->
+  <path class="flow-line" d="M 1026 744 L 1070 744"/>
+
+  <!-- Stage 06 (x = 1076, w = 452) -->
+  <g transform="translate(1076, 586)" filter="url(#q206-shadow)">
+    <rect width="452" height="316" rx="12" fill="#141D2E" stroke="#3B82F6" stroke-width="1.6"/>
+    <rect x="0" y="0" width="452" height="5" rx="2.5" fill="#2563EB"/>
+    <rect x="22" y="22" width="168" height="24" rx="5" fill="#152748" stroke="#2B4D87"/>
+    <text x="106" y="38" text-anchor="middle" class="mono step-idx" fill="#93C5FD">06 · TINDAK LANJUT</text>
+    <text x="428" y="38" text-anchor="end" class="mono anchor-tag">NEXT ACTION</text>
+
+    <text x="22" y="78" class="sans card-h3">Uji ulang terdokumentasi &amp; alur inti</text>
+    <text x="22" y="112" class="sans body-txt">Menyiapkan instrumen yang menjaga ruang lingkup tetap</text>
+    <text x="22" y="134" class="sans body-txt">kecil sambil menutup celah bukti dari tahap sebelumnya:</text>
+    <text x="22" y="166" class="sans body-txt">• Ulangi H1 dengan bukti jawaban asli, bantuan, &amp; waktu.</text>
+    <text x="22" y="192" class="sans body-txt">• Uji beban pembaruan respons (H3) dan pemahaman</text>
+    <text x="34" y="214" class="sans body-txt">istilah status (H2) pada satu alur terfokus (Q3.02–Q3.04).</text>
+
+    <rect x="22" y="256" width="408" height="36" rx="6" fill="#152748" stroke="#2B4D87"/>
+    <text x="36" y="279" class="mono anchor-tag" fill="#93C5FD">Tahan fitur Later (login, kalender, AI, integrasi WA)</text>
+  </g>
+
+  <!-- Footer Note -->
+  <rect x="72" y="928" width="1456" height="92" rx="10" fill="#192438" stroke="#28364F" stroke-width="1.2"/>
+  <text x="96" y="958" class="sans" font-size="13.8" font-weight="650" fill="#F4F7FC">Kesimpulan jejak bukti: keputusan tidak diambil dari klaim skor tertinggi, melainkan dari kesesuaian masalah dan kejujuran membaca batas data.</text>
+  <text x="96" y="986" class="sans" font-size="12.5" fill="#94A3B8">Sumber: sintesis portofolio Q1.03–Q1.06 serta Q2.02–Q2.06 Part B. Visual ini merangkum keterlacakan alasan keputusan tanpa mengklaim pengujian lapangan baru.</text>
+</svg>

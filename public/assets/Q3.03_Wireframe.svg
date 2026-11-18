@@ -4,10 +4,10 @@
 
   <defs>
     <pattern id="wf-grid" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="#141714" fill-opacity="0.05"/>
+      <circle cx="2" cy="2" r="1" fill="#0F172A" fill-opacity="0.05"/>
     </pattern>
     <filter id="wf-shadow" x="-5%" y="-5%" width="110%" height="114%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#141714" flood-opacity="0.04"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.04"/>
     </filter>
     <clipPath id="wf-clip">
       <rect x="28" y="28" width="1544" height="964" rx="16"/>
@@ -17,58 +17,58 @@
       .sans { font-family: "Space Grotesk", sans-serif; }
       .serif { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
       .mono { font-family: "JetBrains Mono", monospace; }
-      .eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; fill: #6E756B; }
-      .h1 { font-size: 31px; font-weight: 700; fill: #141714; letter-spacing: -0.03em; }
-      .sub { font-size: 15px; fill: #484E46; }
-      .card-num { font-size: 11.5px; font-weight: 700; fill: #1B44C8; }
-      .card-title { font-size: 18px; font-weight: 650; fill: #141714; letter-spacing: -0.015em; }
-      .card-state { font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; fill: #52584F; }
-      .slot-label { font-size: 12.5px; fill: #3A4039; font-weight: 500; }
-      .slot-sub { font-size: 11px; fill: #6E756B; }
+      .eyebrow { font-size: 11.5px; font-weight: 600; letter-spacing: 0.1em; fill: #64748B; }
+      .h1 { font-size: 31px; font-weight: 700; fill: #0F172A; letter-spacing: -0.03em; }
+      .sub { font-size: 15px; fill: #334155; }
+      .card-num { font-size: 11.5px; font-weight: 700; fill: #2563EB; }
+      .card-title { font-size: 18px; font-weight: 650; fill: #0F172A; letter-spacing: -0.015em; }
+      .card-state { font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; fill: #64748B; }
+      .slot-label { font-size: 12.5px; fill: #334155; font-weight: 500; }
+      .slot-sub { font-size: 11px; fill: #64748B; }
       .cta-text { font-size: 12.5px; font-weight: 600; fill: #FFFFFF; }
     </style>
   </defs>
 
-  <rect width="1600" height="1020" fill="#EAE8DF"/>
+  <rect width="1600" height="1020" fill="#E6ECF5"/>
 
   <g clip-path="url(#wf-clip)">
-    <rect x="28" y="28" width="1544" height="964" fill="#FAF9F5"/>
+    <rect x="28" y="28" width="1544" height="964" fill="#F8FAFC"/>
     <rect x="28" y="28" width="1544" height="964" fill="url(#wf-grid)"/>
-    <rect x="28" y="28" width="1544" height="5" fill="#1B44C8"/>
+    <rect x="28" y="28" width="1544" height="5" fill="#2563EB"/>
   </g>
-  <rect x="28" y="28" width="1544" height="964" rx="16" fill="none" stroke="#D5D5CA" stroke-width="1.5"/>
+  <rect x="28" y="28" width="1544" height="964" rx="16" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
 
   <!-- Header -->
   <text x="72" y="80" class="mono eyebrow">Q3.03 · SKETCH THE FUTURE · STRUKTUR LAYAR WIREFRAME</text>
   <text x="72" y="120" class="serif h1">Wireframe enam keadaan Decision Readiness Board</text>
   <text x="72" y="149" class="sans sub">Kerangka tata letak fungsional sebelum perancangan visual: menyandingkan daftar anggota dengan panel keputusan kontekstual.</text>
-  <line x1="72" y1="174" x2="1528" y2="174" stroke="#E2E2D8" stroke-width="1.2"/>
+  <line x1="72" y1="174" x2="1528" y2="174" stroke="#E2E8F0" stroke-width="1.2"/>
 
   <!-- ================= ROW 1 (y = 202, h = 334) ================= -->
 
   <!-- Frame 01: Board usulan -->
   <g transform="translate(72, 202)" filter="url(#wf-shadow)">
-    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.5"/>
-    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F5F4EE"/>
-    <rect x="0" y="34" width="464" height="12" fill="#F5F4EE"/>
-    <line x1="0" y1="46" x2="464" y2="46" stroke="#DDDDD3" stroke-width="1"/>
+    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F1F5F9"/>
+    <rect x="0" y="34" width="464" height="12" fill="#F1F5F9"/>
+    <line x1="0" y1="46" x2="464" y2="46" stroke="#E2E8F0" stroke-width="1"/>
     <rect x="18" y="12" width="34" height="22" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
     <text x="35" y="27" text-anchor="middle" class="mono card-num">01</text>
     <text x="62" y="29" class="sans card-title">Board usulan</text>
-    <rect x="354" y="13" width="92" height="20" rx="10" fill="#FFFFFF" stroke="#D2D5CA"/>
+    <rect x="354" y="13" width="92" height="20" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
     <text x="400" y="27" text-anchor="middle" class="mono card-state">USULAN</text>
 
     <!-- Hero & Diagnostics skeleton -->
-    <rect x="18" y="62" width="428" height="44" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="62" width="428" height="44" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="30" y="82" class="sans slot-label">Konteks waktu pertemuan &amp; rel tahapan protokol</text>
     <text x="30" y="98" class="mono slot-sub">Rabu 19.30 WIB · Meter kesiapan 1/3 wajib pasti</text>
 
     <!-- Two-column split skeleton -->
-    <rect x="18" y="118" width="246" height="196" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="118" width="246" height="196" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="30" y="140" class="sans slot-label">Daftar 5 anggota terkelompok</text>
-    <rect x="30" y="152" width="222" height="36" rx="4" fill="#FFFFFF" stroke="#E2E2D8"/>
+    <rect x="30" y="152" width="222" height="36" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
     <text x="40" y="174" class="sans slot-sub">Wajib hadir (3) · status + jam</text>
-    <rect x="30" y="196" width="222" height="36" rx="4" fill="#FFFFFF" stroke="#E2E2D8"/>
+    <rect x="30" y="196" width="222" height="36" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
     <text x="40" y="218" class="sans slot-sub">Opsional (2) · konteks hadir</text>
     <text x="30" y="256" class="mono slot-sub">+ tombol [Ubah] per baris</text>
 
@@ -77,23 +77,23 @@
     <rect x="288" y="152" width="146" height="58" rx="4" fill="#FEF6E4" stroke="#EFD393"/>
     <text x="296" y="174" class="sans slot-sub">Perlu konfirmasi:</text>
     <text x="296" y="192" class="sans slot-sub">Bima &amp; Citra</text>
-    <rect x="288" y="260" width="146" height="38" rx="6" fill="#1B44C8"/>
+    <rect x="288" y="260" width="146" height="38" rx="6" fill="#2563EB"/>
     <text x="361" y="284" text-anchor="middle" class="sans cta-text">Tinjau keputusan</text>
   </g>
 
   <!-- Frame 02: Tinjau kesiapan -->
   <g transform="translate(568, 202)" filter="url(#wf-shadow)">
-    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.5"/>
-    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F5F4EE"/>
-    <rect x="0" y="34" width="464" height="12" fill="#F5F4EE"/>
-    <line x1="0" y1="46" x2="464" y2="46" stroke="#DDDDD3" stroke-width="1"/>
+    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F1F5F9"/>
+    <rect x="0" y="34" width="464" height="12" fill="#F1F5F9"/>
+    <line x1="0" y1="46" x2="464" y2="46" stroke="#E2E8F0" stroke-width="1"/>
     <rect x="18" y="12" width="34" height="22" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
     <text x="35" y="27" text-anchor="middle" class="mono card-num">02</text>
     <text x="62" y="29" class="sans card-title">Tinjau kesiapan</text>
     <rect x="334" y="13" width="112" height="20" rx="10" fill="#FEF6E4" stroke="#EFD393"/>
     <text x="390" y="27" text-anchor="middle" class="mono card-state" fill="#824B0A">BELUM CUKUP</text>
 
-    <rect x="18" y="64" width="428" height="62" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="64" width="428" height="62" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="88" class="sans slot-label">Daftar periksa aturan skenario kelompok</text>
     <text x="32" y="109" class="mono slot-sub">[Belum 1/3] Syarat seluruh anggota wajib pasti</text>
 
@@ -101,42 +101,42 @@
     <text x="32" y="162" class="sans slot-label">Daftar respons wajib yang menghalangi final</text>
     <text x="32" y="183" class="sans slot-sub">Bima (Belum menjawab) · Citra (Mungkin · tentatif)</text>
 
-    <rect x="18" y="212" width="428" height="44" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="212" width="428" height="44" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="239" class="sans slot-label">Arah tindak lanjut klarifikasi lewat WhatsApp</text>
 
-    <rect x="18" y="272" width="290" height="42" rx="6" fill="#1B44C8"/>
+    <rect x="18" y="272" width="290" height="42" rx="6" fill="#2563EB"/>
     <text x="163" y="298" text-anchor="middle" class="sans cta-text">Tandai sementara &amp; siapkan WA</text>
-    <rect x="320" y="272" width="126" height="42" rx="6" fill="#FFFFFF" stroke="#C5C6B9"/>
+    <rect x="320" y="272" width="126" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
     <text x="383" y="298" text-anchor="middle" class="sans slot-label">Kembali</text>
   </g>
 
   <!-- Frame 03: Ubah respons -->
   <g transform="translate(1064, 202)" filter="url(#wf-shadow)">
-    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.5"/>
-    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F5F4EE"/>
-    <rect x="0" y="34" width="464" height="12" fill="#F5F4EE"/>
-    <line x1="0" y1="46" x2="464" y2="46" stroke="#DDDDD3" stroke-width="1"/>
+    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F1F5F9"/>
+    <rect x="0" y="34" width="464" height="12" fill="#F1F5F9"/>
+    <line x1="0" y1="46" x2="464" y2="46" stroke="#E2E8F0" stroke-width="1"/>
     <rect x="18" y="12" width="34" height="22" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
     <text x="35" y="27" text-anchor="middle" class="mono card-num">03</text>
     <text x="62" y="29" class="sans card-title">Ubah respons</text>
     <rect x="334" y="13" width="112" height="20" rx="10" fill="#EEF2FD" stroke="#C5D3F8"/>
-    <text x="390" y="27" text-anchor="middle" class="mono card-state" fill="#1B44C8">INPUT BALASAN</text>
+    <text x="390" y="27" text-anchor="middle" class="mono card-state" fill="#2563EB">INPUT BALASAN</text>
 
-    <rect x="18" y="64" width="428" height="46" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="64" width="428" height="46" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="92" class="sans slot-label">Identitas anggota &amp; penanda baris sedang diubah</text>
 
-    <rect x="18" y="122" width="428" height="134" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="122" width="428" height="134" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="145" class="sans slot-label">5 kartu radio tingkat kepastian tertulis:</text>
-    <rect x="32" y="156" width="400" height="28" rx="4" fill="#EEF2FD" stroke="#1B44C8"/>
-    <text x="44" y="174" class="sans slot-sub" fill="#1B44C8">(•) Tersedia · pasti — kepastian penuh hadir</text>
-    <rect x="32" y="190" width="400" height="26" rx="4" fill="#FFFFFF" stroke="#DDDDD3"/>
+    <rect x="32" y="156" width="400" height="28" rx="4" fill="#EEF2FD" stroke="#2563EB"/>
+    <text x="44" y="174" class="sans slot-sub" fill="#2563EB">(•) Tersedia · pasti — kepastian penuh hadir</text>
+    <rect x="32" y="190" width="400" height="26" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
     <text x="44" y="207" class="sans slot-sub">( ) Mungkin · tentatif / Belum tahu / Belum balas</text>
-    <rect x="32" y="222" width="400" height="24" rx="4" fill="#FFFFFF" stroke="#DDDDD3"/>
+    <rect x="32" y="222" width="400" height="24" rx="4" fill="#FFFFFF" stroke="#E2E8F0"/>
     <text x="44" y="238" class="sans slot-sub">( ) Tidak tersedia — berhalangan hadir</text>
 
-    <rect x="18" y="272" width="260" height="42" rx="6" fill="#1B44C8"/>
+    <rect x="18" y="272" width="260" height="42" rx="6" fill="#2563EB"/>
     <text x="148" y="298" text-anchor="middle" class="sans cta-text">Simpan respons</text>
-    <rect x="290" y="272" width="156" height="42" rx="6" fill="#FFFFFF" stroke="#C5C6B9"/>
+    <rect x="290" y="272" width="156" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
     <text x="368" y="298" text-anchor="middle" class="sans slot-label">Batal</text>
   </g>
 
@@ -144,10 +144,10 @@
 
   <!-- Frame 04: Tetapkan final -->
   <g transform="translate(72, 566)" filter="url(#wf-shadow)">
-    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.5"/>
-    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F5F4EE"/>
-    <rect x="0" y="34" width="464" height="12" fill="#F5F4EE"/>
-    <line x1="0" y1="46" x2="464" y2="46" stroke="#DDDDD3" stroke-width="1"/>
+    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F1F5F9"/>
+    <rect x="0" y="34" width="464" height="12" fill="#F1F5F9"/>
+    <line x1="0" y1="46" x2="464" y2="46" stroke="#E2E8F0" stroke-width="1"/>
     <rect x="18" y="12" width="34" height="22" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
     <text x="35" y="27" text-anchor="middle" class="mono card-num">04</text>
     <text x="62" y="29" class="sans card-title">Tetapkan final</text>
@@ -158,31 +158,31 @@
     <text x="32" y="86" class="sans slot-label" fill="#135C3B">Ringkasan: ketiga anggota wajib telah pasti</text>
     <text x="32" y="105" class="sans slot-sub">Anggota opsional tetap tercatat sebagai konteks</text>
 
-    <rect x="18" y="130" width="428" height="126" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="130" width="428" height="126" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="154" class="sans slot-label">Kolom wajib alasan keputusan koordinator</text>
-    <rect x="32" y="166" width="400" height="76" rx="5" fill="#FFFFFF" stroke="#B8B9AC"/>
+    <rect x="32" y="166" width="400" height="76" rx="5" fill="#FFFFFF" stroke="#CBD5E1"/>
     <text x="44" y="192" class="sans slot-sub">Textarea dasar penetapan jadwal...</text>
     <text x="44" y="214" class="mono slot-sub">(Menolak input kosong / hanya spasi)</text>
 
-    <rect x="18" y="272" width="276" height="42" rx="6" fill="#1B44C8"/>
+    <rect x="18" y="272" width="276" height="42" rx="6" fill="#2563EB"/>
     <text x="156" y="298" text-anchor="middle" class="sans cta-text">Tetapkan jadwal final</text>
-    <rect x="306" y="272" width="140" height="42" rx="6" fill="#FFFFFF" stroke="#C5C6B9"/>
+    <rect x="306" y="272" width="140" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
     <text x="376" y="298" text-anchor="middle" class="sans slot-label">Kembali</text>
   </g>
 
   <!-- Frame 05: Pengumuman -->
   <g transform="translate(568, 566)" filter="url(#wf-shadow)">
-    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.5"/>
-    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F5F4EE"/>
-    <rect x="0" y="34" width="464" height="12" fill="#F5F4EE"/>
-    <line x1="0" y1="46" x2="464" y2="46" stroke="#DDDDD3" stroke-width="1"/>
+    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F1F5F9"/>
+    <rect x="0" y="34" width="464" height="12" fill="#F1F5F9"/>
+    <line x1="0" y1="46" x2="464" y2="46" stroke="#E2E8F0" stroke-width="1"/>
     <rect x="18" y="12" width="34" height="22" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
     <text x="35" y="27" text-anchor="middle" class="mono card-num">05</text>
     <text x="62" y="29" class="sans card-title">Pengumuman</text>
     <rect x="354" y="13" width="92" height="20" rx="10" fill="#EAF6EF" stroke="#B7DFC8"/>
     <text x="400" y="27" text-anchor="middle" class="mono card-state" fill="#135C3B">FINAL</text>
 
-    <rect x="18" y="64" width="428" height="46" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="64" width="428" height="46" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="92" class="sans slot-label">Status protokol terkunci pada tahap 03 · Final</text>
 
     <rect x="18" y="122" width="428" height="134" rx="6" fill="#F3F8F4" stroke="#C5D6CB"/>
@@ -191,18 +191,18 @@
     <text x="32" y="196" class="sans slot-sub">Dasar keputusan: alasan tertulis koordinator</text>
     <text x="32" y="222" class="mono slot-sub">Catatan: tidak mengirim otomatis ke WhatsApp</text>
 
-    <rect x="18" y="272" width="280" height="42" rx="6" fill="#1B44C8"/>
+    <rect x="18" y="272" width="280" height="42" rx="6" fill="#2563EB"/>
     <text x="158" y="298" text-anchor="middle" class="sans cta-text">Tandai diumumkan (simulasi)</text>
-    <rect x="310" y="272" width="136" height="42" rx="6" fill="#FFFFFF" stroke="#C5C6B9"/>
+    <rect x="310" y="272" width="136" height="42" rx="6" fill="#FFFFFF" stroke="#CBD5E1"/>
     <text x="378" y="298" text-anchor="middle" class="sans slot-label">Salin / Kembali</text>
   </g>
 
   <!-- Frame 06: Tinjau ulang -->
   <g transform="translate(1064, 566)" filter="url(#wf-shadow)">
-    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.5"/>
-    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F5F4EE"/>
-    <rect x="0" y="34" width="464" height="12" fill="#F5F4EE"/>
-    <line x1="0" y1="46" x2="464" y2="46" stroke="#DDDDD3" stroke-width="1"/>
+    <rect width="464" height="334" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+    <rect x="0" y="0" width="464" height="46" rx="12" fill="#F1F5F9"/>
+    <rect x="0" y="34" width="464" height="12" fill="#F1F5F9"/>
+    <line x1="0" y1="46" x2="464" y2="46" stroke="#E2E8F0" stroke-width="1"/>
     <rect x="18" y="12" width="34" height="22" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
     <text x="35" y="27" text-anchor="middle" class="mono card-num">06</text>
     <text x="62" y="29" class="sans card-title">Tinjau ulang</text>
@@ -213,14 +213,14 @@
     <text x="32" y="88" class="sans slot-label" fill="#992828">Peringatan perubahan respons sesudah Final</text>
     <text x="32" y="109" class="sans slot-sub">Baris anggota menampilkan lencana [Berubah pasca-final]</text>
 
-    <rect x="18" y="138" width="428" height="56" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="138" width="428" height="56" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="162" class="sans slot-label">Kotak retensi alasan final sebelumnya</text>
     <text x="32" y="181" class="sans slot-sub">Konteks keputusan awal tidak terhapus</text>
 
-    <rect x="18" y="206" width="428" height="50" rx="6" fill="#FAF9F5" stroke="#DDDDD3"/>
+    <rect x="18" y="206" width="428" height="50" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
     <text x="32" y="236" class="sans slot-label">Lini masa jejak perubahan berkategori + waktu</text>
 
-    <rect x="18" y="272" width="428" height="42" rx="6" fill="#1B44C8"/>
+    <rect x="18" y="272" width="428" height="42" rx="6" fill="#2563EB"/>
     <text x="232" y="298" text-anchor="middle" class="sans cta-text">Tinjau keputusan ulang</text>
   </g>
 

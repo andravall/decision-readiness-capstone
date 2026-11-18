@@ -3,11 +3,15 @@ import { Locale } from '../domain/types';
 import { useTheme } from '../i18n/ThemeContext';
 import { VisualArtifactItem } from '../i18n/translations';
 import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  ArrowUpRightIcon,
   ChartCompareIcon,
   CompassHubIcon,
+  ExpandCornersIcon,
   FlowBranchIcon,
+  OpticalLoupeIcon,
   PulseImpactIcon,
-  ShareLinkIcon,
   WireframeGridIcon
 } from './ProjectIcons';
 
@@ -154,17 +158,14 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
   onOpenLightbox
 }) => {
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [activeIdx, setActiveIdx] = useState(0);
   const [stageScale, setStageScale] = useState<1 | 1.45>(1);
-  const [darkMat, setDarkMat] = useState(() => theme === 'dark');
   const [loupeActive, setLoupeActive] = useState(true);
 
-  useEffect(() => {
-    setDarkMat(theme === 'dark');
-  }, [theme]);
   const LOUPE_SIZE = 224;
   const LOUPE_R = LOUPE_SIZE / 2;
-  const LOUPE_ZOOM = 2.2;
+  const LOUPE_ZOOM = 2;
 
   const [loupePos, setLoupePos] = useState<{
     visible: boolean;
@@ -180,6 +181,8 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const currentVisual = visuals[activeIdx] || visuals[0];
+  const activePng = isDark ? currentVisual.pngDark : currentVisual.png;
+  const activeSvg = isDark ? currentVisual.svgDark : currentVisual.svg;
   const metaList = BLUEPRINT_DETAILS[locale];
   const currentMeta = metaList[activeIdx] || metaList[0];
 
@@ -257,7 +260,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
                   <span className="bp-deck-title">{v.tab}</span>
                 </span>
                 <span className="bp-deck-arrow" aria-hidden="true">
-                  →
+                  <ArrowRightIcon size={12} />
                 </span>
               </button>
             );
@@ -275,7 +278,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
                 onClick={() => handleStep(-1)}
                 aria-label={locale === 'id' ? 'Diagram sebelumnya' : 'Previous diagram'}
               >
-                ←
+                <ArrowLeftIcon size={12} />
               </button>
               <span className="bp-step-count">
                 {activeIdx + 1}/{visuals.length}
@@ -286,7 +289,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
                 onClick={() => handleStep(1)}
                 aria-label={locale === 'id' ? 'Diagram berikutnya' : 'Next diagram'}
               >
-                →
+                <ArrowRightIcon size={12} />
               </button>
             </div>
           </div>
@@ -343,43 +346,36 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
             {/* Interactive Magnifier Loupe Toggle (Desktop) */}
             <button
               type="button"
-              className={`btn btn-sm hide-mobile${loupeActive && stageScale === 1 ? ' obsidian' : ''}`}
+              className={`btn btn-sm hide-mobile interactive-icon-trigger${loupeActive && stageScale === 1 ? ' obsidian' : ''}`}
               onClick={() => setLoupeActive((v) => !v)}
               title={
                 locale === 'id'
-                  ? 'Aktifkan kaca pembesar interaktif saat kursor diarahkan ke diagram'
-                  : 'Toggle interactive optical magnifier lens on hover'
+                  ? 'Aktifkan kaca pembesar interaktif 2x saat kursor diarahkan ke diagram'
+                  : 'Toggle interactive 2x optical magnifier lens on hover'
               }
             >
-              <span>🔍 {locale === 'id' ? 'Lensa 2.2×' : 'Loupe 2.2×'}</span>
-            </button>
-
-            {/* Backdrop Mat Contrast Switch */}
-            <button
-              type="button"
-              className="btn btn-sm"
-              onClick={() => setDarkMat((v) => !v)}
-              title={locale === 'id' ? 'Ubah kontras meja gambar' : 'Toggle drafting mat contrast'}
-            >
-              <span>{darkMat ? '☀ Light' : '☾ Dark'}</span>
+              <OpticalLoupeIcon size={13} />
+              <span>{locale === 'id' ? 'Lensa 2×' : 'Loupe 2×'}</span>
             </button>
 
             <button
               type="button"
-              className="btn btn-sm diagram-preview-trigger"
+              className="btn btn-sm diagram-preview-trigger interactive-icon-trigger"
               onClick={() => onOpenLightbox(currentVisual)}
             >
-              {expandLabel}
+              <ExpandCornersIcon size={12} />
+              <span>{expandLabel}</span>
             </button>
 
             <a
-              className="btn btn-sm"
-              href={currentVisual.svg}
+              className="btn btn-sm interactive-icon-trigger"
+              href={activeSvg}
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ShareLinkIcon size={12} />
+              <WireframeGridIcon size={12} />
               <span>{svgLabel}</span>
+              <ArrowUpRightIcon size={12} />
             </a>
           </div>
         </div>
@@ -387,7 +383,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
         {/* CAD Canvas Frame with Corner Crosshairs & Live Optical Loupe */}
         <div
           ref={frameRef}
-          className={`bp-canvas-viewport${darkMat ? ' is-dark-mat' : ''}${
+          className={`bp-canvas-viewport${isDark ? ' is-dark-mat' : ''}${
             stageScale > 1 ? ' is-zoomed' : ''
           }${loupeActive && stageScale === 1 ? ' has-loupe' : ''}`}
           onPointerMove={handleFramePointerMove}
@@ -406,9 +402,9 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
           >
             <img
               ref={imgRef}
-              key={currentVisual.id}
+              key={`${currentVisual.id}-${theme}`}
               className="blueprint-img-enter"
-              src={currentVisual.png}
+              src={activePng}
               alt={currentVisual.title}
               onClick={() => onOpenLightbox(currentVisual)}
             />
@@ -416,7 +412,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
 
           {loupeActive && stageScale === 1 && loupePos.visible && (
             <div
-              className="bp-optical-loupe"
+              className={`bp-optical-loupe${isDark ? ' is-dark-loupe' : ''}`}
               style={{
                 left: `${loupePos.frameX}px`,
                 top: `${loupePos.frameY}px`
@@ -425,7 +421,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
             >
               <img
                 className="bp-loupe-img"
-                src={currentVisual.png}
+                src={activePng}
                 alt=""
                 style={{
                   width: `${loupePos.imgW * LOUPE_ZOOM}px`,
@@ -437,7 +433,7 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
               />
               <span className="bp-loupe-reticle" />
               <span className="bp-loupe-ring" />
-              <span className="bp-loupe-tag">2.2×</span>
+              <span className="bp-loupe-tag">2×</span>
             </div>
           )}
         </div>
@@ -446,8 +442,8 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
           <span className="bp-hint-desktop hide-mobile">
             {loupeActive && stageScale === 1
               ? locale === 'id'
-                ? 'Arahkan kursor ke diagram untuk membaca detail dengan Lensa 2.2×, atau klik gambar untuk layar penuh.'
-                : 'Hover anywhere over the blueprint to inspect details with the 2.2× Optical Loupe, or click for fullscreen.'
+                ? 'Arahkan kursor ke diagram untuk membaca detail dengan Lensa 2×, atau klik gambar untuk layar penuh.'
+                : 'Hover anywhere over the blueprint to inspect details with the 2× Optical Loupe, or click for fullscreen.'
               : locale === 'id'
                 ? 'Klik gambar untuk membuka mode layar penuh beresolusi tinggi.'
                 : 'Click the blueprint to open fullscreen high-resolution view.'}

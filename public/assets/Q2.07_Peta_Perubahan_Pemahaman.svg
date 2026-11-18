@@ -4,19 +4,19 @@
 
   <defs>
     <pattern id="q207-dots" width="20" height="20" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1" fill="#141714" fill-opacity="0.05"/>
+      <circle cx="2" cy="2" r="1" fill="#0F172A" fill-opacity="0.05"/>
     </pattern>
     <filter id="q207-shadow" x="-4%" y="-4%" width="108%" height="112%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#141714" flood-opacity="0.04"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.04"/>
     </filter>
     <marker id="q207-arrow-slate" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="11" markerHeight="11" orient="auto">
-      <path d="M 2 2.2 L 10 6 L 2 9.8" fill="none" stroke="#52584F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 2 2.2 L 10 6 L 2 9.8" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
     <marker id="q207-arrow-warn" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="11" markerHeight="11" orient="auto">
       <path d="M 2 2.2 L 10 6 L 2 9.8" fill="none" stroke="#9A5B13" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
     <marker id="q207-arrow-blue" markerUnits="userSpaceOnUse" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="11" markerHeight="11" orient="auto">
-      <path d="M 2 2.2 L 10 6 L 2 9.8" fill="none" stroke="#1B44C8" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 2 2.2 L 10 6 L 2 9.8" fill="none" stroke="#2563EB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
     </marker>
     <clipPath id="q207-clip">
       <rect x="28" y="28" width="1544" height="1044" rx="16"/>
@@ -26,23 +26,23 @@
       .sans { font-family: "Space Grotesk", sans-serif; }
       .serif { font-family: "Space Grotesk", sans-serif; font-weight: 700; }
       .mono { font-family: "JetBrains Mono", monospace; }
-      .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; fill: #6E756B; }
-      .h1 { font-size: 30px; font-weight: 700; fill: #141714; letter-spacing: -0.03em; }
-      .sub { font-size: 14.8px; fill: #484E46; }
+      .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; fill: #64748B; }
+      .h1 { font-size: 30px; font-weight: 700; fill: #0F172A; letter-spacing: -0.03em; }
+      .sub { font-size: 14.8px; fill: #334155; }
       .col-head { font-size: 11.5px; font-weight: 700; letter-spacing: 0.09em; }
-      .card-title { font-size: 20px; font-weight: 650; fill: #141714; letter-spacing: -0.015em; }
-      .body-txt { font-size: 13.6px; fill: #3A4039; }
+      .card-title { font-size: 20px; font-weight: 650; fill: #0F172A; letter-spacing: -0.015em; }
+      .body-txt { font-size: 13.6px; fill: #334155; }
     </style>
   </defs>
 
-  <rect width="1600" height="1100" fill="#EAE8DF"/>
+  <rect width="1600" height="1100" fill="#E6ECF5"/>
 
   <g clip-path="url(#q207-clip)">
-    <rect x="28" y="28" width="1544" height="1044" fill="#FAF9F5"/>
+    <rect x="28" y="28" width="1544" height="1044" fill="#F8FAFC"/>
     <rect x="28" y="28" width="1544" height="1044" fill="url(#q207-dots)"/>
-    <rect x="28" y="28" width="1544" height="5" fill="#1B44C8"/>
+    <rect x="28" y="28" width="1544" height="5" fill="#2563EB"/>
   </g>
-  <rect x="28" y="28" width="1544" height="1044" rx="16" fill="none" stroke="#D5D5CA" stroke-width="1.5"/>
+  <rect x="28" y="28" width="1544" height="1044" rx="16" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
 
   <!-- Header -->
   <text x="72" y="78" class="mono eyebrow">Q2.07 · CHANGE YOUR MIND · MY INNOVATION MINDSHIFT</text>
@@ -50,41 +50,41 @@
   <text x="72" y="149" class="sans sub">Mohammad Ferdinand Valliandra · 5026231159 · Refleksi kritis atas instrumen eksperimen, keterlacakan data, dan biaya perilaku pengguna</text>
 
   <!-- Right Contrast Pill -->
-  <rect x="1116" y="88" width="412" height="44" rx="22" fill="#FFFFFF" stroke="#DDDDD3" stroke-width="1.3"/>
-  <text x="1322" y="115" text-anchor="middle" class="mono" font-size="11" font-weight="600" fill="#141714">ASUMSI AWAL  ───►  TITIK KRITIS  ───►  PRINSIP BARU</text>
+  <rect x="1116" y="88" width="412" height="44" rx="22" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.3"/>
+  <text x="1322" y="115" text-anchor="middle" class="mono" font-size="11" font-weight="600" fill="#0F172A">ASUMSI AWAL  ───►  TITIK KRITIS  ───►  PRINSIP BARU</text>
 
-  <line x1="72" y1="174" x2="1528" y2="174" stroke="#E2E2D8" stroke-width="1.2"/>
+  <line x1="72" y1="174" x2="1528" y2="174" stroke="#E2E8F0" stroke-width="1.2"/>
 
   <!-- ================= 3-COLUMN TRANSFORMATION ARCHITECTURE ================= -->
   <!-- Col 1: x = 72..516 (w = 444) | Col 2: x = 578..1022 (w = 444) | Col 3: x = 1084..1528 (w = 444) -->
 
   <!-- Column Headers -->
-  <rect x="72" y="196" width="444" height="36" rx="8" fill="#F0F1EB" stroke="#D2D5CA"/>
-  <text x="294" y="219" text-anchor="middle" class="mono col-head" fill="#4A5048">FASE I · KEYAKINAN AWAL &amp; BENTURAN DATA</text>
+  <rect x="72" y="196" width="444" height="36" rx="8" fill="#F1F5F9" stroke="#E2E8F0"/>
+  <text x="294" y="219" text-anchor="middle" class="mono col-head" fill="#334155">FASE I · KEYAKINAN AWAL &amp; BENTURAN DATA</text>
 
   <rect x="578" y="196" width="444" height="36" rx="8" fill="#FEF6E4" stroke="#EFD393"/>
   <text x="800" y="219" text-anchor="middle" class="mono col-head" fill="#824B0A">FASE II · PERTANYAAN KRITIS &amp; PERGESERAN LENSA</text>
 
   <rect x="1084" y="196" width="444" height="36" rx="8" fill="#EEF2FD" stroke="#C5D3F8"/>
-  <text x="1306" y="219" text-anchor="middle" class="mono col-head" fill="#1B44C8">FASE III · KETERLACAKAN &amp; PRINSIP TINDAKAN</text>
+  <text x="1306" y="219" text-anchor="middle" class="mono col-head" fill="#2563EB">FASE III · KETERLACAKAN &amp; PRINSIP TINDAKAN</text>
 
   <!-- Card 01 (Col 1 Top: y = 250, h = 276) -->
   <g transform="translate(72, 250)" filter="url(#q207-shadow)">
-    <rect width="444" height="276" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.4"/>
-    <rect x="22" y="22" width="166" height="24" rx="5" fill="#F0F1EB" stroke="#D2D5CA"/>
-    <text x="105" y="38" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#4A5048">01 · STARTING BELIEF</text>
+    <rect width="444" height="276" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4"/>
+    <rect x="22" y="22" width="166" height="24" rx="5" fill="#F1F5F9" stroke="#E2E8F0"/>
+    <text x="105" y="38" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#334155">01 · STARTING BELIEF</text>
 
     <text x="22" y="80" class="sans card-title">“Tampilan terstruktur pasti unggul”</text>
     <text x="22" y="114" class="sans body-txt">Semula saya menduga Decision Readiness Board</text>
     <text x="22" y="137" class="sans body-txt">otomatis memberi nilai tambah karena status respons,</text>
     <text x="22" y="160" class="sans body-txt">kepastian, dan anggota wajib terlihat di satu tempat.</text>
 
-    <rect x="22" y="204" width="400" height="48" rx="7" fill="#FAF9F5" stroke="#E2E2D8"/>
-    <text x="36" y="233" class="sans" font-size="12.5" fill="#6E756B">Celah awal: menyamakan kerapian visual dengan bukti manfaat.</text>
+    <rect x="22" y="204" width="400" height="48" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="36" y="233" class="sans" font-size="12.5" fill="#64748B">Celah awal: menyamakan kerapian visual dengan bukti manfaat.</text>
   </g>
 
   <!-- Arrow 01 -> 02 (Down inside Col 1) -->
-  <path d="M 294 526 L 294 568" fill="none" stroke="#52584F" stroke-width="1.9" marker-end="url(#q207-arrow-slate)"/>
+  <path d="M 294 526 L 294 568" fill="none" stroke="#64748B" stroke-width="1.9" marker-end="url(#q207-arrow-slate)"/>
 
   <!-- Card 02 (Col 1 Bottom: y = 574, h = 296) -->
   <g transform="translate(72, 574)" filter="url(#q207-shadow)">
@@ -117,8 +117,8 @@
     <text x="22" y="168" class="sans body-txt">Sejauh mana urutan skenario C/D, bantuan peneliti,</text>
     <text x="22" y="191" class="sans body-txt">dan cara pencatatan waktu memengaruhi angka hasil?</text>
 
-    <rect x="22" y="212" width="400" height="42" rx="7" fill="#FAF9F5" stroke="#E2E2D8"/>
-    <text x="36" y="238" class="sans" font-size="12.3" fill="#52584F">Fokus bergeser dari “hasil akhir” menuju “cara bukti diperoleh”.</text>
+    <rect x="22" y="212" width="400" height="42" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="36" y="238" class="sans" font-size="12.3" fill="#64748B">Fokus bergeser dari “hasil akhir” menuju “cara bukti diperoleh”.</text>
   </g>
 
   <!-- Arrow 03 -> 04 (Down inside Col 2) -->
@@ -126,9 +126,9 @@
 
   <!-- Card 04 (Col 2 Bottom: y = 574, h = 296) -->
   <g transform="translate(578, 574)" filter="url(#q207-shadow)">
-    <rect width="444" height="296" rx="12" fill="#FFFFFF" stroke="#1B44C8" stroke-width="1.7"/>
+    <rect width="444" height="296" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.7"/>
     <rect x="22" y="22" width="184" height="24" rx="5" fill="#EEF2FD" stroke="#C5D3F8"/>
-    <text x="114" y="38" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#1B44C8">04 · PERSPECTIVE SHIFT</text>
+    <text x="114" y="38" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#2563EB">04 · PERSPECTIVE SHIFT</text>
 
     <text x="22" y="80" class="sans card-title">Angka, kekuatan bukti, &amp; beban kerja</text>
     <text x="22" y="114" class="sans body-txt">Saya belajar membaca capaian metrik bersama kualitas</text>
@@ -137,15 +137,15 @@
     <text x="22" y="191" class="sans body-txt">bersama biaya memasukkan &amp; memperbarui status (H3).</text>
 
     <rect x="22" y="226" width="400" height="48" rx="7" fill="#EEF2FD" stroke="#C5D3F8"/>
-    <text x="36" y="255" class="sans" font-size="12.5" font-weight="600" fill="#1B44C8">Inti pergeseran: nilai baca harus diuji bersama beban update.</text>
+    <text x="36" y="255" class="sans" font-size="12.5" font-weight="600" fill="#2563EB">Inti pergeseran: nilai baca harus diuji bersama beban update.</text>
   </g>
 
   <!-- Connector 04 -> 05 (Col 2 Bottom-Right -> Col 3 Top-Left) -->
-  <path d="M 1022 722 H 1046 Q 1056 722 1056 710 V 400 Q 1056 388 1066 388 H 1078" fill="none" stroke="#1B44C8" stroke-width="2" marker-end="url(#q207-arrow-blue)"/>
+  <path d="M 1022 722 H 1046 Q 1056 722 1056 710 V 400 Q 1056 388 1066 388 H 1078" fill="none" stroke="#2563EB" stroke-width="2" marker-end="url(#q207-arrow-blue)"/>
 
   <!-- Card 05 (Col 3 Top: y = 250, h = 276) -->
   <g transform="translate(1084, 250)" filter="url(#q207-shadow)">
-    <rect width="444" height="276" rx="12" fill="#FFFFFF" stroke="#CFCFC3" stroke-width="1.4"/>
+    <rect width="444" height="276" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4"/>
     <rect x="22" y="22" width="132" height="24" rx="5" fill="#EAF6EF" stroke="#B7DFC8"/>
     <text x="88" y="38" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#135C3B">05 · EVIDENCE</text>
 
@@ -155,17 +155,17 @@
     <text x="22" y="170" class="sans body-txt">• Q2.05: penetapan verdict H1 inconclusive.</text>
     <text x="22" y="198" class="sans body-txt">• Q2.06: koreksi terbuka skor matriks (17/20 vs 19/20).</text>
 
-    <rect x="22" y="218" width="400" height="38" rx="7" fill="#FAF9F5" stroke="#E2E2D8"/>
-    <text x="36" y="242" class="mono" font-size="11" fill="#52584F">Transparansi atas kekurangan memperkuat kredibilitas</text>
+    <rect x="22" y="218" width="400" height="38" rx="7" fill="#F8FAFC" stroke="#E2E8F0"/>
+    <text x="36" y="242" class="mono" font-size="11" fill="#64748B">Transparansi atas kekurangan memperkuat kredibilitas</text>
   </g>
 
   <!-- Arrow 05 -> 06 (Down inside Col 3) -->
-  <path d="M 1306 526 L 1306 568" fill="none" stroke="#1B44C8" stroke-width="1.9" marker-end="url(#q207-arrow-blue)"/>
+  <path d="M 1306 526 L 1306 568" fill="none" stroke="#2563EB" stroke-width="1.9" marker-end="url(#q207-arrow-blue)"/>
 
   <!-- Card 06 (Col 3 Bottom: y = 574, h = 296) -->
   <g transform="translate(1084, 574)" filter="url(#q207-shadow)">
-    <rect width="444" height="296" rx="12" fill="#F6F8FE" stroke="#1B44C8" stroke-width="1.8"/>
-    <rect x="22" y="22" width="168" height="24" rx="5" fill="#1B44C8"/>
+    <rect width="444" height="296" rx="12" fill="#F6F8FE" stroke="#2563EB" stroke-width="1.8"/>
+    <rect x="22" y="22" width="168" height="24" rx="5" fill="#2563EB"/>
     <text x="106" y="38" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#FFFFFF">06 · NEXT PRINCIPLE</text>
 
     <text x="22" y="80" class="sans card-title">Uji terarah sebelum memperluas produk</text>
@@ -175,12 +175,12 @@
     <text x="22" y="183" class="sans body-txt">solusi yang sudah terbukti di lapangan.</text>
 
     <rect x="22" y="226" width="400" height="48" rx="7" fill="#FFFFFF" stroke="#B9CAF6"/>
-    <text x="36" y="255" class="sans" font-size="12.5" font-weight="650" fill="#141714">Komitmen: validasi tambahan sebelum MVP; tahan fitur Later.</text>
+    <text x="36" y="255" class="sans" font-size="12.5" font-weight="650" fill="#0F172A">Komitmen: validasi tambahan sebelum MVP; tahan fitur Later.</text>
   </g>
 
   <!-- Footer Citation -->
-  <rect x="72" y="904" width="1456" height="106" rx="10" fill="#F2F1EA" stroke="#DDDDD3" stroke-width="1.2"/>
-  <text x="96" y="936" class="sans" font-size="14" font-weight="650" fill="#141714">Keputusan saya yang dibawa ke Quest 3: validasi tambahan sebelum perluasan MVP; Decision Readiness Board tetap menjadi kandidat.</text>
-  <text x="96" y="964" class="sans" font-size="12.5" fill="#52584F">Sumber: refleksi inovasi Q2.07 dan portofolio Q2.02–Q2.06 Part B. Visual ini merangkum pergeseran penalaran atas bukti yang ada tanpa mengarang pengujian atau dialog baru.</text>
-  <text x="96" y="988" class="mono" font-size="11" fill="#6E756B">FROM ASSUMPTION TO INSIGHT · MOHAMMAD FERDINAND VALLIANDRA (5026231159)</text>
+  <rect x="72" y="904" width="1456" height="106" rx="10" fill="#F1F5F9" stroke="#E2E8F0" stroke-width="1.2"/>
+  <text x="96" y="936" class="sans" font-size="14" font-weight="650" fill="#0F172A">Keputusan saya yang dibawa ke Quest 3: validasi tambahan sebelum perluasan MVP; Decision Readiness Board tetap menjadi kandidat.</text>
+  <text x="96" y="964" class="sans" font-size="12.5" fill="#64748B">Sumber: refleksi inovasi Q2.07 dan portofolio Q2.02–Q2.06 Part B. Visual ini merangkum pergeseran penalaran atas bukti yang ada tanpa mengarang pengujian atau dialog baru.</text>
+  <text x="96" y="988" class="mono" font-size="11" fill="#64748B">FROM ASSUMPTION TO INSIGHT · MOHAMMAD FERDINAND VALLIANDRA (5026231159)</text>
 </svg>

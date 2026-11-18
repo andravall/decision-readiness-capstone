@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { RESPONSE_ORDER, ReadinessEvaluation } from '../domain/readiness';
 import { MemberItem, ProtocolStatusKey, ResponseKey } from '../domain/types';
 import { useLanguage } from '../i18n/LanguageContext';
+import { CheckMiniIcon, CloseXIcon } from './ProjectIcons';
 import { ToneIcon } from './StatusBadge';
 
 export type WorkbenchScreen = 'board' | 'review' | 'followup' | 'announcement' | number;
@@ -364,7 +365,14 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
               className="btn"
               onClick={() => copyToClipboard(waText)}
             >
-              {copiedWa ? t.common.copiedFeedback : t.common.copyTextBtn}
+              {copiedWa ? (
+                <>
+                  <CheckMiniIcon size={12} />
+                  <span>{t.common.copiedFeedback}</span>
+                </>
+              ) : (
+                t.common.copyTextBtn
+              )}
             </button>
           </div>
         </>
@@ -426,7 +434,14 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
               className="btn"
               onClick={() => copyToClipboard(waFinal)}
             >
-              {copiedWa ? t.common.copiedFeedback : t.common.copyTextBtn}
+              {copiedWa ? (
+                <>
+                  <CheckMiniIcon size={12} />
+                  <span>{t.common.copiedFeedback}</span>
+                </>
+              ) : (
+                t.common.copyTextBtn
+              )}
             </button>
             <button
               type="button"
@@ -638,7 +653,8 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
                 onClick={() => onChangeScreen('board')}
                 data-testid="btn-close-sheet"
               >
-                {t.common.closeBtn} ✕
+                <span>{t.common.closeBtn}</span>
+                <CloseXIcon size={12} />
               </button>
             </div>
           </div>

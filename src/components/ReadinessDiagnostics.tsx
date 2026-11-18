@@ -3,6 +3,10 @@ import { RESPONSE_TONES, ReadinessEvaluation } from '../domain/readiness';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
   AlertGateIcon,
+  CheckMiniIcon,
+  CloseXIcon,
+  EmptyCircleMiniIcon,
+  HalfCircleMiniIcon,
   LayersOptionalIcon,
   ShieldLockIcon,
   UsersCheckIcon
@@ -83,7 +87,15 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
           {requiredMembers.map((m) => {
             const tone = RESPONSE_TONES[m.response];
             const sym =
-              tone === 'good' ? '✓' : tone === 'alert' ? '✕' : tone === 'warn' ? '◐' : '○';
+              tone === 'good' ? (
+                <CheckMiniIcon size={11} />
+              ) : tone === 'alert' ? (
+                <CloseXIcon size={11} />
+              ) : tone === 'warn' ? (
+                <HalfCircleMiniIcon size={11} />
+              ) : (
+                <EmptyCircleMiniIcon size={11} />
+              );
             return (
               <div
                 key={m.id}
@@ -91,7 +103,9 @@ export const ReadinessDiagnostics: React.FC<ReadinessDiagnosticsProps> = ({
                 title={`${m.name}: ${t.responses[m.response].label}`}
               >
                 <span className="req-seg-name">{m.name}</span>
-                <span aria-hidden="true">{sym}</span>
+                <span className="req-seg-sym" aria-hidden="true">
+                  {sym}
+                </span>
               </div>
             );
           })}

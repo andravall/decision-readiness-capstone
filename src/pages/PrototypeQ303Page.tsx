@@ -7,6 +7,7 @@ import {
   CalendarProposalIcon,
   ClockTickIcon,
   LocationModeIcon,
+  ResetRotateIcon,
   ShieldLockIcon
 } from '../components/ProjectIcons';
 import { ProtocolRail } from '../components/ProtocolRail';
@@ -214,7 +215,7 @@ export const PrototypeQ303Page: React.FC = () => {
 
   const lastDriftSummary =
     lastDriftActor && lastDriftFrom && lastDriftTo
-      ? `${lastDriftActor} (${t.responses[lastDriftFrom].label} → ${t.responses[lastDriftTo].label} · ${lastDriftAt})`
+      ? `${lastDriftActor} (${t.responses[lastDriftFrom].label} ${locale === 'id' ? 'ke' : 'to'} ${t.responses[lastDriftTo].label} · ${lastDriftAt})`
       : undefined;
 
   const mobileCta =
@@ -235,7 +236,8 @@ export const PrototypeQ303Page: React.FC = () => {
             onClick={() => handleReset(true)}
             data-testid="reset-top"
           >
-            {t.nav.resetShort}
+            <ResetRotateIcon size={12} />
+            <span>{t.nav.resetShort}</span>
           </button>
         }
       />
@@ -362,7 +364,8 @@ export const PrototypeQ303Page: React.FC = () => {
             onClick={() => handleReset(true)}
             data-testid="reset-bottom"
           >
-            {t.q303.resetFullBtn}
+            <ResetRotateIcon size={12} />
+            <span>{t.q303.resetFullBtn}</span>
           </button>
         </footer>
       </main>

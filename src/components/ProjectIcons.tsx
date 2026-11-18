@@ -266,6 +266,135 @@ export const SearchFilterIcon: React.FC<IconProps> = ({ size = 14, className = '
   </svg>
 );
 
+export const ArrowUpRightIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon icon-ext-arrow ${className}`} aria-hidden="true">
+    <path
+      d="M12.6 9.6V12.1C12.6 12.87 11.97 13.5 11.2 13.5H3.9C3.13 13.5 2.5 12.87 2.5 12.1V4.8C2.5 4.03 3.13 3.4 3.9 3.4H6.4"
+      stroke="currentColor"
+      strokeWidth="1.55"
+      strokeLinecap="round"
+      opacity="0.55"
+    />
+    <g className="icon-part-ne">
+      <path
+        d="M7.1 8.9L13.3 2.7M9.1 2.7H13.3V6.9"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
+  </svg>
+);
+
+export const ArrowRightIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <g className="icon-part-slide">
+      <path
+        d="M3 8H12.8M8.7 3.9L12.8 8L8.7 12.1"
+        stroke="currentColor"
+        strokeWidth="1.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </g>
+  </svg>
+);
+
+export const ArrowLeftIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path
+      d="M12.8 8H3.2M7.2 4L3.2 8L7.2 12"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const ChevronDownIcon: React.FC<IconProps> = ({ size = 14, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path d="M4 6.2L8 10.2L12 6.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const ChevronUpIcon: React.FC<IconProps> = ({ size = 14, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path d="M4 9.8L8 5.8L12 9.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const OpticalLoupeIcon: React.FC<IconProps> = ({ size = 14, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <circle cx="9" cy="9" r="5.8" stroke="currentColor" strokeWidth="1.65" />
+    <path d="M9 6.5V11.5M6.5 9H11.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    <path d="M13.4 13.4L17.2 17.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  </svg>
+);
+
+export const ExpandCornersIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path
+      d="M2.8 6V2.8H6M10 2.8H13.2V6M13.2 10V13.2H10M6 13.2H2.8V10"
+      stroke="currentColor"
+      strokeWidth="1.65"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const ResetRotateIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path
+      d="M3.2 6.2A5.2 5.2 0 1 1 3.5 10.6M3.2 3V6.3H6.5"
+      stroke="currentColor"
+      strokeWidth="1.65"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const CloseXIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path d="M4.2 4.2L11.8 11.8M11.8 4.2L4.2 11.8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+  </svg>
+);
+
+export const CheckMiniIcon: React.FC<IconProps> = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path d="M3.2 8.3L6.4 11.5L12.8 4.6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const HalfCircleMiniIcon: React.FC<IconProps> = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.65" />
+    <path d="M8 2.5A5.5 5.5 0 0 1 8 13.5V2.5Z" fill="currentColor" />
+  </svg>
+);
+
+export const EmptyCircleMiniIcon: React.FC<IconProps> = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.65" strokeDasharray="2.4 2.2" />
+  </svg>
+);
+
+export const CourseBriefIcon: React.FC<IconProps> = ({ size = 13, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path
+      d="M4 3.5C4 2.8 4.6 2.2 5.3 2.2H12.2L16 6V16.5C16 17.2 15.4 17.8 14.7 17.8H5.3C4.6 17.8 4 17.2 4 16.5V3.5Z"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+    />
+    <path d="M11.8 2.4V6.2H15.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="10" cy="11.6" r="2.4" stroke="currentColor" strokeWidth="1.5" />
+  </svg>
+);
+
 export const PhaseBadgeIcon: React.FC<{ phase: 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'; size?: number }> = ({
   phase,
   size = 15

@@ -21,6 +21,8 @@ export interface VisualArtifactItem {
   caption: string;
   png: string;
   svg: string;
+  pngDark: string;
+  svgDark: string;
 }
 
 export interface TranslationDictionary {
@@ -326,10 +328,10 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       hubRoute: 'Hub Utama',
       q303Route: 'Prototipe Q3.03',
       q304Route: 'MVP Core Q3.04',
-      openMvpCta: 'MVP Q3.04 →',
+      openMvpCta: 'MVP Q3.04',
       simBadge: 'Simulasi Q3.03',
       mvpBadge: 'MVP Core · Q3.04',
-      resetShort: 'Ulangi ↺',
+      resetShort: 'Ulangi',
       newProposalBtn: '+ Usulan Baru',
       storedLocalCount: (n) => `Tersimpan (${n})`,
       switchLangLabel: 'Pilih bahasa tampilan'
@@ -402,7 +404,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       backToBoardBtn: 'Kembali ke board',
       closeBtn: 'Tutup',
       copyTextBtn: 'Salin teks',
-      copiedFeedback: 'Tersalin ✓',
+      copiedFeedback: 'Tersalin',
       currentTag: 'Saat ini',
       membersCount: (n) => `${String(n).padStart(2, '0')} anggota`,
       recordsCount: (n) => `${n} catatan`,
@@ -528,7 +530,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           case 'response_updated': {
             const parts: string[] = [];
             if (entry.fromResponse && entry.toResponse && entry.fromResponse !== entry.toResponse) {
-              parts.push(`${dict.responses[entry.fromResponse].label} → ${dict.responses[entry.toResponse].label}`);
+              parts.push(`${dict.responses[entry.fromResponse].label} ke ${dict.responses[entry.toResponse].label}`);
             }
             if (entry.roleChangedTo) {
               parts.push(`peran menjadi ${entry.roleChangedTo === 'required' ? 'Wajib hadir' : 'Opsional'}`);
@@ -554,7 +556,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       meetingMode: 'Daring',
       scenarioRuleChip: 'Syarat skenario: 3/3 wajib pasti',
       footerNote: 'Skenario fiktif Q3.03 · Seluruh perubahan tersimpan di memori halaman selama sesi aktif dan tidak terhubung ke WhatsApp atau basis data.',
-      resetFullBtn: 'Ulangi simulasi ke kondisi awal ↺',
+      resetFullBtn: 'Ulangi simulasi ke kondisi awal',
       toastReset: 'Simulasi dikembalikan ke keadaan awal (Usulan terbuka, 1/3 anggota wajib pasti).',
       toastProvisional: 'Usulan ditandai Sementara. Pratinjau pesan klarifikasi WhatsApp siap diperiksa.',
       toastResponseSaved: (name, label, at) => `Respons ${name} diperbarui menjadi "${label}" (${at}).`,
@@ -588,7 +590,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       builderFooterHint: 'Seluruh validasi input diperiksa sebelum usulan disimpan ke penyimpanan lokal.',
       submitProposalBtn: 'Simpan & buka board usulan',
       copySnapshotBtn: 'Salin tautan snapshot',
-      snapshotCopied: 'Tautan snapshot disalin ✓',
+      snapshotCopied: 'Tautan snapshot disalin',
       deleteProposalBtn: 'Hapus usulan ini',
       inlineAddPlaceholder: 'Tambah anggota susulan...',
       inlineAddBtn: '+ Tambah',
@@ -655,24 +657,24 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       cardQ303RouteLabel: '/q3-03',
       cardQ303OpenBtn: 'Coba Simulasi Q3.03',
       cardQ303CopyBtn: 'Salin tautan',
-      cardQ303Copied: 'Tautan disalin ✓',
+      cardQ303Copied: 'Tautan disalin',
       cardQ304Pill: 'Q3.04 · Build The Core',
       cardQ304Title: 'MVP Core Build — Data Baru & Persisten',
       cardQ304Body: 'Aplikasi fungsi inti yang memproses usulan pertemuan baru, memvalidasi daftar anggota, menyimpan perubahan di localStorage, menghasilkan tautan snapshot lintas perangkat, dan mencatat riwayat protokol.',
       cardQ304RouteLabel: '/q3-04-core',
       cardQ304OpenBtn: 'Buka Aplikasi Q3.04',
       cardQ304CopyBtn: 'Salin tautan',
-      cardQ304Copied: 'Tautan disalin ✓',
+      cardQ304Copied: 'Tautan disalin',
       visualsEyebrow: 'Artefak Visual Q2–Q3',
       visualsTitle: 'Peta penalaran, alur pengguna, dan struktur layar',
       visualsSub: 'Pilih diagram di panel samping atau perbesar kanvas untuk menelusuri alur keputusan, wireframe enam keadaan layar, serta evaluasi bukti eksperimen.',
-      expandBtn: 'Perbesar ⤢',
-      svgVectorBtn: 'SVG Vektor ↗',
+      expandBtn: 'Perbesar',
+      svgVectorBtn: 'SVG Vektor',
       mobileTapZoomHint: 'Ketuk diagram untuk memperbesar & menggeser detail',
       fitScreenBtn: 'Pas layar',
       zoomInBtn: 'Perbesar 165%',
       trailEyebrow: 'Keterlacakan Lintas Tahap & Arsip Karya',
-      trailTitle: 'Jejak pengerjaan proyek & peta kurikulum (Q1.02 → Q5)',
+      trailTitle: 'Jejak pengerjaan proyek & peta kurikulum (Q1.02–Q5)',
       trailSub: 'Dokumentasi bertahap dari penemuan masalah, pengujian hipotesis, dan pembangunan fungsi inti beserta tautan halaman Notion, dilanjutkan peta tahapan SI Capstone hingga evaluasi akhir.',
       filterAll: (n) => `Semua (${n})`,
       filterQ1: (n) => `Q1 · Discover (${n})`,
@@ -683,7 +685,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       stateFilterAll: 'Semua Tahap',
       stateFilterDone: (n) => `Selesai & Aktif (${n})`,
       stateFilterUpcoming: (n) => `Tahap Berikutnya (${n})`,
-      coursePortalBtn: 'Kurikulum SI Capstone ↗',
+      coursePortalBtn: 'Kurikulum SI Capstone',
       telemetrySubmitted: (n) => `${n} Dokumen Notion`,
       telemetryActiveWeb: (n) => `${n} Aplikasi Interaktif`,
       telemetryUpcoming: (n) => `${n} Tahap Lanjutan (Q3.05–Q5)`,
@@ -697,7 +699,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Diagram Alur Pengguna Bercabang (Q3.02 Experience Design Blueprint)',
           caption: 'Memisahkan cabang klarifikasi sementara via WhatsApp dari penetapan jadwal final oleh koordinator.',
           png: '/assets/Q3.02_User_Flow.png',
-          svg: '/assets/Q3.02_User_Flow.svg'
+          svg: '/assets/Q3.02_User_Flow.svg',
+          pngDark: '/assets/Q3.02_User_Flow_dark.png',
+          svgDark: '/assets/Q3.02_User_Flow_dark.svg'
         },
         {
           id: 'q303-wireframe',
@@ -705,7 +709,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Wireframe Enam Keadaan Layar (Q3.03 Sketch The Future)',
           caption: 'Kerangka awal sebelum diterjemahkan menjadi prototipe interaktif.',
           png: '/assets/Q3.03_Wireframe.png',
-          svg: '/assets/Q3.03_Wireframe.svg'
+          svg: '/assets/Q3.03_Wireframe.svg',
+          pngDark: '/assets/Q3.03_Wireframe_dark.png',
+          svgDark: '/assets/Q3.03_Wireframe_dark.svg'
         },
         {
           id: 'q205-decision',
@@ -713,7 +719,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Ringkasan Bukti Eksperimen dan Keputusan (Q2.05 Follow The Signal)',
           caption: 'Menjelaskan mengapa hasil K1–K3 bersifat indikatif sementara validasi H1 ditetapkan inconclusive.',
           png: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.png',
-          svg: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.svg'
+          svg: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.svg',
+          pngDark: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan_dark.png',
+          svgDark: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan_dark.svg'
         },
         {
           id: 'q206-trail',
@@ -721,7 +729,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Peta Jejak Keputusan Q2.02–Q2.05 (Q2.06 Lean Checkpoint)',
           caption: 'Menghubungkan alternatif ide, koreksi skor matriks, asumsi berisiko, eksperimen, dan keputusan sebelum MVP.',
           png: '/assets/Q2.06_Peta_Jejak_Keputusan.png',
-          svg: '/assets/Q2.06_Peta_Jejak_Keputusan.svg'
+          svg: '/assets/Q2.06_Peta_Jejak_Keputusan.svg',
+          pngDark: '/assets/Q2.06_Peta_Jejak_Keputusan_dark.png',
+          svgDark: '/assets/Q2.06_Peta_Jejak_Keputusan_dark.svg'
         },
         {
           id: 'q207-mindshift',
@@ -729,7 +739,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Peta Perubahan Pemahaman Inovasi (Q2.07 Change Your Mind)',
           caption: 'Pergeseran dari sekadar merapikan tampilan menuju tuntutan keterlacakan prosedur dan beban pembaruan.',
           png: '/assets/Q2.07_Peta_Perubahan_Pemahaman.png',
-          svg: '/assets/Q2.07_Peta_Perubahan_Pemahaman.svg'
+          svg: '/assets/Q2.07_Peta_Perubahan_Pemahaman.svg',
+          pngDark: '/assets/Q2.07_Peta_Perubahan_Pemahaman_dark.png',
+          svgDark: '/assets/Q2.07_Peta_Perubahan_Pemahaman_dark.svg'
         }
       ],
       quests: QUEST_CATALOG.id
@@ -742,10 +754,10 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       hubRoute: 'Main Hub',
       q303Route: 'Q3.03 Prototype',
       q304Route: 'Q3.04 Core MVP',
-      openMvpCta: 'Core MVP →',
+      openMvpCta: 'Core MVP',
       simBadge: 'Q3.03 Simulation',
       mvpBadge: 'Core MVP · Q3.04',
-      resetShort: 'Reset ↺',
+      resetShort: 'Reset',
       newProposalBtn: '+ New Proposal',
       storedLocalCount: (n) => `Saved (${n})`,
       switchLangLabel: 'Select display language'
@@ -818,7 +830,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       backToBoardBtn: 'Back to board',
       closeBtn: 'Close',
       copyTextBtn: 'Copy text',
-      copiedFeedback: 'Copied ✓',
+      copiedFeedback: 'Copied',
       currentTag: 'Current',
       membersCount: (n) => `${String(n).padStart(2, '0')} members`,
       recordsCount: (n) => `${n} entries`,
@@ -944,7 +956,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           case 'response_updated': {
             const parts: string[] = [];
             if (entry.fromResponse && entry.toResponse && entry.fromResponse !== entry.toResponse) {
-              parts.push(`${dict.responses[entry.fromResponse].label} → ${dict.responses[entry.toResponse].label}`);
+              parts.push(`${dict.responses[entry.fromResponse].label} to ${dict.responses[entry.toResponse].label}`);
             }
             if (entry.roleChangedTo) {
               parts.push(`role set to ${entry.roleChangedTo === 'required' ? 'Required' : 'Optional'}`);
@@ -970,7 +982,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       meetingMode: 'Online',
       scenarioRuleChip: 'Scenario rule: 3/3 required certain',
       footerNote: 'Fictional Q3.03 scenario · Changes live in browser memory during this session and do not connect to WhatsApp or a database.',
-      resetFullBtn: 'Reset simulation to initial state ↺',
+      resetFullBtn: 'Reset simulation to initial state',
       toastReset: 'Simulation restored to initial state (Open proposal, 1/3 required confirmed).',
       toastProvisional: 'Marked as Provisional. WhatsApp clarification draft is ready to inspect.',
       toastResponseSaved: (name, label, at) => `${name}’s response updated to "${label}" (${at}).`,
@@ -1004,7 +1016,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       builderFooterHint: 'All inputs are validated before saving to persistent local storage.',
       submitProposalBtn: 'Save & open readiness board',
       copySnapshotBtn: 'Copy snapshot link',
-      snapshotCopied: 'Snapshot link copied ✓',
+      snapshotCopied: 'Snapshot link copied',
       deleteProposalBtn: 'Delete proposal',
       inlineAddPlaceholder: 'Add another member...',
       inlineAddBtn: '+ Add',
@@ -1071,24 +1083,24 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       cardQ303RouteLabel: '/q3-03',
       cardQ303OpenBtn: 'Try Q3.03 Simulation',
       cardQ303CopyBtn: 'Copy link',
-      cardQ303Copied: 'Link copied ✓',
+      cardQ303Copied: 'Link copied',
       cardQ304Pill: 'Q3.04 · Build The Core',
       cardQ304Title: 'MVP Core Build — Live & Persistent',
       cardQ304Body: 'Working core application that validates brand-new meeting proposals, persists state in localStorage, generates shareable URL snapshots, and tracks the full protocol lifecycle.',
       cardQ304RouteLabel: '/q3-04-core',
       cardQ304OpenBtn: 'Open Q3.04 Core App',
       cardQ304CopyBtn: 'Copy link',
-      cardQ304Copied: 'Link copied ✓',
+      cardQ304Copied: 'Link copied',
       visualsEyebrow: 'Q2–Q3 Visual Artifacts',
       visualsTitle: 'Reasoning maps, user flow, and screen wireframes',
       visualsSub: 'Select a blueprint on the side rail or expand the canvas to inspect decision flows, six-state screen wireframes, and experiment evidence.',
-      expandBtn: 'Expand ⤢',
-      svgVectorBtn: 'Vector SVG ↗',
+      expandBtn: 'Expand',
+      svgVectorBtn: 'Vector SVG',
       mobileTapZoomHint: 'Tap diagram to zoom & pan details',
       fitScreenBtn: 'Fit screen',
       zoomInBtn: 'Zoom 165%',
       trailEyebrow: 'Cross-Phase Traceability & Artifacts',
-      trailTitle: 'Project evidence trail & curriculum roadmap (Q1.02 → Q5)',
+      trailTitle: 'Project evidence trail & curriculum roadmap (Q1.02–Q5)',
       trailSub: 'Stage-by-stage record from problem discovery, hypothesis testing, and core engineering with Notion portfolio links, followed by the SI Capstone roadmap through final defense.',
       filterAll: (n) => `All (${n})`,
       filterQ1: (n) => `Q1 · Discover (${n})`,
@@ -1099,7 +1111,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       stateFilterAll: 'All Stages',
       stateFilterDone: (n) => `Completed & Active (${n})`,
       stateFilterUpcoming: (n) => `Upcoming Roadmap (${n})`,
-      coursePortalBtn: 'SI Capstone Curriculum ↗',
+      coursePortalBtn: 'SI Capstone Curriculum',
       telemetrySubmitted: (n) => `${n} Notion Documents`,
       telemetryActiveWeb: (n) => `${n} Interactive Apps`,
       telemetryUpcoming: (n) => `${n} Upcoming Stages (Q3.05–Q5)`,
@@ -1113,7 +1125,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Branching Coordinator User Flow (Q3.02 Experience Design Blueprint)',
           caption: 'Separates provisional WhatsApp clarification loops from deliberate coordinator finalization.',
           png: '/assets/Q3.02_User_Flow.png',
-          svg: '/assets/Q3.02_User_Flow.svg'
+          svg: '/assets/Q3.02_User_Flow.svg',
+          pngDark: '/assets/Q3.02_User_Flow_dark.png',
+          svgDark: '/assets/Q3.02_User_Flow_dark.svg'
         },
         {
           id: 'q303-wireframe',
@@ -1121,7 +1135,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Six-State Screen Wireframe (Q3.03 Sketch The Future)',
           caption: 'Structural layout skeleton prior to visual and interactive implementation.',
           png: '/assets/Q3.03_Wireframe.png',
-          svg: '/assets/Q3.03_Wireframe.svg'
+          svg: '/assets/Q3.03_Wireframe.svg',
+          pngDark: '/assets/Q3.03_Wireframe_dark.png',
+          svgDark: '/assets/Q3.03_Wireframe_dark.svg'
         },
         {
           id: 'q205-decision',
@@ -1129,7 +1145,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Experiment Evidence & Pre-MVP Decision Summary (Q2.05 Follow The Signal)',
           caption: 'Illustrates why K1–K3 reading-time gains were indicative while H1 validation remained inconclusive.',
           png: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.png',
-          svg: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.svg'
+          svg: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan.svg',
+          pngDark: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan_dark.png',
+          svgDark: '/assets/Q2.05_Ringkasan_Bukti_dan_Keputusan_dark.svg'
         },
         {
           id: 'q206-trail',
@@ -1137,7 +1155,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Decision Reasoning Trail Q2.02–Q2.05 (Q2.06 Lean Checkpoint)',
           caption: 'Connects solution alternatives, open matrix score correction, riskiest assumptions, and pre-MVP decision.',
           png: '/assets/Q2.06_Peta_Jejak_Keputusan.png',
-          svg: '/assets/Q2.06_Peta_Jejak_Keputusan.svg'
+          svg: '/assets/Q2.06_Peta_Jejak_Keputusan.svg',
+          pngDark: '/assets/Q2.06_Peta_Jejak_Keputusan_dark.png',
+          svgDark: '/assets/Q2.06_Peta_Jejak_Keputusan_dark.svg'
         },
         {
           id: 'q207-mindshift',
@@ -1145,7 +1165,9 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
           title: 'Innovation Mindshift Map (Q2.07 Change Your Mind)',
           caption: 'Shift from assuming structured visuals automatically help toward demanding procedural traceability and update-cost testing.',
           png: '/assets/Q2.07_Peta_Perubahan_Pemahaman.png',
-          svg: '/assets/Q2.07_Peta_Perubahan_Pemahaman.svg'
+          svg: '/assets/Q2.07_Peta_Perubahan_Pemahaman.svg',
+          pngDark: '/assets/Q2.07_Peta_Perubahan_Pemahaman_dark.png',
+          svgDark: '/assets/Q2.07_Peta_Perubahan_Pemahaman_dark.svg'
         }
       ],
       quests: QUEST_CATALOG.en

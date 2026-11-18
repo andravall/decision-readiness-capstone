@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useTheme } from '../i18n/ThemeContext';
 import { VisualArtifactItem } from '../i18n/translations';
+import { ArrowUpRightIcon, CloseXIcon, WireframeGridIcon } from './ProjectIcons';
 
 interface DiagramLightboxProps {
   artifact: VisualArtifactItem | null;
@@ -9,6 +11,7 @@ interface DiagramLightboxProps {
 
 export const DiagramLightbox: React.FC<DiagramLightboxProps> = ({ artifact, onClose }) => {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const [zoomed, setZoomed] = useState(false);
 
   useEffect(() => {
@@ -26,6 +29,10 @@ export const DiagramLightbox: React.FC<DiagramLightboxProps> = ({ artifact, onCl
   }, [artifact, onClose]);
 
   if (!artifact) return null;
+
+  const isDark = theme === 'dark';
+  const activePng = isDark ? artifact.pngDark : artifact.png;
+  const activeSvg = isDark ? artifact.svgDark : artifact.svg;
 
   const imgWidth = zoomed
     ? `${Math.max(1180, Math.round(window.innerWidth * 1.65))}px`
@@ -45,15 +52,18 @@ export const DiagramLightbox: React.FC<DiagramLightboxProps> = ({ artifact, onCl
             {t.hub.zoomInBtn}
           </button>
           <a
-            className="btn btn-sm"
-            href={artifact.svg}
+            className="btn btn-sm interactive-icon-trigger"
+            href={activeSvg}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {t.hub.svgVectorBtn}
+            <WireframeGridIcon size={12} />
+            <span>{t.hub.svgVectorBtn}</span>
+            <ArrowUpRightIcon size={12} />
           </a>
           <button type="button" className="btn primary btn-sm" onClick={onClose}>
-            {t.common.closeBtn} ✕
+            <span>{t.common.closeBtn}</span>
+            <CloseXIcon size={12} />
           </button>
         </div>
       </div>
@@ -64,7 +74,7 @@ export const DiagramLightbox: React.FC<DiagramLightboxProps> = ({ artifact, onCl
         }}
       >
         <img
-          src={artifact.png}
+          src={activePng}
           alt={artifact.title}
           style={{
             width: imgWidth,
