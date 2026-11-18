@@ -47,7 +47,13 @@ export const MemberRosterList: React.FC<MemberRosterListProps> = ({
             return (
               <div
                 key={member.id}
-                className={`member-row${isEditing ? ' is-editing' : ''}`}
+                className={`member-row tone-${tone}${isEditing ? ' is-editing' : ''}`}
+                onClick={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (!target.closest('button')) {
+                    onSelectEdit(index);
+                  }
+                }}
               >
                 <div className="person-cell">
                   <span

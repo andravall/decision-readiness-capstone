@@ -436,7 +436,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       mobileJumpDecision: 'Tinjau keputusan',
       mobileConfirmedShort: (r, t, s) => `${r}/${t} wajib pasti · ${s}`,
       mobileAllMet: 'Syarat hadir terpenuhi',
-      mobilePendingCount: (n) => `${n} anggota wajib belum pasti`
+      mobilePendingCount: (n) => `${n} wajib belum pasti`
     },
     workbench: {
       updateEyebrow: 'Pembaruan respons',
@@ -862,7 +862,7 @@ export const TRANSLATIONS: Record<Locale, TranslationDictionary> = {
       mobileJumpDecision: 'Review decision',
       mobileConfirmedShort: (r, t, s) => `${r}/${t} required certain · ${s}`,
       mobileAllMet: 'Attendance rule met',
-      mobilePendingCount: (n) => `${n} required pending`
+      mobilePendingCount: (n) => `${n} req. pending`
     },
     workbench: {
       updateEyebrow: 'Response update',

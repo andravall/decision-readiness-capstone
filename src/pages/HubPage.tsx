@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BlueprintStudio } from '../components/BlueprintStudio';
 import { DiagramLightbox } from '../components/DiagramLightbox';
@@ -12,6 +12,7 @@ import {
   CheckMiniIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  CloseXIcon,
   CompassHubIcon,
   CoreDatabaseCheckIcon,
   CourseBriefIcon,
@@ -19,6 +20,7 @@ import {
   FlowBranchIcon,
   HalfCircleMiniIcon,
   NotionDocIcon,
+  OverviewGridIcon,
   PhaseBadgeIcon,
   PrototypeCursorIcon,
   SearchFilterIcon,
@@ -50,6 +52,54 @@ export const HubPage: React.FC = () => {
   const [showAllQuests, setShowAllQuests] = useState(false);
   const [lightboxItem, setLightboxItem] = useState<VisualArtifactItem | null>(null);
   const [copiedRoute, setCopiedRoute] = useState<'q303' | 'q304' | null>(null);
+  const [activeBentoIdx, setActiveBentoIdx] = useState(0);
+  const [activeHubSection, setActiveHubSection] = useState<'top' | 'routes' | 'visuals' | 'trail'>(
+    'top'
+  );
+
+  const bentoRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY + 190;
+      const trailEl = document.getElementById('trail');
+      const visualsEl = document.getElementById('visuals');
+      const routesEl = document.getElementById('routes');
+      if (trailEl && y >= trailEl.offsetTop) {
+        setActiveHubSection('trail');
+      } else if (visualsEl && y >= visualsEl.offsetTop) {
+        setActiveHubSection('visuals');
+      } else if (routesEl && y >= routesEl.offsetTop) {
+        setActiveHubSection('routes');
+      } else {
+        setActiveHubSection('top');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const handleBentoScroll = () => {
+    const el = bentoRef.current;
+    if (!el) return;
+    const firstCard = el.querySelector<HTMLElement>('.bento-stat-card');
+    if (!firstCard) return;
+    const step = firstCard.offsetWidth + 12;
+    if (step <= 0) return;
+    const idx = Math.min(3, Math.max(0, Math.round(el.scrollLeft / step)));
+    setActiveBentoIdx(idx);
+  };
+
+  const scrollToBentoCard = (idx: number) => {
+    const el = bentoRef.current;
+    if (!el) return;
+    const cards = el.querySelectorAll<HTMLElement>('.bento-stat-card');
+    const target = cards[idx];
+    if (!target) return;
+    el.scrollTo({ left: target.offsetLeft - el.offsetLeft, behavior: 'smooth' });
+    setActiveBentoIdx(idx);
+  };
 
   // Interactive Live Hero Mini-Board State
   const [heroRoster, setHeroRoster] = useState<{ name: string; status: MiniStatus }[]>([
@@ -173,14 +223,19 @@ export const HubPage: React.FC = () => {
     <>
       <TopNavbar mode="hub" />
 
-      <main className="container workspace page-enter" id="top">
+      <main className="container workspace has-hub-mobile-nav page-enter" id="top">
         {/* 00 // SCULPTURAL ASYMMETRIC HERO + INTERACTIVE 3D MINI-BOARD OS */}
         <section className="hero-stage" aria-labelledby="hub-title">
           <div className="hero-editorial-col">
             <div>
               <div className="hero-kicker">
                 <span className="eyebrow-dot pulse-dot" aria-hidden="true" />
-                <span>{t.hub.eyebrow}</span>
+                <span className="hide-mobile">{t.hub.eyebrow}</span>
+                <span className="mobile-only-label">
+                  {locale === 'id'
+                    ? 'SI Capstone · ITS Gasal 2026/2027'
+                    : 'SI Capstone · ITS Fall 2026/2027'}
+                </span>
               </div>
 
               <h1 className="hub-display-title" id="hub-title">
@@ -347,8 +402,13 @@ export const HubPage: React.FC = () => {
           </div>
         </section>
 
-        {/* BENTO TELEMETRY STRIP (4 VISUAL DATA CARDS) */}
-        <section className="bento-telemetry-grid" aria-label="Key project findings">
+        {/* BENTO TELEMETRY STRIP (4 VISUAL DATA CARDS — SWIPE DECK ON MOBILE) */}
+        <section
+          ref={bentoRef}
+          className="bento-telemetry-grid"
+          aria-label="Key project findings"
+          onScroll={handleBentoScroll}
+        >
           <article className="bento-stat-card interactive-icon-trigger">
             <div className="ep-cell-head">
               <span className="ep-icon-tile tone-accent">
@@ -451,6 +511,25 @@ export const HubPage: React.FC = () => {
             <p className="diag-subtext">{t.hub.ep4Note}</p>
           </article>
         </section>
+
+        {/* Mobile Swipe Deck Pagination Strip */}
+        <div className="bento-mobile-pager" aria-label="Key findings carousel indicator">
+          <span className="bento-pager-count">
+            0{activeBentoIdx + 1} / 04 ·{' '}
+            {locale === 'id' ? 'Geser ringkasan bukti' : 'Swipe key findings'}
+          </span>
+          <div className="bento-pager-dots">
+            {[0, 1, 2, 3].map((idx) => (
+              <button
+                key={idx}
+                type="button"
+                className={`bento-pager-dot${activeBentoIdx === idx ? ' is-active' : ''}`}
+                onClick={() => scrollToBentoCard(idx)}
+                aria-label={`${locale === 'id' ? 'Kartu' : 'Card'} ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* 01 // INTERACTIVE PRODUCT WORKSPACES */}
         <div className="section-head" id="routes">
@@ -605,6 +684,21 @@ export const HubPage: React.FC = () => {
 
         {/* Semester Progress Telemetry */}
         <div className="trail-telemetry">
+          <div className="trail-mobile-hud">
+            <div className="tmh-tile">
+              <strong className="tmh-num good">{submittedNotionCount}</strong>
+              <span className="tmh-lbl">{locale === 'id' ? 'Notion' : 'Notion'}</span>
+            </div>
+            <div className="tmh-tile">
+              <strong className="tmh-num accent">0{liveWebCount}</strong>
+              <span className="tmh-lbl">{locale === 'id' ? 'Aplikasi Web' : 'Live Apps'}</span>
+            </div>
+            <div className="tmh-tile">
+              <strong className="tmh-num muted">{upcomingCount}</strong>
+              <span className="tmh-lbl">{locale === 'id' ? 'Tahap Lanjut' : 'Upcoming'}</span>
+            </div>
+          </div>
+
           <div className="trail-telemetry-top">
             <div className="trail-stats">
               <span className="trail-stat-item">
@@ -678,30 +772,49 @@ export const HubPage: React.FC = () => {
                 placeholder={locale === 'id' ? 'Cari Q1.04, H1, MVP...' : 'Search Q1.04, H1, MVP...'}
                 aria-label={locale === 'id' ? 'Cari tahapan' : 'Search stages'}
               />
+              {searchQuery && (
+                <button
+                  type="button"
+                  className="trail-search-clear"
+                  onClick={() => setSearchQuery('')}
+                  aria-label={locale === 'id' ? 'Bersihkan pencarian' : 'Clear search'}
+                >
+                  <CloseXIcon size={11} />
+                </button>
+              )}
             </div>
 
-            <div className="scroll-tabs-wrap">
+            <div className="scroll-tabs-wrap" style={{ width: '100%' }}>
               <div className="state-switch" role="group" aria-label="Filter by completion status">
                 <button
                   type="button"
                   className={`state-switch-btn${stateFilter === 'all' ? ' is-active' : ''}`}
                   onClick={() => setStateFilter('all')}
                 >
-                  {t.hub.stateFilterAll}
+                  <span className="hide-mobile">{t.hub.stateFilterAll}</span>
+                  <span className="mobile-only-label">
+                    {locale === 'id' ? 'Semua' : 'All'}
+                  </span>
                 </button>
                 <button
                   type="button"
                   className={`state-switch-btn${stateFilter === 'done' ? ' is-active' : ''}`}
                   onClick={() => setStateFilter('done')}
                 >
-                  {t.hub.stateFilterDone(doneCount)}
+                  <span className="hide-mobile">{t.hub.stateFilterDone(doneCount)}</span>
+                  <span className="mobile-only-label">
+                    {locale === 'id' ? `Selesai (${doneCount})` : `Done (${doneCount})`}
+                  </span>
                 </button>
                 <button
                   type="button"
                   className={`state-switch-btn${stateFilter === 'upcoming' ? ' is-active' : ''}`}
                   onClick={() => setStateFilter('upcoming')}
                 >
-                  {t.hub.stateFilterUpcoming(upcomingCount)}
+                  <span className="hide-mobile">{t.hub.stateFilterUpcoming(upcomingCount)}</span>
+                  <span className="mobile-only-label">
+                    {locale === 'id' ? `Lanjutan (${upcomingCount})` : `Next (${upcomingCount})`}
+                  </span>
                 </button>
               </div>
             </div>
@@ -828,6 +941,45 @@ export const HubPage: React.FC = () => {
           <span>{t.hub.footerRight}</span>
         </footer>
       </main>
+
+      {/* Mobile Floating Glass Bottom Section Bar (Thumb-Zone Navigation) */}
+      <nav
+        className="mobile-hub-nav"
+        aria-label={locale === 'id' ? 'Navigasi cepat halaman' : 'Quick section navigation'}
+      >
+        <a
+          href="#top"
+          className={`mhn-item${activeHubSection === 'top' ? ' is-active' : ''}`}
+          onClick={() => setActiveHubSection('top')}
+        >
+          <OverviewGridIcon size={15} />
+          <span>{locale === 'id' ? 'Ikhtisar' : 'Overview'}</span>
+        </a>
+        <a
+          href="#routes"
+          className={`mhn-item${activeHubSection === 'routes' ? ' is-active' : ''}`}
+          onClick={() => setActiveHubSection('routes')}
+        >
+          <PrototypeCursorIcon size={15} />
+          <span>{locale === 'id' ? 'Aplikasi' : 'Apps'}</span>
+        </a>
+        <a
+          href="#visuals"
+          className={`mhn-item${activeHubSection === 'visuals' ? ' is-active' : ''}`}
+          onClick={() => setActiveHubSection('visuals')}
+        >
+          <WireframeGridIcon size={15} />
+          <span>Blueprint</span>
+        </a>
+        <a
+          href="#trail"
+          className={`mhn-item${activeHubSection === 'trail' ? ' is-active' : ''}`}
+          onClick={() => setActiveHubSection('trail')}
+        >
+          <CompassHubIcon size={15} />
+          <span>{locale === 'id' ? 'Peta Q1–Q5' : 'Q1–Q5'}</span>
+        </a>
+      </nav>
 
       <DiagramLightbox artifact={lightboxItem} onClose={() => setLightboxItem(null)} />
     </>

@@ -23,7 +23,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
   const scrollProgress = useScrollProgress();
 
   const brandTitle = mode === 'hub' ? t.nav.hubTitle : t.nav.boardTitle;
-  const compactBrandTitle = mode === 'hub' ? t.nav.hubTitle : 'Readiness OS';
+  const compactBrandTitle = mode === 'hub' ? 'Decision Readiness' : 'Readiness';
   const badgeText =
     mode === 'hub'
       ? '5026231159 · SI Capstone'

@@ -395,6 +395,21 @@ export const CourseBriefIcon: React.FC<IconProps> = ({ size = 13, className = ''
   </svg>
 );
 
+export const PlusMiniIcon: React.FC<IconProps> = ({ size = 12, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <path d="M8 3.2V12.8M3.2 8H12.8" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" />
+  </svg>
+);
+
+export const OverviewGridIcon: React.FC<IconProps> = ({ size = 15, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className={`p-icon ${className}`} aria-hidden="true">
+    <rect x="2.8" y="2.8" width="6.2" height="6.2" rx="1.8" stroke="currentColor" strokeWidth="1.65" />
+    <rect x="11" y="2.8" width="6.2" height="6.2" rx="1.8" stroke="currentColor" strokeWidth="1.65" />
+    <rect x="2.8" y="11" width="6.2" height="6.2" rx="1.8" stroke="currentColor" strokeWidth="1.65" />
+    <circle cx="14.1" cy="14.1" r="3.1" stroke="currentColor" strokeWidth="1.65" />
+  </svg>
+);
+
 export const PhaseBadgeIcon: React.FC<{ phase: 'Q1' | 'Q2' | 'Q3' | 'Q4' | 'Q5'; size?: number }> = ({
   phase,
   size = 15

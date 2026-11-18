@@ -162,20 +162,35 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
   const [activeIdx, setActiveIdx] = useState(0);
   const [stageScale, setStageScale] = useState<1 | 1.45>(1);
   const [loupeActive, setLoupeActive] = useState(true);
+  const [touchLoupeEnabled, setTouchLoupeEnabled] = useState(false);
 
   const LOUPE_SIZE = 224;
   const LOUPE_R = LOUPE_SIZE / 2;
+  const TOUCH_LOUPE_SIZE = 172;
+  const TOUCH_LOUPE_R = TOUCH_LOUPE_SIZE / 2;
   const LOUPE_ZOOM = 2;
 
   const [loupePos, setLoupePos] = useState<{
     visible: boolean;
+    isTouch: boolean;
     frameX: number;
     frameY: number;
+    frameW: number;
     imgX: number;
     imgY: number;
     imgW: number;
     imgH: number;
-  }>({ visible: false, frameX: 0, frameY: 0, imgX: 0, imgY: 0, imgW: 0, imgH: 0 });
+  }>({
+    visible: false,
+    isTouch: false,
+    frameX: 0,
+    frameY: 0,
+    frameW: 0,
+    imgX: 0,
+    imgY: 0,
+    imgW: 0,
+    imgH: 0
+  });
 
   const frameRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -203,8 +218,12 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
     setActiveIdx((prev) => (prev + dir + visuals.length) % visuals.length);
   };
 
-  const handleFramePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!loupeActive || stageScale > 1 || e.pointerType === 'touch') return;
+  const updateLoupeFromPointer = (e: React.PointerEvent<HTMLDivElement>) => {
+    const isTouch = e.pointerType === 'touch';
+    if (stageScale > 1) return;
+    if (isTouch && !touchLoupeEnabled) return;
+    if (!isTouch && !loupeActive) return;
+
     const frameEl = frameRef.current;
     const imgEl = imgRef.current;
     if (!frameEl || !imgEl) return;
@@ -224,8 +243,10 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
     const frameRect = frameEl.getBoundingClientRect();
     setLoupePos({
       visible: true,
+      isTouch,
       frameX: e.clientX - frameRect.left,
       frameY: e.clientY - frameRect.top,
+      frameW: frameRect.width,
       imgX: e.clientX - imgRect.left,
       imgY: e.clientY - imgRect.top,
       imgW: imgRect.width,
@@ -312,6 +333,26 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
 
       {/* RIGHT COLUMN: INTERACTIVE CAD DRAFTING STAGE + MAGNIFIER LOUPE */}
       <div className="bp-main-stage">
+        {/* Mobile/Tablet Top Sheet Selector Strip for Instant Thumb Switching */}
+        <div className="bp-mobile-sheet-strip" role="tablist" aria-label="Select blueprint sheet">
+          {visuals.map((v, idx) => {
+            const isActive = idx === activeIdx;
+            return (
+              <button
+                key={v.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                className={`bp-mobile-pill${isActive ? ' is-active' : ''}`}
+                onClick={() => setActiveIdx(idx)}
+              >
+                <span className="bp-mobile-pill-num">0{idx + 1}</span>
+                <span>{v.tab.split('·')[1]?.trim() || v.tab}</span>
+              </button>
+            );
+          })}
+        </div>
+
         <div className="bp-toolbar">
           <div className="bp-title-block">
             <div className="bp-coord-line">
@@ -358,6 +399,20 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
               <span>{locale === 'id' ? 'Lensa 2×' : 'Loupe 2×'}</span>
             </button>
 
+            {/* Mobile Touch-Drag 2x Loupe Toggle */}
+            <button
+              type="button"
+              className={`btn btn-sm bp-touch-loupe-btn interactive-icon-trigger${touchLoupeEnabled ? ' obsidian' : ''}`}
+              onClick={() => {
+                setTouchLoupeEnabled((v) => !v);
+                setLoupePos((prev) => ({ ...prev, visible: false }));
+              }}
+              data-testid="btn-touch-loupe"
+            >
+              <OpticalLoupeIcon size={13} />
+              <span>{locale === 'id' ? 'Lensa 2×' : 'Loupe 2×'}</span>
+            </button>
+
             <button
               type="button"
               className="btn btn-sm diagram-preview-trigger interactive-icon-trigger"
@@ -385,8 +440,21 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
           ref={frameRef}
           className={`bp-canvas-viewport${isDark ? ' is-dark-mat' : ''}${
             stageScale > 1 ? ' is-zoomed' : ''
-          }${loupeActive && stageScale === 1 ? ' has-loupe' : ''}`}
-          onPointerMove={handleFramePointerMove}
+          }${loupeActive && stageScale === 1 ? ' has-loupe' : ''}${
+            touchLoupeEnabled ? ' is-touch-inspect' : ''
+          }`}
+          onPointerDown={(e) => {
+            if (e.pointerType === 'touch' && touchLoupeEnabled) {
+              updateLoupeFromPointer(e);
+            }
+          }}
+          onPointerMove={updateLoupeFromPointer}
+          onPointerUp={(e) => {
+            if (e.pointerType === 'touch') {
+              setLoupePos((prev) => ({ ...prev, visible: false }));
+            }
+          }}
+          onPointerCancel={() => setLoupePos((prev) => ({ ...prev, visible: false }))}
           onPointerLeave={() => setLoupePos((prev) => ({ ...prev, visible: false }))}
         >
           <span className="bp-corner tl" aria-hidden="true" />
@@ -406,36 +474,53 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
               className="blueprint-img-enter"
               src={activePng}
               alt={currentVisual.title}
-              onClick={() => onOpenLightbox(currentVisual)}
+              onClick={() => {
+                if (!touchLoupeEnabled) onOpenLightbox(currentVisual);
+              }}
             />
           </div>
 
-          {loupeActive && stageScale === 1 && loupePos.visible && (
-            <div
-              className={`bp-optical-loupe${isDark ? ' is-dark-loupe' : ''}`}
-              style={{
-                left: `${loupePos.frameX}px`,
-                top: `${loupePos.frameY}px`
-              }}
-              aria-hidden="true"
-            >
-              <img
-                className="bp-loupe-img"
-                src={activePng}
-                alt=""
-                style={{
-                  width: `${loupePos.imgW * LOUPE_ZOOM}px`,
-                  height: `${loupePos.imgH * LOUPE_ZOOM}px`,
-                  transform: `translate3d(${LOUPE_R - loupePos.imgX * LOUPE_ZOOM}px, ${
-                    LOUPE_R - loupePos.imgY * LOUPE_ZOOM
-                  }px, 0)`
-                }}
-              />
-              <span className="bp-loupe-reticle" />
-              <span className="bp-loupe-ring" />
-              <span className="bp-loupe-tag">2×</span>
-            </div>
-          )}
+          {stageScale === 1 &&
+            loupePos.visible &&
+            ((!loupePos.isTouch && loupeActive) || (loupePos.isTouch && touchLoupeEnabled)) &&
+            (() => {
+              const activeR = loupePos.isTouch ? TOUCH_LOUPE_R : LOUPE_R;
+              const posLeft = loupePos.isTouch
+                ? Math.min(Math.max(activeR + 6, loupePos.frameX), Math.max(activeR + 6, loupePos.frameW - activeR - 6))
+                : loupePos.frameX;
+              const posTop = loupePos.isTouch
+                ? Math.max(activeR + 6, loupePos.frameY - 94)
+                : loupePos.frameY;
+
+              return (
+                <div
+                  className={`bp-optical-loupe${isDark ? ' is-dark-loupe' : ''}${
+                    loupePos.isTouch ? ' is-touch-loupe' : ''
+                  }`}
+                  style={{
+                    left: `${posLeft}px`,
+                    top: `${posTop}px`
+                  }}
+                  aria-hidden="true"
+                >
+                  <img
+                    className="bp-loupe-img"
+                    src={activePng}
+                    alt=""
+                    style={{
+                      width: `${loupePos.imgW * LOUPE_ZOOM}px`,
+                      height: `${loupePos.imgH * LOUPE_ZOOM}px`,
+                      transform: `translate3d(${activeR - loupePos.imgX * LOUPE_ZOOM}px, ${
+                        activeR - loupePos.imgY * LOUPE_ZOOM
+                      }px, 0)`
+                    }}
+                  />
+                  <span className="bp-loupe-reticle" />
+                  <span className="bp-loupe-ring" />
+                  <span className="bp-loupe-tag">2×</span>
+                </div>
+              );
+            })()}
         </div>
 
         <div className="bp-stage-footer">
@@ -448,10 +533,22 @@ export const BlueprintStudio: React.FC<BlueprintStudioProps> = ({
                 ? 'Klik gambar untuk membuka mode layar penuh beresolusi tinggi.'
                 : 'Click the blueprint to open fullscreen high-resolution view.'}
           </span>
-          <span className="mobile-zoom-hint">{mobileHint}</span>
-          <div className="bp-dots" aria-hidden="true">
+          <span className="mobile-zoom-hint">
+            {touchLoupeEnabled
+              ? locale === 'id'
+                ? 'Sentuh & geser jari pada diagram untuk menggerakkan Lensa 2×'
+                : 'Touch & drag across the blueprint to move the 2× Loupe'
+              : mobileHint}
+          </span>
+          <div className="bp-dots" role="tablist" aria-label="Blueprint sheet pagination">
             {visuals.map((v, i) => (
-              <span key={v.id} className={`bp-dot${i === activeIdx ? ' is-active' : ''}`} />
+              <button
+                key={v.id}
+                type="button"
+                className={`bp-dot${i === activeIdx ? ' is-active' : ''}`}
+                onClick={() => setActiveIdx(i)}
+                aria-label={`${locale === 'id' ? 'Lembar' : 'Sheet'} ${i + 1}`}
+              />
             ))}
           </div>
         </div>

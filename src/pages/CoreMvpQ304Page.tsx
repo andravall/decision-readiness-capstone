@@ -9,6 +9,7 @@ import {
   ClockTickIcon,
   CloseXIcon,
   LocationModeIcon,
+  PlusMiniIcon,
   ShareLinkIcon,
   ShieldLockIcon
 } from '../components/ProjectIcons';
@@ -439,7 +440,13 @@ export const CoreMvpQ304Page: React.FC = () => {
               }}
               data-testid="btn-toggle-builder"
             >
-              {t.nav.newProposalBtn}
+              <PlusMiniIcon size={12} />
+              <span className="hide-mobile">
+                {locale === 'id' ? 'Usulan Baru' : 'New Proposal'}
+              </span>
+              <span className="mobile-only-label">
+                {locale === 'id' ? 'Baru' : 'New'}
+              </span>
             </button>
           </>
         }
