@@ -38,7 +38,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
       <div className="container">
         <div className="topbar-capsule">
           <div className="topbar-row">
-            {mode === 'q303-isolated' || mode === 'q308' ? (
+            {mode === 'q308' ? (
               <div className="brand">
                 {BrandEmblem}
                 <div className="brand-meta">

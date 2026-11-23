@@ -99,7 +99,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       challengeName: "Decode the Pain",
       title: "The Human Insight Atlas",
       deliverable: "Evidence Library, Affinity Map, Persona Raka & PP01–PP04",
-      status: "Terkumpul · Notion & Forum",
+      status: "Terkumpul · Notion",
       tone: "good",
       completed: true,
       summary: "Menyintesis temuan observasi dan wawancara ke dalam peta afinitas, persona komposit Raka, empathy map, serta customer journey. Menetapkan PP02 (kelengkapan dan tingkat kepastian respons yang belum terlihat bersama) sebagai critical pain.",
@@ -114,11 +114,6 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
           label: "Brief Dosen",
           href: "https://idits.notion.site/The-Human-Insight-Atlas-From-Voices-to-Critical-Pains-3cc333dd1d288036b8d4c8fe491ace48",
           kind: "brief"
-        },
-        {
-          label: "Forum Classroom",
-          href: "https://classroom.its.ac.id/mod/forum/discuss.php?d=6708#p18009",
-          kind: "artifact"
         }
       ]
     },
@@ -915,7 +910,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       challengeName: "Decode the Pain",
       title: "The Human Insight Atlas",
       deliverable: "Evidence Library, Affinity Map, Persona Raka & PP01–PP04",
-      status: "Submitted · Notion & Forum",
+      status: "Submitted · Notion",
       tone: "good",
       completed: true,
       summary: "Synthesized observation and interview findings into affinity clusters, composite persona Raka, empathy map, and user journey. Prioritized PP02 (response completeness and certainty not visible together) as the critical pain.",
@@ -930,11 +925,6 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
           label: "Lecturer Brief",
           href: "https://idits.notion.site/The-Human-Insight-Atlas-From-Voices-to-Critical-Pains-3cc333dd1d288036b8d4c8fe491ace48",
           kind: "brief"
-        },
-        {
-          label: "Classroom Forum",
-          href: "https://classroom.its.ac.id/mod/forum/discuss.php?d=6708#p18009",
-          kind: "artifact"
         }
       ]
     },

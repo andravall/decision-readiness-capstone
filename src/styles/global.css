@@ -468,6 +468,7 @@ button {
   position: relative;
   padding-top: 24px;
   padding-bottom: 68px;
+  scroll-margin-top: 90px;
 }
 
 .live-toast {
@@ -4489,6 +4490,7 @@ a:focus-visible,
 
   .section-head {
     margin: 28px 0 13px;
+    scroll-margin-top: 80px;
   }
 
   .section-head h2 {
