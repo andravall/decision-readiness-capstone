@@ -859,6 +859,15 @@ export const HubPage: React.FC = () => {
                 {q.links && q.links.length > 0 && (
                   <div className="quest-links">
                     {q.links.map((lnk) => {
+                      if (lnk.kind === 'brief' && !lnk.href.trim()) {
+                        return (
+                          <button key="unavailable-brief" type="button" className="quest-link-btn kind-brief" disabled>
+                            <CourseBriefIcon size={13} />
+                            <span>{lnk.label} · {locale === 'id' ? 'Belum tersedia' : 'Unavailable'}</span>
+                          </button>
+                        );
+                      }
+
                       if (lnk.kind === 'internal') {
                         return (
                           <Link

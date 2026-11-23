@@ -80,7 +80,7 @@ function makeEmptyDraft(): ProposalDraftInput {
   };
 }
 
-export const CoreMvpQ304Page: React.FC = () => {
+export const CoreMvpQ304Page: React.FC<{ sprint?: boolean }> = ({ sprint = false }) => {
   const { locale, t } = useLanguage();
   const [store, setStore] = useState<ProposalStore>(loadProposalStore);
   const [showBuilder, setShowBuilder] = useState<boolean>(
@@ -425,7 +425,7 @@ export const CoreMvpQ304Page: React.FC = () => {
   return (
     <>
       <TopNavbar
-        mode="q304"
+        mode={sprint ? 'q308' : 'q304'}
         rightSlot={
           <>
             <span className="meta-chip hide-mobile" data-testid="storage-count">
@@ -895,6 +895,7 @@ export const CoreMvpQ304Page: React.FC = () => {
                       ? `${activeProposal.lastDriftActor} (${t.responses[activeProposal.lastDriftFrom].label} ${locale === 'id' ? 'ke' : 'to'} ${t.responses[activeProposal.lastDriftTo].label} · ${activeProposal.lastDriftAt})`
                       : undefined
                   }
+                  explainReadiness={sprint}
                   allowRoleChange
                   panelRef={panelRef}
                   onChangeScreen={(next) => {

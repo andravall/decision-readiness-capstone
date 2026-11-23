@@ -13,7 +13,7 @@ import {
 } from './ProjectIcons';
 
 interface TopNavbarProps {
-  mode: 'hub' | 'q303-isolated' | 'q304';
+  mode: 'hub' | 'q303-isolated' | 'q304' | 'q308';
   rightSlot?: React.ReactNode;
 }
 
@@ -29,7 +29,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
       ? '5026231159 · SI Capstone'
       : mode === 'q303-isolated'
         ? t.nav.simBadge
-        : t.nav.mvpBadge;
+        : mode === 'q308' ? 'MVP · Q3.08' : t.nav.mvpBadge;
 
   const BrandEmblem = <BrandLogo />;
 
@@ -38,7 +38,7 @@ export const TopNavbar: React.FC<TopNavbarProps> = ({ mode, rightSlot }) => {
       <div className="container">
         <div className="topbar-capsule">
           <div className="topbar-row">
-            {mode === 'q303-isolated' ? (
+            {mode === 'q303-isolated' || mode === 'q308' ? (
               <div className="brand">
                 {BrandEmblem}
                 <div className="brand-meta">

@@ -20,6 +20,7 @@ interface DecisionWorkbenchProps {
   finalAt: string;
   announcedAt: string;
   lastDriftSummary?: string;
+  explainReadiness?: boolean;
   allowRoleChange?: boolean;
   isSimulation?: boolean;
   panelRef?: React.RefObject<HTMLElement | null>;
@@ -43,6 +44,7 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
   finalAt,
   announcedAt,
   lastDriftSummary,
+  explainReadiness = false,
   allowRoleChange = false,
   isSimulation = false,
   panelRef,
@@ -203,6 +205,18 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
           </div>
           <h2 id="panel-title">{t.workbench.reviewTitle}</h2>
           <p className="panel-lead">{t.workbench.reviewLead}</p>
+          {explainReadiness && !canFinalize && (
+            <div className="callout warn" data-testid="decision-guidance">
+              <strong>{locale === 'id' ? 'Jadwal masih menunggu konfirmasi' : 'Confirmation is still needed'}</strong>
+              <p>{locale === 'id'
+                ? `Baru ${readyCount} dari ${requiredMembers.length} anggota wajib yang pasti hadir. Final tersedia setelah semuanya mengonfirmasi.`
+                : `Only ${readyCount} of ${requiredMembers.length} required members have confirmed. Final is available once all confirm.`}</p>
+              <ul>{pendingRequired.map(m => <li key={m.id}><strong>{m.name}</strong> — {t.responses[m.response].label}</li>)}</ul>
+              <button type="button" className="btn primary" onClick={onMarkProvisional} data-testid="btn-mark-provisional">
+                {t.workbench.markProvisionalBtn}
+              </button>
+            </div>
+          )}
 
           <ul className="rule-checklist">
             <li>
@@ -287,7 +301,7 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
             </>
           ) : (
             <>
-              <div className="callout warn">
+              {!explainReadiness && <div className="callout warn">
                 <div className="callout-title">
                   <ToneIcon tone="warn" />
                   <span>{t.workbench.blockedCalloutTitle}</span>
@@ -300,16 +314,16 @@ export const DecisionWorkbench: React.FC<DecisionWorkbenchProps> = ({
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div>}
               <div className="actions">
-                <button
+                {!explainReadiness && <button
                   type="button"
                   className="btn primary"
                   onClick={onMarkProvisional}
                   data-testid="btn-mark-provisional"
                 >
                   {t.workbench.markProvisionalBtn}
-                </button>
+                </button>}
                 <button
                   type="button"
                   className="btn"

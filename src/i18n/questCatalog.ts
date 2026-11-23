@@ -421,7 +421,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       tone: "good",
       completed: true,
       summary: "Membangun fungsi inti yang benar-benar memproses data baru di rute /q3-04-core: pembuatan multi-usulan dengan validasi ketat, penyimpanan persisten localStorage, ekspor/impor tautan #snapshot=, evaluasi kesiapan dinamis, serta dokumentasi 6 uji internal (IT-01–IT-06).",
-      boundary: "Batas tahap: lulus verifikasi fungsional internal pada 6 skenario; pengujian bersama pengguna luar dijadwalkan pada Q3.07 sehingga H1 tetap inconclusive.",
+      boundary: "Batas tahap: lulus verifikasi fungsional internal pada 6 skenario; hasil uji pengguna Q3.06 dicatat terpisah. H1 tetap inconclusive.",
       links: [
         {
           label: "Buka Core MVP /q3-04-core",
@@ -449,7 +449,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Build-Mode-ON-374333dd1d2880e9b23bf194e4f02d3a",
+          href: "",
           kind: "brief"
         }
       ]
@@ -457,18 +457,23 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
     {
       phase: "Q3",
       code: "Q3.06",
-      challengeName: "Make It Work",
-      title: "Integrasi Komponen Menjadi Functional MVP Utuh",
-      deliverable: "Target Output: Functional MVP End-to-End",
-      status: "Tahap Berikutnya",
-      tone: "neutral",
-      completed: false,
-      summary: "Menyempurnakan integrasi alur pembuatan usulan, pembaruan status, pembagian tautan snapshot lintas perangkat, dan kejelasan pesan WhatsApp berdasarkan catatan review mentor Q3.05.",
-      boundary: "Status saat ini: terjadwal setelah sesi review mentor Q3.05.",
+      challengeName: "Let The Users Prove It!",
+      title: "MVP User Testing Evidence Portfolio",
+      deliverable: "Catatan uji, hasil tugas, dan masukan peserta",
+      status: "Sesi P01 terdokumentasi",
+      tone: "accent",
+      completed: true,
+      summary: "P01 menyelesaikan tiga dari empat tugas secara mandiri. Pada tugas peninjauan keputusan, P01 meminta klarifikasi sebelum memilih Sementara.",
+      boundary: "Bukti berasal dari satu sesi P01. Tangkapan layar walkthrough merupakan pemeriksaan mandiri. H1 tetap inconclusive.",
       links: [
         {
+          label: "Halaman Pengumpulan Notion",
+          href: "https://app.notion.com/p/idits/Q3-06_Mohammad-Ferdinand-Valliandra-420333dd1d2880bcb9a3cb482912f4d9",
+          kind: "submission"
+        },
+        {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Make-It-Work-Prove-It-Connect-The-Pieces-Test-The-Journey-Show-The-Evidence-40c333dd1d288073adaaf467b0de9c21",
+          href: "https://idits.notion.site/Let-The-Users-Prove-It-Don-t-Guess-Observe-Capture-The-Evidence-40c333dd1d28800baab7f48e4cb6e1d1",
           kind: "brief"
         }
       ]
@@ -476,18 +481,23 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
     {
       phase: "Q3",
       code: "Q3.07",
-      challengeName: "Put It In Their Hands",
-      title: "Pengujian Langsung Bersama Koordinator & Kelompok Nyata",
-      deliverable: "Target Output: User Testing Results",
-      status: "Tahap Berikutnya",
-      tone: "neutral",
-      completed: false,
-      summary: "Menjalankan pengujian penggunaan nyata bersama koordinator mahasiswa untuk memeriksa kembali ambang H1 dengan pencatatan waktu/prosedur lengkap sekaligus mengamati beban pembaruan status (H3).",
-      boundary: "Status saat ini: belum dilaksanakan; tidak ada klaim hasil pengujian lapangan baru pada tahap ini.",
+      challengeName: "Find The Friction. Prove The Priority!",
+      title: "User Friction & Improvement Priority Portfolio",
+      deliverable: "Peta hambatan, matriks prioritas, dan backlog",
+      status: "Portofolio siap · Progress di Notion",
+      tone: "accent",
+      completed: true,
+      summary: "Menganalisis tiga hambatan dari uji Q3.06. Peninjauan keputusan saat Final belum tersedia diprioritaskan karena merupakan satu-satunya tugas yang memerlukan bantuan.",
+      boundary: "Prioritas didasarkan pada satu sesi P01. Status Progress terlihat pada halaman Notion saat diperiksa.",
       links: [
         {
+          label: "Halaman Pengumpulan Notion",
+          href: "https://app.notion.com/p/idits/Q3-07-Mohammad-Ferdinand-Valliandra-421333dd1d288041a1efe183174e16ec?source=copy_link",
+          kind: "submission"
+        },
+        {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ306-c-40c333dd1d28800baab7f48e4cb6e1d1",
+          href: "https://idits.notion.site/Find-The-Friction-Prove-The-Priority-From-User-Evidence-to-Smarter-Product-Decisions-40c333dd1d28802293bbd563d91fa63f",
           kind: "brief"
         }
       ]
@@ -506,7 +516,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Find-The-Friction-377333dd1d288017bc08c0192e8dba9c",
+          href: "",
           kind: "brief"
         }
       ]
@@ -525,7 +535,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ3011-c-40c333dd1d28803db610f78c7d25c755",
+          href: "",
           kind: "brief"
         }
       ]
@@ -544,7 +554,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ3010-c-40c333dd1d2880898e15ec40e8ec012e",
+          href: "",
           kind: "brief"
         }
       ]
@@ -563,7 +573,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ309-c-40c333dd1d288010b9beef321df2ab3e",
+          href: "",
           kind: "brief"
         }
       ]
@@ -582,7 +592,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ308-c-40c333dd1d2880718cbad7ce9fd61789",
+          href: "",
           kind: "brief"
         }
       ]
@@ -601,7 +611,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ307-c-40c333dd1d28802293bbd563d91fa63f",
+          href: "https://idits.notion.site/Ready-For-Impact-377333dd1d288085b104e25b419db7cc",
           kind: "brief"
         }
       ]
@@ -1217,7 +1227,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       tone: "good",
       completed: true,
       summary: "Built the working persistent core on /q3-04-core processing brand-new proposals with strict validation, localStorage persistence, #snapshot= link sharing, dynamic readiness evaluation, and 6 verified internal test scenarios (IT-01–IT-06).",
-      boundary: "Stage boundary: passed 6 internal functional test scenarios; external participant testing follows in Q3.07, keeping H1 inconclusive.",
+      boundary: "Stage boundary: passed 6 internal functional test scenarios; Q3.06 documents participant testing separately. H1 remains inconclusive.",
       links: [
         {
           label: "Launch Core MVP /q3-04-core",
@@ -1245,7 +1255,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Build-Mode-ON-374333dd1d2880e9b23bf194e4f02d3a",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1253,18 +1263,23 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
     {
       phase: "Q3",
       code: "Q3.06",
-      challengeName: "Make It Work",
-      title: "End-to-End Component Integration into Functional MVP",
-      deliverable: "Target Output: Functional MVP",
-      status: "Upcoming",
-      tone: "neutral",
-      completed: false,
-      summary: "Refine end-to-end flow cohesion across proposal creation, status updates, cross-device snapshot sharing, and WhatsApp message clarity following Q3.05 mentor feedback.",
-      boundary: "Current status: scheduled after Q3.05 mentor review.",
+      challengeName: "Let The Users Prove It!",
+      title: "MVP User Testing Evidence Portfolio",
+      deliverable: "Test notes, task outcomes, and participant feedback",
+      status: "P01 session documented",
+      tone: "accent",
+      completed: true,
+      summary: "P01 completed three of four tasks independently. During decision review, P01 requested clarification before choosing Provisional.",
+      boundary: "Evidence comes from one P01 session. Walkthrough screenshots come from internal checks. H1 remains inconclusive.",
       links: [
         {
+          label: "Notion Submission Page",
+          href: "https://app.notion.com/p/idits/Q3-06_Mohammad-Ferdinand-Valliandra-420333dd1d2880bcb9a3cb482912f4d9",
+          kind: "submission"
+        },
+        {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Make-It-Work-Prove-It-Connect-The-Pieces-Test-The-Journey-Show-The-Evidence-40c333dd1d288073adaaf467b0de9c21",
+          href: "https://idits.notion.site/Let-The-Users-Prove-It-Don-t-Guess-Observe-Capture-The-Evidence-40c333dd1d28800baab7f48e4cb6e1d1",
           kind: "brief"
         }
       ]
@@ -1272,18 +1287,23 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
     {
       phase: "Q3",
       code: "Q3.07",
-      challengeName: "Put It In Their Hands",
-      title: "Live Testing with Real Student Coordinators & Groups",
-      deliverable: "Target Output: User Testing Results",
-      status: "Upcoming",
-      tone: "neutral",
-      completed: false,
-      summary: "Conduct hands-on testing with real student group coordinators to re-examine H1 with complete procedural logging while observing real status-update effort (H3).",
-      boundary: "Current status: not yet conducted; zero unverified field claims made.",
+      challengeName: "Find The Friction. Prove The Priority!",
+      title: "User Friction & Improvement Priority Portfolio",
+      deliverable: "Friction map, priority matrix, and improvement backlog",
+      status: "Portfolio ready · Progress in Notion",
+      tone: "accent",
+      completed: true,
+      summary: "Analyzed three friction points from Q3.06. Reviewing a decision while Final was unavailable took priority because it was the only task that required assistance.",
+      boundary: "Priorities draw on one P01 session. The Notion page showed Progress when checked.",
       links: [
         {
+          label: "Notion Submission Page",
+          href: "https://app.notion.com/p/idits/Q3-07-Mohammad-Ferdinand-Valliandra-421333dd1d288041a1efe183174e16ec?source=copy_link",
+          kind: "submission"
+        },
+        {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ306-c-40c333dd1d28800baab7f48e4cb6e1d1",
+          href: "https://idits.notion.site/Find-The-Friction-Prove-The-Priority-From-User-Evidence-to-Smarter-Product-Decisions-40c333dd1d28802293bbd563d91fa63f",
           kind: "brief"
         }
       ]
@@ -1302,7 +1322,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Find-The-Friction-377333dd1d288017bc08c0192e8dba9c",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1321,7 +1341,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ3011-c-40c333dd1d28803db610f78c7d25c755",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1340,7 +1360,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ3010-c-40c333dd1d2880898e15ec40e8ec012e",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1359,7 +1379,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ309-c-40c333dd1d288010b9beef321df2ab3e",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1378,7 +1398,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ308-c-40c333dd1d2880718cbad7ce9fd61789",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1397,7 +1417,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ307-c-40c333dd1d28802293bbd563d91fa63f",
+          href: "https://idits.notion.site/Ready-For-Impact-377333dd1d288085b104e25b419db7cc",
           kind: "brief"
         }
       ]

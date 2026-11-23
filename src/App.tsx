@@ -25,6 +25,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<HubPage />} />
             <Route path="/q3-03" element={<PrototypeQ303Page />} />
+            <Route path="/q3-08" element={<CoreMvpQ304Page sprint />} />
             <Route path="/q3-04-core" element={<CoreMvpQ304Page />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
