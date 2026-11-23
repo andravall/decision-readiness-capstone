@@ -395,6 +395,11 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       boundary: "Batas tahap: pemeriksaan fungsional dan responsivitas telah dilakukan mandiri; sesi review pengguna langsung dilaksanakan pada tahap evaluasi berikutnya.",
       links: [
         {
+          label: "Pengumpulan Notion",
+          href: "https://app.notion.com/p/41d7d157485d80909fb6ee7358d153ec",
+          kind: "submission"
+        },
+        {
           label: "Buka Prototipe /q3-03",
           href: "/q3-03",
           kind: "internal"
@@ -423,6 +428,11 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       summary: "Membangun fungsi inti yang benar-benar memproses data baru di rute /q3-04-core: pembuatan multi-usulan dengan validasi ketat, penyimpanan persisten localStorage, ekspor/impor tautan #snapshot=, evaluasi kesiapan dinamis, serta dokumentasi 6 uji internal (IT-01–IT-06).",
       boundary: "Batas tahap: lulus verifikasi fungsional internal pada 6 skenario; hasil uji pengguna Q3.06 dicatat terpisah. H1 tetap inconclusive.",
       links: [
+        {
+          label: "Pengumpulan Notion",
+          href: "https://app.notion.com/p/41d7d157485d8059b86bca3ffd96d777",
+          kind: "submission"
+        },
         {
           label: "Buka Core MVP /q3-04-core",
           href: "/q3-04-core",
@@ -467,7 +477,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       boundary: "Bukti berasal dari satu sesi P01. Tangkapan layar walkthrough merupakan pemeriksaan mandiri. H1 tetap inconclusive.",
       links: [
         {
-          label: "Halaman Pengumpulan Notion",
+          label: "Pengumpulan Notion",
           href: "https://app.notion.com/p/idits/Q3-06_Mohammad-Ferdinand-Valliandra-420333dd1d2880bcb9a3cb482912f4d9",
           kind: "submission"
         },
@@ -491,7 +501,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       boundary: "Prioritas didasarkan pada satu sesi P01. Status Progress terlihat pada halaman Notion saat diperiksa.",
       links: [
         {
-          label: "Halaman Pengumpulan Notion",
+          label: "Pengumpulan Notion",
           href: "https://app.notion.com/p/idits/Q3-07-Mohammad-Ferdinand-Valliandra-421333dd1d288041a1efe183174e16ec?source=copy_link",
           kind: "submission"
         },
@@ -611,7 +621,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Ready-For-Impact-377333dd1d288085b104e25b419db7cc",
+          href: "",
           kind: "brief"
         }
       ]
@@ -630,7 +640,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Impact-Check-374333dd1d2880d989f6f3ea11e37b03",
+          href: "",
           kind: "brief"
         }
       ]
@@ -649,7 +659,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ402-c-3f6333dd1d2880548baade3e43a1d0a4",
+          href: "",
           kind: "brief"
         }
       ]
@@ -668,7 +678,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Own-Your-Decisions-377333dd1d288004b658ddddd8df7760",
+          href: "",
           kind: "brief"
         }
       ]
@@ -687,7 +697,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Think-Beyond-Today-377333dd1d28801a9044c57266dde54e",
+          href: "",
           kind: "brief"
         }
       ]
@@ -706,7 +716,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Impact-Review-377333dd1d28807484d9e0d86e250351",
+          href: "",
           kind: "brief"
         }
       ]
@@ -725,7 +735,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Change-Maker-Reflection-377333dd1d288015adbfc00b07c473af",
+          href: "",
           kind: "brief"
         }
       ]
@@ -744,7 +754,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/Leave-Your-Legacy-377333dd1d2880fa9b9bd450bf8aad0c",
+          href: "",
           kind: "brief"
         }
       ]
@@ -763,7 +773,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/One-Last-Look-374333dd1d28803ea347c77bd7747320",
+          href: "",
           kind: "brief"
         }
       ]
@@ -782,7 +792,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/The-Impact-Defense-377333dd1d28807c8042ec3f0f783983",
+          href: "",
           kind: "brief"
         }
       ]
@@ -801,7 +811,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/My-Changemaker-Story-377333dd1d28806ab136eb410b01b546",
+          href: "",
           kind: "brief"
         }
       ]
@@ -820,7 +830,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Brief Dosen",
-          href: "https://idits.notion.site/CSQ502-c-3f6333dd1d2880ec9ac0eb0dc22d03c0",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1201,6 +1211,11 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       boundary: "Stage boundary: functional and responsive verification completed; live unguided participant review proceeds in the next evaluation step.",
       links: [
         {
+          label: "Notion Submission",
+          href: "https://app.notion.com/p/41d7d157485d80909fb6ee7358d153ec",
+          kind: "submission"
+        },
+        {
           label: "Launch Prototype /q3-03",
           href: "/q3-03",
           kind: "internal"
@@ -1229,6 +1244,11 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       summary: "Built the working persistent core on /q3-04-core processing brand-new proposals with strict validation, localStorage persistence, #snapshot= link sharing, dynamic readiness evaluation, and 6 verified internal test scenarios (IT-01–IT-06).",
       boundary: "Stage boundary: passed 6 internal functional test scenarios; Q3.06 documents participant testing separately. H1 remains inconclusive.",
       links: [
+        {
+          label: "Notion Submission",
+          href: "https://app.notion.com/p/41d7d157485d8059b86bca3ffd96d777",
+          kind: "submission"
+        },
         {
           label: "Launch Core MVP /q3-04-core",
           href: "/q3-04-core",
@@ -1273,7 +1293,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       boundary: "Evidence comes from one P01 session. Walkthrough screenshots come from internal checks. H1 remains inconclusive.",
       links: [
         {
-          label: "Notion Submission Page",
+          label: "Notion Submission",
           href: "https://app.notion.com/p/idits/Q3-06_Mohammad-Ferdinand-Valliandra-420333dd1d2880bcb9a3cb482912f4d9",
           kind: "submission"
         },
@@ -1297,7 +1317,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       boundary: "Priorities draw on one P01 session. The Notion page showed Progress when checked.",
       links: [
         {
-          label: "Notion Submission Page",
+          label: "Notion Submission",
           href: "https://app.notion.com/p/idits/Q3-07-Mohammad-Ferdinand-Valliandra-421333dd1d288041a1efe183174e16ec?source=copy_link",
           kind: "submission"
         },
@@ -1417,7 +1437,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Ready-For-Impact-377333dd1d288085b104e25b419db7cc",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1436,7 +1456,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Impact-Check-374333dd1d2880d989f6f3ea11e37b03",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1455,7 +1475,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ402-c-3f6333dd1d2880548baade3e43a1d0a4",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1474,7 +1494,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Own-Your-Decisions-377333dd1d288004b658ddddd8df7760",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1493,7 +1513,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Think-Beyond-Today-377333dd1d28801a9044c57266dde54e",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1512,7 +1532,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Impact-Review-377333dd1d28807484d9e0d86e250351",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1531,7 +1551,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Change-Maker-Reflection-377333dd1d288015adbfc00b07c473af",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1550,7 +1570,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/Leave-Your-Legacy-377333dd1d2880fa9b9bd450bf8aad0c",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1569,7 +1589,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/One-Last-Look-374333dd1d28803ea347c77bd7747320",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1588,7 +1608,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/The-Impact-Defense-377333dd1d28807c8042ec3f0f783983",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1607,7 +1627,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/My-Changemaker-Story-377333dd1d28806ab136eb410b01b546",
+          href: "",
           kind: "brief"
         }
       ]
@@ -1626,7 +1646,7 @@ export const QUEST_CATALOG: Record<Locale, QuestTrailItem[]> = {
       links: [
         {
           label: "Lecturer Brief",
-          href: "https://idits.notion.site/CSQ502-c-3f6333dd1d2880ec9ac0eb0dc22d03c0",
+          href: "",
           kind: "brief"
         }
       ]
